@@ -86,7 +86,7 @@ export default function About() {
           <button className="about-features-btn about-features-btn-outline">Contact Us</button>
           <button className="about-features-btn about-features-btn-viewall">View All <span className="about-features-btn-arrow">→</span></button>
         </div>
-        <Image src="/bg1.png" alt="Decorative Left Dots" width={90} height={90} className="about-features-bg-left" />
+        <Image src="/Bg1.png" alt="Decorative Left Dots" width={90} height={90} className="about-features-bg-left" />
         <Image src="/Bg.png" alt="Decorative Right Dots" width={120} height={90} className="about-features-bg-right" />
       </section>
       {/* Integration Section */}

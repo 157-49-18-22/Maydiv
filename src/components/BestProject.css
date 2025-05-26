@@ -1,0 +1,103 @@
+.best-project-section {
+  background: #0a0a0a;
+  color: #fff;
+  padding: 4rem 0;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.best-project-heading {
+  text-align: center;
+  color: #e15cff;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.best-project-filter-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.best-project-filter-btn {
+  padding: 0.7rem 2.2rem;
+  border-radius: 2rem;
+  border: none;
+  background: #181818;
+  color: #bdbdbd;
+  font-weight: 600;
+  font-size: 1.1rem;
+  outline: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.best-project-filter-btn.active {
+  background: linear-gradient(90deg, #b983ff, #ff5ecd);
+  color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(185,131,255,0.18);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.best-project-filter-btn img {
+  margin-right: 8px;
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+  filter: grayscale(1) brightness(0.7);
+}
+
+.best-project-filter-btn.active img {
+  filter: none;
+}
+
+/* Hover effect for non-active filter buttons */
+.best-project-filter-btn:not(.active):hover {
+  background: #292929;
+  color: #fff;
+  opacity: 1;
+  box-shadow: 0 2px 12px 0 rgba(185,131,255,0.10);
+}
+
+.best-project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.best-project-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.best-project-image {
+  border-radius: 24px;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
+  background: #181818;
+  width: 580px;
+  height: 400px;
+  object-fit: cover;
+  transition: transform 0.35s cubic-bezier(0.4,0.2,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0.2,0.2,1);
+}
+
+.best-project-image:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 48px 0 rgba(185,131,255,0.25), 0 2px 16px 0 rgba(0,0,0,0.18);
+  z-index: 2;
+}

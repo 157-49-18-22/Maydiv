@@ -4,9 +4,9 @@ import Image from 'next/image';
 import './Testimonial.css';
 
 const testimonials = [
-  '/testi1.png',
-  '/testi2.png',
-  '/testi3.png',
+  '/Testi1.png',
+  '/Testi2.png',
+  '/Testi3.png',
 ];
 
 const VISIBLE = 3;

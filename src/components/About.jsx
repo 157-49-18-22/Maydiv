@@ -54,7 +54,7 @@ export default function About() {
         <div className="about-features-card-group">
           <div className="about-feature-card">
             <div className="about-feature-icon">
-              <Image src="/cutting.png" alt="Cutting Edge Icon" width={48} height={48} quality={100} priority />
+              <Image src="/Cutting.png" alt="Cutting Edge Icon" width={48} height={48} quality={100} priority />
             </div>
             <div className="about-feature-title">Cutting-Edge Innovation</div>
             <div className="about-feature-text">
@@ -64,7 +64,7 @@ export default function About() {
           <div className="about-feature-divider"></div>
           <div className="about-feature-card">
             <div className="about-feature-icon">
-              <Image src="/seamless.png" alt="Seamless Icon" width={48} height={48} quality={100} priority />
+              <Image src="/Seamless.png" alt="Seamless Icon" width={48} height={48} quality={100} priority />
             </div>
             <div className="about-feature-title">Seamless Connectivity</div>
             <div className="about-feature-text">
@@ -74,7 +74,7 @@ export default function About() {
           <div className="about-feature-divider"></div>
           <div className="about-feature-card">
             <div className="about-feature-icon">
-              <Image src="/intuitive.png" alt="Intuitive Icon" width={48} height={48} quality={100} priority />
+              <Image src="/Intuitive.png" alt="Intuitive Icon" width={48} height={48} quality={100} priority />
             </div>
             <div className="about-feature-title">Intuitive User Interface</div>
             <div className="about-feature-text">

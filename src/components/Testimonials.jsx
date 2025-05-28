@@ -29,6 +29,12 @@ const Testimonials = () => {
       </header>
 
       <section className="marketing-hero-section">
+        <div className="marketing-hero-graphic-star">
+          <img src="/Star.png" alt="Decorative Star" />
+        </div>
+        <div className="marketing-hero-graphic-star1">
+          <img src="/Star1.png" alt="Decorative Star1" />
+        </div>
         <div className="marketing-hero-graphic-t2">
           <img src="/T2.png" alt="Decorative T2" />
         </div>
@@ -59,11 +65,81 @@ const Testimonials = () => {
         </div>
         <div className="marketing-hero-graphic-t4">
           <img src="/T4.png" alt="Decorative T4" />
-        </div>
+      </div>
         <div className="marketing-hero-graphic-t3">
           <img src="/T3.png" alt="Decorative T3" />
+      </div>
+    </section>
+    <section className="featured-in-section">
+      <h2 className="featured-in-title">Featured in</h2>
+      <div className="featured-in-logos">
+        <div className="featured-in-logo-card"><img src="/Asus.png" alt="ASUS" /></div>
+        <div className="featured-in-logo-card"><img src="/Alli.png" alt="Allianz" /></div>
+        <div className="featured-in-logo-card"><img src="/Chase.png" alt="Chase" /></div>
+        <div className="featured-in-logo-card"><img src="/New-york-times.png" alt="The New York Times" /></div>
+        <div className="featured-in-logo-card"><img src="/Linkedin.png" alt="LinkedIn" /></div>
+      </div>
+    </section>
+    <section className="expertise-section">
+      <div className="expertise-grid">
+        <div className="expertise-row expertise-row-top">
+          <div className="expertise-card">
+            <div className="expertise-icon"><img src="/Search.png" alt="Search Engine Optimization" /></div>
+            <div className="expertise-title">Search Engine Optimization</div>
+          </div>
+          <div className="expertise-card">
+            <div className="expertise-icon"><img src="/Website.png" alt="Website design & Development" /></div>
+            <div className="expertise-title">Website design & Development</div>
+          </div>
+          <div className="expertise-info">
+            <h2>Our Digital<br />Marketing Expertise</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor Lorem ipsum dolor sit</p>
+          </div>
         </div>
-      </section>
+        <div className="expertise-row">
+          <div className="expertise-card">
+            <div className="expertise-icon"><img src="/Video.png" alt="Video editing & Production" /></div>
+            <div className="expertise-title">Video editing & Production</div>
+          </div>
+          <div className="expertise-card">
+            <div className="expertise-icon"><img src="/Content.png" alt="Content Writing" /></div>
+            <div className="expertise-title">Content Writing</div>
+          </div>
+          <div className="expertise-card">
+            <div className="expertise-icon"><img src="/Social1.png" alt="Social media Marketing" /></div>
+            <div className="expertise-title">Social media Marketing</div>
+          </div>
+          <div className="expertise-card">
+            <div className="expertise-icon"><img src="/Pay.png" alt="Pay per click (PPC)" /></div>
+            <div className="expertise-title">Pay per click (PPC)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="why-maydiv-section">
+      <div className="why-maydiv-grid">
+        <div className="why-maydiv-left">
+          <img className="why-maydiv-bg" src="/Background.png" alt="Background" />
+          <img className="why-maydiv-person" src="/Man1.png" alt="Person" />
+          <img className="why-maydiv-revenue-img" src="/Revenue.png" alt="Revenue" />
+        </div>
+        <div className="why-maydiv-right">
+          <div className="why-maydiv-customers">
+            <span className="customers-label">Our Customers</span>
+            <div className="customers-avatars-row">
+              <img className="customer-avatar" src="/Pic1.png" alt="Customer 1" />
+              <img className="customer-avatar" src="/Pic2.png" alt="Customer 2" />
+              <img className="customer-avatar" src="/Pic3.png" alt="Customer 3" />
+              <img className="customer-avatar" src="/Pic4.png" alt="Customer 4" />
+              <span className="customers-count">+25K</span>
+            </div>
+          </div>
+          <h2 className="why-maydiv-heading">Why should you choose Maydiv</h2>
+          <p className="why-maydiv-desc">Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor Lorem ipsum dolor sit amet, consectetur sadipscing elitr.</p>
+          <button className="why-maydiv-btn">Contact us</button>
+        </div>
+      </div>
+    </section>
     </>
   );
 };

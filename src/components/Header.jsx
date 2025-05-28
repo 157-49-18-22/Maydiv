@@ -84,8 +84,8 @@ const Header = () => {
         <ul className="header-links">
           <li><Link href="#home">Home</Link></li>
           <li><Link href="/services">Services</Link></li>
-          <li><Link href="#projects">Projects</Link></li>
-          <li><Link href="#testimonials">Testimonials</Link></li>
+          <li><Link href="/projects">Projects</Link></li>
+          <li><Link href="/testimonials">Testimonials</Link></li>
           <li><Link href="#contact">Contact</Link></li>
         </ul>
         <div className="header-socials">

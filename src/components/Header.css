@@ -379,11 +379,28 @@
     min-width: 220px;
     max-width: 320px;
     text-align: center;
+    margin-right: -144px;
+    margin-bottom: 10px;
   }
-  
+  .step1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 0;
+    min-width: 220px;
+    max-width: 320px;
+  }
+  .step2{  display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 0;
+    min-width: 220px;
+    max-width: 320px;
+
+  }
   .step-icon {
-    width: 64px;
-    height: 64px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background: linear-gradient(135deg, rgba(255,59,255,1) 0%, rgba(92,36,255,1) 100%);
     display: flex;
@@ -407,6 +424,7 @@
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: 0;
+    margin-left: 10px;
   }
   
   .step-arrow {
@@ -437,7 +455,7 @@
     display: block;
   }
   
-  .step-img-arrow {
+  .step-img-arrow-1 {
     width: 290px;
     height: 18px;
     object-fit: contain;
@@ -445,11 +463,23 @@
     margin: 0 8px;
     display: block;
     margin-bottom: 110px;
-   margin-left: -123px;
+    margin-left: -113px;
+  }
+  
+  .step-img-arrow-2 {
+    width: 290px;
+    height: 18px;
+    object-fit: contain;
+    align-self: center;
+    margin: 0 8px;
+    display: block;
+    margin-bottom: 110px;
+    margin-left: -113px;
   }
   
   @media (max-width: 900px) {
-    .step-img-arrow {
+    .step-img-arrow-1,
+    .step-img-arrow-2 {
       display: none;
     }
   }
@@ -492,4 +522,87 @@
     padding: 0;
     width: 100%;
     height: 100%;
-  } 
+  }
+
+  /* If there are any dots created by CSS, hide them */
+  .step-img-arrow-1::before,
+  .step-img-arrow-1::after,
+  .step-img-arrow-2::before,
+  .step-img-arrow-2::after {
+    display: none !important;
+  }
+
+  /* If the dots are part of the Arrow.png image, you must edit the image file to remove the dots. */
+  
+  .header-hero-robot-group {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 620px;
+    margin: 0 auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .header-hero-robot-group .infinity {
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 70%;
+    min-width: 600px;
+    max-width: 1100px;
+  }
+  .header-hero-robot-group .left-arm {
+    position: absolute;
+    left: 2%;
+    top: 7%;
+    z-index: 3;
+    width: 30%;
+    min-width: 220px;
+    max-width: 400px;
+  }
+  .header-hero-robot-group .right-arm {
+    position: absolute;
+    right: 2%;
+    top: 7%;
+    z-index: 3;
+    width: 30%;
+    min-width: 220px;
+    max-width: 400px;
+  }
+  .header-hero-robot-group .left-doll {
+    position: absolute;
+    left: 19%;
+    top: 38%;
+    z-index: 4;
+    width: 24%;
+    min-width: 180px;
+    max-width: 320px;
+    height: 400px;
+  }
+  .header-hero-robot-group .right-doll {
+    position: absolute;
+    right: 19%;
+    top: 38%;
+    z-index: 4;
+    width: 24%;
+    min-width: 180px;
+    max-width: 320px;
+  }
+  @media (max-width: 900px) {
+    .header-hero-robot-group {
+      height: 320px;
+      max-width: 98vw;
+    }
+    .header-hero-robot-group .infinity,
+    .header-hero-robot-group .left-arm,
+    .header-hero-robot-group .right-arm,
+    .header-hero-robot-group .left-doll,
+    .header-hero-robot-group .right-doll {
+      min-width: 60px;
+      max-width: 120px;
+    }
+  }
+  

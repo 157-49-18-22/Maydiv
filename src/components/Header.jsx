@@ -106,13 +106,14 @@ const Header = () => {
           <button className="primary-btn">Get started</button>
           <button className="secondary-btn">Our Portfolio</button>
         </div>
-        <Image 
-          className="header-animation-img" 
-          src="/animation.png" 
-          alt="Animation"
-          width={1696}
-          height={619}
-        />
+        <div className="header-hero-robot-group" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '620px', margin: '0 auto'}}>
+          <Lottie
+            animationData={require('../../public/Animation.json')}
+            style={{ width: '1470px', height: '940px', maxWidth: '100%', maxHeight: '90vw',marginTop:'120px' }}
+            loop
+            autoplay
+          />
+        </div>
         <div className="header-stats-section" ref={statsRef}>
           <div className="header-stat">
             <span className="stat-number gradient-text">
@@ -180,23 +181,24 @@ const Header = () => {
               style={{
                 height: 84,
                 width: 84,
-                transform: `translate(${robotX}px, -66px)`,
+                transform: `translate(${robotX}px, -36px)`,
                 transition: 'transform 0.35s cubic-bezier(0.4,0.2,0.2,1)'
               }}
               loop
               autoplay
             />
           </div>
-          <Image src="/Arrow.png" alt="Arrow" className="step-img-arrow" width={290} height={18} quality={100} />
-          <div className="step">
+          <img src="/Arrow.png" alt="Arrow" className="step-img-arrow-1" />
+          <div className="step1">
             <div className="step-icon">
-              <Image src="/Vector.png" alt="Vector" className="step-img-icon" width={50} height={50} />
+              <Image src="/Vector.png" alt="Vector" className="step-img-icon1" width={50} height={50} />
             </div>
             <div className="step-title">Polished designs – on time</div>
             <div className="step-desc">Our designers get to work to deliver your request. Receive your design within a few days.</div>
           </div>
-          <Image src="/Arrow.png" alt="Arrow" className="step-img-arrow" width={290} height={18} quality={100} />
-          <div className="step">
+          <img src="/Arrow.png" alt="Arrow" className="step-img-arrow-2" />
+          
+          <div className="step2">
             <div className="step-icon"><FaSync /></div>
             <div className="step-title">Revisions made simple</div>
             <div className="step-desc">Custom designs, prompt replies and as many revisions as you need.</div>

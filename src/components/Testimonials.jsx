@@ -4,6 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaInstagram, FaFacebook } from 'react-icons/fa';
 import './Testimonials.css';
+import Testimonial from './Testimonial';
+import Discuss from './Discuss';
+import Footer from './Footer';
+import CountUp from 'react-countup';
 
 const Testimonials = () => {
   return (
@@ -116,6 +120,7 @@ const Testimonials = () => {
         </div>
       </div>
     </section>
+
     <section className="why-maydiv-section">
       <div className="why-maydiv-grid">
         <div className="why-maydiv-left">
@@ -140,6 +145,69 @@ const Testimonials = () => {
         </div>
       </div>
     </section>
+    <section className="latest-work-section">
+      <h2 className="latest-work-title">Our latest work</h2>
+      <div className="latest-work-cards">
+        <div className="latest-work-card-group">
+          <div className="latest-work-card">
+           
+            <img src="/Artem.png" alt="Artem Icon" className="latest-work-icon" />
+          </div>
+          <div className="latest-work-card-content">
+            <div className="latest-work-card-title">Artem - Digital Marketing campaign</div>
+            <div className="latest-work-card-desc">Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod.</div>
+          </div>
+        </div>
+        <div className="latest-work-card-group">
+          <div className="latest-work-card">
+         
+            <img src="/Mayhem.png" alt="Mayhem Icon" className="latest-work-icon" />
+          </div>
+          <div className="latest-work-card-content">
+            <div className="latest-work-card-title">Mayhem - Search engine Optimization</div>
+            <div className="latest-work-card-desc">Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod.</div>
+          </div>
+        </div>
+        <div className="latest-work-card-group">
+          <div className="latest-work-card">
+       
+            <img src="/Basic.png" alt="Basic Icon" className="latest-work-icon" />
+          </div>
+          <div className="latest-work-card-content">
+            <div className="latest-work-card-title">Basic - Pay per click (PPC)</div>
+            <div className="latest-work-card-desc">Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="header-stats-section">
+      <div className="header-stats-grid">
+        <div className="header-stat">
+          <div className="header-stat-number"><CountUp end={723} duration={2} />+</div>
+          <div className="header-stat-label">Success Project</div>
+        </div>
+        <div className="header-stat-separator"></div>
+        <div className="header-stat">
+          <div className="header-stat-number"><CountUp end={10} duration={2} />+</div>
+          <div className="header-stat-label">Years Experience</div>
+        </div>
+        <div className="header-stat-separator"></div>
+        <div className="header-stat">
+          <div className="header-stat-number"><CountUp end={500} duration={2} />+</div>
+          <div className="header-stat-label">Products Launched</div>
+        </div>
+        <div className="header-stat-separator"></div>
+        <div className="header-stat">
+          <div className="header-stat-number"><CountUp end={100} duration={2} />+</div>
+          <div className="header-stat-label">Startups Raised</div>
+        </div>
+      </div>
+    </section>
+       {/* Features Section (new) */}
+      <Testimonial />
+      <Discuss />
+      <Footer />
+   
     </>
   );
 };

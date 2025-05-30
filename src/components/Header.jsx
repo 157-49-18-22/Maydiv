@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { FaGithub, FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 import Lottie from 'lottie-react';
@@ -77,6 +77,7 @@ const Header = () => {
 
   return (
     <header className="header-container">
+      <button style={{ cursor: 'pointer', zIndex: 9999, position: 'absolute', top: 0, left: 0 }}>Test Cursor</button>
       <nav className="header-nav">
         <div className="header-logo">
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
@@ -89,7 +90,6 @@ const Header = () => {
           <li><Link href="#contact">Contact</Link></li>
         </ul>
         <div className="header-socials">
-          <a href="#" aria-label="GitHub"><FaGithub /></a>
           <a href="#" aria-label="Instagram"><FaInstagram /></a>
           <a href="#" aria-label="Facebook"><FaFacebook /></a>
         </div>
@@ -102,9 +102,9 @@ const Header = () => {
         <p className="header-subtext">
           Step into the future with maydiv! I offer a range of digital solutions that can transform your business landscape. With our expertise, your digital needs will be met with creativity and innovation, ensuring you stand out in a crowded marketplace. Let's get started today!
         </p>
-        <div className="header-buttons">
-          <button className="primary-btn">Get started</button>
-          <button className="secondary-btn">Our Portfolio</button>
+        <div className="header-buttons" style={{ cursor: 'default' }}>
+          <button className="primary-btn" style={{ cursor: 'pointer' }}>Get started</button>
+          <button className="secondary-btn" style={{ cursor: 'pointer' }}>Our Portfolio</button>
         </div>
         <div className="header-hero-robot-group" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '620px', margin: '0 auto'}}>
           <div className="fall-from-top">

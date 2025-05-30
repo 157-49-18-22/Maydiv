@@ -28,7 +28,9 @@
   }
   
   .header-logo img {
-    height: 100px;
+    height: 120px;
+    width: 120px;
+
   }
   
   .header-links {
@@ -101,6 +103,7 @@
     gap: 20px;
     justify-content: center;
     margin-bottom: 32px;
+    cursor: pointer;
    
   }
   
@@ -113,8 +116,13 @@
     background: transparent;
     color: #fff;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
     font-family: 'Inter', sans-serif;
+  }
+  
+  .primary-btn:hover, .secondary-btn:hover {
+    transform: scale(1.08);
+    cursor: pointer !important;
   }
   
   .primary-btn {
@@ -130,6 +138,10 @@
   .secondary-btn:hover {
     background: #fff;
     color: #3813c2;
+  }
+  
+  .primary-btn, .secondary-btn {
+    cursor: pointer !important;
   }
   
   .header-animation-img {

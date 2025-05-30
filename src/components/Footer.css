@@ -2,7 +2,8 @@
   background: linear-gradient(90deg, #181818 60%, #3a1c71 100%);
   color: #fff;
   padding: 3rem 0 1.5rem 0;
-  font-family: inherit;
+  font-family: 'Inter', sans-serif;
+
 }
 
 .footer-content {

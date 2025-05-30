@@ -23,6 +23,7 @@
     width: 100%;
     box-sizing: border-box;
   height: 80px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
  
   }
   
@@ -67,13 +68,14 @@
   }
   
   .header-hero h1 {
-    font-size: 6.2rem;
+    font-size:5rem;
     font-weight: 900;
-    margin-bottom: 24px;
+    margin-bottom: 23px;
     line-height: 1.08;
     letter-spacing: -2px;
     text-align: center;
-  }
+    font-family: 'Space Grotesk', sans-serif;
+    }
   
   .gradient-text {
     background: linear-gradient(90deg, #ff5ecd 0%, #b983ff 40%, #5c24ff 80%, #3813c2 100%) !important;
@@ -91,6 +93,7 @@
     font-size: 1.4rem;
     margin-bottom: 32px;
     text-align: center;
+    font-family: 'Inter', sans-serif;
   }
   
   .header-buttons {
@@ -111,6 +114,7 @@
     color: #fff;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
+    font-family: 'Inter', sans-serif;
   }
   
   .primary-btn {
@@ -197,6 +201,7 @@
     flex-direction: column;
     align-items: center;
     min-width: 180px;
+    font-family: 'Inter', sans-serif;
   }
   
   .stat-number {
@@ -233,6 +238,7 @@
     text-align: center;
     max-width: 1100px;
     margin-top: 100px;
+    font-family: 'Inter', sans-serif;
   }
   
   .trusted-heading, .how-we-work-heading {
@@ -245,6 +251,7 @@
     display: inline-block;
     text-align: center;
     margin-bottom: 24px;
+    color: #3ecfff !important;
   }
   
   .how-we-work-heading {
@@ -277,6 +284,28 @@
     border-radius: 4px;
   }
   
+  .trusted-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s cubic-bezier(0.4,0.2,0.2,1);
+    cursor: pointer;
+  }
+  .trusted-logo-wrap:hover img {
+    transform: scale(1.18);
+    z-index: 2;
+  }
+  
+  .trusted-logos img, .trusted-logos :global(img) {
+    width: auto !important;
+    height: 30px !important;
+    object-fit: contain;
+    image-rendering: auto;
+    display: block;
+    margin: 0 12px;
+    transition: transform 0.25s cubic-bezier(0.4,0.2,0.2,1);
+  }
+  
   @media (max-width: 900px) {
     .trusted-logos {
       gap: 16px 16px;
@@ -294,6 +323,7 @@
     max-width: 1100px;
     text-align: center;
     margin-top: 100px;
+    font-family: 'Inter', sans-serif;
   }
   
   .how-we-work-content {
@@ -331,6 +361,7 @@
     color: #bdbdbd;
     font-size: 1.4rem;
     margin-bottom: 10;
+    font-family: 'Inter', sans-serif;
   }
   
   .how-we-work-btn {
@@ -344,6 +375,7 @@
     cursor: pointer;
     transition: opacity 0.2s;
     box-shadow: 0 2px 16px 0 rgba(92,36,255,0.12);
+    font-family: 'Inter', sans-serif;
   }
   
   .how-we-work-btn:hover {
@@ -381,6 +413,7 @@
     text-align: center;
     margin-right: -144px;
     margin-bottom: 10px;
+    font-family: 'Inter', sans-serif;
   }
   .step1{
     display: flex;
@@ -389,6 +422,7 @@
     flex: 1 1 0;
     min-width: 220px;
     max-width: 320px;
+    font-family: 'Inter', sans-serif;
   }
   .step2{  display: flex;
     flex-direction: column;
@@ -396,6 +430,7 @@
     flex: 1 1 0;
     min-width: 220px;
     max-width: 320px;
+    font-family: 'Inter', sans-serif;
 
   }
   .step-icon {
@@ -417,6 +452,7 @@
     font-weight: 700;
     color: #fff;
     margin-bottom: 8px;
+   
   }
   
   .step-desc {
@@ -630,5 +666,13 @@
       transform: translateY(0) scale(1);
       filter: blur(0px);
     }
+  }
+  
+  .trusted-logos-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 56px;
+    margin-bottom: 16px;
   }
   

@@ -145,16 +145,22 @@ const Header = () => {
         <div className="header-trusted-section">
           <div className="trusted-heading gradient-text">Trusted by 67+ Startups and Agencies</div>
           <div className="trusted-logos">
-            <span>Panasonic</span>
-            <span>Nestlé</span>
-            <span>Apollo.io</span>
-            <span>Toptal.</span>
-            <span>LOGIPSUM</span>
-            <span>LOGIPSUM</span>
-            <span>Apollo.io</span>
-            <span>Nestlé</span>
-            <span>Toptal.</span>
-            <span>LOGIPSUM</span>
+            <div className="trusted-logos-row">
+              <div className="trusted-logo-wrap"><Image src="/Panasonic.png" alt="Panasonic" width={110} height={30} quality={100} unoptimized /></div>
+              <div className="trusted-logo-wrap"><Image src="/Nestle.png" alt="Nestle" width={100} height={30} quality={100} unoptimized /></div>
+              <div className="trusted-logo-wrap"><Image src="/Apollo.png" alt="Apollo.io" width={100} height={30} quality={100} unoptimized /></div>
+              <div className="trusted-logo-wrap"><Image src="/Toptal.png" alt="Toptal" width={100} height={30} quality={100} unoptimized /></div>
+              <div className="trusted-logo-wrap"><Image src="/Logo1.png" alt="LOGOIPSUM" width={120} height={30} quality={100} unoptimized /></div>
+              <div className="trusted-logo-wrap"><Image src="/Logo1.png" alt="logoipsum" width={120} height={30} quality={100} unoptimized /></div>
+            </div>
+            <div className="trusted-logos-row">
+              <div className="trusted-logo-wrap"><Image src="/Toptal.png" alt="Toptal" width={100} height={30} quality={100} unoptimized /></div>
+              <div className="trusted-logo-wrap"><Image src="/Logo1.png" alt="LOGOIPSUM" width={120} height={30} quality={100} unoptimized /></div>
+              <div className="trusted-logo-wrap"><Image src="/Logo1.png" alt="logoipsum" width={120} height={30} quality={100} unoptimized /></div>
+              <div className="trusted-logo-wrap"><Image src="/Apollo.png" alt="Apollo.io" width={100} height={30} quality={100} unoptimized /></div>
+              <div className="trusted-logo-wrap"><Image src="/Nestle.png" alt="Nestle" width={100} height={30} quality={100} unoptimized /></div>
+              <div className="trusted-logo-wrap"><Image src="/Panasonic.png" alt="Panasonic" width={100} height={30} quality={100} unoptimized /></div>
+            </div>
           </div>
         </div>
         <div className="how-we-work-section">
@@ -195,7 +201,7 @@ const Header = () => {
             <div className="step-icon">
               <Image src="/Vector.png" alt="Vector" className="step-img-icon1" width={50} height={50} />
             </div>
-            <div className="step-title">Polished designs – on time</div>
+            <div className="step-title">Polished designs</div>
             <div className="step-desc">Our designers get to work to deliver your request. Receive your design within a few days.</div>
           </div>
           <img src="/Arrow.png" alt="Arrow" className="step-img-arrow-2" />

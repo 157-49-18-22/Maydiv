@@ -75,7 +75,15 @@ const OurService = () => {
         }}
       />
 
-      <h2 style={{ textAlign: 'center', color: '#b983ff', letterSpacing: 2, marginBottom: '2rem', fontWeight: 700 }}>OUR SERVICES</h2>
+<h2 style={{ 
+  textAlign: 'center', 
+  color: '#b983ff', 
+  letterSpacing: '2px', 
+  marginBottom: '2rem', 
+  fontWeight: 700,
+  fontFamily: "'Inter', sans-serif",
+  textTransform: 'uppercase'
+}}>OUR SERVICES</h2>
       <div className="our-services-cards">
         {services.map((service, idx) => (
           <div

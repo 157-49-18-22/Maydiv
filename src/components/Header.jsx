@@ -107,12 +107,14 @@ const Header = () => {
           <button className="secondary-btn">Our Portfolio</button>
         </div>
         <div className="header-hero-robot-group" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '620px', margin: '0 auto'}}>
-          <Lottie
-            animationData={require('../../public/Animation.json')}
-            style={{ width: '1470px', height: '940px', maxWidth: '100%', maxHeight: '90vw',marginTop:'120px' }}
-            loop
-            autoplay
-          />
+          <div className="fall-from-top">
+            <Lottie
+              animationData={require('../../public/Animation.json')}
+              style={{ width: '1070px', height: '1140px', maxWidth: '100%', maxHeight: '90vw', marginTop: '140px' }}
+              loop
+              autoplay
+            />
+          </div>
         </div>
         <div className="header-stats-section" ref={statsRef}>
           <div className="header-stat">

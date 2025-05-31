@@ -1,7 +1,9 @@
 .header-container {
   background: #0a0a0a;
   color: #fff;
-  padding-bottom: 10px;
+  min-height: unset;
+  height: auto;
+  padding-bottom: 0;
   position: relative;
   overflow: hidden;
   width: 100vw;

@@ -77,7 +77,7 @@ const Header = () => {
 
   return (
     <header className="header-container">
-      <button style={{ cursor: 'pointer', zIndex: 9999, position: 'absolute', top: 0, left: 0 }}>Test Cursor</button>
+
       <nav className="header-nav">
         <div className="header-logo">
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
@@ -87,7 +87,7 @@ const Header = () => {
           <li><Link href="/services">Services</Link></li>
           <li><Link href="/projects">Projects</Link></li>
           <li><Link href="/testimonials">Testimonials</Link></li>
-          <li><Link href="#contact">Contact</Link></li>
+          <li><Link href="/contact">Contact</Link></li>
         </ul>
         <div className="header-socials">
           <a href="#" aria-label="Instagram"><FaInstagram /></a>

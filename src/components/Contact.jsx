@@ -5,7 +5,8 @@ import Link from 'next/link';   // Assuming you're using Next.js
 import { FaGithub, FaInstagram, FaFacebook } from 'react-icons/fa';
 import Lottie from 'lottie-react';
 import './Contact.css';
-
+import Testimonial from './Testimonial';
+import Footer from './Footer';
 const Contact = () => (
   <>
     <header className="header-container">
@@ -123,12 +124,13 @@ const Contact = () => (
     <section className="ai-multiverse-row">
       <div className="ai-multiverse-row-content">
         <div className="ai-multiverse-row-lottie">
-          <Lottie animationData={require('../../public/Multiverse.json')} style={{ width: 220, height: 220, marginBottom: '1.2rem' }} loop autoplay />
+          <Lottie animationData={require('../../public/Multiverse.json')} style={{ width: 420, height: 220, marginBottom: '1.2rem' }} loop autoplay />
         </div>
         <div className="ai-multiverse-row-text">
           <h3 className="ai-multiverse-heading"><span className="gradient-text">AI Multiverse</span></h3>
           <div className="ai-multiverse-subheading">Optimized Reach</div>
           <p className="ai-multiverse-desc">It's all about getting your message in front of the right audience and creating those valuable <span className="ai-multiverse-link">relationships</span>.<br/>Learn More about how DOML can help you do just that - all with a simple, easy-to-use platform.</p>
+          <img src="/Frame 14.png" alt="divider" className="ai-multiverse-divider-img" />
           <button className="ai-multiverse-btn">Learn more →</button>
         </div>
       </div>
@@ -137,18 +139,79 @@ const Contact = () => (
     {/* AI Marketing Section (flipped) */}
     <section className="ai-multiverse-row">
       <div className="ai-multiverse-row-content ai-multiverse-row-flip">
+        <div className="ai-multiverse-row-lottie">
+          <Lottie animationData={require('../../public/Marketing.json')} style={{ width: 440, height: 240, marginBottom: '1.2rem', transform: 'scaleX(-1)' }} loop autoplay />
+        </div>
         <div className="ai-multiverse-row-text">
           <h3 className="ai-multiverse-heading"><span className="gradient-text">AI Marketing</span></h3>
           <div className="ai-multiverse-subheading">Optimized Reach</div>
           <p className="ai-multiverse-desc">DOML is a digital media agency powered by AI technology providing real time, <span className="ai-multiverse-link">data-driven insights</span> on your business and audience. The mission of DOML is to create the best experiences for companies through intelligent insights, powerful analytics and <span className="ai-multiverse-link">strategic execution</span>.</p>
+          <img src="/Frame 14.png" alt="divider" className="ai-multiverse-divider-img" />
           <button className="ai-multiverse-btn">Learn more →</button>
-        </div>
-        <div className="ai-multiverse-row-lottie">
-          <Lottie animationData={require('../../public/Marketing.json')} style={{ width: 220, height: 220, marginBottom: '1.2rem' }} loop autoplay />
         </div>
       </div>
     </section>
+
+    {/* Our Projects Section */}
+    <section className="contact-our-projects-section">
+      <h2 className="contact-our-projects-heading">AI Driven Projects</h2>
+      <div className="contact-our-projects-grid">
+        <div className="contact-our-projects-card">
+          <img src="/Our1.png" alt="Project 1" />
+          <div className="contact-our-projects-title">VPN Mobile App</div>
+          <div className="contact-our-projects-subtitle">Mobile App</div>
+        </div>
+        <div className="contact-our-projects-card">
+          <img src="/Our2.png" alt="Project 2" />
+          <div className="contact-our-projects-title">Streaming Mobile App</div>
+          <div className="contact-our-projects-subtitle">Mobile App</div>
+        </div>
+        <div className="contact-our-projects-card">
+          <img src="/Our3.png" alt="Project 3" />
+          <div className="contact-our-projects-title">Creative Digital Agency</div>
+          <div className="contact-our-projects-subtitle">Landing Page</div>
+        </div>
+        <div className="contact-our-projects-card">
+          <img src="/Our4.png" alt="Project 4" />
+          <div className="contact-our-projects-title">Podcast Mobile App</div>
+          <div className="contact-our-projects-subtitle">Mobile App</div>
+        </div>
+        <div className="contact-our-projects-card">
+          <img src="/Our5.png" alt="Project 5" />
+          <div className="contact-our-projects-title">Multimedia Design Platform</div>
+          <div className="contact-our-projects-subtitle">Web Design</div>
+        </div>
+        <div className="contact-our-projects-card">
+          <img src="/Our6.png" alt="Project 6" />
+          <div className="contact-our-projects-title">Parking Mobile App</div>
+          <div className="contact-our-projects-subtitle">Mobile App</div>
+        </div>
+      </div>
+      <div className="contact-our-projects-description">
+        <p>Explore more of our AI-driven, innovative, and user-centric digital projects designed to elevate your business.</p>
+      </div>
+      <div className="contact-our-projects-viewmore-wrap">
+        <button className="contact-our-projects-viewmore-btn">View more</button>
+      </div>
+    </section>
+    <Testimonial />
+    <section className="contact-get-section contact-gradient-cta-section">
+      <div className="contact-gradient-cta-content">
+        <div className="contact-gradient-cta-left">
+          <img src="/Get.png" alt="Swirl" className="contact-gradient-cta-img" />
+        </div>
+        <div className="contact-gradient-cta-right">
+          <h2 className="contact-gradient-cta-heading">Get exponential reach via <span>AI Technology</span></h2>
+          <form className="contact-gradient-cta-form" onSubmit={e => e.preventDefault()}>
+            <input type="email" className="contact-gradient-cta-input" placeholder="Enter your work email" required />
+            <button type="submit" className="contact-gradient-cta-btn">Get in touch →</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <Footer />
   </>
 );
 
 export default Contact;
+

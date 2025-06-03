@@ -697,6 +697,7 @@
   transition: transform 0.18s, box-shadow 0.18s;
   cursor: pointer;
   position: relative;
+  max-height: 49px;
 }
 
 .service-card:hover {

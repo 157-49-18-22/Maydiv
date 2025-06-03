@@ -74,6 +74,24 @@
   justify-content: center;
   min-height: 70vh;
   padding-top: 80px;
+  overflow: hidden;
+}
+
+.about-hero-lottie-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.19;
+}
+
+.about-hero-lottie-bg div {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .about-gradient-heading {
@@ -381,7 +399,7 @@ justify-content: center;
   flex-direction: column;
   align-items: center;
   margin: 48px 0 56px 0;
-  margin-top: 240px;
+
 }
 
 .trusted-logos-badge {

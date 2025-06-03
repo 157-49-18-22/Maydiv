@@ -51,7 +51,7 @@ export default function TrustedLogos() {
           </div>
           <div className="trusted-logo-pair">
             <Image src="/5.5.png" alt="Amazon Gray" width={120} height={60} quality={100} className="about-logo logo-gray" />
-            <Image src="/Amazon.jfif" alt="Amazon Color" width={120} height={60} quality={100} className="about-logo logo-color" />
+            <Image src="/Amazon.png" alt="Amazon Color" width={120} height={60} quality={100} className="about-logo logo-color" />
           </div>
           <div className="trusted-logo-pair">
             <Image src="/6.6.png" alt="Adobe Gray" width={120} height={60} quality={100} className="about-logo logo-gray" />

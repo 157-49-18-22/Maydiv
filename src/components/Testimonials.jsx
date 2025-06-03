@@ -12,7 +12,7 @@ import CountUp from 'react-countup';
 const Testimonials = () => {
   return (
     <>
-      <header className="header-container">
+      <header className="header-container" style={{ overflowX: 'hidden' }}>
         <nav className="header-nav">
           <div className="header-logo">
             <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />

@@ -8,6 +8,8 @@ import TrustedLogos from './TrustedLogos';
 import Testimonial from './Testimonial';
 import Discuss from './Discuss';
 import Footer from './Footer';
+import Lottie from 'lottie-react';
+import aboutAnimation from '../../public/About.json';
 
 export default function About() {
   return (
@@ -31,6 +33,9 @@ export default function About() {
         </div>
       </nav>
       <section className="about-hero-section">
+        <div className="about-hero-lottie-bg">
+          <Lottie animationData={aboutAnimation} loop autoplay />
+        </div>
         <h1 className="about-gradient-heading">
           Innovating Digital Experience<br />
           <span className="about-gradient-blue">About Us</span>

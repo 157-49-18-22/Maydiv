@@ -1110,12 +1110,18 @@ height: 80px;
 }
 
 .header-stats-section {
-  width: 100%;
+  width: 100vw;
   background: #0a0a0a;
-  padding: 48px 0 32px 0;
+  padding: 0px 0 0px 0;
   display: flex;
   justify-content: center;
+
+ 
+
+
 }
+
+
 
 .header-stats-grid {
   display: flex;

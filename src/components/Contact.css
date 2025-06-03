@@ -6,12 +6,7 @@
     padding-bottom: 0;
     position: relative;
     overflow: hidden;
-    width: 100vw;
-    max-width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: 100%;
     box-sizing: border-box;
     z-index: 1000;
   }
@@ -162,12 +157,8 @@
 }
 
 .contact-hero-section {
-  width: 100vw;
+  width: 100%;
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
   background:
     url('data:image/svg+xml;utf8,<svg width="60" height="60" opacity="0.4" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="59" height="59" rx="5.5" fill="none" stroke="%23ffffff11"/></svg>') repeat,
     linear-gradient(120deg, #181818 60%, #3a1c71 100%, #7e3ff2 120%);

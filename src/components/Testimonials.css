@@ -222,7 +222,7 @@ height: 80px;
 .marketing-hero-projects {
   display: flex;
   align-items: baseline;
-
+ gap: -30px;
  
 }
 .marketing-hero-projects-number {
@@ -382,7 +382,7 @@ margin-bottom: 20%;
   75% {
     transform: translateY(-10px) scale(0.98) rotate(-4deg);
   }
-% {
+85% {
     transform: translateY(8px) scale(1.03) rotate(2deg);
   }
   92% {

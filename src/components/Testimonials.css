@@ -131,15 +131,18 @@ height: 80px;
 }
 
 .marketing-hero-section {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #0a0a0a;
   padding: 60px 0 40px 0;
-  min-height: 70vh;
+ 
   gap: 40px;
   margin-bottom: 0;
   position: relative;
+ 
+ 
 }
 
 .marketing-hero-left {
@@ -181,8 +184,8 @@ height: 80px;
   word-break: keep-all;
   max-width: 100%;
 
-  margin-left: auto;         /* Push the element to the right */
-  margin-right: -80px;
+        /* Push the element to the right */
+  margin-left: 55%;
 }
 
 
@@ -219,8 +222,8 @@ height: 80px;
 .marketing-hero-projects {
   display: flex;
   align-items: baseline;
-  gap: 10px;
-  margin-bottom: 28px;
+
+ 
 }
 .marketing-hero-projects-number {
   color: white;
@@ -231,7 +234,8 @@ height: 80px;
 .marketing-hero-projects-label {
   color: #fff;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 100;
+ 
 }
 
 .marketing-hero-btn {
@@ -243,10 +247,14 @@ height: 80px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  margin-top: 10px;
+  
   box-shadow: 0 2px 16px #00cfff33;
   transition: background 0.2s, box-shadow 0.2s;
+  margin-left: 53%;
+ 
+ 
 }
+
 .marketing-hero-btn:hover {
   background: #009fd6;
   box-shadow: 0 6px 32px #00cfff66;
@@ -285,6 +293,18 @@ height: 80px;
   justify-content: center;
   color: #ffd600;
   font-size: 1.5rem;
+}
+.marketing-hero-tagline{
+  margin-bottom: 23%;
+  color: white;
+  margin-right: -60px;
+  
+}
+.marketing-hero-tagline1{
+margin-bottom: 20%;
+  color: white;
+  margin-left: -10px;
+ 
 }
 .marketing-hero-user-text {
   color: #fff;
@@ -342,9 +362,10 @@ height: 80px;
   height: auto;
   display: block;
   border-radius: 32px;
+  
+ margin-bottom: 470px;
+  margin-left:-1130px; 
  
-  margin-bottom: 470px;
-  margin-left:-1130px;
 }
 
 @keyframes dropInT2Advanced {
@@ -361,7 +382,7 @@ height: 80px;
   75% {
     transform: translateY(-10px) scale(0.98) rotate(-4deg);
   }
-  85% {
+% {
     transform: translateY(8px) scale(1.03) rotate(2deg);
   }
   92% {
@@ -1160,4 +1181,14 @@ height: 80px;
   border-radius: 2px;
   opacity: 1;
   flex-shrink: 0;
+}
+.marketing-hero-graphic-950 {
+  position: absolute;
+  
+  width: 100%; /* Adjust as needed */
+  height: 100%; /* Adjust as needed */
+  object-fit: contain; /* Or 'cover' depending on desired effect */
+  z-index: 3; /* Ensure it's above the T3 image */
+ bottom: 14px;
+ left: 17px;
 }

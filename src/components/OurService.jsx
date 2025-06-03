@@ -1,12 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import './OurService.css';
-
-const services = [
-  { img: '/Web.png' },
-  { img: '/UI.png' },
-  { img: '/Social.png' },
-];
 
 const iconSize = 500; // px, adjust as needed
 
@@ -75,30 +70,59 @@ const OurService = () => {
         }}
       />
 
-<h2 style={{ 
-  textAlign: 'center', 
-  color: '#b983ff', 
-  letterSpacing: '2px', 
-  marginBottom: '2rem', 
-  fontWeight: 700,
-  fontFamily: "'Inter', sans-serif",
-  textTransform: 'uppercase'
-}}>OUR SERVICES</h2>
+      <h2
+        style={{
+          textAlign: 'center',
+          color: '#b983ff',
+          letterSpacing: '2px',
+          marginBottom: '2rem',
+          fontWeight: 700,
+          fontFamily: "'Inter', sans-serif",
+          textTransform: 'uppercase',
+        }}
+      >
+        OUR SERVICES
+      </h2>
+
       <div className="our-services-cards">
-        {services.map((service, idx) => (
-          <div
-            key={idx}
-            className="service-card"
-          >
+        {/* Web Card - Link to Projects */}
+        <Link href="/projects">
+          <div className="service-card" style={{ cursor: 'pointer' }}>
             <Image
-              src={service.img}
-              alt={`Service ${idx + 1}`}
+              src="/Web.png"
+              alt="Web Development"
               width={iconSize}
               height={iconSize}
               className="service-card-img"
             />
           </div>
-        ))}
+        </Link>
+
+        {/* UI Card - Link to Services */}
+        <Link href="/services">
+          <div className="service-card" style={{ cursor: 'pointer' }}>
+            <Image
+              src="/UI.png"
+              alt="UI/UX Design"
+              width={iconSize}
+              height={iconSize}
+              className="service-card-img"
+            />
+          </div>
+        </Link>
+
+        {/* Social Card - Link to Testimonials */}
+        <Link href="/testimonials">
+          <div className="service-card" style={{ cursor: 'pointer' }}>
+            <Image
+              src="/Social.png"
+              alt="Social Media"
+              width={iconSize}
+              height={iconSize}
+              className="service-card-img"
+            />
+          </div>
+        </Link>
       </div>
     </section>
   );

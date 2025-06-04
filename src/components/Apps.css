@@ -1,0 +1,280 @@
+.header-container {
+  background: #0a0a0a;
+  color: #fff;
+  min-height: unset;
+  height: auto;
+  padding-bottom: 0;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 64px 0 64px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  height: 80px;
+}
+
+.header-logo img {
+  height: 120px;
+}
+
+.header-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.header-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.header-links a:hover {
+  color: #b983ff;
+}
+
+.header-socials {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-socials a {
+  color: #fff;
+  margin-left: 16px;
+  font-size: 1.3rem;
+  transition: color 0.2s;
+}
+
+.header-socials a:hover {
+  color: #b983ff;
+}
+
+.apps-container {
+  background: #0a0a0a url('/Bg2.png') no-repeat center center;
+  background-size: cover;
+  color: #fff;
+  min-height: calc(100vh - 80px);
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.apps-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.3));
+  z-index: 1;
+}
+
+.apps-hero {
+  padding: 2rem 8% 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  position: relative;
+  z-index: 2;
+}
+
+.apps-hero-content {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.apps-hero-content h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.purple-text {
+  background: linear-gradient(45deg, #b983ff, #ff5ecd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  color: #888;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.expertise-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.apps1-image {
+  width: 34%;
+  max-width: 1200px;
+  
+  object-fit: contain;
+  margin-left: 34%;
+}
+
+.ios-section, .android-section {
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem 0;
+  position: relative;
+  overflow: visible;
+}
+
+.android-section {
+  flex-direction: row-reverse;
+}
+
+.service-content {
+  flex: 0 0 45%;
+  padding: 2rem;
+  z-index: 2;
+}
+
+.service-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #b983ff;
+}
+
+.service-content p {
+  color: #888;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  max-width: 90%;
+}
+
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.platform-badge:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.platform-badge span {
+  color: #fff;
+  font-weight: 500;
+}
+
+.arrow {
+  font-size: 1.2rem;
+}
+
+.service-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.ios-devices {
+  margin-top: -100%;
+}
+
+.apps2-image {
+  width: 74%;
+  max-width: 1200px;
+  
+  object-fit: contain;
+  margin-left: 34%;
+  margin-bottom: 70%;
+ 
+}
+
+.android-devices {
+  transform: translateY(-150%);
+  margin-left: 80%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+  .ios-section, .android-section {
+    flex-direction: column;
+    padding: 1.5rem;
+    align-items: center;
+  }
+
+  .service-content {
+    flex: none;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .service-content p {
+    max-width: 100%;
+  }
+
+  .service-image {
+    position: relative;
+    height: 300px;
+    margin-top: 2rem;
+  }
+
+  .ios-devices, .android-devices {
+    margin: 0;
+    transform: none;
+  }
+
+  .apps-hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .expertise-image {
+    margin-top: 1rem;
+  }
+
+  .apps1-image {
+    max-width: 100%;
+  }
+}
+
+.mobile-image-container {
+  position: absolute;
+  right: 10%;
+  bottom: 40%;
+ 
+}
+
+.mobiles-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}

@@ -10,10 +10,11 @@
 .our-services-cards {
   display: flex;
   justify-content: center;
-  gap: 0;
-  flex-wrap: wrap;
+  gap: 0px;
+  flex-wrap: nowrap;
   position: relative;
   z-index: 2;
+  padding: 0 2rem;
 }
 
 .service-card {
@@ -25,13 +26,19 @@
   justify-content: center;
   margin: 0;
   padding: 0;
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   background: transparent;
   border: none;
   box-shadow: none;
   transition: transform 0.35s cubic-bezier(0.4,0.2,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0.2,0.2,1);
 }
+
+.service-card-img1{
+  height: 74%;
+  width: 70%;
+}
+
 
 .service-card::before {
   content: "";
@@ -90,9 +97,4 @@
   100% { left: 120%; opacity: 0; }
 }
 
-.service-card-img {
-  margin: 0;
-  padding: 0;
-  width: 1200px;
-  height: 540px;
-}
+

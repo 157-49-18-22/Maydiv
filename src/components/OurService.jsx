@@ -98,6 +98,7 @@ const OurService = () => {
           </div>
         </Link>
 
+       
         {/* UI Card - Link to Services */}
         <Link href="/services">
           <div className="service-card" style={{ cursor: 'pointer' }}>
@@ -120,6 +121,17 @@ const OurService = () => {
               width={iconSize}
               height={iconSize}
               className="service-card-img"
+            />
+          </div>
+        </Link>
+        <Link href="/apps">
+          <div className="service-card" style={{ cursor: 'pointer' }}>
+            <Image
+              src="/App.png"
+              alt="App Development"
+              width={iconSize}
+              height={iconSize}
+              className="service-card-img1"
             />
           </div>
         </Link>

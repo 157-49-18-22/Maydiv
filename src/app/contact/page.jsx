@@ -1,12 +1,12 @@
-import Contact from '../../components/Contact';
+import Ai from '../../components/Ai';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
 
-export default function ContactPage() {
+export default function AiPage() {
   return (
     <main>
     
-      <Contact />
+      <Ai />
      
     </main>
   );

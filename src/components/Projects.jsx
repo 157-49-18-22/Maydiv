@@ -41,7 +41,8 @@ const Projects = () => {
           <li><Link href="/">Home</Link></li>
           <li><Link href="/services">Services</Link></li>
           <li><Link href="/projects">Projects</Link></li>
-          <li><Link href="#testimonials">Testimonials</Link></li>
+          <li><Link href="/testimonials">Testimonials</Link></li>
+          <li><Link href="/ai">AI</Link></li>
           <li><Link href="#contact">Contact</Link></li>
         </ul>
         <div className="header-socials">
@@ -60,7 +61,7 @@ const Projects = () => {
           <div className="projects-hero-subheading">
             Elevate your site's visibility effortlessly with Maydiv, <br />where smart technology meets user-friendly SEO tools.
           </div>
-          <button className="projects-hero-btn">Contact Us</button>
+          <button className="projects-hero-btn">AI Us</button>
         </div>
       </section>
 
@@ -129,7 +130,7 @@ const Projects = () => {
                 <img src="/Girl4.png" alt="Girl 4" />
               </div>
               <div className="online-separator"></div>
-              <button className="online-btn">Contact</button>
+              <button className="online-btn">AI</button>
             </div>
           </div>
         </div>

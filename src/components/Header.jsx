@@ -87,7 +87,7 @@ const Header = () => {
           <li><Link href="/services">Services</Link></li>
           <li><Link href="/projects">Projects</Link></li>
           <li><Link href="/testimonials">Testimonials</Link></li>
-          <li><Link href="/contact">Contact</Link></li>
+          <li><Link href="/ai">AI</Link></li>
         </ul>
         <div className="header-socials">
           <a href="#" aria-label="Instagram"><FaInstagram /></a>
@@ -171,16 +171,16 @@ const Header = () => {
             </div>
             <div className="how-we-work-right">
               <p>Grow your brand with high-quality UI/UX design for a minimal fee. Work with senior designers. Contact and make as many requests as you need – no limits.</p>
-              <button className="how-we-work-btn">Contact Us</button>
+              <button className="how-we-work-btn">AI Us</button>
             </div>
           </div>
         </div>
         <div className="how-we-work-steps" ref={howWeWorkRef}>
           <div className="step">
-            <div className="step-icon">
-              <Image src="/Shuttle.png" alt="Shuttle" className="step-img-icon" width={50} height={50} />
+          <div className="step-icon">
+              <Image src="/Shuttle.png" alt="Vector" className="step-img-icon1" width={50} height={50} />
             </div>
-            <div className="step-title">Contact & get started</div>
+            <div className="step-title">AI & get started</div>
             <div className="step-desc">Submit as many design tasks as you need without worrying about individual project fees.</div>
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0 12px' }}>

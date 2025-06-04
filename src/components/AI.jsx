@@ -1,13 +1,14 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image'; // Assuming you're using Next.js
 import Link from 'next/link';   // Assuming you're using Next.js
 import { FaGithub, FaInstagram, FaFacebook } from 'react-icons/fa';
 import Lottie from 'lottie-react';
-import './Contact.css';
+import './AI.css';
 import Testimonial from './Testimonial';
 import Footer from './Footer';
-const Contact = () => (
+
+const AI = () => (
   <>
     <header className="header-container">
       <nav className="header-nav">
@@ -19,7 +20,7 @@ const Contact = () => (
           <li><Link href="/services">Services</Link></li>
           <li><Link href="/projects">Projects</Link></li>
           <li><Link href="/testimonials">Testimonials</Link></li>
-          <li><Link href="#contact">Contact</Link></li>
+          <li><Link href="#Ai">Ai</Link></li>
         </ul>
         <div className="header-socials">
           <a href="#" aria-label="GitHub"><FaGithub /></a>
@@ -29,15 +30,15 @@ const Contact = () => (
       </nav>
     </header>
 
-    <section className="contact-hero-section">
-      <div className="contact-hero-left">
-        <h1 className="contact-hero-title">Elevate With<br />Ai Agent.</h1>
-        <p className="contact-hero-desc">
+    <section className="ai-hero-section">
+      <div className="ai-hero-left">
+        <h1 className="ai-hero-title">Elevate With<br />Ai Agent.</h1>
+        <p className="ai-hero-desc">
           Elevate your site's visibility effortlessly with AI, where smart technology meets user-friendly SEO tools. Elevate your site's visibility effortlessly with AI, where smart technology meets user-friendly SEO tools.
         </p>
-        <button className="contact-hero-btn">Contact Us</button>
+        <button className="Ai-hero-btn">Ai Us</button>
       </div>
-      <div className="contact-hero-right">
+      <div className="Ai-hero-right">
         <div className="rock-group">
           <Image src="/Rock1.png" alt="Rock1" width={400} height={400} className="rock-img rock1" />
           <Image src="/Rock2.png" alt="Rock2" width={400} height={400} className="rock-img rock2" />
@@ -67,7 +68,7 @@ const Contact = () => (
           <h2 className="ai-growth-title">AI elevate your brands growth</h2>
           <Lottie animationData={require('../../public/Ai.json')} style={{ width: 660, height: 380, borderRadius: '1.2rem', background: 'none', margin: '1rem 0' }} loop autoplay />
           <p className="ai-growth-desc">One stop for all your E-commerce marketing solutions. Scale your brand with our digital & result driven marketing services. Ready to take your brand to the next level?</p>
-          <button className="ai-growth-btn">Contact Us</button>
+          <button className="ai-growth-btn">Ai Us</button>
         </div>
         <div className="ai-growth-right-col">
           <div className="ai-growth-cards">
@@ -153,58 +154,58 @@ const Contact = () => (
     </section>
 
     {/* Our Projects Section */}
-    <section className="contact-our-projects-section">
-      <h2 className="contact-our-projects-heading">AI Driven Projects</h2>
-      <div className="contact-our-projects-grid">
-        <div className="contact-our-projects-card">
+    <section className="ai-our-projects-section">
+      <h2 className="ai-our-projects-heading">AI Driven Projects</h2>
+      <div className="ai-our-projects-grid">
+        <div className="ai-our-projects-card">
           <img src="/Our1.png" alt="Project 1" />
-          <div className="contact-our-projects-title">VPN Mobile App</div>
-          <div className="contact-our-projects-subtitle">Mobile App</div>
+          <div className="ai-our-projects-title">VPN Mobile App</div>
+          <div className="ai-our-projects-subtitle">Mobile App</div>
         </div>
-        <div className="contact-our-projects-card">
+        <div className="ai-our-projects-card">
           <img src="/Our2.png" alt="Project 2" />
-          <div className="contact-our-projects-title">Streaming Mobile App</div>
-          <div className="contact-our-projects-subtitle">Mobile App</div>
+          <div className="ai-our-projects-title">Streaming Mobile App</div>
+          <div className="ai-our-projects-subtitle">Mobile App</div>
         </div>
-        <div className="contact-our-projects-card">
+        <div className="ai-our-projects-card">
           <img src="/Our3.png" alt="Project 3" />
-          <div className="contact-our-projects-title">Creative Digital Agency</div>
-          <div className="contact-our-projects-subtitle">Landing Page</div>
+          <div className="ai-our-projects-title">Creative Digital Agency</div>
+          <div className="ai-our-projects-subtitle">Landing Page</div>
         </div>
-        <div className="contact-our-projects-card">
+        <div className="ai-our-projects-card">
           <img src="/Our4.png" alt="Project 4" />
-          <div className="contact-our-projects-title">Podcast Mobile App</div>
-          <div className="contact-our-projects-subtitle">Mobile App</div>
+          <div className="ai-our-projects-title">Podcast Mobile App</div>
+          <div className="ai-our-projects-subtitle">Mobile App</div>
         </div>
-        <div className="contact-our-projects-card">
+        <div className="ai-our-projects-card">
           <img src="/Our5.png" alt="Project 5" />
-          <div className="contact-our-projects-title">Multimedia Design Platform</div>
-          <div className="contact-our-projects-subtitle">Web Design</div>
+          <div className="ai-our-projects-title">Multimedia Design Platform</div>
+          <div className="ai-our-projects-subtitle">Web Design</div>
         </div>
-        <div className="contact-our-projects-card">
+        <div className="ai-our-projects-card">
           <img src="/Our6.png" alt="Project 6" />
-          <div className="contact-our-projects-title">Parking Mobile App</div>
-          <div className="contact-our-projects-subtitle">Mobile App</div>
+          <div className="ai-our-projects-title">Parking Mobile App</div>
+          <div className="ai-our-projects-subtitle">Mobile App</div>
         </div>
       </div>
-      <div className="contact-our-projects-description">
+      <div className="ai-our-projects-description">
         <p>Explore more of our AI-driven, innovative, and user-centric digital projects designed to elevate your business.</p>
       </div>
-      <div className="contact-our-projects-viewmore-wrap">
-        <button className="contact-our-projects-viewmore-btn">View more</button>
+      <div className="ai-our-projects-viewmore-wrap">
+        <button className="ai-our-projects-viewmore-btn">View more</button>
       </div>
     </section>
     <Testimonial />
-    <section className="contact-get-section contact-gradient-cta-section">
-      <div className="contact-gradient-cta-content">
-        <div className="contact-gradient-cta-left">
-          <img src="/Get.png" alt="Swirl" className="contact-gradient-cta-img" />
+    <section className="ai-get-section ai-gradient-cta-section">
+      <div className="ai-gradient-cta-content">
+        <div className="ai-gradient-cta-left">
+          <img src="/Get.png" alt="Swirl" className="ai-gradient-cta-img" />
         </div>
-        <div className="contact-gradient-cta-right">
-          <h2 className="contact-gradient-cta-heading">Get exponential reach via <span>AI Technology</span></h2>
-          <form className="contact-gradient-cta-form" onSubmit={e => e.preventDefault()}>
-            <input type="email" className="contact-gradient-cta-input" placeholder="Enter your work email" required />
-            <button type="submit" className="contact-gradient-cta-btn">Get in touch →</button>
+        <div className="ai-gradient-cta-right">
+          <h2 className="ai-gradient-cta-heading">Get exponential reach via <span>AI Technology</span></h2>
+          <form className="ai-gradient-cta-form" onSubmit={e => e.preventDefault()}>
+            <input type="email" className="ai-gradient-cta-input" placeholder="Enter your work email" required />
+            <button type="submit" className="ai-gradient-cta-btn">Get in touch →</button>
           </form>
         </div>
       </div>
@@ -213,5 +214,5 @@ const Contact = () => (
   </>
 );
 
-export default Contact;
+export default AI;
 

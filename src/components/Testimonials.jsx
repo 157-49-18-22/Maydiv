@@ -22,6 +22,7 @@ const Testimonials = () => {
             <li><Link href="/services">Services</Link></li>
             <li><Link href="/projects">Projects</Link></li>
             <li><Link href="/testimonials">Testimonials</Link></li>
+            <li><Link href="/ai">AI</Link></li>
             <li><Link href="#contact">Contact</Link></li>
           </ul>
           <div className="header-socials">
@@ -147,7 +148,7 @@ const Testimonials = () => {
           </div>
           <h2 className="why-maydiv-heading">Why should you choose Maydiv</h2>
           <p className="why-maydiv-desc">Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor Lorem ipsum dolor sit amet, consectetur sadipscing elitr.</p>
-          <button className="why-maydiv-btn">Contact us</button>
+          <button className="why-maydiv-btn">AI us</button>
         </div>
       </div>
     </section>

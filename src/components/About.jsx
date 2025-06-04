@@ -23,7 +23,8 @@ export default function About() {
           <li><Link href="#home">Home</Link></li>
           <li><Link href="#services">Services</Link></li>
           <li><Link href="#projects">Projects</Link></li>
-          <li><Link href="#testimonials">Testimonials</Link></li>
+          <li><Link href="/testimonials">Testimonials</Link></li>
+          <li><Link href="/ai">AI</Link></li>
           <li><Link href="#contact">Contact</Link></li>
         </ul>
         <div className="header-socials">
@@ -88,7 +89,7 @@ export default function About() {
           </div>
         </div>
         <div className="about-features-btn-row">
-          <button className="about-features-btn about-features-btn-outline">Contact Us</button>
+          <button className="about-features-btn about-features-btn-outline">AI Us</button>
           <button className="about-features-btn about-features-btn-viewall">View All <span className="about-features-btn-arrow">→</span></button>
         </div>
         <Image src="/Bg1.png" alt="Decorative Left Dots" width={90} height={90} className="about-features-bg-left" />

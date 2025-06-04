@@ -1,6 +1,4 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import "../styles/globals.css";
-import "./_document.css";
 
 export default function Document() {
   return (

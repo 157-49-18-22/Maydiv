@@ -87,7 +87,7 @@ const Apps = () => {
                     <p>access to device-specific features.</p>
                   </div>
                   <div className="logo-section">
-                    <LottiePlayer
+                  <LottiePlayer
                       autoplay
                       loop
                       src="/Apple.json"
@@ -116,6 +116,14 @@ const Apps = () => {
                     <p>
                       largest mobile platform in the world.
                     </p>
+                  </div>
+                  <div style={{marginTop: '18px', marginLeft: '0px', width: '90px', height: '90px', display: 'flex', alignItems: 'center'}}>
+                    <LottiePlayer
+                      autoplay
+                      loop
+                      src="/Android.json"
+                      style={{ width: '180px', height: '103px', background: 'none',marginLeft:'-30%' }}
+                    />
                   </div>
                 </div>
                 </span>

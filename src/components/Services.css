@@ -335,21 +335,22 @@
   align-items: center;
   gap: 18px;
   margin-top: 32px;
-  margin-left: 80px;
+  margin-left: 180px;
   position: relative;
   flex-direction: row;
 }
 
 .partners-logos-topline {
-  width: 100%;
+  width: 90%;
   height: 1px;
   background: white;
   border-radius: 1px;
   margin-bottom: 18px;
-  margin-left: 0;
+
   position: absolute;
   top: -20px;
-  left: 0;
+ 
+  margin-right: 200px;
 }
 
 .partners-logos-row {
@@ -1160,6 +1161,7 @@
   margin: 80px 80px 0 80px;
   max-width: 1200px;
   width: calc(100% - 160px);
+  margin-left: 200px;
 }
 .projects-header-row {
   display: flex;

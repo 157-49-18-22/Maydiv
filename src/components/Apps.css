@@ -90,6 +90,8 @@
 
   position: relative;
   z-index: 2;
+
+ 
 }
 
 .apps-hero::before,
@@ -112,6 +114,7 @@
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
+  margin-left: -10%;
 }
 
 .purple-text {
@@ -124,6 +127,7 @@
   font-size: 1.5rem;
   color: #fff;
   margin-bottom: 1rem;
+  margin-left: -10%;
 }
 
 .hero-description {
@@ -131,6 +135,7 @@
   color: #888;
   max-width: 600px;
   margin: 0 auto 2rem;
+  margin-left: 28%;
 }
 
 .expertise-image {
@@ -219,20 +224,23 @@
   animation:
     dropInIos 1.1s cubic-bezier(0.77,0,0.175,1) 1.1s forwards,
     floatIos 5.8s ease-in-out 2.2s infinite;
+    margin-left: 30%;
 }
 
 .apps2-image {
-  width: 80%;
+  width: 57%;
   max-width: 1200px;
   object-fit: contain;
-  margin-left: 34%;
+  margin-left: 27%;
   margin-bottom: 10%;
   text-align: center;
+  margin-left: -10%;
 }
 
 .projects-partners-section{
   
   width: 100%;
+  margin-left: -112px;
 }
 .projects-partners-heading{
   margin-left: 40%;
@@ -292,6 +300,7 @@
   position: absolute;
   right: 10%;
   bottom: 40%;
+  margin-right: 200px;
  
 }
 
@@ -302,6 +311,7 @@
   animation:
     slideInMobiles 1.1s cubic-bezier(0.77,0,0.175,1) 1.3s forwards,
     floatMobiles 5.2s ease-in-out 2.4s infinite;
+   
 }
 
 .ios-box {
@@ -316,6 +326,7 @@
   padding: 2rem;
   margin-left: 50%;
   transition: box-shadow 0.22s cubic-bezier(0.4,0.2,0.2,1), transform 0.22s cubic-bezier(0.4,0.2,0.2,1);
+  margin-left: 47%;
 }
 
 .ios-box:hover {
@@ -344,7 +355,8 @@
   color: white;
   text-align: left;
   width: 100%;
-  margin-left: -7%;
+  margin-left: -27%;
+ 
 
 }
 
@@ -521,6 +533,7 @@
   background: linear-gradient(90deg, #b983ff, #ff5ecd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-left: -30%;
 }
 
 .tech-cards-row {
@@ -531,6 +544,7 @@
   align-items: stretch;
   width: 100%;
   margin-top: 12px;
+  margin-left: -24%;
 }
 
 .tech-card {
@@ -605,6 +619,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 17%;
 }
 
 .webprojects-title {
@@ -723,6 +738,7 @@
   transform: translate(-50%, -50%) rotate(-30deg);
   animation: floatNucleus 5.5s ease-in-out infinite;
   animation-delay: 1.2s;
+  margin-left: -10%;
 }
 
 .webprojects-section .nucleus-bg-extra2 {
@@ -739,6 +755,7 @@
   transform: translate(-50%, -50%) rotate(-30deg);
   animation: floatNucleus 6.2s ease-in-out infinite;
   animation-delay: 2.1s;
+  margin-left: -7%;
 }
 .webprojects-section .nucleus-bg-extra3 {
   position: absolute;
@@ -754,6 +771,7 @@
   transform: translate(-50%, -50%) rotate(-30deg);
   animation: floatNucleus3 7.2s ease-in-out infinite;
   animation-delay: 2.8s;
+  margin-left: -10%;
 }
 
 
@@ -771,6 +789,7 @@
   transform: translate(-50%, -50%) rotate(40deg);
   animation: floatNucleus2 6.8s ease-in-out infinite;
   animation-delay: 3.5s;
+  margin-left: -10%;
 }
 
 .webprojects-title,
@@ -801,6 +820,8 @@
   animation:
     slideInAndroid 1.2s cubic-bezier(0.77,0,0.175,1) 1.2s forwards,
     floatAndroid 6.2s ease-in-out 2.4s infinite;
+    margin-top: 300px;
+    margin-right: 340px;
 }
 
 @keyframes dropInIos {

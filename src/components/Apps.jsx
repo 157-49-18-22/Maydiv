@@ -100,7 +100,7 @@ const Apps = () => {
             </div>
           </div>
           <div style={{position:'absolute',top:'3%',right:'0%'}}>
-            <Image src="/half.png" alt="Android Devices" width={340} height={240} className="Android" />
+            <Image src="/half.png" alt="Android Devices" width={440} height={340} className="Android" />
           </div>
 
           <div className="ios-section">

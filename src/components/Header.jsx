@@ -84,10 +84,19 @@ const Header = () => {
         </div>
         <ul className="header-links">
           <li><Link href="#home">Home</Link></li>
-          <li><Link href="/services">Services</Link></li>
+          <li className="dropdown">
+            <span className="dropdown-toggle">Services</span>
+            <ul className="dropdown-menu">
+              <li><Link href="/real-projects">Web Development</Link></li>
+              <li><Link href="/real-services">UI/UX Design</Link></li>
+              <li><Link href="/real-testimonials">Social Media and Marketing</Link></li>
+              <li><Link href="/real-apps">App Development</Link></li>
+              <li><Link href="/real-ai">AI</Link></li>
+            </ul>
+          </li>
           <li><Link href="/projects">Projects</Link></li>
           <li><Link href="/testimonials">Testimonials</Link></li>
-          <li><Link href="/ai">AI</Link></li>
+          <li><Link href="/contact">Contact</Link></li>
         </ul>
         <div className="header-socials">
           <a href="#" aria-label="Instagram"><FaInstagram /></a>
@@ -177,7 +186,7 @@ const Header = () => {
         </div>
         <div className="how-we-work-steps" ref={howWeWorkRef}>
           <div className="step">
-          <div className="step-icon">
+            <div className="step-icon">
               <Image src="/Shuttle.png" alt="Vector" className="step-img-icon1" width={50} height={50} />
             </div>
             <div className="step-title">AI & get started</div>

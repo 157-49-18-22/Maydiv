@@ -72,69 +72,85 @@ const OurService = () => {
 
       <h2
         style={{
-          textAlign: 'center',
-          color: '#b983ff',
-          letterSpacing: '2px',
-          marginBottom: '2rem',
-          fontWeight: 700,
-          fontFamily: "'Inter', sans-serif",
+  textAlign: 'center', 
+  color: '#b983ff', 
+  letterSpacing: '2px', 
+  marginBottom: '2rem', 
+  fontWeight: 700,
+  fontFamily: "'Inter', sans-serif",
           textTransform: 'uppercase',
         }}
       >
         OUR SERVICES
       </h2>
 
-      <div className="our-services-cards">
-        {/* Web Card - Link to Projects */}
-        <Link href="/projects">
-          <div className="service-card" style={{ cursor: 'pointer' }}>
+      <div className="our-services-cards-pyramid">
+        <div className="services-row top-row">
+          {/* Web Card */}
+          <Link href="/real-projects">
+            <div className="service-card" style={{ cursor: 'pointer' }}>
+              <Image
+                src="/Web.png"
+                alt="Web Development"
+                width={iconSize}
+                height={iconSize}
+                className="service-card-img"
+              />
+            </div>
+          </Link>
+          {/* UI/UX Card */}
+          <Link href="/real-services">
+            <div className="service-card" style={{ cursor: 'pointer' }}>
+              <Image
+                src="/UI.png"
+                alt="UI/UX Design"
+                width={iconSize}
+                height={iconSize}
+                className="service-card-img"
+              />
+            </div>
+          </Link>
+        </div>
+        <div className="services-row middle-row">
+          {/* Social Media Card */}
+          <Link href="/real-testimonials">
+            <div className="service-card" style={{ cursor: 'pointer' }}>
             <Image
-              src="/Web.png"
-              alt="Web Development"
+                src="/Social.png"
+                alt="Social Media"
               width={iconSize}
               height={iconSize}
               className="service-card-img"
             />
           </div>
-        </Link>
-
-       
-        {/* UI Card - Link to Services */}
-        <Link href="/services">
-          <div className="service-card" style={{ cursor: 'pointer' }}>
-            <Image
-              src="/UI.png"
-              alt="UI/UX Design"
-              width={iconSize}
-              height={iconSize}
-              className="service-card-img"
-            />
-          </div>
-        </Link>
-
-        {/* Social Card - Link to Testimonials */}
-        <Link href="/testimonials">
-          <div className="service-card" style={{ cursor: 'pointer' }}>
-            <Image
-              src="/Social.png"
-              alt="Social Media"
-              width={iconSize}
-              height={iconSize}
-              className="service-card-img"
-            />
-          </div>
-        </Link>
-        <Link href="/apps">
-          <div className="service-card" style={{ cursor: 'pointer' }}>
-            <Image
-              src="/App.png"
-              alt="App Development"
-              width={iconSize}
-              height={iconSize}
-              className="service-card-img1"
-            />
-          </div>
-        </Link>
+          </Link>
+        </div>
+        <div className="services-row bottom-row">
+          {/* App Development Card */}
+          <Link href="/real-apps">
+            <div className="service-card" style={{ cursor: 'pointer' }}>
+              <Image
+                src="/App.png"
+                alt="App Development"
+                width={iconSize}
+                height={iconSize}
+                className="service-card-img1"
+              />
+            </div>
+          </Link>
+          {/* ServicesAI Card */}
+          <Link href="/real-ai">
+            <div className="service-card" style={{ cursor: 'pointer' }}>
+              <Image
+                src="/Servicesai.png"
+                alt="ServicesAI"
+                width={iconSize}
+                height={iconSize}
+                className="service-card-img4"
+              />
+            </div>
+          </Link>
+        </div>
       </div>
     </section>
   );

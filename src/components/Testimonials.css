@@ -236,6 +236,7 @@ height: 80px;
   font-size: 1.1rem;
   font-weight: 100;
  
+ 
 }
 
 .marketing-hero-btn {
@@ -250,7 +251,8 @@ height: 80px;
   
   box-shadow: 0 2px 16px #00cfff33;
   transition: background 0.2s, box-shadow 0.2s;
-  margin-left: 53%;
+  margin-left: 70%;
+  width: 10%;
  
  
 }
@@ -344,7 +346,7 @@ margin-bottom: 20%;
   display: block;
   border-radius: 32px;
  
-  margin-left: 472px;
+  margin-left: 559px;
   margin-top: 100px;
 }
 
@@ -362,10 +364,8 @@ margin-bottom: 20%;
   height: auto;
   display: block;
   border-radius: 32px;
-  
- margin-bottom: 470px;
-  margin-left:-1130px; 
- 
+  margin-bottom: 506px;
+  margin-left: -1209px;
 }
 
 @keyframes dropInT2Advanced {

@@ -11,15 +11,25 @@ import Footer from './Footer';
 const AI = () => (
   <>
     <header className="header-container">
+      {/* Hero Section */}
       <nav className="header-nav">
         <div className="header-logo">
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
         </div>
         <ul className="header-links">
-          <li><Link href="#home">Home</Link></li>
-          <li><Link href="/services">Services</Link></li>
+          <li><Link href="/">Home</Link></li>
+          <li className="dropdown">
+            <span className="dropdown-toggle">Services</span>
+            <ul className="dropdown-menu">
+              <li><Link href="/real-projects">Web Development</Link></li>
+              <li><Link href="/real-services">UI/UX Design</Link></li>
+              <li><Link href="/real-testimonials">Social Media and Marketing</Link></li>
+              <li><Link href="/real-apps">App Development</Link></li>
+              <li><Link href="/real-ai">AI</Link></li>
+            </ul>
+          </li>
           <li><Link href="/projects">Projects</Link></li>
-          <li><Link href="/testimonials">Testimonials</Link></li>
+      
           <li><Link href="/contact">Contact</Link></li>
         </ul>
         <div className="header-socials">

@@ -1,3 +1,12 @@
+
+:root {
+  --font-family: 'coco', sans-serif;
+}
+
+body, html, * {
+  font-family: var(--font-family) !important;
+}
+
 .header-container {
     background: #0a0a0a;
     color: #fff;
@@ -35,7 +44,7 @@
   
   .header-links {
     display: flex;
-    gap: 32px;
+    gap: 70px;
     list-style: none;
   }
   

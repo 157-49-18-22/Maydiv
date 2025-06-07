@@ -36,10 +36,12 @@ const Discuss = () => {
               e.currentTarget.style.color = '#fff';
               e.currentTarget.style.boxShadow = 'none';
             }}
-            onClick={() => window.open('https://your-connect-link.com', '_blank')}
+            
+            onClick={() => window.open('/contact', '_blank')}
           >
             Connect Now
           </button>
+          
           <button
             style={{
               padding: '16px 44px',

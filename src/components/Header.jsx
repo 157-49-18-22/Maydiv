@@ -97,7 +97,6 @@ const Header = () => {
             </ul>
           </li>
           <li><Link href="/projects">Projects</Link></li>
-          <li><Link href="/testimonials">Testimonials</Link></li>
           <li><Link href="/contact">Contact</Link></li>
         </ul>
         <div className="header-socials">
@@ -182,7 +181,10 @@ const Header = () => {
             </div>
             <div className="how-we-work-right">
               <p>Grow your brand with high-quality UI/UX design for a minimal fee. Work with senior designers. Contact and make as many requests as you need – no limits.</p>
-              <button className="how-we-work-btn">Contact Us</button>
+              <Link href="/contact">
+  <button className="how-we-work-btn">Contact Us</button>
+</Link>
+
             </div>
           </div>
         </div>

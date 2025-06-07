@@ -217,7 +217,9 @@ body, html, * {
 }
 
 .arrow {
-  font-size: 1.2rem;
+  font-size: 2rem;
+  margin-left: 120px;
+  cursor: pointer;
 }
 
 .service-image {
@@ -229,11 +231,11 @@ body, html, * {
 }
 
 .ios-devices {
-  margin-top: -100%;
+  margin-top: -90%;
   animation:
     dropInIos 1.1s cubic-bezier(0.77,0,0.175,1) 1.1s forwards,
     floatIos 5.8s ease-in-out 2.2s infinite;
-    margin-left: 30%;
+  
 }
 
 .apps2-image {
@@ -320,6 +322,7 @@ body, html, * {
   animation:
     slideInMobiles 1.1s cubic-bezier(0.77,0,0.175,1) 1.3s forwards,
     floatMobiles 5.2s ease-in-out 2.4s infinite;
+    margin-left: -38%;
    
 }
 
@@ -335,7 +338,7 @@ body, html, * {
   padding: 2rem;
   margin-left: 50%;
   transition: box-shadow 0.22s cubic-bezier(0.4,0.2,0.2,1), transform 0.22s cubic-bezier(0.4,0.2,0.2,1);
-  margin-left: 47%;
+  margin-left: 40%;
 }
 
 .ios-box:hover {
@@ -429,8 +432,9 @@ body, html, * {
 }
 
 .ios-content .arrow {
-  font-size: 1.2rem;
+  font-size: 2rem;
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .ios-content .platform-badge:hover .arrow {

@@ -46,7 +46,9 @@ const AI = () => (
         <p className="ai-hero-desc">
           Elevate your site's visibility effortlessly with AI, where smart technology meets user-friendly SEO tools. Elevate your site's visibility effortlessly with AI, where smart technology meets user-friendly SEO tools.
         </p>
-        <button className="Ai-hero-btn">Contact Us</button>
+        <Link href="/contact">
+          <button className="Ai-hero-btn"><span>Contact Us</span></button>
+        </Link>
       </div>
       <div className="Ai-hero-right">
         <div className="rock-group">
@@ -78,7 +80,9 @@ const AI = () => (
           <h2 className="ai-growth-title">AI elevate your brands growth</h2>
           <Lottie animationData={require('../../public/Ai.json')} style={{   }} loop autoplay />
           <p className="ai-growth-desc">One stop for all your E-commerce marketing solutions. Scale your brand with our digital & result driven marketing services. Ready to take your brand to the next level?</p>
-          <button className="ai-growth-btn">Contact Us</button>
+          <Link href="/contact">
+            <button className="ai-growth-btn"><span>Contact Us</span></button>
+          </Link>
         </div>
         <div className="ai-growth-right-col">
           <div className="ai-growth-cards">

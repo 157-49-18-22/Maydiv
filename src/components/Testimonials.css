@@ -265,6 +265,7 @@ height: 80px;
   transition: background 0.2s, box-shadow 0.2s;
   margin-left: 70%;
   width: 40%;
+  margin-top: 20px;
  
  
 }
@@ -469,7 +470,7 @@ margin-bottom: 23%;
   height: 48px;
   pointer-events: none;
   margin-top: 290px;
-  margin-left: 1040px;
+  margin-left: 1140px;
 }
 
 @keyframes starBlink {
@@ -496,7 +497,7 @@ margin-bottom: 23%;
   width: 32px;
   height: 32px;
   pointer-events: none;
-  
+  margin-left: 1040px;
 }
 .marketing-hero-graphic-star1 img {
   width: 100%;

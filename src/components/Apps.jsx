@@ -110,7 +110,8 @@ const Apps = () => {
             </div>
           </div>
           <div style={{position:'absolute',top:'3%',right:'0%'}}>
-            <Image src="/half.png" alt="Android Devices" width={440} height={340} className="Android" />
+            <Image src="/half.png" alt="Android Devices" width={533} height={440} className="Android" />
+            
           </div>
 
           <div className="ios-section">
@@ -134,6 +135,7 @@ const Apps = () => {
                       src="/Android.json"
                       style={{ width: '180px', height: '103px', background: 'none',marginLeft:'-30%' }}
                     />
+                    <span className="arrow">→</span>
                   </div>
                 </div>
                 </span>
@@ -159,8 +161,8 @@ const Apps = () => {
               <Image
                 src="/Multi.png"
                 alt="iOS Devices"
-                width={600}
-                height={400}
+                width={700}
+                height={700}
                 className="ios-devices"
               />
             </div>

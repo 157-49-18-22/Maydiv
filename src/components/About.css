@@ -920,6 +920,7 @@ justify-content: center;
   background: #0a0a0a;
   border-radius: 12px;
   overflow: hidden;
+  margin-right: 20px;
 }
 .logo-gray,
 .logo-color {
@@ -966,6 +967,7 @@ justify-content: center;
   border-top: 2px solid rgba(255,255,255,0.08);
   max-width: 1100px;
   margin-top: 100px;
+  margin-left: -47px;
 }
 
 .header-stat {

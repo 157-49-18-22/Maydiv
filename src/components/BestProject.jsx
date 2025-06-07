@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import './BestProject.css';
+import Testimonial from './Testimonial';
 
 const images = [
   '/1.png', '/2.png',
@@ -44,6 +45,7 @@ const BestProject = () => {
           </div>
         ))}
       </div>
+      <Testimonial />
     </section>
   );
 };

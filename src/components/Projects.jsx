@@ -61,7 +61,7 @@ const Projects = () => {
           <div className="projects-hero-subheading">
             Elevate your site's visibility effortlessly with Maydiv, <br />where smart technology meets user-friendly SEO tools.
           </div>
-          <button className="projects-hero-btn">AI Us</button>
+          <button className="projects-hero-btn">Contact Us</button>
         </div>
       </section>
 

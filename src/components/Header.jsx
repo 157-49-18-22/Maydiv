@@ -4,7 +4,9 @@ import React, { useRef, useEffect, useState } from 'react';
 import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import Lottie from 'lottie-react';
+
 import robotAnimation from '../../public/Robot.json';
 import './Header.css';
 
@@ -180,7 +182,7 @@ const Header = () => {
             </div>
             <div className="how-we-work-right">
               <p>Grow your brand with high-quality UI/UX design for a minimal fee. Work with senior designers. Contact and make as many requests as you need – no limits.</p>
-              <button className="how-we-work-btn">AI Us</button>
+              <button className="how-we-work-btn">Contact Us</button>
             </div>
           </div>
         </div>
@@ -222,7 +224,9 @@ const Header = () => {
           </div>
         </div>
       </div>
+      
     </header>
+ 
   );
 };
 

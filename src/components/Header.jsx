@@ -85,19 +85,19 @@ const Header = () => {
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
         </div>
         <ul className="header-links">
-          <li><Link href="#home">Home</Link></li>
+          <li><Link href="#home"><span>Home</span></Link></li>
           <li className="dropdown">
             <span className="dropdown-toggle">Services</span>
             <ul className="dropdown-menu">
-              <li><Link href="/real-projects">Web Development</Link></li>
-              <li><Link href="/real-services">UI/UX Design</Link></li>
-              <li><Link href="/real-testimonials">Social Media and Marketing</Link></li>
-              <li><Link href="/real-apps">App Development</Link></li>
-              <li><Link href="/real-ai">AI</Link></li>
+              <li><Link href="/real-projects"><span>Web Development</span></Link></li>
+              <li><Link href="/real-services"><span>UI/UX Design</span></Link></li>
+              <li><Link href="/real-testimonials"><span>Social Media and Marketing</span></Link></li>
+              <li><Link href="/real-apps"><span>App Development</span></Link></li>
+              <li><Link href="/real-ai"><span>AI</span></Link></li>
             </ul>
           </li>
-          <li><Link href="/projects">Projects</Link></li>
-          <li><Link href="/contact">Contact</Link></li>
+          <li><Link href="/projects"><span>Projects</span></Link></li>
+          <li><Link href="/contact"><span>Contact</span></Link></li>
         </ul>
         <div className="header-socials">
           <a href="#" aria-label="Instagram"><FaInstagram /></a>
@@ -112,9 +112,9 @@ const Header = () => {
         <p className="header-subtext">
           Step into the future with maydiv! I offer a range of digital solutions that can transform your business landscape. With our expertise, your digital needs will be met with creativity and innovation, ensuring you stand out in a crowded marketplace. Let's get started today!
         </p>
-        <div className="header-buttons" style={{ cursor: 'default' }}>
-          <button className="primary-btn" style={{ cursor: 'pointer' }}>Get started</button>
-          <button className="secondary-btn" style={{ cursor: 'pointer' }}>Our Portfolio</button>
+        <div className="header-buttons" >
+          <button className="primary-btn" >Get started</button>
+          <button className="secondary-btn" >Our Portfolio</button>
         </div>
         <div className="header-hero-robot-group" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '620px', margin: '0 auto'}}>
           <div className="fall-from-top">
@@ -182,9 +182,8 @@ const Header = () => {
             <div className="how-we-work-right">
               <p>Grow your brand with high-quality UI/UX design for a minimal fee. Work with senior designers. Contact and make as many requests as you need – no limits.</p>
               <Link href="/contact">
-  <button className="how-we-work-btn">Contact Us</button>
-</Link>
-
+                <button className="how-we-work-btn"><span>Contact Us</span></button>
+              </Link>
             </div>
           </div>
         </div>

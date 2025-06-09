@@ -356,4 +356,56 @@ body, html, * {
     pointer-events: auto;
   }
   
+.input-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-icon-wrap input,
+.input-icon-wrap textarea {
+  padding-left: 44px !important;
+}
+.input-icon {
+  position: absolute;
+  left: 14px;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  opacity: 0.7;
+  margin-bottom: 58px;
+}
+.input-icon-wrap textarea {
+  min-height: 48px;
+}
+
+.contactus-form .input-icon-wrap:first-of-type input {
+  width: 100%;
+}
+
+.contactus-form .input-icon-wrap input,
+.contactus-form .input-icon-wrap textarea {
+  width: 100%;
+}
+.input-icon2{
+  position: absolute;
+  left: 14px;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  opacity: 0.7;
+  margin-bottom: 9px;
+
+}
+.input-icon1{
+  position: absolute;
+  left: 14px;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  opacity: 0.7;
+  margin-bottom: 9px;
+
+}
+
+
   

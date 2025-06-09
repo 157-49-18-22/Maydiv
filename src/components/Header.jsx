@@ -87,7 +87,7 @@ const Header = () => {
         <ul className="header-links">
           <li><Link href="#home"><span>Home</span></Link></li>
           <li className="dropdown">
-            <span className="dropdown-toggle">Services</span>
+            <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
             <ul className="dropdown-menu">
               <li><Link href="/real-projects"><span>Web Development</span></Link></li>
               <li><Link href="/real-services"><span>UI/UX Design</span></Link></li>
@@ -96,7 +96,7 @@ const Header = () => {
               <li><Link href="/real-ai"><span>AI</span></Link></li>
             </ul>
           </li>
-          <li><Link href="/projects"><span>Projects</span></Link></li>
+          <li><Link href="/new"><span>Projects</span></Link></li>
           <li><Link href="/contact"><span>Contact</span></Link></li>
         </ul>
         <div className="header-socials">

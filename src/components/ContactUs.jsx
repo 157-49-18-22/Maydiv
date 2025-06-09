@@ -61,11 +61,20 @@ export default function ContactUs() {
             <p className="contactus-desc">Leave us a message, we will contact you as soon as possible.</p>
             <form className="contactus-form">
               <label>FULL NAME</label>
-              <input type="text" placeholder="Your Name" onFocus={handleFieldFocus} />
+              <div className="input-icon-wrap">
+                <img src="/Name.png" alt="Name" className="input-icon1" />
+                <input type="text" placeholder="Your Name" onFocus={handleFieldFocus} />
+              </div>
               <label>EMAIL</label>
-              <input type="email" placeholder="Your Email" onFocus={handleFieldFocus} />
+              <div className="input-icon-wrap">
+                <img src="/Email.png" alt="Email" className="input-icon2" />
+                <input type="email" placeholder="Your Email" onFocus={handleFieldFocus} />
+              </div>
               <label>MESSAGE</label>
-              <textarea placeholder="Type your message..." rows={4} onFocus={handleFieldFocus} />
+              <div className="input-icon-wrap">
+                <img src="/Message.png" alt="Message" className="input-icon" />
+                <textarea placeholder="Type your message..." rows={4} onFocus={handleFieldFocus} />
+              </div>
               <button type="submit" className="send-btn-animated"><span>SEND</span></button>
             </form>
           </div>

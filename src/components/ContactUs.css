@@ -71,7 +71,7 @@ body, html, * {
   .header-socials a:hover {
     color: #b983ff;
   }.contactus-bg {
-  min-height: 100vh;
+  min-height: unset;
   display: flex;
   align-items: center;
   justify-content: center;

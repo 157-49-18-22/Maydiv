@@ -9,7 +9,7 @@
   .header-container {
       background: #0a0a0a;
       color: #fff;
-      min-height: 100vh;
+   
       padding-bottom: 40px;
       position: relative;
       overflow: hidden;
@@ -175,7 +175,7 @@
       
 
 .projects-page {
-  min-height: 100vh;
+ 
   background: linear-gradient(120deg, #18122B 0%, #393053 100%);
   padding: 40px 0;
   font-family: 'Inter', sans-serif;

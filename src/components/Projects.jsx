@@ -77,7 +77,7 @@ const Projects = () => {
 
       {/* Project Image Section */}
       <div className="projects-hero-image-wrap">
-        <Image src="/Project.png" alt="Project Dashboard" width={900} height={420} className="projects-hero-image" />
+        <Image src="/Project.png" alt="Project Dashboard" width={900} height={420} className="projects-hero-image" quality={100} unoptimized />
         <div className="projects-hero-image-fade"></div>
       </div>
       <div className="projects-partners-section">

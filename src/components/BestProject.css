@@ -17,7 +17,10 @@ body, html, * {
 
 .best-project-heading {
   text-align: center;
-  color: #e15cff;
+  background: linear-gradient(90deg, #FF3BFF 4%, #ECBFBF 3%, #5C24FF 4%, #D94FD5 10%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  
   letter-spacing: 2px;
   margin-bottom: 2rem;
   font-weight: 700;
@@ -31,6 +34,7 @@ body, html, * {
   align-items: center;
   gap: 1.5rem;
   margin-bottom: 2.5rem;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .best-project-filter-btn {
@@ -83,7 +87,7 @@ body, html, * {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 1.2rem;
   justify-content: center;
   align-items: center;
   max-width: 1000px;
@@ -95,21 +99,55 @@ body, html, * {
   justify-content: center;
   align-items: center;
   perspective: 1200px;
+  opacity: 1;
+  transform: none;
+  transition: transform 0.7s cubic-bezier(.4,2,.6,1), opacity 0.7s cubic-bezier(.4,2,.6,1);
+  margin-bottom: 1.2rem;
 }
 
 .best-project-image {
   border-radius: 24px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   background: #181818;
-  width: 580px;
-  height: 400px;
+  width: 420px;
+  height: 320px;
   object-fit: cover;
-  transform: rotateX(75deg) translateY(-60px) translateZ(-60px);
-  transition: transform 0.6s cubic-bezier(0.4,0.2,0.2,1), box-shadow 0.6s cubic-bezier(0.4,0.2,0.2,1);
+  transform: none;
+  transition: transform 0.4s cubic-bezier(0.4,0.2,0.2,1), box-shadow 0.4s cubic-bezier(0.4,0.2,0.2,1);
 }
 
 .best-project-image:hover {
-  transform: rotateX(0deg) translateY(0) translateZ(0);
+  transform: scale(1.06);
   box-shadow: 0 0px 20px rgba(0,0,0,0.3);
   z-index: 2;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(200px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }

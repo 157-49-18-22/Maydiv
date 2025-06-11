@@ -18,7 +18,9 @@ body, html, * {
 
 .testimonial-heading {
   text-align: center;
-  color: #e15cff;
+  background: linear-gradient(90deg, #FF3BFF 0%, #6A37FF 0%,  #D94FD5 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
   letter-spacing: 2px;
   margin-bottom: 2.5rem;
   font-weight: 700;

@@ -1,5 +1,3 @@
-
-
 :root {
   --font-family: 'coco', sans-serif;
 }
@@ -67,11 +65,7 @@ body, html, * {
   pointer-events: none;
 }
 
-.service-card:hover::before {
-  opacity: 1;
-  filter: blur(2px) brightness(1.1);
-  animation: cardGlowSweep 1.2s linear 1;
-}
+
 
 @keyframes cardGlowSweep {
   0% {
@@ -100,10 +94,7 @@ body, html, * {
   pointer-events: none;
 }
 
-.service-card:hover::after {
-  opacity: 1;
-  animation: shineSweep 0.8s linear;
-}
+
 
 @keyframes shineSweep {
   0% { left: -75%; opacity: 0.2; }
@@ -157,6 +148,194 @@ body, html, * {
   .our-services-cards-pyramid {
     gap: 1rem;
   }
+}
+
+/* Animation for Our Services cards */
+.animated-card {
+  transition: transform 0.7s cubic-bezier(.4,2,.6,1), opacity 0.5s;
+}
+
+.card-drop-init {
+  opacity: 0;
+  transform: translate(-50%, -120px);
+}
+
+.card-drop {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  transition: transform 0.7s cubic-bezier(.4,2,.6,1), opacity 0.5s;
+  animation: cardDrop 0.7s cubic-bezier(.4,2,.6,1);
+}
+
+@keyframes cardDrop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -120px);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -40%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.card-stack {
+  opacity: 1;
+  /* Only animate from center to offset, not from above */
+  transition: transform 0.5s cubic-bezier(.4,2,.6,1);
+}
+
+.card-spread {
+  transition: transform 0.7s cubic-bezier(.4,2,.6,1);
+  transform: none !important;
+  z-index: 1 !important;
+}
+
+.stack-center-container {
+  position: relative;
+  width: 100vw;
+  height: 420px;
+  overflow: visible;
+}
+
+.stack-center-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transition: transform 0.7s cubic-bezier(.4,2,.6,1), opacity 0.5s;
+}
+
+.row-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  height: 420px;
+}
+
+.row-layout .service-card {
+  position: static;
+  flex-shrink: 0;
+  width: 400px;
+  height: 400px;
+  max-width: 90vw;
+  max-height: 90vw;
+}
+
+@media (max-width: 1100px) {
+  .row-layout .service-card, .stack-center-card {
+    width: 270px;
+    height: 270px;
+  }
+  .stack-center-container, .row-layout {
+    height: 270px;
+  }
+}
+@media (max-width: 700px) {
+  .row-layout .service-card, .stack-center-card {
+    width: 220px;
+    height: 220px;
+  }
+  .stack-center-container, .row-layout {
+    height: 220px;
+  }
+}
+
+.carousel-row-container {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 420px;
+}
+
+.carousel-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100vw;
+  position: relative;
+  perspective: 1200px;
+}
+
+.carousel-card {
+  margin: 0 -180px;
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(.4,2,.6,1), opacity 0.7s, filter 0.4s;
+  will-change: transform, opacity, filter;
+}
+
+.carousel-row .carousel-card {
+  opacity: 1;
+}
+
+.carousel-arrow {
+  background: #1a1a1a;
+  color: #b983ff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 16px;
+  z-index: 20;
+  box-shadow: 0 2px 8px #0003;
+  transition: background 0.2s;
+}
+.carousel-arrow:hover {
+  background: #b983ff33;
+}
+
+@media (max-width: 1100px) {
+  .carousel-row-container, .stack-center-container, .row-layout {
+    min-height: 320px;
+    height: 320px;
+  }
+  .carousel-card,
+  .row-layout .service-card,
+  .stack-center-card {
+    width: 320px;
+    height: 320px;
+  }
+}
+@media (max-width: 700px) {
+  .carousel-row-container, .stack-center-container, .row-layout {
+    min-height: 220px;
+    height: 220px;
+  }
+  .carousel-card,
+  .row-layout .service-card,
+  .stack-center-card {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+.carousel-card,
+.row-layout .service-card,
+.stack-center-card {
+  width: 540px;
+  height: 540px;
+}
+
+.carousel-card:hover {
+  transform: scale(1.08) !important;
+  z-index: 20;
+  box-shadow: none !important;
+  filter: none !important;
 }
 
 

@@ -82,7 +82,7 @@ const Header = () => {
 
       <nav className="header-nav">
         <div className="header-logo">
-          <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
+          <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized />
         </div>
         <ul className="header-links">
           <li><Link href="#home"><span>Home</span></Link></li>
@@ -107,47 +107,41 @@ const Header = () => {
       <div className="header-hero">
         <h1>
           <span className="gradient-text">Interactive Digital Solutions</span><br />
-          <span className="gradient-text">Scalable AI.</span>
+          <span className="gradient-text1">Scalable AI.</span>
         </h1>
-        <p className="header-subtext">
-          Step into the future with maydiv! I offer a range of digital solutions that can transform your business landscape. With our expertise, your digital needs will be met with creativity and innovation, ensuring you stand out in a crowded marketplace. Let's get started today!
-        </p>
+       
         <div className="header-buttons" >
           <button className="primary-btn" >Get started</button>
           <button className="secondary-btn" >Our Portfolio</button>
         </div>
-        <div className="header-hero-robot-group" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '620px', margin: '0 auto'}}>
-          <div className="fall-from-top">
-            <Lottie
-              animationData={require('../../public/Animation.json')}
-              style={{ width: '1070px', height: '1140px', maxWidth: '100%', maxHeight: '90vw', marginTop: '140px' }}
-              loop
-              autoplay
+        <div className="header-hero-robot-group" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', margin: '0 auto'}}>
+        
+            <Image
+              src="/Animation.png"
+              alt="Animation"
+              width={1205}
+              height={419}
+              className="header-animation-img"
             />
           </div>
-        </div>
+   
         <div className="header-stats-section" ref={statsRef}>
           <div className="header-stat">
             <span className="stat-number gradient-text">
-              {showCounters ? <Counter start={40} end={723} duration={2000} /> : 40}+
+              {showCounters ? <Counter start={40} end={150} duration={2000} /> : 40}+
             </span>
             <span className="stat-label">Success Project</span>
           </div>
           <div className="header-stat">
             <span className="stat-number gradient-text">
-              {showCounters ? <Counter start={2} end={10} duration={2000} /> : 2}+
+              {showCounters ? <Counter start={1} end={2} duration={2000} /> : 2}+
             </span>
-            <span className="stat-label">Years Experience</span>
-          </div>
-          <div className="header-stat">
-            <span className="stat-number gradient-text">
-              {showCounters ? <Counter start={30} end={500} duration={2000} /> : 30}+
-            </span>
+           
             <span className="stat-label">Product Launched</span>
           </div>
           <div className="header-stat">
             <span className="stat-number gradient-text">
-              {showCounters ? <Counter start={10} end={100} duration={2000} /> : 10}+
+              {showCounters ? <Counter start={2} end={10} duration={2000} /> : 10}+
             </span>
             <span className="stat-label">Startup Raised</span>
           </div>

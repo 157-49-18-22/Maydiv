@@ -12,7 +12,7 @@ body, html, * {
   background: linear-gradient(90deg, #181818 60%, #3a1c71 100%);
   color: #fff;
   padding: 3rem 0 1.5rem 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 }
 
@@ -41,12 +41,14 @@ body, html, * {
   font-weight: 700;
   letter-spacing: 2px;
   margin-bottom: 0.5rem;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .footer-desc {
   color: #bdbdbd;
   font-size: 1.1rem;
   margin-bottom: 1.2rem;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .footer-title {
@@ -54,6 +56,7 @@ body, html, * {
   font-weight: 600;
   margin-bottom: 1rem;
   color: #fff;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .footer-link {
@@ -66,6 +69,7 @@ body, html, * {
   border-radius: 0.5rem;
   padding: 0.2rem 0.7rem;
   width: fit-content;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .footer-link:hover {
@@ -77,6 +81,7 @@ body, html, * {
   color: #bdbdbd;
   font-size: 1rem;
   margin-top: 0.5rem;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .footer-bottom {
@@ -119,4 +124,5 @@ body, html, * {
 
 .footer-bottom-links .footer-link {
   display: inline-block;
+  font-family: 'Poppins', sans-serif !important;
 } 

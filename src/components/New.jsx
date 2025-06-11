@@ -10,11 +10,13 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './New.css';
+import Discuss from './Discuss';
+import Footer from './Footer';
 
 const projects = [
   {
     title: 'Portfolio Website',
-    image: '/portfolio.png',
+    image: '/Portfolio.png',
     technologies: ['React', 'Next.js', 'CSS'],
     link: 'https://your-portfolio-link.com',
     startDate: 'Jan 2023',
@@ -24,7 +26,7 @@ const projects = [
   },
   {
     title: 'E-commerce Store',
-    image: '/ecommerce.png',
+    image: '/commerce.jpg',
     technologies: ['React', 'Redux', 'Node.js', 'MongoDB'],
     link: 'https://your-ecommerce-link.com',
     startDate: 'Apr 2023',
@@ -40,6 +42,36 @@ const projects = [
     startDate: 'Aug 2023',
     endDate: 'Present',
     description: 'A modern blog platform with markdown support and live preview.',
+    status: 'In Progress',
+  },
+  {
+    title: 'Landing Page',
+    image: '',
+    technologies: ['React', 'Styled Components'],
+    link: 'https://your-landing-link.com',
+    startDate: 'Feb 2024',
+    endDate: 'Mar 2024',
+    description: 'A modern landing page for a SaaS product.',
+    status: 'Completed',
+  },
+  {
+    title: 'Dashboard App',
+    image: '',
+    technologies: ['Vue.js', 'Vuetify', 'Firebase'],
+    link: 'https://your-dashboard-link.com',
+    startDate: 'May 2024',
+    endDate: 'Jun 2024',
+    description: 'A real-time dashboard for analytics and reporting.',
+    status: 'Completed',
+  },
+  {
+    title: 'Mobile App',
+    image: '',
+    technologies: ['React Native', 'Expo'],
+    link: 'https://your-mobile-link.com',
+    startDate: 'Jul 2024',
+    endDate: 'Present',
+    description: 'A cross-platform mobile app for productivity.',
     status: 'In Progress',
   },
 ];
@@ -90,13 +122,16 @@ export default function New() {
           }}
           pagination={{ clickable: true }}
           navigation={true}
+          loop={true}
           modules={[EffectCoverflow, Pagination, Navigation]}
           className="projects-list"
         >
           {projects.map((project, idx) => (
             <SwiperSlide key={idx}>
               <div className="project-card">
-                <img src={project.image} alt={project.title} className="project-image" />
+                {project.image && (
+                  <img src={project.image} alt={project.title} className="project-image" />
+                )}
                 <h2 className="project-name">{project.title}</h2>
                 <div className="project-dates">
                   <span className="project-date">🗓️ {project.startDate} - {project.endDate}</span>
@@ -116,6 +151,8 @@ export default function New() {
           ))}
         </Swiper>
       </div>
+      <Discuss />
+      <Footer />
     </div>
   );
 }

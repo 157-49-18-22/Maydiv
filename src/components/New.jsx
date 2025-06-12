@@ -185,16 +185,18 @@ export default function New() {
                 </div>
                 <a 
                   href={
-                    project.title === 'Sun Pay'
+                    project.title === 'Portfolio Website'
                       ? 'https://sunpay.co.in/'
-                      : project.title === 'College Disha'
+                      : project.title === 'Dashboard App'
                         ? 'https://www.collegedisha.com/'
-                        : project.title === 'School 18'
+                        : project.title === 'E-commerce Store'
                           ? 'https://schools18.com/'
-                          : project.title === 'Dashboard App'
+                          : project.title === 'Blog Platform'
                             ? 'https://www.melanieindia.com/'
                             : project.title === 'Mobile App'
                               ? 'https://fika-india.com/'
+                               : project.title === 'Landing Page'
+                              ? 'https://schools18.com/'
                               : project.link
                   }
                   className="project-link" 

@@ -7,6 +7,9 @@
 body, html, * {
   font-family: var(--font-family) !important;
 }
+body {
+  margin: 0px;
+}
 .header-container {
     background: #0a0a0a;
     color: #fff;
@@ -70,8 +73,8 @@ body, html, * {
     color: #b983ff;
   }
 .services-container {
-  padding: 40px;
-  background: #111;
+
+  background: #0a0a0a;
   color: #fff;
   min-height: 80vh;
   padding-top: 0;
@@ -423,7 +426,7 @@ body, html, * {
 
 .hero-pattern-bg {
   position: relative;
-  background-color: #111;
+  background-color: #0a0a0a;
   background-image: url("data:image/svg+xml;utf8,<svg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='0' y='0' width='40' height='40' fill='none'/><path d='M 40 0 L 0 0 L 0 40' stroke='%232a3759' stroke-width='1'/></svg>");
   background-size: 40px 40px;
   background-repeat: repeat;
@@ -711,7 +714,7 @@ body, html, * {
 .about-pill {
   display: flex;
   align-items: center;
-  background: #181f2e;
+  background: #0a0a0a;
   color: #fff;
   font-size: 1rem;
   font-weight: 500;
@@ -889,7 +892,7 @@ body, html, * {
 .features-illustration-placeholder {
   width: 340px;
   height: 340px;
-  background: radial-gradient(circle at 60% 40%, #232d44 60%, #181f2e 100%);
+  background: radial-gradient(circle at 60% 40%, #232d44 60%, #0a0a0a 100%);
   border-radius: 50%;
   position: relative;
   margin-left: 0;
@@ -1012,7 +1015,7 @@ body, html, * {
   display: flex;
   align-items: center;
   gap: 22px;
-  background: #181f2e;
+  background: #0a0a0a;
   border-radius: 18px;
   padding: 22px 32px 22px 22px;
   box-shadow: 0 2px 12px 0 rgba(62,198,255,0.06);
@@ -1193,6 +1196,7 @@ body, html, * {
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s;
+  margin-right: 240px;
  
 }
 .projects-seeall-link:hover {
@@ -1202,9 +1206,11 @@ body, html, * {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px 38px;
+  
+ 
 }
 .project-card {
-  background: #181f2e;
+  background: #0a0a0a;
   border-radius: 18px;
   box-shadow: 0 2px 12px 0 rgba(62,198,255,0.06);
   display: flex;
@@ -1215,6 +1221,7 @@ body, html, * {
   height: 340px;
   padding: 0;
   overflow: hidden;
+
 }
 .project-card:hover {
   box-shadow: 0 8px 32px 0 rgba(62,198,255,0.18);

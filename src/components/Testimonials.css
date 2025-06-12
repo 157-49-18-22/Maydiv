@@ -9,6 +9,9 @@ body, html, * {
   font-family: var(--font-family) !important;
 
 }
+body {
+  margin: 0px;
+}
 
 .header-container {
   background: #0a0a0a;
@@ -20,7 +23,7 @@ body, html, * {
   overflow: hidden;
   width: 100%;
   box-sizing: border-box;
-  z-index: 1000;
+  
 
 }
 
@@ -32,6 +35,7 @@ body, html, * {
   width: 100%;
   box-sizing: border-box;
 height: 80px;
+
 
 }
 
@@ -148,6 +152,7 @@ height: 80px;
 
   margin-bottom: 0;
   position: relative;
+ 
  
  
 }
@@ -376,7 +381,7 @@ margin-bottom: 23%;
   border-radius: 32px;
   margin-bottom: 506px;
   margin-left: -68vw;
-  max-width: 100vw;
+
 }
 
 @keyframes dropInT2Advanced {
@@ -1142,7 +1147,7 @@ margin-bottom: 23%;
 }
 
 .header-stats-section {
-  width: 100vw;
+  width: 99vw;
   background: #0a0a0a;
   padding: 0px 0 0px 0;
   display: flex;
@@ -1206,6 +1211,7 @@ margin-bottom: 23%;
 }
 .dropdown {
   position: relative;
+ 
 }
 
 .dropdown-toggle {
@@ -1215,6 +1221,7 @@ margin-bottom: 23%;
   font-weight: 500;
   transition: color 0.2s;
   display: inline-block;
+ 
 }
 
 .dropdown-toggle:hover {

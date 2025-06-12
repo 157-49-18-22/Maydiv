@@ -16,16 +16,33 @@ body, html, * {
 }
 
 .best-project-heading {
-  text-align: center;
-  background: linear-gradient(90deg, #FF3BFF 4%, #ECBFBF 3%, #5C24FF 4%, #D94FD5 10%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
+
+  background: linear-gradient(90deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5, #FF3BFF);
+    background-size: 300% 300%;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    text-fill-color: transparent !important;
+    display: inline-block;
+    font-weight: 100;
+    font-family: 'Poppins', sans-serif !important;
+    margin-top: 10px;
+
+    animation: gradient-move 3s linear infinite;
+    display: flex;
+    justify-content: center;
+    font-size: 2.1rem;
   
-  letter-spacing: 2px;
-  margin-bottom: 2rem;
-  font-weight: 700;
-  font-size: 2.5rem;
-  font-family: 'Inter', sans-serif;
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 .best-project-filter-bar {

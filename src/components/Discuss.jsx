@@ -5,7 +5,7 @@ import Image from 'next/image';
 const Discuss = () => {
   return (
     <section style={{ background: '#0a0a0a', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '5rem 0', position: 'relative' }}>
-      <div style={{ width: '100%', display: 'flex', justifyContent: 'center', position: 'relative', marginBottom: '-2.5rem', zIndex: 2 }}>
+      <div style={{ width: '100%', display: 'flex', justifyContent: 'center', position: 'absolute', marginBottom: '-2.5rem', zIndex: 2,top:'25%' }}>
         <Image
           src="/star3.png"
           alt="Star Decoration"

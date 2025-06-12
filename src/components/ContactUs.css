@@ -622,4 +622,27 @@ body, html, * {
   width: 59%;
 }
 
+.wave-text {
+  position: relative;
+  display: inline-block;
+  color: #111;
+  font-weight: 700;
+  background: linear-gradient(120deg, #111 0 100%);
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  background-position-x: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: wave-fill 2.5s infinite linear alternate;
+}
+
+@keyframes wave-fill {
+  0% {
+    background-position-x: 200%;
+  }
+  100% {
+    background-position-x: 0%;
+  }
+}
+
   

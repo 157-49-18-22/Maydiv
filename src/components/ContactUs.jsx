@@ -44,7 +44,7 @@ export default function ContactUs() {
       </nav>
       <div className="contactus-main">
         <div className="contactus-form-card">
-          <h1 className="contactus-heading">Get in Touch</h1>
+          <h1 className="contactus-heading"><span className="wave-text">Get in Touch</span></h1>
           <form className="contactus-form-modern">
             <div className="contactus-row">
               <div className="contactus-field">

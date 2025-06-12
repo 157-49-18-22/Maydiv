@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaInstagram, FaFacebook } from 'react-icons/fa';
@@ -12,6 +12,8 @@ import 'swiper/css/navigation';
 import './New.css';
 import Discuss from './Discuss';
 import Footer from './Footer';
+import Lottie from 'lottie-react';
+import newAnimation from '../../public/new.json';
 
 const projects = [
   {
@@ -21,7 +23,7 @@ const projects = [
     link: 'https://your-portfolio-link.com',
     startDate: 'Jan 2023',
     endDate: 'Mar 2023',
-    description: 'A personal portfolio to showcase my work and skills. Features responsive design and smooth animations.',
+    description: 'A personal portfolio to showcase Our work and skills. Features responsive design and smooth animations.',
     status: 'Completed',
   },
   {
@@ -77,6 +79,18 @@ const projects = [
 ];
 
 export default function New() {
+  const [centerCardVisible, setCenterCardVisible] = useState(false);
+  const [sideCardsVisible, setSideCardsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer1 = setTimeout(() => setCenterCardVisible(true), 200);
+    const timer2 = setTimeout(() => setSideCardsVisible(true), 600);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
+
   return (
     <div className="services-container">
       {/* Hero Section */}
@@ -106,8 +120,23 @@ export default function New() {
         </div>
       </nav>
 
+      {/* Projects Hero Section */}
+      <div className="projects-hero-flex">
+        <div className="projects-hero-content">
+          <h2 className="projects-hero-title">Explore Our Work</h2>
+          <p className="projects-hero-desc">
+            Here are some of the projects I've built using modern web technologies.<br />
+            From portfolios to e-commerce, each project is crafted with passion and precision.
+          </p>
+          <a href="#contact" className="projects-hero-btn">Let's Collaborate</a>
+        </div>
+        <div className="projects-hero-lottie">
+          <Lottie animationData={newAnimation} style={{ width: 320, height: 320 }} loop autoplay />
+        </div>
+      </div>
+
       <div className="projects-page">
-        <h1 className="projects-title">My Projects</h1>
+        <h1 className="projects-title">our Projects</h1>
         <Swiper
           effect={'coverflow'}
           grabCursor={true}
@@ -128,7 +157,7 @@ export default function New() {
         >
           {projects.map((project, idx) => (
             <SwiperSlide key={idx}>
-              <div className="project-card">
+              <div className={`project-card ${centerCardVisible && idx === 0 ? 'show-center' : ''} ${sideCardsVisible && idx !== 0 ? 'show-side' : ''}`}>
                 {project.image && (
                   <img src={project.image} alt={project.title} className="project-image" />
                 )}

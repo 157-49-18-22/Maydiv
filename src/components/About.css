@@ -6,6 +6,9 @@
 body, html, * {
   font-family: var(--font-family) !important;
 }
+body {
+  margin: 0px;
+}
 
 .about-main {
   min-height: 100%;

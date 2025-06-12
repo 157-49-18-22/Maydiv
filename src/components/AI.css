@@ -5,6 +5,9 @@
 body, html, * {
   font-family: var(--font-family) !important;
 }
+body {
+  margin: 0px;
+}
 
 .header-container {
     background: #0a0a0a;

@@ -9,40 +9,76 @@ const iconSize = 500; // px, adjust as needed
 const services = [
   {
     id: 1,
-    image: "/Web.png",
-    alt: "Web Development",
+    image: "/ourservice.png",
+    alt: "Service Card",
     link: "/real-projects",
     className: 'service-card-img'
   },
   {
     id: 2,
-    image: "/UI.png",
-    alt: "UI/UX Design",
+    image: "/ourservice.png",
+    alt: "Service Card",
     link: "/real-services",
     className: 'service-card-img'
   },
   {
-    id: 3,
-    image: "/Social.png",
-    alt: "Social Media",
-    link: "/real-testimonials",
-    className: 'service-card-img'
+    id: 5,
+    image: "/ourservice.png",
+    alt: "Service Card",
+    link: "/real-ai",
+    className: 'service-card-img4'
   },
   {
     id: 4,
-    image: "/App.png",
-    alt: "App Development",
+    image: "/ourservice.png",
+    alt: "Service Card",
     link: "/real-apps",
     className: 'service-card-img1'
   },
   {
-    id: 5,
-    image: "/Servicesai.png",
-    alt: "ServicesAI",
-    link: "/real-ai",
-    className: 'service-card-img4'
+    id: 3,
+    image: "/ourservice.png",
+    alt: "Service Card",
+    link: "/real-testimonials",
+    className: 'service-card-img'
   }
 ];
+
+
+const cardTexts = [
+  {
+    
+    title: 'Web Development',
+    desc: 'From idea to launch — we build websites that work and wow.',
+    className: 'card-item',
+  },
+  {
+    
+    title: 'UI/UX Design',
+    desc: 'Crafting seamless digital journeys with clean, modern UI/UX.',
+    className: 'card-item',
+  },
+  {
+  
+    title: 'AI',
+    desc: 'Smart AI solutions that automate, predict, and optimize.',
+    className: 'card-item',
+  },
+  {
+   
+    title: 'App Development',
+    desc: 'Custom mobile apps designed to engage and scale',
+    className: 'card-item',
+  },
+  {
+  
+    title: 'Social Media & Marketing',
+    desc: 'Marketing that connects, engages, and drives results.',
+    className: 'card-item',
+  },
+];
+
+
 
 const OurService = () => {
   const [activeIndex, setActiveIndex] = useState(2); // center card by default
@@ -124,17 +160,15 @@ const OurService = () => {
           pointerEvents: 'none',
         }}
       />
-  <h2
-  style={{
- textAlign: 'center',
- letterSpacing: '2px',
- marginBottom: '2rem',
- fontWeight: 700,
- fontFamily: "'Inter', sans-serif",
- textTransform: 'uppercase',
- background: 'linear-gradient(90deg, #FF3BFF 30%, #6A37FF 70%, #4D22C8 25%, #D94FD5 100%)',
- WebkitBackgroundClip: 'text',
- WebkitTextFillColor: 'transparent',
+      <h2
+        className="our-services-gradient-title"
+        style={{
+          textAlign: 'center',
+          letterSpacing: '2px',
+          marginBottom: '2rem',
+          fontWeight: 700,
+          fontFamily: "'Inter', sans-serif",
+          textTransform: 'uppercase',
         }}
       >
         OUR SERVICES
@@ -146,6 +180,7 @@ const OurService = () => {
           {[-2, -1, 0, 1, 2].map((offset) => {
             let i = (activeIndex + offset + services.length) % services.length;
             const service = services[i];
+            const cardText = cardTexts[i];
             // Tilt effect
             let rotateY = 0;
             if (offset === -2) rotateY = -18;
@@ -192,6 +227,13 @@ const OurService = () => {
                     height={iconSize}
                     className={service.className}
                   />
+                  {/* Text overlay */}
+                  <div className="service-card-overlay">
+                    <div className="service-card-number">{cardText.number}</div>
+                    <div className="service-card-title-gradient">{cardText.title}</div>
+                    <div className="service-card-desc">{cardText.desc}</div>
+                    <div className="service-card-arrow">&rarr;</div>
+                  </div>
                 </div>
               </Link>
             );

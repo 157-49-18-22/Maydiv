@@ -1,5 +1,6 @@
 :root {
   --font-family: 'coco', sans-serif;
+  overflow-x: hidden;
 }
 
 body, html, * {
@@ -11,7 +12,8 @@ body, html, * {
   padding: 4rem 0;
   position: relative;
   z-index: 1;
-  overflow: hidden;
+ 
+  width: 102vw;
 }
 
 .our-services-cards {
@@ -26,7 +28,7 @@ body, html, * {
 
 .service-card {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   z-index: 1;
   display: flex;
   align-items: center;
@@ -39,19 +41,11 @@ body, html, * {
   border: none;
   box-shadow: none;
   transition: transform 0.35s cubic-bezier(0.4,0.2,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0.2,0.2,1);
+  border-radius: 32px;
 }
-.service-card-img4{
-  height: 74%;
-  width: 70%;
-  
+.card-item{
+  margin-right: 10px;
 }
-
-.service-card-img1{
-  height: 74%;
-  width: 70%;
-}
-
-
 .service-card::before {
   content: "";
   position: absolute;
@@ -64,8 +58,6 @@ body, html, * {
   filter: blur(1px);
   pointer-events: none;
 }
-
-
 
 @keyframes cardGlowSweep {
   0% {
@@ -93,8 +85,6 @@ body, html, * {
   transition: opacity 0.3s;
   pointer-events: none;
 }
-
-
 
 @keyframes shineSweep {
   0% { left: -75%; opacity: 0.2; }
@@ -166,6 +156,7 @@ body, html, * {
   transition: transform 0.7s cubic-bezier(.4,2,.6,1), opacity 0.5s;
   animation: cardDrop 0.7s cubic-bezier(.4,2,.6,1);
 }
+
 
 @keyframes cardDrop {
   0% {
@@ -336,6 +327,125 @@ body, html, * {
   z-index: 20;
   box-shadow: none !important;
   filter: none !important;
+}
+
+.service-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 38px 38px 28px 38px;
+  z-index: 2;
+  pointer-events: none;
+  box-sizing: border-box;
+  max-width: 88%;
+}
+
+.service-card-number {
+  font-size: 1.7rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5, #FF3BFF);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* For Firefox */
+  color: transparent;
+  letter-spacing: 1px;
+  opacity: 0.85;
+  max-width: 90%;
+  box-sizing: border-box;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-align: left;
+  margin-bottom: 8px;
+  position: static;
+  margin-top: 70px;
+  height: 24px;
+  margin-left: 70px;
+  animation: gradient-move 3s linear infinite;
+}
+
+.service-card-title-gradient,
+.service-card-desc {
+  max-width: 90%;
+  box-sizing: border-box;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-align: left;
+}
+
+.service-card-title-gradient {
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5, #FF3BFF);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  display: inline-block;
+  margin-left: 90px;
+  margin-top: 70px;
+  animation: gradient-move 3s linear infinite;
+}
+
+.service-card-desc {
+  font-size: 0.85rem;
+  color: #bdbdbd;
+  font-weight: 400;
+  margin-bottom: 0;
+  opacity: 0.85;
+  margin-left: 90px;
+}
+
+.service-card-arrow {
+  position: absolute;
+  right: 38px;
+  bottom: 28px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5, #FF3BFF);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  display: inline-block;
+  opacity: 0.9;
+  margin-right: 20px;
+  margin-bottom: 70px;
+  animation: gradient-move 3s linear infinite;
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.our-services-gradient-title {
+  background: linear-gradient(90deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5, #FF3BFF);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-fill-color: transparent;
+  display: block;
+  font-weight: 700;
+  animation: gradient-move 3s linear infinite;
+  text-align: center;
+  width: 100%;
 }
 
 

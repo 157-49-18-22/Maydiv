@@ -4,11 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaInstagram, FaFacebook } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
+import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
 import './New.css';
 import Discuss from './Discuss';
 import Footer from './Footer';
@@ -18,7 +19,7 @@ import newAnimation from '../../public/new.json';
 const projects = [
   {
     title: 'Portfolio Website',
-    image: '/Portfolio.png',
+    image: '/1.7.png',
     technologies: ['React', 'Next.js', 'CSS'],
     link: 'https://your-portfolio-link.com',
     startDate: 'Jan 2023',
@@ -28,7 +29,7 @@ const projects = [
   },
   {
     title: 'E-commerce Store',
-    image: '/commerce.jpg',
+    image: '/2.7.png',
     technologies: ['React', 'Redux', 'Node.js', 'MongoDB'],
     link: 'https://your-ecommerce-link.com',
     startDate: 'Apr 2023',
@@ -38,7 +39,7 @@ const projects = [
   },
   {
     title: 'Blog Platform',
-    image: '/blog.png',
+    image: '/3.7.png',
     technologies: ['Next.js', 'Sanity.io', 'Styled Components'],
     link: 'https://your-blog-link.com',
     startDate: 'Aug 2023',
@@ -48,7 +49,7 @@ const projects = [
   },
   {
     title: 'Landing Page',
-    image: '',
+    image: '/4.7.png',
     technologies: ['React', 'Styled Components'],
     link: 'https://your-landing-link.com',
     startDate: 'Feb 2024',
@@ -58,7 +59,7 @@ const projects = [
   },
   {
     title: 'Dashboard App',
-    image: '',
+    image: '/5.7.png',
     technologies: ['Vue.js', 'Vuetify', 'Firebase'],
     link: 'https://your-dashboard-link.com',
     startDate: 'May 2024',
@@ -68,7 +69,7 @@ const projects = [
   },
   {
     title: 'Mobile App',
-    image: '',
+    image: '/6.7.png',
     technologies: ['React Native', 'Expo'],
     link: 'https://your-mobile-link.com',
     startDate: 'Jul 2024',
@@ -152,12 +153,22 @@ export default function New() {
           pagination={{ clickable: true }}
           navigation={true}
           loop={true}
-          modules={[EffectCoverflow, Pagination, Navigation]}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+          }}
+          modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
           className="projects-list"
         >
           {projects.map((project, idx) => (
             <SwiperSlide key={idx}>
-              <div className={`project-card ${centerCardVisible && idx === 0 ? 'show-center' : ''} ${sideCardsVisible && idx !== 0 ? 'show-side' : ''}`}>
+              <div 
+                className={`project-card ${centerCardVisible && idx === 0 ? 'show-center' : ''} ${sideCardsVisible && idx !== 0 ? 'show-side' : ''}`}
+                onMouseEnter={() => {
+                  // Optional: Add hover effect here if needed
+                }}
+              >
                 {project.image && (
                   <img src={project.image} alt={project.title} className="project-image" />
                 )}
@@ -172,7 +183,24 @@ export default function New() {
                     <span className="tech-badge" key={i}>{tech}</span>
                   ))}
                 </div>
-                <a href={project.link} className="project-link" target="_blank" rel="noopener noreferrer">
+                <a 
+                  href={
+                    project.title === 'Sun Pay'
+                      ? 'https://sunpay.co.in/'
+                      : project.title === 'College Disha'
+                        ? 'https://www.collegedisha.com/'
+                        : project.title === 'School 18'
+                          ? 'https://schools18.com/'
+                          : project.title === 'Dashboard App'
+                            ? 'https://www.melanieindia.com/'
+                            : project.title === 'Mobile App'
+                              ? 'https://fika-india.com/'
+                              : project.link
+                  }
+                  className="project-link" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
                   Visit Website
                 </a>
               </div>

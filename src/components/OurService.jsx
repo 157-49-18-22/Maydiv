@@ -83,11 +83,40 @@ const cardTexts = [
 const OurService = () => {
   const [activeIndex, setActiveIndex] = useState(2); // center card by default
   const [phase, setPhase] = useState('center'); // 'center' or 'fan'
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   React.useEffect(() => {
     const timer = setTimeout(() => setPhase('fan'), 1000); // 1 second
     return () => clearTimeout(timer);
   }, []);
+
+  // Auto-play functionality
+  React.useEffect(() => {
+    let interval;
+    if (isAutoPlaying) {
+      interval = setInterval(() => {
+        setActiveIndex((prev) => (prev === services.length - 1 ? 0 : prev + 1));
+      }, 3000); // Move every 3 seconds
+    }
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isAutoPlaying]);
+
+  // Pause auto-play on hover
+  const handleMouseEnter = (index) => {
+    setHoveredIndex(index);
+    setIsAutoPlaying(false);
+  };
+
+  // Resume auto-play when mouse leaves
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+    setIsAutoPlaying(true);
+  };
 
   // Carousel navigation
   const goLeft = () => {
@@ -207,18 +236,28 @@ const OurService = () => {
               transitionDelay = `${0.06 * (Math.abs(offset))}s`;
             }
             const blur = Math.abs(offset) === 2 ? 'blur(2px)' : 'none';
+            
+            // Add hover effect
+            if (hoveredIndex === i) {
+              scale = 1.1;
+              zIndex = 50;
+            }
+
             return (
               <Link href={service.link} key={service.id + '-' + offset}>
                 <div
                   className={`service-card animated-card carousel-card`}
                   style={{
-                    transform: `scale(${scale}) translateX(${offset * 60}px) translateY(${translateY}px) rotateY(${rotateY}deg)` ,
+                    transform: `scale(${scale}) translateX(${offset * 60}px) translateY(${translateY}px) rotateY(${rotateY}deg)`,
                     opacity,
                     zIndex,
                     filter: blur,
                     transition: 'transform 0.7s cubic-bezier(.4,2,.6,1), opacity 0.7s, filter 0.4s',
                     transitionDelay,
+                    boxShadow: hoveredIndex === i ? '0 0 30px rgba(0, 0, 0, 0.3)' : 'none'
                   }}
+                  onMouseEnter={() => handleMouseEnter(i)}
+                  onMouseLeave={handleMouseLeave}
                 >
                   <Image
                     src={service.image}

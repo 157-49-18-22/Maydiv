@@ -285,14 +285,10 @@
 
 .project-card:hover::after {
   opacity: 1;
-  animation: shineSweep 0.8s linear;
+
 }
 
-@keyframes shineSweep {
-  0% { left: -75%; opacity: 0.2; }
-  50% { left: 100%; opacity: 0.6; }
-  100% { left: 120%; opacity: 0; }
-}
+
 
 .project-image {
   height: 65%;
@@ -494,7 +490,7 @@
 .projects-hero-btn {
   display: inline-block;
   padding: 12px 36px;
-  border-radius: 30px;
+  border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 700;
   background: linear-gradient(90deg, #b983ff 0%, #6e8efb 100%);

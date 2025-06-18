@@ -136,7 +136,7 @@ export default function About() {
           <div className="about-security-left">
             <div className="about-security-visual">
               <div className="about-security-glow"></div>
-              <Image src="/Security.png" alt="Security" width={340} height={340} quality={100} className="about-security-img" />
+              <Image src="/Security.jpg" alt="Security" width={340} height={340} quality={100} className="about-security-img" />
             </div>
           </div>
           <div className="about-security-right">

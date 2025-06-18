@@ -841,7 +841,7 @@ body {
     slideInAndroid 1.2s cubic-bezier(0.77,0,0.175,1) 1.2s forwards,
     floatAndroid 6.2s ease-in-out 2.4s infinite;
     margin-top: 300px;
-    margin-right: 340px;
+    margin-right: 270px;
 }
 
 @keyframes dropInIos {

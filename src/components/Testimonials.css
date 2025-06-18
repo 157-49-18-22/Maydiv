@@ -249,6 +249,7 @@ height: 80px;
   color: #fff;
   font-size: 1.1rem;
   font-weight: 100;
+  margin-left: -40px;
  
  
 }
@@ -258,16 +259,16 @@ height: 80px;
   color: #fff;
   font-size: 1.15rem;
   font-weight: 700;
-  padding: 15px 38px;
+  padding: 11px 33px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
   
   box-shadow: 0 2px 16px #00cfff33;
   transition: background 0.2s, box-shadow 0.2s;
-  margin-left: 70%;
+  margin-left: 87%;
   width: 40%;
-  margin-top: 20px;
+  margin-top: 40px;
  
  
 }

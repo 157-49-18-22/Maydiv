@@ -7,6 +7,7 @@ body, html, * {
 }
 body {
   margin: 0px;
+
 }
 
 .header-container {
@@ -787,7 +788,7 @@ Ai-our-projects-section {
   justify-content: center;
   align-items: center;
   padding: 3rem 0 2.5rem 0;
-  background: #0a0a0a;
+  background: linear-gradient(120deg, #181818 60%, #3a1c71 100%);
 
 }
 
@@ -1029,7 +1030,7 @@ Ai-our-projects-section {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background: #0a0a0a;
+  background: linear-gradient(120deg, #181818 60%, #3a1c71 100%);
   height: min-content;
 }
 
@@ -1173,7 +1174,7 @@ Ai-our-projects-section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #0a0a0a;
+  background: linear-gradient(120deg, #181818 60%, #3a1c71 100%);
  
 }
 

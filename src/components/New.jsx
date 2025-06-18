@@ -18,60 +18,70 @@ import newAnimation from '../../public/new.json';
 
 const projects = [
   {
-    title: 'Portfolio Website',
-    image: '/1.7.png',
+    title: 'Mobile App1',
+    image: '/1.7.webp',
     technologies: ['React', 'Next.js', 'CSS'],
-    link: 'https://your-portfolio-link.com',
+    link: 'https://play.google.com/store/apps/details?id=com.blackhatcode.in.ssa_app.new&hl=en_US',
     startDate: 'Jan 2023',
     endDate: 'Mar 2023',
     description: 'A personal portfolio to showcase Our work and skills. Features responsive design and smooth animations.',
     status: 'Completed',
   },
   {
-    title: 'E-commerce Store',
-    image: '/2.7.png',
+    title: 'Mobile App2',
+    image: '/2.7.webp',
     technologies: ['React', 'Redux', 'Node.js', 'MongoDB'],
-    link: 'https://your-ecommerce-link.com',
+    link: 'https://play.google.com/store/apps/details?id=com.rathifarms&hl=en_US',
     startDate: 'Apr 2023',
     endDate: 'Jul 2023',
     description: 'A full-featured e-commerce platform with cart, payment, and admin dashboard.',
     status: 'Completed',
   },
   {
-    title: 'Blog Platform',
+    title: 'Company website',
     image: '/3.7.png',
     technologies: ['Next.js', 'Sanity.io', 'Styled Components'],
-    link: 'https://your-blog-link.com',
+    link: 'https://www.melanieindia.com/',
     startDate: 'Aug 2023',
     endDate: 'Present',
     description: 'A modern blog platform with markdown support and live preview.',
     status: 'In Progress',
   },
   {
-    title: 'Landing Page',
-    image: '/4.7.png',
+    title: 'Mobile App3',
+    image: '/4.7.webp',
     technologies: ['React', 'Styled Components'],
-    link: 'https://your-landing-link.com',
+    link: 'https://play.google.com/store/apps/details?id=com.myjobee&hl=en_US',
     startDate: 'Feb 2024',
     endDate: 'Mar 2024',
     description: 'A modern landing page for a SaaS product.',
     status: 'Completed',
   },
   {
-    title: 'Dashboard App',
+    title: 'College Website',
     image: '/5.7.png',
     technologies: ['Vue.js', 'Vuetify', 'Firebase'],
-    link: 'https://your-dashboard-link.com',
+    link: 'https://www.collegedisha.com/',
     startDate: 'May 2024',
     endDate: 'Jun 2024',
     description: 'A real-time dashboard for analytics and reporting.',
     status: 'Completed',
   },
   {
-    title: 'Mobile App',
+    title: 'E-commerce website',
     image: '/6.7.png',
     technologies: ['React Native', 'Expo'],
-    link: 'https://your-mobile-link.com',
+    link: 'https://fika-india.com/',
+    startDate: 'Jul 2024',
+    endDate: 'Present',
+    description: 'A cross-platform mobile app for productivity.',
+    status: 'In Progress',
+  },
+  {
+    title: 'Mobile App4',
+    image: '/7.7.webp',
+    technologies: ['React Native', 'Expo'],
+    link: 'https://play.google.com/store/apps/details?id=com.colyr&hl=en_US',
     startDate: 'Jul 2024',
     endDate: 'Present',
     description: 'A cross-platform mobile app for productivity.',
@@ -186,19 +196,22 @@ export default function New() {
                 </div>
                 <a 
                   href={
-                    project.title === 'Portfolio Website'
-                      ? 'https://sunpay.co.in/'
-                      : project.title === 'Dashboard App'
-                        ? 'https://www.collegedisha.com/'
-                        : project.title === 'E-commerce Store'
-                          ? 'https://schools18.com/'
-                          : project.title === 'Blog Platform'
-                            ? 'https://www.melanieindia.com/'
-                            : project.title === 'Mobile App'
-                              ? 'https://fika-india.com/'
-                               : project.title === 'Landing Page'
-                              ? 'https://schools18.com/'
-                              : project.link
+                    project.title === 'Mobile App1'
+                     
+                        ? 'https://play.google.com/store/apps/details?id=com.blackhatcode.in.ssa_app.new&hl=en_US'
+                        : project.title === 'Mobile App2'
+                          ? 'https://play.google.com/store/apps/details?id=com.rathifarms&hl=en_US'
+                          : project.title === 'Mobile App3'
+                            ? 'https://play.google.com/store/apps/details?id=com.myjobee&hl=en_US'
+                            : project.title === 'Mobile App4'
+                              ? 'https://play.google.com/store/apps/details?id=com.colyr&hl=en_US'
+                              : project.title === 'College Website'
+                                ? 'https://www.collegedisha.com/'
+                                : project.title === 'Company Website'
+                                  ? 'https://www.melanieindia.com/'
+                                  : project.title === 'E-commerce Website'
+                                    ? 'https://fika-india.com/'
+                                    : project.link
                   }
                   className="project-link" 
                   target="_blank" 

@@ -107,13 +107,22 @@ export default function About() {
       <section className="about-integration-section">
         <div className="about-integration-content">
           <div className="about-integration-left">
-            <div className="about-integration-label">INTEGRATIONS</div>
-            <h2 className="about-integration-heading">Unified view of your <br />customers</h2>
-            <div className="about-integration-desc">
-              Enterpact will integrate directly with any feedback channel.<br />
-              Take advantage of our CSV importer or API
+            <div className="about-story-card about-story-flex">
+              <div className="about-story-main">
+                <div className="about-integration-label">Our Story</div>
+                <div className="about-integration-desc">
+                  We began our journey as a group of passionate freelancers with a vision — to transform ideas into digital reality. With no investors and just pure determination, we officially registered our company on February 28, 2025.
+                  <br /><br />
+                  From humble beginnings to growing into a full-fledged IT solutions startup, our focus remains the same: building smart, fast, and scalable digital solutions that solve real problems.
+                </div>
+              </div>
+              <div className="about-story-project">
+                <div className="about-story-project-title">Our very first project?</div>
+                <div className="about-story-project-desc">
+                  A fully functional salary management software, developed and delivered in just one week. That successful launch gave us the confidence to dream bigger — and today, we are building high-quality websites, mobile apps, and offering a wide range of IT services for startups, businesses, and individuals alike.
+                </div>
+              </div>
             </div>
-            <button className="about-integration-btn">View all integrations</button>
           </div>
           <div className="about-integration-right">
             <Image src="/Integration.png" alt="Integration" width={420} height={420} quality={100} className="about-integration-img" />
@@ -131,12 +140,16 @@ export default function About() {
             </div>
           </div>
           <div className="about-security-right">
-            <div className="about-security-label">SECURITY</div>
-            <h2 className="about-security-heading">Built for scale and enterprise level security</h2>
-            <div className="about-security-desc">
-              SOC-2 Type II certification, penetration tested, and regular vulnerability scans. Hosted behind a VPC. Data encryption at rest and transit.
+            <div className="about-story-project founder-card">
+              <div className="about-story-project-title">Founder</div>
+              <div className="about-story-project-desc">
+              We're a passionate team of builders, designers, and thinkers — driven by the idea of solving real problems with smart tech.
+
+It all began on a train ride, when Vishal wished for an LSAT prep app that didn't exist. So he built it — and it became the #1 paid LSAT app for over a year.
+
+Since then, we've been turning ideas into impactful digital products — from mobile apps to full-stack IT solutions.
+              </div>
             </div>
-            <button className="about-security-btn">Learn More</button>
           </div>
         </div>
       </section>
@@ -148,15 +161,19 @@ export default function About() {
         </div>
         <div className="about-team-testimonial-card">
           <div className="about-team-quote">
-            During a train ride, a moment of inspiration struck Vishal; he wished for a convenient study tool on his phone to help prep for the LSAT. However, such an app didn't exist at the time. Determined to overcome this hurdle, Vishal took matters into his own hands and developed one of the easiest and most comprehensive LSAT apps on the market. The app quickly gained popularity, becoming the #1 paid LSAT app for over a year.
+          We're a passionate team of builders, designers, and thinkers — driven by the idea of solving real problems with smart tech.
+
+It all began on a train ride, when Vishal wished for an LSAT prep app that didn't exist. So he built it — and it became the #1 paid LSAT app for over a year.
+
+Since then, we've been turning ideas into impactful digital products — from mobile apps to full-stack IT solutions.
           </div>
           <div className="about-team-person">
-            <div className="about-team-name">John Wick</div>
-            <div className="about-team-role">CEO Maydiv</div>
+            <div className="about-team-name">Mayank Varshney</div>
+            <div className="about-team-role">MD Maydiv Infotech</div>
             <div className="about-team-socials">
-              <a href="#" aria-label="Twitter"><FaTwitter /></a>
-              <a href="#" aria-label="Facebook"><FaFacebook /></a>
-              <a href="#" aria-label="LinkedIn"><FaLinkedin /></a>
+         
+              <a href="https://www.instagram.com/mayank.vy?igsh=NnRpNXN4OGF6MDI1" aria-label="Instagram"><FaInstagram /></a>
+              <a href="https://www.linkedin.com/in/mayank-varshney-b69191284" aria-label="LinkedIn"><FaLinkedin /></a>
             </div>
           </div>
           <div className="about-team-card-triangle"></div>

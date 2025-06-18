@@ -172,6 +172,7 @@ export default function New() {
                 {project.image && (
                   <img src={project.image} alt={project.title} className="project-image" />
                 )}
+                <div className="card-separator"></div>
                 <h2 className="project-name">{project.title}</h2>
                 <div className="project-dates">
                   <span className="project-date">🗓️ {project.startDate} - {project.endDate}</span>

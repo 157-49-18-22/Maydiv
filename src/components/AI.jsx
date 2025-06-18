@@ -60,17 +60,7 @@ const AI = () => (
           <Image src="/Rock6.png" alt="Rock6" width={400} height={400} className="rock-img rock6" />
         </div>
       </div>
-      {/* Trusted by bar inside hero section */}
-      <div className="trusted-bar">
-        <span className="trusted-text">Trusted by top innovative teams:</span>
-        <div className="trusted-logos">
-          <span className="trusted-logo"><Image src="/celestial 1.png" alt="Celestial" width={90} height={32} /></span>
-          <span className="trusted-logo"><Image src="/apexw 1.png" alt="APEX" width={90} height={32} /></span>
-          <span className="trusted-logo"><Image src="/quantrumw 1.png" alt="Quantum" width={90} height={32} /></span>
-          <span className="trusted-logo"><Image src="/acme 1.png" alt="Acme Corp" width={90} height={32} /></span>
-          <span className="trusted-logo"><Image src="/pulsew 1.png" alt="PULSE" width={90} height={32} /></span>
-        </div>
-      </div>
+     
     </section>
 
     {/* AI elevate your brands growth section */}

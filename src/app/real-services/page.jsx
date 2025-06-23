@@ -1,4 +1,7 @@
+"use client";
 import Services from '../../components/Services';
+import { usePathname } from 'next/navigation';
 export default function RealServicesPage() {
-  return <Services />;
+  const pathname = usePathname();
+  return <Services key={pathname} />;
 } 

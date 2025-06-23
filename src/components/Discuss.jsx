@@ -52,7 +52,7 @@ const Discuss = () => {
               style={{
                 padding: '16px 44px',
                 fontSize: '1.25rem',
-                borderRadius: 40,
+                borderRadius: 14,
                 background: '#000',
                 color: '#fff',
                 border: 'none',
@@ -78,7 +78,7 @@ const Discuss = () => {
               style={{
                 padding: '16px 44px',
                 fontSize: '1.25rem',
-                borderRadius: 40,
+                borderRadius: 14,
                 background: 'transparent',
                 color: '#fff',
                 border: '2.5px solid #fff',

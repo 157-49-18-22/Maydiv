@@ -86,6 +86,12 @@ const OurService = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
+  // Reset state on mount
+  React.useEffect(() => {
+    setActiveIndex(2);
+    setPhase('center');
+  }, []);
+
   React.useEffect(() => {
     const timer = setTimeout(() => setPhase('fan'), 1000); // 1 second
     return () => clearTimeout(timer);

@@ -8,7 +8,8 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-col footer-brand">
           <div className="footer-logo">MAYDIV</div>
-          <div className="footer-desc">Technology AI Generator Website</div>
+          <div className="footer-desc">We Code. You Grow</div>
+        
         </div>
         <div className="footer-col">
           <div className="footer-title">Explore</div>
@@ -24,7 +25,7 @@ const Footer = () => {
         </div>
         <div className="footer-col">
           <div className="footer-title">OFFICE LOCATION</div>
-          <div className="footer-address">Address Line Lorem Ipsum Dolore Sit Amet</div>
+          <div className="footer-address">SCO-105 Second floor world street, Faridabad , HR 121004</div>
         </div>
       </div>
       <div className="footer-bottom">
@@ -33,7 +34,7 @@ const Footer = () => {
           <a href="#" className="footer-link">Privacy</a>
           <a href="#" className="footer-link">Cookies</a>
         </div>
-        <div className="footer-copyright">© 2025 By Avinash. All Rights Reserved.</div>
+       
         <div className="footer-socials">
           <a href="#" className="footer-social"><i className="fa fa-facebook"></i></a>
           <a href="#" className="footer-social"><i className="fa fa-linkedin"></i></a>

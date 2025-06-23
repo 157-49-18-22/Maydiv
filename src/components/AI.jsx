@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image'; // Assuming you're using Next.js
 import Link from 'next/link';   // Assuming you're using Next.js
-import { FaGithub, FaInstagram, FaFacebook } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain } from 'react-icons/fa';
 import Lottie from 'lottie-react';
 import './AI.css';
 import Testimonial from './Testimonial';
@@ -17,21 +18,20 @@ const AI = () => (
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
         </div>
         <ul className="header-links">
-          <li><Link href="/">Home</Link></li>
-          <li className="dropdown">
-            <span className="dropdown-toggle">Services</span>
-            <ul className="dropdown-menu">
-              <li><Link href="/real-projects">Web Development</Link></li>
-              <li><Link href="/real-services">UI/UX Design</Link></li>
-              <li><Link href="/real-testimonials">Social Media and Marketing</Link></li>
-              <li><Link href="/real-apps">App Development</Link></li>
-              <li><Link href="/real-ai">AI</Link></li>
-            </ul>
-          </li>
-          <li><Link href="/projects">Projects</Link></li>
-      
-          <li><Link href="/contact">Contact</Link></li>
-        </ul>
+        <li><Link href="/">Home</Link></li>
+            <li className="dropdown">
+              <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
+              <ul className="dropdown-menu">
+                <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
+                <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
+                <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
+                <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
+                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> AI</span></Link></li>
+              </ul>
+            </li>
+            <li><Link href="/new"><span>Projects</span></Link></li>
+            <li><Link href="/contact"><span>Contact</span></Link></li>
+          </ul>
         <div className="header-socials">
           <a href="#" aria-label="GitHub"><FaGithub /></a>
           <a href="#" aria-label="Instagram"><FaInstagram /></a>
@@ -63,6 +63,7 @@ const AI = () => (
      
     </section>
 
+    <div className="ai-seamless-background">
     {/* AI elevate your brands growth section */}
     <section className="ai-growth-section">
       <div className="ai-growth-content">
@@ -214,6 +215,7 @@ const AI = () => (
         </div>
       </div>
     </section>
+    </div>
     <Footer />
   </>
 );

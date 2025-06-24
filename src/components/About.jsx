@@ -195,12 +195,8 @@ Since then, we've been turning ideas into impactful digital products — from mo
           <div className="about-team-card-triangle"></div>
         </div>
         <div className="about-team-image-row">
-          <div className="about-team-image about-team-image-small">
-            <Image src="/Abhi.jpeg" alt="Abhi" width={170} height={170} quality={100} />
-          </div>
-          <div className="about-team-image about-team-image-small">
-            <Image src="/Ayush.jpeg" alt="Ayush" width={170} height={170} quality={100} />
-          </div>
+          
+         
           <div className="about-team-image about-team-image-small">
           <Image src="/Ayush.jpeg" alt="Ayush" width={170} height={170} quality={100} />
           </div>
@@ -211,11 +207,9 @@ Since then, we've been turning ideas into impactful digital products — from mo
           <Image src="/Abhi.jpeg" alt="Abhi" width={170} height={170} quality={100} />
           </div>
           <div className="about-team-image about-team-image-small">
-            <Image src="/Pic6.png" alt="Team Member 6" width={170} height={170} quality={100} />
+            <Image src="/Ashish.jpeg" alt="Team Member 6" width={170} height={170} quality={100} />
           </div>
-          <div className="about-team-image about-team-image-small">
-            <Image src="/Pic7.png" alt="Team Member 7" width={170} height={170} quality={100} />
-          </div>
+         
         </div>
         {/* Stats Section Below Testimonials/Team */}
         <StatsSection />

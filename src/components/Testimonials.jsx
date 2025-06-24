@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -11,36 +11,48 @@ import Footer from './Footer';
 import CountUp from 'react-countup';
 
 const Testimonials = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleDropdownEnter = () => setDropdownOpen(true);
+  const handleDropdownLeave = () => setDropdownOpen(false);
+
   return (
     <>
-      <header className="header-container">
-      <nav className="header-nav">
-        <div className="header-logo">
-          <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
-        </div>
-        <ul className="header-links">
-        <li><Link href="/">Home</Link></li>
+<header className="header-container">
 
-            <li className="dropdown">
-              <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
-              <ul className="dropdown-menu">
-                <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
-                <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
-                <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
-                <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
-                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
-              </ul>
-            </li>
-            <li><Link href="/new"><span>Projects</span></Link></li>
-            <li><Link href="/contact"><span>Contact</span></Link></li>
-          </ul>
-        <div className="header-socials">
-          <a href="#" aria-label="GitHub"><FaGithub /></a>
-          <a href="#" aria-label="Instagram"><FaInstagram /></a>
-          <a href="#" aria-label="Facebook"><FaFacebook /></a>
-        </div>
-      </nav>
-      </header>
+<nav className="header-nav">
+  <div className="header-logo">
+    <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized />
+  </div>
+  <ul className="header-links">
+  <li><Link href="/">Home</Link></li>
+    <li
+      className="dropdown"
+      onMouseEnter={handleDropdownEnter}
+      onMouseLeave={handleDropdownLeave}
+      onFocus={handleDropdownEnter}
+      onBlur={handleDropdownLeave}
+    >
+      <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
+      <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
+        <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
+        <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
+        <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
+        <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
+        <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
+      </ul>
+    </li>
+    <li><Link href="/new"><span>Projects</span></Link></li>
+    <li><Link href="/contact"><span>Contact</span></Link></li>
+  </ul>
+  <div className="header-socials">
+    <a href="#" aria-label="Instagram"><FaInstagram /></a>
+    <a href="#" aria-label="Facebook"><FaFacebook /></a>
+    <a href="https://github.com/" aria-label="GitHub"><FaGithub /></a>
+    
+  </div>
+</nav>
+</header>
 
       <section className="marketing-hero-section">
         <div className="marketing-hero-graphic-star">
@@ -111,7 +123,7 @@ const Testimonials = () => {
           </div>
           <div className="expertise-info">
             <h2>Our Digital<br />Marketing Expertise</h2>
-            <p>We don’t just market, we connect. Our digital marketing expertise helps businesses build strong online identities, engage the right audiences, and turn attention into action — consistently and effectively.</p>
+            <p>We don't just market, we connect. Our digital marketing expertise helps businesses build strong online identities, engage the right audiences, and turn attention into action — consistently and effectively.</p>
           </div>
         </div>
         <div className="expertise-row">
@@ -154,7 +166,7 @@ const Testimonials = () => {
             </div>
           </div>
           <h2 className="why-maydiv-heading">Why should you choose Maydiv</h2>
-          <p className="why-maydiv-desc">At Maydiv, we blend creativity with strategy to deliver marketing that works. We don’t just follow trends — we craft solutions that drive real results..</p>
+          <p className="why-maydiv-desc">At Maydiv, we blend creativity with strategy to deliver marketing that works. We don't just follow trends — we craft solutions that drive real results..</p>
           <Link href="/contact">
   <button className="why-maydiv-btn">Contact Us</button>
 </Link>

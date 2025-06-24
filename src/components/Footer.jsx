@@ -25,7 +25,9 @@ const Footer = () => {
         </div>
         <div className="footer-col">
           <div className="footer-title">OFFICE LOCATION</div>
-          <div className="footer-address">SCO-105 Second floor world street, Faridabad , HR 121004</div>
+          <div className="footer-address">SCO-105 Second Floor World street, Faridabad , HR 121004</div>
+          <div className="footer-address">Contact: +91 9220438999</div>
+          <div className="footer-address">Email: <a href="mailto: Operations@maydiv.com" style={{color: '#bdbdbd'}}> Operations@maydiv.com</a></div>
         </div>
       </div>
       <div className="footer-bottom">

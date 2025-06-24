@@ -88,9 +88,9 @@ const Apps = () => {
             <li><Link href="/contact"><span>Contact</span></Link></li>
           </ul>
         <div className="header-socials">
-          <a href="#" aria-label="GitHub"><FaGithub /></a>
-          <a href="#" aria-label="Instagram"><FaInstagram /></a>
-          <a href="#" aria-label="Facebook"><FaFacebook /></a>
+        <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+            <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
         </div>
       </nav>
       </header>

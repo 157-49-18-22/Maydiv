@@ -90,9 +90,9 @@ export default function ContactUs() {
             <div className="contactus-info-item"><FaMapMarkerAlt /> SCO-105 Second floor world street, Faridabad , HR 121004</div>
           </div>
           <div className="contactus-info-socials">
-            <a href="#"><FaInstagram /></a>
-            <a href="#"><FaFacebook /></a>
-            <a href="#"><FaTwitter /></a>
+          <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+            <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
           </div>
           <img src="/MAYDIV.png" alt="MAYDIV" className="maydiv-watermark" />
         </div>

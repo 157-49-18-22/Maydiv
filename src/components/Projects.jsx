@@ -13,6 +13,8 @@ const Projects = () => {
   const [showScreen, setShowScreen] = useState(false);
   const [animate, setAnimate] = useState(false);
   const nextgenRef = useRef(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownTimeout = useRef(null);
 
   useEffect(() => {
     const observer = new window.IntersectionObserver(
@@ -31,6 +33,15 @@ const Projects = () => {
     return () => observer.disconnect();
   }, []);
 
+  const handleDropdownEnter = () => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setDropdownOpen(true);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 350);
+  };
+
   return (
     <div className="services-container">
       {/* Hero Section */}
@@ -40,14 +51,19 @@ const Projects = () => {
         </div>
         <ul className="header-links">
         <li><Link href="/">Home</Link></li>
-            <li className="dropdown">
+            <li className="dropdown"
+                onMouseEnter={handleDropdownEnter}
+                onMouseLeave={handleDropdownLeave}
+                onFocus={handleDropdownEnter}
+                onBlur={handleDropdownLeave}
+            >
               <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
                 <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
                 <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
                 <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
                 <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
-                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> AI</span></Link></li>
+                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
               </ul>
             </li>
             <li><Link href="/new"><span>Projects</span></Link></li>

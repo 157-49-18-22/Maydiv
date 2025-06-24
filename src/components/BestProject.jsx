@@ -11,10 +11,7 @@ const images = [
 ];
 
 const filters = [
-  { label: 'Design', active: true, icon: '/Design.png' },
-  { label: 'Development', active: false, icon: '/Development.png' },
-  { label: 'Digital Marketing', active: false, icon: '/Digital.png' },
-  { label: 'SEO', active: false, icon: '/Seo.png' },
+
 ];
 
 const BestProject = () => {

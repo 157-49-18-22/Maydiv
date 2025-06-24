@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa';
@@ -13,6 +13,16 @@ import Lottie from 'lottie-react';
 import aboutAnimation from '../../public/About.json';
 
 export default function About() {
+  // Dropdown state and timeout
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownTimeout = useRef(null);
+  const handleDropdownEnter = () => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setDropdownOpen(true);
+  };
+  const handleDropdownLeave = () => {
+    dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 350);
+  };
   return (
     <main className="about-main">
       {/* Hero Section */}
@@ -22,14 +32,19 @@ export default function About() {
         </div>
         <ul className="header-links">
         <li><Link href="/">Home</Link></li>
-            <li className="dropdown">
+            <li className="dropdown"
+                onMouseEnter={handleDropdownEnter}
+                onMouseLeave={handleDropdownLeave}
+                onFocus={handleDropdownEnter}
+                onBlur={handleDropdownLeave}
+            >
               <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
                 <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
                 <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
                 <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
                 <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
-                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> AI</span></Link></li>
+                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
               </ul>
             </li>
             <li><Link href="/new"><span>Projects</span></Link></li>
@@ -53,8 +68,8 @@ export default function About() {
           Step into the future with maydiv! I offer a range of digital solutions that can transform your business landscape. With our expertise, your digital needs will be met with creativity and innovation.
         </p>
         <div className="about-btn-row">
-          <button className="about-btn about-btn-primary">Get started</button>
-          <button className="about-btn about-btn-secondary">Our Portfolio</button>
+          <button className="fancy"><span className="top-key"></span><span className="text">Get started</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
+          <button className="fancy"><span className="top-key"></span><span className="text">Our Portfolio</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
         </div>
       </section>
       <TrustedLogos />
@@ -104,31 +119,7 @@ export default function About() {
         <Image src="/Bg.png" alt="Decorative Right Dots" width={120} height={90} className="about-features-bg-right" />
       </section>
       {/* Integration Section */}
-      <section className="about-integration-section">
-        <div className="about-integration-content">
-          <div className="about-integration-left">
-            <div className="about-story-card about-story-flex">
-              <div className="about-story-main">
-                <div className="about-integration-label">Our Story</div>
-                <div className="about-integration-desc">
-                  We began our journey as a group of passionate freelancers with a vision — to transform ideas into digital reality. With no investors and just pure determination, we officially registered our company on February 28, 2025.
-                  <br /><br />
-                  From humble beginnings to growing into a full-fledged IT solutions startup, our focus remains the same: building smart, fast, and scalable digital solutions that solve real problems.
-                </div>
-              </div>
-              <div className="about-story-project">
-                <div className="about-story-project-title">Our very first project?</div>
-                <div className="about-story-project-desc">
-                  A fully functional salary management software, developed and delivered in just one week. That successful launch gave us the confidence to dream bigger — and today, we are building high-quality websites, mobile apps, and offering a wide range of IT services for startups, businesses, and individuals alike.
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="about-integration-right">
-            <Image src="/Integration.png" alt="Integration" width={420} height={420} quality={100} className="about-integration-img" />
-          </div>
-        </div>
-      </section>
+     
       {/* Security Section */}
       <section className="about-security-section">
         <Image src="/Bg1.png" alt="Decorative Dots" width={70} height={260} className="about-security-bg-dots" />
@@ -150,6 +141,31 @@ It all began on a train ride, when Vishal wished for an LSAT prep app that didn'
 Since then, we've been turning ideas into impactful digital products — from mobile apps to full-stack IT solutions.
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="about-integration-section">
+        <div className="about-integration-content">
+          <div className="about-integration-left">
+            <div className="about-story-card about-story-flex">
+              <div className="about-story-main">
+                <div className="about-integration-label">Managing Director</div>
+                <div className="about-integration-desc">
+                  We began our journey as a group of passionate freelancers with a vision — to transform ideas into digital reality. With no investors and just pure determination, we officially registered our company on February 28, 2025.
+                  <br /><br />
+                  From humble beginnings to growing into a full-fledged IT solutions startup, our focus remains the same: building smart, fast, and scalable digital solutions that solve real problems.
+                </div>
+              </div>
+              <div className="about-story-project">
+                <div className="about-story-project-title">Our very first project?</div>
+                <div className="about-story-project-desc">
+                  A fully functional salary management software, developed and delivered in just one week. That successful launch gave us the confidence to dream bigger — and today, we are building high-quality websites, mobile apps, and offering a wide range of IT services for startups, businesses, and individuals alike.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="about-integration-right">
+            <Image src="/Integration.png" alt="Integration" width={420} height={420} quality={100} className="about-integration-img" />
           </div>
         </div>
       </section>
@@ -180,19 +196,19 @@ Since then, we've been turning ideas into impactful digital products — from mo
         </div>
         <div className="about-team-image-row">
           <div className="about-team-image about-team-image-small">
-            <Image src="/Pic1.png" alt="Team Member 1" width={170} height={170} quality={100} />
+            <Image src="/Abhi.jpeg" alt="Abhi" width={170} height={170} quality={100} />
           </div>
           <div className="about-team-image about-team-image-small">
-            <Image src="/Pic2.png" alt="Team Member 2" width={170} height={170} quality={100} />
+            <Image src="/Ayush.jpeg" alt="Ayush" width={170} height={170} quality={100} />
           </div>
           <div className="about-team-image about-team-image-small">
-            <Image src="/Pic3.png" alt="Team Member 3" width={170} height={170} quality={100} />
+          <Image src="/Ayush.jpeg" alt="Ayush" width={170} height={170} quality={100} />
           </div>
           <div className="about-team-image about-team-image-large">
-            <Image src="/Pic4.png" alt="Team Member 4" width={280} height={280} quality={100} />
+          <Image src="/Ravi.jpeg" alt="Ravi" width={170} height={170} quality={100} />
           </div>
           <div className="about-team-image about-team-image-small">
-            <Image src="/Pic5.png" alt="Team Member 5" width={170} height={170} quality={100} />
+          <Image src="/Abhi.jpeg" alt="Abhi" width={170} height={170} quality={100} />
           </div>
           <div className="about-team-image about-team-image-small">
             <Image src="/Pic6.png" alt="Team Member 6" width={170} height={170} quality={100} />
@@ -255,27 +271,25 @@ function StatsSection() {
     <div className="header-stats-section" ref={statsRef}>
       <div className="header-stat">
         <span className="stat-number gradient-text">
-          {showCounters ? <Counter start={40} end={723} duration={2000} /> : 40}+
+          {showCounters ? <Counter start={40} end={120} duration={400} /> : 40}+
         </span>
         <div className="stat-label">Success Project</div>
       </div>
       <div className="header-stat">
         <span className="stat-number gradient-text">
-          {showCounters ? <Counter start={2} end={10} duration={2000} /> : 2}+
+          {showCounters ? <Counter start={1} end={2} duration={700} /> : 2}+
         </span>
         <div className="stat-label">Years Experience</div>
       </div>
       <div className="header-stat">
-        <span className="stat-number gradient-text">
-          {showCounters ? <Counter start={30} end={500} duration={2000} /> : 30}+
-        </span>
-        <div className="stat-label">Product Launched</div>
-      </div>
+       
+   
       <div className="header-stat">
         <span className="stat-number gradient-text">
-          {showCounters ? <Counter start={10} end={100} duration={2000} /> : 10}+
+          {showCounters ? <Counter start={2} end={10} duration={400} /> : 10}+
         </span>
         <div className="stat-label">Startup Raised</div>
+      </div>
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const Testimonials = () => {
                 <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
                 <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
                 <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
-                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> AI</span></Link></li>
+                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
               </ul>
             </li>
             <li><Link href="/new"><span>Projects</span></Link></li>
@@ -111,7 +111,7 @@ const Testimonials = () => {
           </div>
           <div className="expertise-info">
             <h2>Our Digital<br />Marketing Expertise</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor Lorem ipsum dolor sit</p>
+            <p>We don’t just market, we connect. Our digital marketing expertise helps businesses build strong online identities, engage the right audiences, and turn attention into action — consistently and effectively.</p>
           </div>
         </div>
         <div className="expertise-row">
@@ -154,7 +154,7 @@ const Testimonials = () => {
             </div>
           </div>
           <h2 className="why-maydiv-heading">Why should you choose Maydiv</h2>
-          <p className="why-maydiv-desc">Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor Lorem ipsum dolor sit amet, consectetur sadipscing elitr.</p>
+          <p className="why-maydiv-desc">At Maydiv, we blend creativity with strategy to deliver marketing that works. We don’t just follow trends — we craft solutions that drive real results..</p>
           <Link href="/contact">
   <button className="why-maydiv-btn">Contact Us</button>
 </Link>
@@ -171,7 +171,7 @@ const Testimonials = () => {
           </div>
           <div className="latest-work-card-content">
             <div className="latest-work-card-title">Artem - Digital Marketing campaign</div>
-            <div className="latest-work-card-desc">Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod.</div>
+            <div className="latest-work-card-desc">Artem is a high-impact digital campaign built to boost visibility, drive engagement, and deliver real growth.</div>
           </div>
         </div>
         <div className="latest-work-card-group">
@@ -181,7 +181,7 @@ const Testimonials = () => {
           </div>
           <div className="latest-work-card-content">
             <div className="latest-work-card-title">Mayhem - Search engine Optimization</div>
-            <div className="latest-work-card-desc">Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod.</div>
+            <div className="latest-work-card-desc">Mayhem is SEO with purpose — built to boost rankings, drive traffic, and dominate search results.</div>
           </div>
         </div>
         <div className="latest-work-card-group">
@@ -191,7 +191,7 @@ const Testimonials = () => {
           </div>
           <div className="latest-work-card-content">
             <div className="latest-work-card-title">Basic - Pay per click (PPC)</div>
-            <div className="latest-work-card-desc">Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod.</div>
+            <div className="latest-work-card-desc">Basic is your launchpad into high-impact PPC. We create targeted ads that get clicks, drive traffic, and deliver real ROI — fast..</div>
           </div>
         </div>
       </div>
@@ -199,22 +199,22 @@ const Testimonials = () => {
     <section className="header-stats-section">
       <div className="header-stats-grid">
         <div className="header-stat">
-          <div className="header-stat-number"><CountUp end={723} duration={2} />+</div>
+          <div className="header-stat-number"><CountUp end={120} duration={2} />+</div>
           <div className="header-stat-label">Success Project</div>
         </div>
         <div className="header-stat-separator"></div>
         <div className="header-stat">
-          <div className="header-stat-number"><CountUp end={10} duration={2} />+</div>
+          <div className="header-stat-number"><CountUp end={2} duration={2} />+</div>
           <div className="header-stat-label">Years Experience</div>
         </div>
         <div className="header-stat-separator"></div>
         <div className="header-stat">
-          <div className="header-stat-number"><CountUp end={500} duration={2} />+</div>
+          <div className="header-stat-number"><CountUp end={2} duration={2} />+</div>
           <div className="header-stat-label">Products Launched</div>
         </div>
         <div className="header-stat-separator"></div>
         <div className="header-stat">
-          <div className="header-stat-number"><CountUp end={100} duration={2} />+</div>
+          <div className="header-stat-number"><CountUp end={10} duration={2} />+</div>
           <div className="header-stat-label">Startups Raised</div>
         </div>
       </div>

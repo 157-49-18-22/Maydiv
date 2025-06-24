@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -93,6 +93,8 @@ const projects = [
 export default function New() {
   const [centerCardVisible, setCenterCardVisible] = useState(false);
   const [sideCardsVisible, setSideCardsVisible] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownTimeout = useRef(null);
 
   useEffect(() => {
     const timer1 = setTimeout(() => setCenterCardVisible(true), 200);
@@ -103,6 +105,14 @@ export default function New() {
     };
   }, []);
 
+  const handleDropdownEnter = () => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setDropdownOpen(true);
+  };
+  const handleDropdownLeave = () => {
+    dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 350);
+  };
+
   return (
     <div className="services-container">
       {/* Hero Section */}
@@ -112,14 +122,19 @@ export default function New() {
         </div>
         <ul className="header-links">
         <li><Link href="/">Home</Link></li>
-            <li className="dropdown">
+            <li className="dropdown"
+                onMouseEnter={handleDropdownEnter}
+                onMouseLeave={handleDropdownLeave}
+                onFocus={handleDropdownEnter}
+                onBlur={handleDropdownLeave}
+            >
               <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
                 <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
                 <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
                 <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
                 <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
-                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> AI</span></Link></li>
+                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
               </ul>
             </li>
             <li><Link href="/new"><span>Projects</span></Link></li>
@@ -198,27 +213,29 @@ export default function New() {
                 <a 
                   href={
                     project.title === 'Mobile App1'
-                     
-                        ? 'https://play.google.com/store/apps/details?id=com.blackhatcode.in.ssa_app.new&hl=en_US'
-                        : project.title === 'Mobile App2'
-                          ? 'https://play.google.com/store/apps/details?id=com.rathifarms&hl=en_US'
-                          : project.title === 'Mobile App3'
-                            ? 'https://play.google.com/store/apps/details?id=com.myjobee&hl=en_US'
-                            : project.title === 'Mobile App4'
-                              ? 'https://play.google.com/store/apps/details?id=com.colyr&hl=en_US'
-                              : project.title === 'College Website'
-                                ? 'https://www.collegedisha.com/'
-                                : project.title === 'Company Website'
-                                  ? 'https://www.melanieindia.com/'
-                                  : project.title === 'E-commerce Website'
-                                    ? 'https://fika-india.com/'
-                                    : project.link
+                      ? 'https://play.google.com/store/apps/details?id=com.blackhatcode.in.ssa_app.new&hl=en_US'
+                      : project.title === 'Mobile App2'
+                        ? 'https://play.google.com/store/apps/details?id=com.rathifarms&hl=en_US'
+                        : project.title === 'Mobile App3'
+                          ? 'https://play.google.com/store/apps/details?id=com.myjobee&hl=en_US'
+                          : project.title === 'Mobile App4'
+                            ? 'https://play.google.com/store/apps/details?id=com.colyr&hl=en_US'
+                            : project.title === 'College Website'
+                              ? 'https://www.collegedisha.com/'
+                              : project.title === 'Company Website'
+                                ? 'https://www.melanieindia.com/'
+                                : project.title === 'E-commerce Website'
+                                  ? 'https://fika-india.com/'
+                                  : project.link
                   }
-                  className="project-link" 
-                  target="_blank" 
+                  className="project-link fancy"
+                  target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Visit Website
+                  <span className="top-key"></span>
+                  <span className="text">Visit Website</span>
+                  <span className="bottom-key-1"></span>
+                  <span className="bottom-key-2"></span>
                 </a>
               </div>
             </SwiperSlide>

@@ -268,13 +268,13 @@ body {
   .header-stats-section {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     gap: 90px;
     margin: 32px auto 0 auto;
     padding: 32px 0 0 0;
     border-top: 2px solid rgba(255,255,255,0.08);
     max-width: 1100px;
-    margin-top: -74px;
+  
   }
   
   .header-stat {
@@ -306,6 +306,8 @@ body {
       flex-direction: column;
       gap: 32px;
       padding: 24px 0 0 0;
+      align-items: center;
+      margin: 0 auto;
     }
     .header-stat {
       min-width: 0;
@@ -1052,5 +1054,58 @@ body {
   .dropdown-icon {
     font-size: 1.2rem;
     color: #a259ff;
+  }
+
+  /* Uiverse.io Animated Underline Button */
+  .btn {
+    font-size: 17px;
+    background: transparent;
+    border: none;
+    padding: 1em 1.5em;
+    color: #ffedd3;
+    text-transform: uppercase;
+    position: relative;
+    transition: 0.5s ease;
+    cursor: pointer;
+  }
+
+  .btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    /* Use a green gradient for the underline */
+    background:linear-gradient(90deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5, #FF3BFF);
+    transition: 0.5s ease;
+  }
+
+  .btn:hover {
+    color: #1e1e2b;
+    transition-delay: 0.5s;
+  }
+
+  .btn:hover::before {
+    width: 100%;
+  }
+
+  .btn::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 0;
+    width: 100%;
+    /* Use the same green gradient for the background fill */
+    background: linear-gradient(90deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5, #FF3BFF);
+    transition: 0.4s ease;
+    z-index: -1;
+  }
+
+  .btn:hover::after {
+    height: 100%;
+    transition-delay: 0.4s;
+    color: aliceblue;
   }
 

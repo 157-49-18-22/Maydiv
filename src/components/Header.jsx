@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaGithub } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import Lottie from 'lottie-react';
+import TrustedLogos from './TrustedLogos';
 
 import robotAnimation from '../../public/Robot.json';
 import './Header.css';
@@ -40,6 +41,9 @@ const Header = () => {
   const [robotActive, setRobotActive] = useState(false);
   const statsRef = useRef(null);
   const [showCounters, setShowCounters] = useState(false);
+  // Dropdown state and timeout
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownTimeout = useRef(null);
 
   useEffect(() => {
     // Set initial mouse position to center of screen on client
@@ -85,6 +89,20 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Dropdown handlers
+  const handleDropdownEnter = () => {
+    if (dropdownTimeout.current) {
+      clearTimeout(dropdownTimeout.current);
+    }
+    setDropdownOpen(true);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimeout.current = setTimeout(() => {
+      setDropdownOpen(false);
+    }, 350); // 350ms delay
+  };
+
   return (
     <>
       {/* Floating Robot */}
@@ -108,14 +126,20 @@ const Header = () => {
           </div>
           <ul className="header-links">
             <li><Link href="#home"><span>Home</span></Link></li>
-            <li className="dropdown">
+            <li
+              className="dropdown"
+              onMouseEnter={handleDropdownEnter}
+              onMouseLeave={handleDropdownLeave}
+              onFocus={handleDropdownEnter}
+              onBlur={handleDropdownLeave}
+            >
               <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
                 <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
                 <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
                 <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
                 <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
-                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> AI</span></Link></li>
+                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
               </ul>
             </li>
             <li><Link href="/new"><span>Projects</span></Link></li>
@@ -124,6 +148,8 @@ const Header = () => {
           <div className="header-socials">
             <a href="#" aria-label="Instagram"><FaInstagram /></a>
             <a href="#" aria-label="Facebook"><FaFacebook /></a>
+            <a href="https://github.com/" aria-label="GitHub"><FaGithub /></a>
+            
           </div>
         </nav>
         <div className="header-hero">
@@ -133,8 +159,8 @@ const Header = () => {
           </h1>
          
           <div className="header-buttons" >
-            <button className="primary-btn" >Get started</button>
-            <button className="secondary-btn" >Our Portfolio</button>
+            <button className="btn">Get started</button>
+            <button className="btn">Our Portfolio</button>
           </div>
           <div className="header-hero-robot-group" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', margin: '0 auto'}}>
           
@@ -169,25 +195,7 @@ const Header = () => {
             </div>
           </div>
           <div className="header-trusted-section">
-            <div className="trusted-heading gradient-text">Trusted by 67+ Startups and Agencies</div>
-            <div className="trusted-logos">
-              <div className="trusted-logos-row">
-                <div className="trusted-logo-wrap"><Image src="/Panasonic.png" alt="Panasonic" width={110} height={30} quality={100} unoptimized /></div>
-                <div className="trusted-logo-wrap"><Image src="/Nestle.png" alt="Nestle" width={100} height={30} quality={100} unoptimized /></div>
-                <div className="trusted-logo-wrap"><Image src="/Apollo.png" alt="Apollo.io" width={100} height={30} quality={100} unoptimized /></div>
-                <div className="trusted-logo-wrap"><Image src="/Toptal.png" alt="Toptal" width={100} height={30} quality={100} unoptimized /></div>
-                <div className="trusted-logo-wrap"><Image src="/Logo1.png" alt="LOGOIPSUM" width={120} height={30} quality={100} unoptimized /></div>
-                <div className="trusted-logo-wrap"><Image src="/Logo1.png" alt="logoipsum" width={120} height={30} quality={100} unoptimized /></div>
-              </div>
-              <div className="trusted-logos-row">
-                <div className="trusted-logo-wrap"><Image src="/Toptal.png" alt="Toptal" width={100} height={30} quality={100} unoptimized /></div>
-                <div className="trusted-logo-wrap"><Image src="/Logo1.png" alt="LOGOIPSUM" width={120} height={30} quality={100} unoptimized /></div>
-                <div className="trusted-logo-wrap"><Image src="/Logo1.png" alt="logoipsum" width={120} height={30} quality={100} unoptimized /></div>
-                <div className="trusted-logo-wrap"><Image src="/Apollo.png" alt="Apollo.io" width={100} height={30} quality={100} unoptimized /></div>
-                <div className="trusted-logo-wrap"><Image src="/Nestle.png" alt="Nestle" width={100} height={30} quality={100} unoptimized /></div>
-                <div className="trusted-logo-wrap"><Image src="/Panasonic.png" alt="Panasonic" width={100} height={30} quality={100} unoptimized /></div>
-              </div>
-            </div>
+            <TrustedLogos />
           </div>
           <div className="how-we-work-section">
             <div className="how-we-work-heading gradient-text">HOW WE WORK</div>

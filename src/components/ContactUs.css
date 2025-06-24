@@ -4,6 +4,15 @@
   --font-family: 'coco', sans-serif;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background: #0a0a0a;
+  overflow-x: hidden;
+}
+
 body, html, * {
   font-family: var(--font-family) !important;
 }
@@ -614,8 +623,10 @@ body, html, * {
   align-items: center;
   min-height: 100vh;
   background: #0a0a0a;
-  gap: 0;
+  gap: 24px;
+  width: 100vw;
 }
+
 
 .contactus-form-card {
   background: linear-gradient(120deg, rgba(255, 59, 255, 1) 0%, rgba(236, 191, 191, 1) 50%, rgba(92, 36, 255, 1) 100%,rgba(217, 79, 213, 1));
@@ -654,6 +665,7 @@ body, html, * {
   flex-direction: column;
   flex: 1;
 }
+
 
 .contactus-field label {
   font-size: 1.1rem;

@@ -1109,3 +1109,213 @@ body {
     color: aliceblue;
   }
 
+@media (max-width: 480px) {
+  .header-container {
+    padding-bottom: 20px;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+    left: 0;
+    right: 0;
+  }
+  .header-nav {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 8px 0 8px;
+    height: auto;
+  }
+  .header-logo {
+    margin-bottom: 8px;
+    margin-top: -57px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 1101;
+  }
+  .header-hamburger {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    z-index: 1200;
+    background: none;
+    border: none;
+    margin: 0;
+    width: auto;
+  }
+  .header-links {
+    display: none !important;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    background: #181818;
+    position: static;
+    padding: 24px 0 24px 0;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+  .header-links.open {
+    display: flex !important;
+  }
+  .header-socials {
+    flex-direction: column;
+    position: absolute;
+    top: 87px;
+    right: 23px;
+    width: auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 18px;
+    margin: 0;
+    z-index: 1201;
+  }
+  .header-hero {
+    margin-top: 0;
+    padding: 0 8px;
+  }
+  .header-hero h1 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    height: auto;
+  }
+  .gradient-text, .gradient-text1 {
+    font-size: 1.1rem;
+    height: auto;
+    margin-top: 0;
+  }
+  .header-buttons {
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .header-animation-img {
+    height: 160px;
+    width: 98vw;
+    max-width: 98vw;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(185,131,255,0.08);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .header-stats-section {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 12px 0 0 0;
+    margin: 0 auto;
+    max-width: 98vw;
+    border-radius: 12px;
+    margin-top: 12px;
+  }
+  .header-stat {
+    min-width: 0;
+    align-items: center;
+    width: auto;
+    padding: 6px 0;
+    text-align: center;
+  }
+  .header-stats-section .header-stat:last-child {
+    align-items: center;
+    text-align: center;
+    padding-right: 0;
+    margin-right: 18px;
+  }
+  .stat-number {
+    font-size: 1.1rem;
+  }
+  .stat-label {
+    font-size: 0.9rem;
+  }
+  .header-trusted-section {
+    margin: 20px auto 0 auto;
+    max-width: 98vw;
+    margin-top: 30px;
+  }
+  .trusted-logos {
+    gap: 8px 8px;
+    max-width: 98vw;
+    flex-wrap: wrap;
+  }
+  .trusted-logos span {
+    font-size: 0.7rem;
+    min-width: 60px;
+    flex: 1 1 60px;
+    padding: 4px 0;
+  }
+  .trusted-logo-wrap img {
+    height: 18px !important;
+    margin: 0 4px;
+  }
+  .how-we-work-section {
+    margin: 24px auto 0 auto;
+    max-width: 98vw;
+    margin-top: 30px;
+  }
+  .how-we-work-content {
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    padding: 0 4px;
+  }
+  .how-we-work-left h2 {
+    font-size: 1rem;
+  }
+  .how-we-work-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+  .how-we-work-steps {
+    flex-direction: column;
+    gap: 8px;
+    max-width: 98vw;
+    margin-top: 20px;
+  }
+  .step, .step1, .step2 {
+    min-width: 0;
+    max-width: 100vw;
+    font-size: 0.9rem;
+  }
+  .step-title {
+    font-size: 0.95rem;
+  }
+  .step-desc {
+    font-size: 0.8rem;
+  }
+  .step-img-arrow-1, .step-img-arrow-2 {
+    width: 80px;
+    height: 8px;
+    margin-bottom: 10px;
+    margin-left: 0;
+  }
+  .header-hero-robot-group {
+    height: 120px;
+    max-width: 98vw;
+  }
+  .header-hero-robot-group .infinity,
+  .header-hero-robot-group .left-arm,
+  .header-hero-robot-group .right-arm,
+  .header-hero-robot-group .left-doll,
+  .header-hero-robot-group .right-doll {
+    min-width: 20px;
+    max-width: 40px;
+  }
+}
+
+/* Desktop: hide hamburger */
+.header-hamburger {
+  display: none;
+}
+

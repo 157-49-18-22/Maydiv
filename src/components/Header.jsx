@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaGithub } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaGithub, FaBars } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -44,6 +44,7 @@ const Header = () => {
   // Dropdown state and timeout
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeout = useRef(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     // Set initial mouse position to center of screen on client
@@ -119,12 +120,15 @@ const Header = () => {
         <Lottie animationData={robotAnimation} style={{ width: '100%', height: '100%' }} loop autoplay />
       </div>
       <header className="header-container">
-
         <nav className="header-nav">
           <div className="header-logo">
             <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized />
           </div>
-          <ul className="header-links">
+          {/* Hamburger icon for mobile */}
+          <div className="header-hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+            <FaBars />
+          </div>
+          <ul className={`header-links${menuOpen ? ' open' : ''}`}>
             <li><Link href="#home"><span>Home</span></Link></li>
             <li
               className="dropdown"

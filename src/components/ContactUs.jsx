@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaTwitter, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
-import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes } from 'react-icons/fa';
 
 import './ContactUs.css';
 import Discuss from './Discuss';
@@ -12,6 +12,8 @@ import Footer from './Footer';
 export default function ContactUs() {
   const [showPhone, setShowPhone] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [burgerOpen, setBurgerOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const dropdownTimeout = useRef(null);
   const handleFieldFocus = () => {
     if (!showPhone) setShowPhone(true);
@@ -55,6 +57,35 @@ export default function ContactUs() {
           <a href="#" aria-label="Instagram"><FaInstagram /></a>
           <a href="#" aria-label="Facebook"><FaFacebook /></a>
         </div>
+        {/* Burger menu for mobile */}
+        <button className="burger-menu" onClick={() => setBurgerOpen(true)} aria-label="Open menu">
+          <FaBars />
+        </button>
+        {/* Side drawer for mobile nav */}
+        {burgerOpen && (
+          <div className="mobile-drawer">
+            <button className="close-drawer" onClick={() => setBurgerOpen(false)} aria-label="Close menu"><FaTimes /></button>
+            <ul className="mobile-links">
+              <li><Link href="/" onClick={() => setBurgerOpen(false)}>Home</Link></li>
+              <li>
+                <button className="mobile-services-toggle" onClick={() => setServicesOpen((v) => !v)}>
+                  Services {servicesOpen ? '▲' : '▼'}
+                </button>
+                {servicesOpen && (
+                  <ul className="mobile-services-dropdown">
+                    <li><Link href="/real-projects" onClick={() => setBurgerOpen(false)}>Web Development</Link></li>
+                    <li><Link href="/real-services" onClick={() => setBurgerOpen(false)}>UI/UX Design</Link></li>
+                    <li><Link href="/real-testimonials" onClick={() => setBurgerOpen(false)}>Social Media and Marketing</Link></li>
+                    <li><Link href="/real-apps" onClick={() => setBurgerOpen(false)}>App Development</Link></li>
+                    <li><Link href="/real-ai" onClick={() => setBurgerOpen(false)}>Artificial Intelligence</Link></li>
+                  </ul>
+                )}
+              </li>
+              <li><Link href="/new" onClick={() => setBurgerOpen(false)}>Projects</Link></li>
+              <li><Link href="/contact" onClick={() => setBurgerOpen(false)}>Contact</Link></li>
+            </ul>
+          </div>
+        )}
       </nav>
       <div className="contactus-main">
         <div className="contactus-form-card">

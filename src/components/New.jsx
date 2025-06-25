@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
-import { FaGithub,FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain } from 'react-icons/fa';
+import { FaGithub,FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes } from 'react-icons/fa';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
@@ -94,14 +94,31 @@ export default function New() {
   const [centerCardVisible, setCenterCardVisible] = useState(false);
   const [sideCardsVisible, setSideCardsVisible] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [slidesPerView, setSlidesPerView] = useState(3);
+  const [spaceBetween, setSpaceBetween] = useState(0);
+  const [burgerOpen, setBurgerOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
     const timer1 = setTimeout(() => setCenterCardVisible(true), 200);
     const timer2 = setTimeout(() => setSideCardsVisible(true), 600);
+    // Responsive slidesPerView
+    const handleResize = () => {
+      if (window.innerWidth <= 480) {
+        setSlidesPerView(1.2);
+        setSpaceBetween(12);
+      } else {
+        setSlidesPerView(3);
+        setSpaceBetween(0);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -145,6 +162,35 @@ export default function New() {
             <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
         </div>
+        {/* Burger menu for mobile */}
+        <button className="burger-menu" onClick={() => setBurgerOpen(true)} aria-label="Open menu">
+          <FaBars />
+        </button>
+        {/* Side drawer for mobile nav */}
+        {burgerOpen && (
+          <div className="mobile-drawer">
+            <button className="close-drawer" onClick={() => setBurgerOpen(false)} aria-label="Close menu"><FaTimes /></button>
+            <ul className="mobile-links">
+              <li><Link href="/" onClick={() => setBurgerOpen(false)}>Home</Link></li>
+              <li>
+                <button className="mobile-services-toggle" onClick={() => setServicesOpen((v) => !v)}>
+                  Services {servicesOpen ? '▲' : '▼'}
+                </button>
+                {servicesOpen && (
+                  <ul className="mobile-services-dropdown">
+                    <li><Link href="/real-projects" onClick={() => setBurgerOpen(false)}>Web Development</Link></li>
+                    <li><Link href="/real-services" onClick={() => setBurgerOpen(false)}>UI/UX Design</Link></li>
+                    <li><Link href="/real-testimonials" onClick={() => setBurgerOpen(false)}>Social Media and Marketing</Link></li>
+                    <li><Link href="/real-apps" onClick={() => setBurgerOpen(false)}>App Development</Link></li>
+                    <li><Link href="/real-ai" onClick={() => setBurgerOpen(false)}>Artificial Intelligence</Link></li>
+                  </ul>
+                )}
+              </li>
+              <li><Link href="/new" onClick={() => setBurgerOpen(false)}>Projects</Link></li>
+              <li><Link href="/contact" onClick={() => setBurgerOpen(false)}>Contact</Link></li>
+            </ul>
+          </div>
+        )}
       </nav>
 
       {/* Projects Hero Section */}
@@ -168,7 +214,8 @@ export default function New() {
           effect={'coverflow'}
           grabCursor={true}
           centeredSlides={true}
-          slidesPerView={typeof window !== 'undefined' && window.innerWidth < 900 ? 1 : 3}
+          slidesPerView={slidesPerView}
+          spaceBetween={spaceBetween}
           coverflowEffect={{
             rotate: 25,
             stretch: 0,

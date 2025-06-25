@@ -1133,6 +1133,7 @@ body {
     display: flex;
     justify-content: center;
     z-index: 1101;
+    margin-top: -22px;
   }
   .header-hamburger {
     display: flex !important;

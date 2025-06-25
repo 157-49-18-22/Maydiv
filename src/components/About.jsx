@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa';
-import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes } from 'react-icons/fa';
 import './About.css';
 import TrustedLogos from './TrustedLogos';
 import Testimonial from './Testimonial';
@@ -16,6 +16,7 @@ export default function About() {
   // Dropdown state and timeout
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeout = useRef(null);
+  const [burgerOpen, setBurgerOpen] = useState(false); // Burger menu state
   const handleDropdownEnter = () => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
     setDropdownOpen(true);
@@ -23,33 +24,47 @@ export default function About() {
   const handleDropdownLeave = () => {
     dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 350);
   };
+  // Close burger menu on nav link click (mobile)
+  const handleNavClick = () => setBurgerOpen(false);
   return (
     <main className="about-main">
       {/* Hero Section */}
-      <nav className="header-nav">
+      <nav className={`header-nav${burgerOpen ? ' menu-open' : ''}`}>
         <div className="header-logo">
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
         </div>
-        <ul className="header-links">
-        <li><Link href="/">Home</Link></li>
-            <li className="dropdown"
-                onMouseEnter={handleDropdownEnter}
-                onMouseLeave={handleDropdownLeave}
-                onFocus={handleDropdownEnter}
-                onBlur={handleDropdownLeave}
-            >
-              <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
-              <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
-                <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
-                <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
-                <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
-                <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
-                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
-              </ul>
-            </li>
-            <li><Link href="/new"><span>Projects</span></Link></li>
-            <li><Link href="/contact"><span>Contact</span></Link></li>
-          </ul>
+        {/* Burger icon for mobile */}
+        {(!burgerOpen) && (
+          <div className="burger-icon" onClick={() => setBurgerOpen(!burgerOpen)}>
+            <FaBars />
+          </div>
+        )}
+        {/* Mobile menu overlay with close icon */}
+        <ul className={`header-links${burgerOpen ? ' open' : ''}`} style={{ display: burgerOpen ? 'flex' : '', }}>
+          {burgerOpen && (
+            <div className="mobile-menu-close" onClick={() => setBurgerOpen(false)}>
+              <FaTimes />
+            </div>
+          )}
+          <li><Link href="/" onClick={handleNavClick}>Home</Link></li>
+          <li className="dropdown"
+              onMouseEnter={handleDropdownEnter}
+              onMouseLeave={handleDropdownLeave}
+              onFocus={handleDropdownEnter}
+              onBlur={handleDropdownLeave}
+          >
+            <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
+            <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
+              <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
+              <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
+              <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
+              <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
+              <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
+            </ul>
+          </li>
+          <li><Link href="/new" onClick={handleNavClick}><span>Projects</span></Link></li>
+          <li><Link href="/contact" onClick={handleNavClick}><span>Contact</span></Link></li>
+        </ul>
         <div className="header-socials">
         <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
             <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
@@ -119,7 +134,32 @@ export default function About() {
         <Image src="/Bg.png" alt="Decorative Right Dots" width={120} height={90} className="about-features-bg-right" />
       </section>
       {/* Integration Section */}
-     
+      <section className="about-integration-section">
+        <div className="about-integration-content">
+          <Image src="/Integration.png" alt="Integration" width={420} height={420} quality={100} className="about-integration-img" />
+          <div className="about-integration-left">
+            <div className="about-story-card about-story-flex">
+              <div className="about-story-main">
+                <div className="about-integration-label">Managing Director</div>
+                <div className="about-integration-desc">
+                  We began our journey as a group of passionate freelancers with a vision — to transform ideas into digital reality. With no investors and just pure determination, we officially registered our company on February 28, 2025.
+                  <br /><br />
+                  From humble beginnings to growing into a full-fledged IT solutions startup, our focus remains the same: building smart, fast, and scalable digital solutions that solve real problems.
+                </div>
+              </div>
+              <div className="about-story-project">
+                <div className="about-story-project-title">Our very first project?</div>
+                <div className="about-story-project-desc">
+                  A fully functional salary management software, developed and delivered in just one week. That successful launch gave us the confidence to dream bigger — and today, we are building high-quality websites, mobile apps, and offering a wide range of IT services for startups, businesses, and individuals alike.
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <div className="about-integration-right">
+            <Image src="/Integration.png" alt="Integration" width={420} height={420} quality={100} className="about-integration-img" />
+          </div> */}
+        </div>
+      </section>
       {/* Security Section */}
       <section className="about-security-section">
         <Image src="/Bg1.png" alt="Decorative Dots" width={70} height={260} className="about-security-bg-dots" />
@@ -141,31 +181,6 @@ It all began on a train ride, when Vishal wished for an LSAT prep app that didn'
 Since then, we've been turning ideas into impactful digital products — from mobile apps to full-stack IT solutions.
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-      <section className="about-integration-section">
-        <div className="about-integration-content">
-          <div className="about-integration-left">
-            <div className="about-story-card about-story-flex">
-              <div className="about-story-main">
-                <div className="about-integration-label">Managing Director</div>
-                <div className="about-integration-desc">
-                  We began our journey as a group of passionate freelancers with a vision — to transform ideas into digital reality. With no investors and just pure determination, we officially registered our company on February 28, 2025.
-                  <br /><br />
-                  From humble beginnings to growing into a full-fledged IT solutions startup, our focus remains the same: building smart, fast, and scalable digital solutions that solve real problems.
-                </div>
-              </div>
-              <div className="about-story-project">
-                <div className="about-story-project-title">Our very first project?</div>
-                <div className="about-story-project-desc">
-                  A fully functional salary management software, developed and delivered in just one week. That successful launch gave us the confidence to dream bigger — and today, we are building high-quality websites, mobile apps, and offering a wide range of IT services for startups, businesses, and individuals alike.
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="about-integration-right">
-            <Image src="/Integration.png" alt="Integration" width={420} height={420} quality={100} className="about-integration-img" />
           </div>
         </div>
       </section>

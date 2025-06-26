@@ -2152,7 +2152,7 @@ html, body, .services-container, .hero-pattern-bg, .services-hero-row {
     left: 0;
   }
   .custom-partners-arrow-btn.right {
-    right: 0;
+    right: 140px !important;
   }
 }
 @media (max-width: 900px) {
@@ -2184,6 +2184,6 @@ html, body, .services-container, .hero-pattern-bg, .services-hero-row {
   left: 0;
 }
 .custom-partners-arrow-btn.right {
-  right: 143px;
+  right: 0;
 }
 

@@ -2,8 +2,7 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image'; // Assuming you're using Next.js
 import Link from 'next/link';   // Assuming you're using Next.js
-import { FaGithub } from 'react-icons/fa';
-import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain } from 'react-icons/fa';
+import { FaGithub, FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars } from 'react-icons/fa';
 import Lottie from 'lottie-react';
 import './AI.css';
 import Testimonial from './Testimonial';
@@ -12,6 +11,7 @@ import Footer from './Footer';
 const AI = () => {
   // Dropdown state and timeout
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // for burger menu
   const dropdownTimeout = useRef(null);
   const handleDropdownEnter = () => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
@@ -29,6 +29,9 @@ const AI = () => {
           <div className="header-logo">
             <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
           </div>
+          <button className="burger-menu" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+            <FaBars />
+          </button>
           <ul className="header-links">
             <li><Link href="/">Home</Link></li>
             <li className="dropdown"
@@ -50,10 +53,35 @@ const AI = () => {
             <li><Link href="/contact"><span>Contact</span></Link></li>
           </ul>
           <div className="header-socials">
-          <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
             <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
           </div>
+          {/* Side drawer for mobile nav */}
+          {menuOpen && (
+            <div className="mobile-drawer">
+              <button className="close-drawer" onClick={() => setMenuOpen(false)} aria-label="Close menu"><span style={{fontSize: '2rem'}}>&times;</span></button>
+              <ul className="mobile-links">
+                <li><Link href="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
+                <li>
+                  <button className="mobile-services-toggle" onClick={() => setDropdownOpen((v) => !v)}>
+                    Services {dropdownOpen ? '▲' : '▼'}
+                  </button>
+                  {dropdownOpen && (
+                    <ul className="mobile-services-dropdown">
+                      <li><Link href="/real-projects" onClick={() => setMenuOpen(false)}>Web Development</Link></li>
+                      <li><Link href="/real-services" onClick={() => setMenuOpen(false)}>UI/UX Design</Link></li>
+                      <li><Link href="/real-testimonials" onClick={() => setMenuOpen(false)}>Social Media and Marketing</Link></li>
+                      <li><Link href="/real-apps" onClick={() => setMenuOpen(false)}>App Development</Link></li>
+                      <li><Link href="/real-ai" onClick={() => setMenuOpen(false)}>Artificial Intelligence</Link></li>
+                    </ul>
+                  )}
+                </li>
+                <li><Link href="/new" onClick={() => setMenuOpen(false)}>Projects</Link></li>
+                <li><Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
+              </ul>
+            </div>
+          )}
         </nav>
       </header>
 

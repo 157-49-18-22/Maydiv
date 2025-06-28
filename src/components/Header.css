@@ -1110,10 +1110,20 @@ body {
   }
 
 @media (max-width: 480px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+  .header-container,
+  .header-hero,
+  .header-animation-img {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
   .header-container {
     padding-bottom: 20px;
-    width: 100vw;
-    max-width: 100vw;
     margin-left: 0;
     margin-right: 0;
     left: 0;
@@ -1319,4 +1329,107 @@ body {
 .header-hamburger {
   display: none;
 }
+
+/* --- Begin: Copied from Services.css for burger-menu and mobile-drawer --- */
+.burger-menu {
+  display: none;
+}
+@media (max-width: 480px) {
+  .header-nav {
+    padding: 16px 10px 0 10px;
+    height: 60px;
+  }
+  .header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+  .header-logo img {
+    height: 60px;
+    width: 60px;
+    margin: 0 auto;
+    display: block;
+  }
+  .header-links, .header-socials {
+    display: none !important;
+  }
+  .burger-menu {
+    display: flex !important;
+    position: absolute;
+    right: 16px;
+    top: 18px;
+    z-index: 1200;
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: #fff;
+    cursor: pointer;
+  }
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80vw;
+    max-width: 320px;
+    height: 100vh;
+    background: #181828;
+    box-shadow: -2px 0 24px #0008;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 18px 18px 18px;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(.77,0,.175,1);
+  }
+  .mobile-drawer.open {
+    transform: translateX(0);
+  }
+  .mobile-drawer .drawer-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-size: 2rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .mobile-drawer ul {
+    list-style: none;
+    padding: 0;
+    margin: 60px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .mobile-drawer a {
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .mobile-drawer .drawer-dropdown {
+    margin-top: 8px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .mobile-drawer .drawer-dropdown-list {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 18px;
+    margin-top: 8px;
+  }
+  .mobile-drawer .drawer-dropdown.open .drawer-dropdown-list {
+    display: flex;
+  }
+}
+/* --- End: Copied from Services.css for burger-menu and mobile-drawer --- */
 

@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaTwitter, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
-import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
 
 import './ContactUs.css';
 import Discuss from './Discuss';
@@ -33,25 +33,25 @@ export default function ContactUs() {
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
         </div>
         <ul className="header-links">
-        <li><Link href="/">Home</Link></li>
-            <li className="dropdown"
-                onMouseEnter={handleDropdownEnter}
-                onMouseLeave={handleDropdownLeave}
-                onFocus={handleDropdownEnter}
-                onBlur={handleDropdownLeave}
-            >
-              <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
-              <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
-                <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
-                <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
-                <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
-                <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
-                <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
-              </ul>
-            </li>
-            <li><Link href="/new"><span>Projects</span></Link></li>
-            <li><Link href="/contact"><span>Contact</span></Link></li>
-          </ul>
+          <li><Link href="/">Home</Link></li>
+          <li className="dropdown"
+            onMouseEnter={handleDropdownEnter}
+            onMouseLeave={handleDropdownLeave}
+            onFocus={handleDropdownEnter}
+            onBlur={handleDropdownLeave}
+          >
+            <span className="dropdown-toggle">Services</span>
+            <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
+              <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
+              <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
+              <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
+              <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
+              <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
+            </ul>
+          </li>
+          <li><Link href="/new">Projects</Link></li>
+          <li><Link href="/contact">Contact</Link></li>
+        </ul>
         <div className="header-socials">
           <a href="#" aria-label="GitHub"><FaGithub /></a>
           <a href="#" aria-label="Instagram"><FaInstagram /></a>
@@ -69,15 +69,15 @@ export default function ContactUs() {
               <li><Link href="/" onClick={() => setBurgerOpen(false)}>Home</Link></li>
               <li>
                 <button className="mobile-services-toggle" onClick={() => setServicesOpen((v) => !v)}>
-                  Services {servicesOpen ? '▲' : '▼'}
+                  Services <FaChevronDown style={{marginLeft: 8, fontSize: '1rem', transform: servicesOpen ? 'rotate(180deg)' : 'none'}} />
                 </button>
                 {servicesOpen && (
                   <ul className="mobile-services-dropdown">
-                    <li><Link href="/real-projects" onClick={() => setBurgerOpen(false)}>Web Development</Link></li>
-                    <li><Link href="/real-services" onClick={() => setBurgerOpen(false)}>UI/UX Design</Link></li>
-                    <li><Link href="/real-testimonials" onClick={() => setBurgerOpen(false)}>Social Media and Marketing</Link></li>
-                    <li><Link href="/real-apps" onClick={() => setBurgerOpen(false)}>App Development</Link></li>
-                    <li><Link href="/real-ai" onClick={() => setBurgerOpen(false)}>Artificial Intelligence</Link></li>
+                    <li><Link href="/real-projects" onClick={() => setBurgerOpen(false)}><FaCode className="dropdown-icon" /> Web Development</Link></li>
+                    <li><Link href="/real-services" onClick={() => setBurgerOpen(false)}><FaPalette className="dropdown-icon" /> UI/UX Design</Link></li>
+                    <li><Link href="/real-testimonials" onClick={() => setBurgerOpen(false)}><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</Link></li>
+                    <li><Link href="/real-apps" onClick={() => setBurgerOpen(false)}><FaMobileAlt className="dropdown-icon" /> App Development</Link></li>
+                    <li><Link href="/real-ai" onClick={() => setBurgerOpen(false)}><FaBrain className="dropdown-icon" /> Artificial Intelligence</Link></li>
                   </ul>
                 )}
               </li>

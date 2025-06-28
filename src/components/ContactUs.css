@@ -962,13 +962,8 @@ body, html, * {
 
 @media (max-width: 480px) {
   .header-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px 16px 0 16px;
+    padding: 16px 10px 0 10px;
     height: 60px;
-    position: relative;
-    z-index: 1001;
   }
   .header-logo {
     display: flex;
@@ -982,25 +977,20 @@ body, html, * {
     margin: 0 auto;
     display: block;
   }
+  .header-links, .header-socials {
+    display: none !important;
+  }
   .burger-menu {
     display: flex !important;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1101;
     position: absolute;
     right: 16px;
-    top: 16px;
-  }
-  .header-links {
-    display: none !important;
-  }
-  .header-socials {
-    display: none !important;
+    top: 18px;
+    z-index: 1200;
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: #fff;
+    cursor: pointer;
   }
   .mobile-drawer {
     position: fixed;

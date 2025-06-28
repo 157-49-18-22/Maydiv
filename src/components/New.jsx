@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
-import { FaGithub,FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes } from 'react-icons/fa';
+import { FaGithub,FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
@@ -94,10 +94,11 @@ export default function New() {
   const [centerCardVisible, setCenterCardVisible] = useState(false);
   const [sideCardsVisible, setSideCardsVisible] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [slidesPerView, setSlidesPerView] = useState(3);
   const [spaceBetween, setSpaceBetween] = useState(0);
-  const [burgerOpen, setBurgerOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
@@ -106,9 +107,11 @@ export default function New() {
     // Responsive slidesPerView
     const handleResize = () => {
       if (window.innerWidth <= 480) {
+        setIsMobile(true);
         setSlidesPerView(1.2);
         setSpaceBetween(12);
       } else {
+        setIsMobile(false);
         setSlidesPerView(3);
         setSpaceBetween(0);
       }
@@ -137,6 +140,8 @@ export default function New() {
         <div className="header-logo">
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
         </div>
+        {/* Desktop nav links */}
+        {!isMobile && (
         <ul className="header-links">
         <li><Link href="/">Home</Link></li>
             <li className="dropdown"
@@ -157,41 +162,44 @@ export default function New() {
             <li><Link href="/new"><span>Projects</span></Link></li>
             <li><Link href="/contact"><span>Contact</span></Link></li>
           </ul>
+        )}
+        {/* Burger menu for mobile (only render on mobile) */}
+        {isMobile && (
+          <button className="burger-menu" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
+            <FaBars />
+          </button>
+        )}
         <div className="header-socials">
         <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
             <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
         </div>
-        {/* Burger menu for mobile */}
-        <button className="burger-menu" onClick={() => setBurgerOpen(true)} aria-label="Open menu">
-          <FaBars />
+      </nav>
+      {/* Mobile Drawer (only render on mobile) */}
+      {isMobile && (
+        <div className={`mobile-drawer${drawerOpen ? ' open' : ''}`}>
+          <button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close menu">
+            <FaTimes />
         </button>
-        {/* Side drawer for mobile nav */}
-        {burgerOpen && (
-          <div className="mobile-drawer">
-            <button className="close-drawer" onClick={() => setBurgerOpen(false)} aria-label="Close menu"><FaTimes /></button>
-            <ul className="mobile-links">
-              <li><Link href="/" onClick={() => setBurgerOpen(false)}>Home</Link></li>
-              <li>
-                <button className="mobile-services-toggle" onClick={() => setServicesOpen((v) => !v)}>
-                  Services {servicesOpen ? '▲' : '▼'}
+          <ul>
+            <li><Link href="/" onClick={() => setDrawerOpen(false)}>Home</Link></li>
+            <li>
+              <button className={`drawer-dropdown${drawerDropdownOpen ? ' open' : ''}`} onClick={() => setDrawerDropdownOpen(v => !v)}>
+                Services <FaChevronDown style={{marginLeft: 8, transform: drawerDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s'}} />
                 </button>
-                {servicesOpen && (
-                  <ul className="mobile-services-dropdown">
-                    <li><Link href="/real-projects" onClick={() => setBurgerOpen(false)}>Web Development</Link></li>
-                    <li><Link href="/real-services" onClick={() => setBurgerOpen(false)}>UI/UX Design</Link></li>
-                    <li><Link href="/real-testimonials" onClick={() => setBurgerOpen(false)}>Social Media and Marketing</Link></li>
-                    <li><Link href="/real-apps" onClick={() => setBurgerOpen(false)}>App Development</Link></li>
-                    <li><Link href="/real-ai" onClick={() => setBurgerOpen(false)}>Artificial Intelligence</Link></li>
-                  </ul>
-                )}
+              <div className={`drawer-dropdown-list${drawerDropdownOpen ? ' open' : ''}`} style={{display: drawerDropdownOpen ? 'flex' : 'none'}}>
+                <Link href="/real-projects" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
+                <Link href="/real-services" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>
+                <Link href="/real-testimonials" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
+                <Link href="/real-apps" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
+                <Link href="/real-ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
+              </div>
               </li>
-              <li><Link href="/new" onClick={() => setBurgerOpen(false)}>Projects</Link></li>
-              <li><Link href="/contact" onClick={() => setBurgerOpen(false)}>Contact</Link></li>
+            <li><Link href="/new" onClick={() => setDrawerOpen(false)}>Projects</Link></li>
+            <li><Link href="/contact" onClick={() => setDrawerOpen(false)}>Contact</Link></li>
             </ul>
           </div>
         )}
-      </nav>
 
       {/* Projects Hero Section */}
       <div className="projects-hero-flex">

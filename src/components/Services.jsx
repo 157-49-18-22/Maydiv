@@ -185,7 +185,7 @@ const Services = () => {
               <span className="partners-wave">~</span> We've More Then 254+ <br /> Global Partners
             </div>
             <div className="partners-desc">
-              Sed ut perspiciatis unde omnis natus error voluptatem santium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis quasi architecto beatae vitae
+            Trusted by over 254+ global partners shaping the digital future.
             </div>
           </div>
         </div>

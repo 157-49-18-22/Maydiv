@@ -199,8 +199,7 @@ const Projects = () => {
           <div className="services-left">
             <h2>Maydiv web<br />Development Services</h2>
             <p>
-              Eget malesuada tortor ut sed. Tincidunt viverra malesuada nisl vehicula vestibulum. 
-              Ut blandit fermentum, cursus nulla. Imperdiet neque mi convallis quis interdum sagittis.
+            Crafting digital experiences that connect and convert
             </p>
           </div>
           <div className="services-right">

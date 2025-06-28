@@ -35,6 +35,27 @@ const Projects = () => {
     return () => observer.disconnect();
   }, []);
 
+
+  // Cleanup nav/drawer/dropdown state on unmount
+  useEffect(() => {
+    return () => {
+      setBurgerOpen(false);
+      setServicesOpen(false);
+      setDropdownOpen(false);
+    };
+  }, []);
+
+  // Cleanup and force page reload on unmount
+  useEffect(() => {
+    return () => {
+      document.body.style.overflowX = 'hidden';
+      document.documentElement.style.overflowX = 'hidden';
+      const next = document.getElementById('__next');
+      if (next) next.style.overflowX = 'hidden';
+      window.location.reload(); // Force full page reload on unmount
+    };
+  }, []);
+
   const handleDropdownEnter = () => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
     setDropdownOpen(true);

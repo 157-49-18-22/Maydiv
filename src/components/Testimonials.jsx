@@ -34,6 +34,17 @@ const Testimonials = () => {
     dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 350);
   };
 
+  // Cleanup overflow-x on unmount and force page reload
+  useEffect(() => {
+    return () => {
+      document.body.style.overflowX = 'hidden';
+      document.documentElement.style.overflowX = 'hidden';
+      const next = document.getElementById('__next');
+      if (next) next.style.overflowX = 'hidden';
+      window.location.reload(); // Force full page reload on unmount
+    };
+  }, []);
+
   return (
     <>
 <header className="header-container">

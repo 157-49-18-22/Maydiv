@@ -84,6 +84,26 @@ const Services = () => {
     logosRowRef.current && logosRowRef.current.scrollBy({ left: 150, behavior: 'smooth' });
   };
 
+  // Cleanup nav/drawer/dropdown state on unmount
+  useEffect(() => {
+    return () => {
+      setDrawerOpen(false);
+      setDrawerDropdownOpen(false);
+      setDropdownOpen(false);
+    };
+  }, []);
+
+  // Cleanup and force page reload on unmount
+  useEffect(() => {
+    return () => {
+      document.body.style.overflowX = 'hidden';
+      document.documentElement.style.overflowX = 'hidden';
+      const next = document.getElementById('__next');
+      if (next) next.style.overflowX = 'hidden';
+      window.location.reload(); // Force full page reload on unmount
+    };
+  }, []);
+
   return (
     <div className="services-container">
       {/* Hero Section */}

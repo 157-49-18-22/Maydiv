@@ -1,9 +1,8 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaGithub } from 'react-icons/fa';
+import { FaBars, FaTimes, FaGithub, FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain } from 'react-icons/fa';
 import dynamic from 'next/dynamic';
-import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain } from 'react-icons/fa';
 import './Apps.css';
 import Testimonial from './Testimonial';
 import Discuss from './Discuss';
@@ -50,6 +49,8 @@ function WebProjectsCards() {
 const Apps = () => {
   // Dropdown state and timeout
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [burgerOpen, setBurgerOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const dropdownTimeout = useRef(null);
   const handleDropdownEnter = () => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
@@ -67,6 +68,11 @@ const Apps = () => {
         <div className="header-logo">
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
         </div>
+        {!burgerOpen && (
+          <button className="burger-menu" onClick={() => setBurgerOpen(true)} aria-label="Open menu">
+            <FaBars />
+          </button>
+        )}
         <ul className="header-links">
         <li><Link href="/">Home</Link></li>
             <li className="dropdown"
@@ -92,6 +98,31 @@ const Apps = () => {
             <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
         </div>
+        {/* Side drawer for mobile nav */}
+        {burgerOpen && (
+          <div className="mobile-drawer">
+            <button className="close-drawer" onClick={() => setBurgerOpen(false)} aria-label="Close menu"><FaTimes /></button>
+            <ul className="mobile-links">
+              <li><Link href="/" onClick={() => setBurgerOpen(false)}>Home</Link></li>
+              <li>
+                <button className="mobile-services-toggle" onClick={() => setServicesOpen((v) => !v)}>
+                  Services {servicesOpen ? '▲' : '▼'}
+                </button>
+                {servicesOpen && (
+                  <ul className="mobile-services-dropdown">
+                    <li><Link href="/real-projects" onClick={() => setBurgerOpen(false)}>Web Development</Link></li>
+                    <li><Link href="/real-services" onClick={() => setBurgerOpen(false)}>UI/UX Design</Link></li>
+                    <li><Link href="/real-testimonials" onClick={() => setBurgerOpen(false)}>Social Media and Marketing</Link></li>
+                    <li><Link href="/real-apps" onClick={() => setBurgerOpen(false)}>App Development</Link></li>
+                    <li><Link href="/real-ai" onClick={() => setBurgerOpen(false)}>Artificial Intelligence</Link></li>
+                  </ul>
+                )}
+              </li>
+              <li><Link href="/new" onClick={() => setBurgerOpen(false)}>Projects</Link></li>
+              <li><Link href="/contact" onClick={() => setBurgerOpen(false)}>Contact</Link></li>
+            </ul>
+          </div>
+        )}
       </nav>
       </header>
 

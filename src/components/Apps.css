@@ -42,6 +42,13 @@ body {
   overflow: visible;
 }
 
+.header-logo {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .header-logo img {
   height: 120px;
   width: 120px;
@@ -49,12 +56,20 @@ body {
 }
 
 .header-links {
+  flex: 1 1 auto;
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 70px;
   list-style: none;
-      margin-bottom: -4px;
-      font-family: 'Poppins' !important;
+  margin-bottom: -4px;
+  font-family: 'Poppins' !important;
+}
 
+.header-links li {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .header-links a {
@@ -94,6 +109,13 @@ body {
   position: relative;
   z-index: 3;
   font-family: 'Poppins', sans-serif !important;
+}
+
+.header-socials {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .header-socials a {
@@ -905,9 +927,12 @@ body {
   font-weight: 300;
   transition: color 0.2s;
   display: inline-block;
-  margin-top: 0px;
   position: relative;
   padding-right: 15px;
+  vertical-align: middle;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  line-height: 1.5;
 }
 
 .dropdown-toggle:hover {
@@ -1192,12 +1217,15 @@ body {
     margin-right: 0;
   }
   .header-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    padding: 16px 10px 0 10px;
     height: 60px;
-    padding: 0 16px;
+  }
+  
+  .header-links {
+    display: none !important;
+  }
+  .header-socials {
+    display: none !important;
   }
   .burger-menu {
     display: flex !important;
@@ -1221,24 +1249,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    position: relative;
-    z-index: 1;
+    flex: 1;
   }
   .header-logo img {
     height: 60px;
     width: 60px;
     margin: 0 auto;
     display: block;
-    position: relative;
-    left: 0;
-    right: 0;
-  }
-  .header-links {
-    display: none !important;
-  }
-  .header-socials {
-    display: none !important;
   }
   .apps-container {
     min-height: unset;
@@ -1286,7 +1303,7 @@ body {
     margin-left: 0;
     min-width: 0;
     text-align: left;
-    margin-top: -98px;
+    margin-top: -77px;
     margin-left: -61px;
   }
   .gradient-title {
@@ -1522,48 +1539,17 @@ body {
 
 .burger-menu {
   display: none;
-}
-.header-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 16px 0 16px;
-  height: 60px;
-  position: relative;
-  z-index: 1001;
-}
-.header-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-.header-logo img {
-  height: 60px;
-  width: 60px;
-  margin: 0 auto;
-  display: block;
-}
-.burger-menu {
-  display: flex !important;
+  position: absolute;
+  right: 32px;
+  top: 32px;
   background: none;
   border: none;
   color: #fff;
   font-size: 2rem;
-  align-items: center;
-  justify-content: center;
+  z-index: 2100;
   cursor: pointer;
-  z-index: 1101;
-  position: absolute;
-  right: 16px;
-  top: 16px;
 }
-.header-links {
-  display: none !important;
-}
-.header-socials {
-  display: none !important;
-}
+
 .mobile-drawer {
   position: fixed;
   top: 0;

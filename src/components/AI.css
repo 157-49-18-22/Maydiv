@@ -1458,6 +1458,18 @@ Ai-our-projects-section {
   padding: 0 0 3.5rem 0;
   background: #0a0a0a;
 }
+.fancy::before {
+  content: " ";
+  width: 1rem;
+  height: 2px;
+  background: black;
+  top: 50%;
+  left: 1.5em;
+  position: absolute;
+  transform: translateY(-50%);
+  transform-origin: center;
+  transition: background 0.3s linear, width 0.3s linear;
+ }
 
 .ai-gradient-cta-content {
   display: flex;
@@ -1738,6 +1750,7 @@ Ai-our-projects-section {
   color: #c59cff;
   transition: color 0.2s ease, transform 0.2s ease;
 }
+
 
 .dropdown-menu a:hover .dropdown-icon {
   color: #fff;
@@ -2336,16 +2349,7 @@ button:hover {
     padding: 0;
   }
   .fancy::before {
-    content: " ";
-    width: 1rem;
-    height: 2px;
-    background: black;
-    top: 50%;
-    left: 1.5em;
-    position: absolute;
-    transform: translateY(-50%);
-    transform-origin: center;
-    transition: background 0.3s linear, width 0.3s linear;
+   display: none;
    }
    
   .mobile-links {
@@ -2423,7 +2427,7 @@ button:hover {
     max-width: 120px;
     padding: 4px 8px;
     font-size: 0.8rem;
-    margin-bottom: -41px ;
+    
   }
   .fancy .text {
     font-size: 0.8em;
@@ -2585,6 +2589,7 @@ button:hover {
     gap: 8px !important;
     align-items: center;
     justify-content: center;
+    margin-bottom: 27px;
   }
   .ai-multiverse-row-lottie, .ai-multiverse-row-text {
     width: 50%;

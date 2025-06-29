@@ -52,8 +52,8 @@ body, html, * {
   display: flex;
   gap: 70px;
   list-style: none;
-      margin-bottom: -4px;
-      font-family: 'Poppins' !important;
+  margin-bottom: -4px;
+  font-family: 'Poppins' !important;
 }
 
 .header-links a {
@@ -1404,12 +1404,17 @@ body, html, * {
     transform: translateX(-50%);
     z-index: 1202;
   }
-  .burger-menu {
+  .burger-icon {
     display: block;
     position: absolute;
     right: 8px;
     top: 10px;
     z-index: 1203;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
   }
   .header-links,
   .header-socials {
@@ -1777,12 +1782,17 @@ body, html, * {
     transform: translateX(-50%);
     z-index: 1202;
   }
-  .burger-menu {
+  .burger-icon {
     display: block;
     position: absolute;
     right: 8px;
     top: 10px;
     z-index: 1203;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
   }
   .header-links,
   .header-socials {
@@ -1808,7 +1818,7 @@ body, html, * {
   from { right: -100vw; opacity: 0; }
   to { right: 0; opacity: 1; }
 }
-.close-drawer {
+.mobile-drawer .drawer-close {
   background: none;
   border: none;
   color: #fff;
@@ -1818,7 +1828,7 @@ body, html, * {
   right: 18px;
   cursor: pointer;
 }
-.mobile-links {
+.mobile-drawer ul {
   list-style: none;
   padding: 0;
   margin: 60px 0 0 0;
@@ -1826,8 +1836,7 @@ body, html, * {
   flex-direction: column;
   gap: 18px;
 }
-.mobile-links li a,
-.mobile-services-toggle {
+.mobile-drawer a {
   color: #fff;
   font-size: 1.1rem;
   text-decoration: none;
@@ -1839,14 +1848,20 @@ body, html, * {
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
 }
-.mobile-services-toggle {
+.mobile-drawer .drawer-dropdown {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 1.1rem;
   font-weight: 500;
+  background: none;
+  border: none;
+  color: #fff;
+  width: 100%;
+  padding: 8px 0;
+  cursor: pointer;
 }
-.mobile-services-dropdown {
+.mobile-drawer .drawer-dropdown-list {
   list-style: none;
   padding-left: 12px;
   margin-top: 6px;
@@ -1854,12 +1869,12 @@ body, html, * {
   flex-direction: column;
   gap: 10px;
 }
-.mobile-services-dropdown li a {
+.mobile-drawer .drawer-dropdown-list a {
   font-size: 1rem;
   color: #bdbdbd;
   padding: 4px 0 4px 8px;
 }
-.mobile-services-dropdown li a:hover {
+.mobile-drawer .drawer-dropdown-list a:hover {
   color: #fff;
 }
 

@@ -696,6 +696,24 @@ margin-bottom: 23%;
   .mobile-drawer .drawer-dropdown.open .drawer-dropdown-list {
     display: flex;
   }
+  
+
+  .burger-icon {
+    display: flex;
+  }
+  .header-links.open ~ .burger-icon {
+    display: none !important;
+  }
+}
+
+/* Show burger icon only on mobile */
+.burger-icon {
+  display: none;
+}
+@media (max-width: 480px) {
+  .burger-icon {
+    display: flex;
+  }
   .marketing-hero-section,
   .marketing-hero-left,
   .marketing-hero-right {
@@ -869,101 +887,7 @@ margin-bottom: 23%;
     min-width: 100%;
   }
   
-  .mobile-drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 75vw;
-    max-width: 320px;
-    height: 100vh;
-    background: #18122B;
-    box-shadow: -2px 0 16px #0008;
-    z-index: 2000;
-    display: flex;
-    flex-direction: column;
-    padding: 32px 18px 18px 18px;
-    animation: slideInDrawer 0.25s cubic-bezier(0.77,0,0.175,1);
-  }
-  @keyframes slideInDrawer {
-    from { right: -100vw; opacity: 0; }
-    to { right: 0; opacity: 1; }
-  }
-  .close-drawer {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    align-self: flex-end;
-    margin-bottom: 18px;
-    cursor: pointer;
-    margin-right: 30px;
-  }
-  .mobile-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-  .mobile-links li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 8px 0;
-    display: block;
-    border-radius: 8px;
-    transition: background 0.2s, color 0.2s;
-  }
-  .mobile-links li a:hover {
-    background: #b983ff33;
-    color: #b983ff;
-  }
-  .mobile-services-toggle {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 8px 0;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background 0.2s, color 0.2s;
-    margin-bottom: 0;
-  }
-  .mobile-services-toggle:hover {
-    background: #b983ff33;
-    color: #b983ff;
-  }
-  .mobile-services-dropdown {
-    list-style: none;
-    padding-left: 12px;
-    margin: 8px 0 0 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    animation: fadeInDropdown 0.2s;
-  }
-  @keyframes fadeInDropdown {
-    from { opacity: 0; transform: translateY(-8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .mobile-services-dropdown li a {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #b983ff;
-    padding: 6px 0 6px 8px;
-    border-radius: 6px;
-    background: none;
-    transition: background 0.2s, color 0.2s;
-  }
-  .mobile-services-dropdown li a:hover {
-    background: #fff2;
-    color: #fff;
-  }
+ 
   .latest-work-icon {
     width: 80px !important;
     height: 80px !important;
@@ -1947,9 +1871,13 @@ margin-bottom: 23%;
     height: auto;
     gap: 10px;
   }
+
+
   .header-logo img {
     height: 60px;
     width: 60px;
+    margin-left: 190px;
+   
   }
   .header-links {
     flex-direction: column;

@@ -51,6 +51,7 @@ export default function ContactUs() {
           </li>
           <li><Link href="/new">Projects</Link></li>
           <li><Link href="/contact">Contact</Link></li>
+          <li><Link href="/about">About Us</Link></li>
         </ul>
         <div className="header-socials">
           <a href="#" aria-label="GitHub"><FaGithub /></a>
@@ -82,7 +83,8 @@ export default function ContactUs() {
                 )}
               </li>
               <li><Link href="/new" onClick={() => setBurgerOpen(false)}>Projects</Link></li>
-              <li><Link href="/contact" onClick={() => setBurgerOpen(false)}>Contact</Link></li>
+              <li><Link href="/contact" onClick={() => setBurgerOpen(false)}>Contact</Link></li>  
+              <li><Link href="/about" onClick={() => setBurgerOpen(false)}>About Us</Link></li>
             </ul>
           </div>
         )}

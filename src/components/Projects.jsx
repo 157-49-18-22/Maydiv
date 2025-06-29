@@ -91,6 +91,7 @@ const Projects = () => {
             </li>
             <li><Link href="/new"><span>Projects</span></Link></li>
             <li><Link href="/contact"><span>Contact</span></Link></li>
+            <li><Link href="/about"><span>About Us</span></Link></li>
           </ul>
         <div className="header-socials">
         <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
@@ -123,6 +124,7 @@ const Projects = () => {
               </li>
               <li><Link href="/new" onClick={() => setBurgerOpen(false)}>Projects</Link></li>
               <li><Link href="/contact" onClick={() => setBurgerOpen(false)}>Contact</Link></li>
+              <li><Link href="/about" onClick={() => setBurgerOpen(false)}>About Us</Link></li>
             </ul>
           </div>
         )}

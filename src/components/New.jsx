@@ -161,6 +161,7 @@ export default function New() {
             </li>
             <li><Link href="/new"><span>Projects</span></Link></li>
             <li><Link href="/contact"><span>Contact</span></Link></li>
+
           </ul>
         )}
         {/* Burger menu for mobile (only render on mobile) */}
@@ -197,6 +198,7 @@ export default function New() {
               </li>
             <li><Link href="/new" onClick={() => setDrawerOpen(false)}>Projects</Link></li>
             <li><Link href="/contact" onClick={() => setDrawerOpen(false)}>Contact</Link></li>
+            <li><Link href="/about" onClick={() => setDrawerOpen(false)}>About Us</Link></li>
             </ul>
           </div>
         )}

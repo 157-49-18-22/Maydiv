@@ -68,6 +68,7 @@ export default function About() {
             </li>
             <li><Link href="/new">Projects</Link></li>
             <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/about">About Us</Link></li>
           </ul>
         )}
         {/* Burger menu for mobile */}
@@ -99,6 +100,7 @@ export default function About() {
             </li>
             <li><Link href="/new" onClick={handleNavClick}>Projects</Link></li>
             <li><Link href="/contact" onClick={handleNavClick}>Contact</Link></li>
+            <li><Link href="/about" onClick={handleNavClick}>About Us</Link></li>
           </ul>
         )}
         <div className="header-socials">

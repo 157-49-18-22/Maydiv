@@ -130,6 +130,7 @@ const Services = () => {
           </li>
           <li><Link href="/new"><span>Projects</span></Link></li>
           <li><Link href="/contact"><span>Contact</span></Link></li>
+          <li><Link href="/about"><span>About Us</span></Link></li>
         </ul>
         <div className="header-socials">
           <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
@@ -162,6 +163,7 @@ const Services = () => {
           </li>
           <li><Link href="/new" onClick={() => setDrawerOpen(false)}>Projects</Link></li>
           <li><Link href="/contact" onClick={() => setDrawerOpen(false)}>Contact</Link></li>
+          <li><Link href="/about" onClick={() => setDrawerOpen(false)}>About Us</Link></li>
         </ul>
       </div>
       {/* Hero Content Row */}
@@ -246,28 +248,28 @@ const Services = () => {
               <img src="/Business.png" alt="Business Growth" className="explore-card-icon" />
               <div>
                 <div className="explore-card-title">Business Growth</div>
-                <div className="explore-card-desc">Sed perspiciatis unde omnis natus error voluptatem</div>
+                <div className="explore-card-desc">Accelerating your business growth with smart digital strategies</div>
               </div>
             </div>
             <div className="explore-card">
               <img src="/User.png" alt="User Research" className="explore-card-icon" />
               <div>
                 <div className="explore-card-title">User Research</div>
-                <div className="explore-card-desc">Sed perspiciatis unde omnis natus error voluptatem</div>
+                <div className="explore-card-desc">In-depth insights that shape user-centric solutions.</div>
               </div>
             </div>
             <div className="explore-card">
               <img src="/Big.png" alt="Big Data Solution" className="explore-card-icon" />
               <div>
                 <div className="explore-card-title">Big Data Solution</div>
-                <div className="explore-card-desc">Sed perspiciatis unde omnis natus error voluptatem</div>
+                <div className="explore-card-desc">Transforming complex data into clear business insights</div>
               </div>
             </div>
             <div className="explore-card">
               <img src="/Product.png" alt="Product Design" className="explore-card-icon" />
               <div>
                 <div className="explore-card-title">Product Design</div>
-                <div className="explore-card-desc">Sed perspiciatis unde omnis natus error voluptatem</div>
+                <div className="explore-card-desc">From idea to pixel-perfect product experiences.</div>
               </div>
             </div>
           </div>
@@ -281,7 +283,7 @@ const Services = () => {
             <img src="/Who.png" alt="Who Background" className="about-heading-bg-img" />
             <h2 className="about-heading">We're Awards Winning Modern Business Solutions Agency</h2>
           </div>
-          <div className="about-desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis architecto beatae</div>
+          <div className="about-desc">Award-winning modern business solutions for forward-thinking brands.</div>
           <div className="about-pills-row">
             <span className="about-pill">Tech Solutions</span>
             <span className="about-pill">IT Consulting</span>
@@ -310,7 +312,7 @@ const Services = () => {
               <img src="/Graphics.png" alt="Graphics Design" className="features-card-icon" />
               <div>
                 <div className="features-card-title">Graphics Design</div>
-                <div className="features-card-desc">Sed perspiciatis unde omnis natus error voluptatem</div>
+                <div className="features-card-desc">Creating visual stories that elevate your brand</div>
               </div>
               <span className="features-card-arrow">→</span>
             </div>
@@ -318,7 +320,7 @@ const Services = () => {
               <img src="/Idea.png" alt="Ideation & Evaluation" className="features-card-icon" />
               <div>
                 <div className="features-card-title">Ideation & Evaluation</div>
-                <div className="features-card-desc">Sed perspiciatis unde omnis natus error voluptatem</div>
+                <div className="features-card-desc">Turning bold ideas into tested, user-validated solutions.</div>
               </div>
               <span className="features-card-arrow">→</span>
             </div>
@@ -326,7 +328,7 @@ const Services = () => {
               <img src="/Brand1.png" alt="Brand Identity" className="features-card-icon" />
               <div>
                 <div className="features-card-title">Brand Identity</div>
-                <div className="features-card-desc">Sed perspiciatis unde omnis natus error voluptatem</div>
+                <div className="features-card-desc">Crafting unique identities that resonate and inspire</div>
               </div>
               <span className="features-card-arrow">→</span>
             </div>
@@ -334,7 +336,7 @@ const Services = () => {
               <img src="/Costume.png" alt="Custome Service" className="features-card-icon" />
               <div>
                 <div className="features-card-title">Custome Service</div>
-                <div className="features-card-desc">Sed perspiciatis unde omnis natus error voluptatem</div>
+                <div className="features-card-desc">Delivering support that’s fast, friendly, and always on.</div>
               </div>
               <span className="features-card-arrow">→</span>
             </div>
@@ -342,7 +344,7 @@ const Services = () => {
               <img src="/Web1.png" alt="Web Strategy" className="features-card-icon" />
               <div>
                 <div className="features-card-title">Web Strategy</div>
-                <div className="features-card-desc">Sed perspiciatis unde omnis natus error voluptatem</div>
+                <div className="features-card-desc">Aligning digital vision with measurable business goals.</div>
               </div>
               <span className="features-card-arrow">→</span>
             </div>

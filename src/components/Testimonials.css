@@ -6,9 +6,11 @@
 body, html, * {
   font-family: var(--font-family) !important;
 
+
 }
 body {
   margin: 0px;
+  overflow-x: hidden !important;
 }
 .header-container {
   background: #0a0a0a;

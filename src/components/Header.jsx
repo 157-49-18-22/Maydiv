@@ -5,10 +5,7 @@ import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, 
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Lottie from 'lottie-react';
 import TrustedLogos from './TrustedLogos';
-
-import robotAnimation from '../../public/Robot.json';
 import './Header.css';
 
 function Counter({ start, end, duration = 2000 }) {
@@ -32,20 +29,12 @@ function Counter({ start, end, duration = 2000 }) {
 }
 
 const Header = () => {
-  const maxRobotX = 350; // adjust as per your layout
-  // Robot ke liye scroll-based position
-  const [robotPos, setRobotPos] = useState({ top: 100, left: 100 });
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const escapingRef = useRef(false);
   const howWeWorkRef = useRef(null);
-  const [robotActive, setRobotActive] = useState(false);
   const statsRef = useRef(null);
   const [showCounters, setShowCounters] = useState(false);
-  // Dropdown state and timeout
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeout = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  // Add drawer state for mobile nav
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -58,36 +47,6 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    // Set initial mouse position to center of screen on client
-    mouseRef.current = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    const handleMouseMove = (e) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  useEffect(() => {
-    let animationFrame;
-    const size = 100;
-    const padding = 20;
-    const speed = 0.5; // Trailing factor (higher = less lag, 0.5 = very fast)
-    const moveRobot = () => {
-      let { top, left } = robotPos;
-      const { x, y } = mouseRef.current;
-      // Target robot center to follow mouse
-      const targetLeft = Math.max(padding, Math.min(window.innerWidth - size - padding, x - size / 2));
-      const targetTop = Math.max(padding, Math.min(window.innerHeight - size - padding, y - size / 2));
-      left += (targetLeft - left) * speed;
-      top += (targetTop - top) * speed;
-      setRobotPos({ top, left });
-      animationFrame = requestAnimationFrame(moveRobot);
-    };
-    animationFrame = requestAnimationFrame(moveRobot);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [robotPos]);
-
-  useEffect(() => {
     const handleScroll = () => {
       if (!statsRef.current) return;
       const rect = statsRef.current.getBoundingClientRect();
@@ -96,12 +55,10 @@ const Header = () => {
       }
     };
     window.addEventListener('scroll', handleScroll);
-    // Run once on mount in case already in view
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Dropdown handlers
   const handleDropdownEnter = () => {
     if (dropdownTimeout.current) {
       clearTimeout(dropdownTimeout.current);
@@ -112,30 +69,16 @@ const Header = () => {
   const handleDropdownLeave = () => {
     dropdownTimeout.current = setTimeout(() => {
       setDropdownOpen(false);
-    }, 350); // 350ms delay
+    }, 350);
   };
 
   return (
     <>
-      {/* Floating Robot */}
-      <div style={{
-        position: 'fixed',
-        top: robotPos.top,
-        left: robotPos.left,
-        width: 100,
-        height: 100,
-        zIndex: 9999,
-        pointerEvents: 'none',
-        transition: 'top 1.2s cubic-bezier(0.4,0.2,0.2,1), left 1.2s cubic-bezier(0.4,0.2,0.2,1)'
-      }}>
-        <Lottie animationData={robotAnimation} style={{ width: '100%', height: '100%' }} loop autoplay />
-      </div>
       <header className="header-container">
         <nav className="header-nav">
           <div className="header-logo">
             <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized />
           </div>
-          {/* Desktop nav links */}
           {!isMobile && (
             <ul className="header-links">
               <li><Link href="/">Home</Link></li>
@@ -145,8 +88,13 @@ const Header = () => {
                 onFocus={handleDropdownEnter}
                 onBlur={handleDropdownLeave}
               >
-                <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
-                <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
+                <span className="dropdown-toggle" style={{ marginBottom: '10px' }}>Services</span>
+                <ul className="dropdown-menu" style={{
+                  display: dropdownOpen ? 'flex' : 'none',
+                  opacity: dropdownOpen ? 1 : 0,
+                  pointerEvents: dropdownOpen ? 'auto' : 'none',
+                  transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'
+                }}>
                   <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
                   <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
                   <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
@@ -154,92 +102,79 @@ const Header = () => {
                   <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
                 </ul>
               </li>
-              <li><Link href="/new"><span>Projects</span></Link></li>
-              <li><Link href="/contact"><span>Contact</span></Link></li>
+              <li><Link href="/new">Projects</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
+              <li><Link href="/about">About Us</Link></li>
             </ul>
           )}
-          {/* Burger menu for mobile (only render on mobile) */}
           {isMobile && (
             <button className="burger-menu" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
-          <FaBars />
-        </button>
+              <FaBars />
+            </button>
           )}
           <div className="header-socials">
             <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
             <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
           </div>
-      </nav>
-        {/* Mobile Drawer (only render on mobile) */}
+        </nav>
+
         {isMobile && (
-      <div className={`mobile-drawer${drawerOpen ? ' open' : ''}`}>
-        <button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close menu">
-          <FaTimes />
-        </button>
-        <ul>
-          <li><Link href="/" onClick={() => setDrawerOpen(false)}>Home</Link></li>
-          <li>
-            <button className={`drawer-dropdown${drawerDropdownOpen ? ' open' : ''}`} onClick={() => setDrawerDropdownOpen(v => !v)}>
-              Services <FaChevronDown style={{marginLeft: 8, transform: drawerDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s'}} />
-            </button>
-            <div className={`drawer-dropdown-list${drawerDropdownOpen ? ' open' : ''}`} style={{display: drawerDropdownOpen ? 'flex' : 'none'}}>
-              <Link href="/real-projects" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
-              <Link href="/real-services" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>
-              <Link href="/real-testimonials" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
-              <Link href="/real-apps" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
-              <Link href="/real-ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
-            </div>
-          </li>
-          <li><Link href="/new" onClick={() => setDrawerOpen(false)}>Projects</Link></li>
-          <li><Link href="/contact" onClick={() => setDrawerOpen(false)}>Contact</Link></li>
-        </ul>
+          <div className={`mobile-drawer${drawerOpen ? ' open' : ''}`}>
+            <button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close menu"><FaTimes /></button>
+            <ul>
+              <li><Link href="/" onClick={() => setDrawerOpen(false)}>Home</Link></li>
+              <li>
+                <button className={`drawer-dropdown${drawerDropdownOpen ? ' open' : ''}`} onClick={() => setDrawerDropdownOpen(v => !v)}>
+                  Services <FaChevronDown style={{ marginLeft: 8, transform: drawerDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                </button>
+                <div className={`drawer-dropdown-list${drawerDropdownOpen ? ' open' : ''}`} style={{ display: drawerDropdownOpen ? 'flex' : 'none' }}>
+                  <Link href="/real-projects" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
+                  <Link href="/real-services" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>
+                  <Link href="/real-testimonials" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
+                  <Link href="/real-apps" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
+                  <Link href="/real-ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
+                </div>
+              </li>
+              <li><Link href="/new" onClick={() => setDrawerOpen(false)}>Projects</Link></li>
+              <li><Link href="/contact" onClick={() => setDrawerOpen(false)}>Contact</Link></li>
+              <li><Link href="/about" onClick={() => setDrawerOpen(false)}>About Us</Link></li>
+            </ul>
           </div>
         )}
+
         <div className="header-hero">
           <h1>
             <span className="gradient-text">Interactive Digital Solutions</span><br />
             <span className="gradient-text1">Scalable AI.</span>
           </h1>
-         
-          <div className="header-buttons" >
+          <div className="header-buttons">
             <button className="btn">Get started</button>
             <button className="btn">Our Portfolio</button>
           </div>
-          <div className="header-hero-robot-group" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', margin: '0 auto'}}>
-          
-              <Image
-                src="/Animation.png"
-                alt="Animation"
-                width={1205}
-                height={419}
-                className="header-animation-img"
-              />
-            </div>
-     
+          <div className="header-hero-robot-group" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', margin: '0 auto' }}>
+            <Image src="/Animation.png" alt="Animation" width={1205} height={419} className="header-animation-img" />
+          </div>
+
           <div className="header-stats-section" ref={statsRef}>
             <div className="header-stat">
-              <span className="stat-number gradient-text">
-                {showCounters ? <Counter start={40} end={150} duration={2000} /> : 40}+
-              </span>
+              <span className="stat-number gradient-text">{showCounters ? <Counter start={40} end={150} duration={2000} /> : 40}+</span>
               <span className="stat-label">Success Project</span>
             </div>
             <div className="header-stat">
-              <span className="stat-number gradient-text">
-                {showCounters ? <Counter start={1} end={2} duration={2000} /> : 2}+
-              </span>
-             
+              <span className="stat-number gradient-text">{showCounters ? <Counter start={1} end={2} duration={2000} /> : 2}+</span>
               <span className="stat-label">Product Launched</span>
             </div>
             <div className="header-stat">
-              <span className="stat-number gradient-text">
-                {showCounters ? <Counter start={2} end={10} duration={2000} /> : 10}+
-              </span>
+              <span className="stat-number gradient-text">{showCounters ? <Counter start={2} end={10} duration={2000} /> : 10}+</span>
               <span className="stat-label">Startup Raised</span>
             </div>
           </div>
+
           <div className="header-trusted-section">
             <TrustedLogos />
           </div>
+
           <div className="how-we-work-section">
             <div className="how-we-work-heading gradient-text">HOW WE WORK</div>
             <div className="how-we-work-content">
@@ -248,30 +183,24 @@ const Header = () => {
               </div>
               <div className="how-we-work-right">
                 <p>Grow your brand with high-quality UI/UX design for a minimal fee. Work with senior designers. Contact and make as many requests as you need – no limits.</p>
-                <Link href="/contact">
-                  <button className="how-we-work-btn"><span>Contact Us</span></button>
-                </Link>
+                <Link href="/contact"><button className="how-we-work-btn"><span>Contact Us</span></button></Link>
               </div>
             </div>
           </div>
+
           <div className="how-we-work-steps" ref={howWeWorkRef}>
             <div className="step">
-              <div className="step-icon">
-                <Image src="/Shuttle.png" alt="Vector" className="step-img-icon1" width={50} height={50} />
-              </div>
+              <div className="step-icon"><Image src="/Shuttle.png" alt="Vector" width={50} height={50} /></div>
               <div className="step-title">AI & get started</div>
               <div className="step-desc">Submit as many design tasks as you need without worrying about individual project fees.</div>
             </div>
             <img src="/Arrow.png" alt="Arrow" className="step-img-arrow-1" />
             <div className="step1">
-              <div className="step-icon">
-                <Image src="/Vector.png" alt="Vector" className="step-img-icon1" width={50} height={50} />
-              </div>
+              <div className="step-icon"><Image src="/Vector.png" alt="Vector" width={50} height={50} /></div>
               <div className="step-title">Polished designs</div>
               <div className="step-desc">Our designers get to work to deliver your request. Receive your design within a few days.</div>
             </div>
             <img src="/Arrow.png" alt="Arrow" className="step-img-arrow-2" />
-            
             <div className="step2">
               <div className="step-icon"><FaSync /></div>
               <div className="step-title">Revisions made simple</div>
@@ -279,10 +208,9 @@ const Header = () => {
             </div>
           </div>
         </div>
-        
       </header>
     </>
   );
 };
 
-export default Header; 
+export default Header;

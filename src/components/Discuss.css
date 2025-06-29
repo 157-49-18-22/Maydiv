@@ -105,4 +105,186 @@
 .fancy:hover .bottom-key-2 {
   right: 0;
   width: 0;
+}
+
+/* Discuss Section Styles */
+.discuss-section {
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 0;
+  position: relative;
+}
+.discuss-star-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  margin-bottom: -2.5rem;
+  z-index: 2;
+  top: 25%;
+}
+.discuss-star-img {
+  max-width: 100vw;
+  height: auto;
+  display: block;
+}
+.discuss-main-img-wrapper {
+  position: relative;
+  width: 900px;
+  max-width: 95vw;
+  margin: 0 auto;
+}
+.discuss-main-img {
+  width: 124%;
+  height: auto;
+  display: block;
+  border-radius: 2.5rem;
+  margin-left: -12%;
+}
+.discuss-content-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem 1.5rem;
+}
+.discuss-title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 3.2rem;
+  text-align: center;
+  margin: 0 0 2.5rem 0;
+  letter-spacing: 2px;
+  font-family: 'Inter', sans-serif;
+  z-index: 3;
+  line-height: 1.1;
+}
+.discuss-btn-group {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  z-index: 3;
+}
+.discuss-btn {
+  padding: 16px 44px;
+  font-size: 1.25rem;
+  border-radius: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.discuss-btn-connect {
+  background: #000;
+  color: #fff;
+  border: none;
+}
+.discuss-btn-connect:hover {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+}
+.discuss-btn-follow {
+  background: transparent;
+  color: #fff;
+  border: 2.5px solid #fff;
+}
+.discuss-btn-follow:hover {
+  background: #fff;
+  color: #a100ff;
+  border-color: #a100ff;
+}
+@media (max-width: 1000px) {
+  .discuss-main-img-wrapper {
+    width: 98vw;
+    max-width: 98vw;
+  }
+  .discuss-main-img {
+    width: 100%;
+    margin-left: 0;
+  }
+  .discuss-title {
+    font-size: 2rem;
+  }
+  .discuss-btn-group {
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+@media (max-width: 480px) {
+  .discuss-section {
+    padding: 1.1rem 0 0.7rem 0;
+  }
+  .discuss-star-wrapper {
+    display: none;
+  }
+  .discuss-main-img-wrapper {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .discuss-main-img {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    margin-left: 0;
+    border-radius: 0.7rem;
+    display: block;
+  }
+  .discuss-content-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    height: 100%;
+    padding: 0.7rem 0.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .discuss-title {
+    font-size: 1.02rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.13;
+    padding: 0 0.1rem;
+    word-break: break-word;
+    font-weight: 600;
+  }
+  .discuss-btn-group {
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .discuss-btn {
+    width: 100%;
+    max-width: 220px;
+    font-size: 0.85rem;
+    padding: 8px 0;
+    border-radius: 7px;
+    margin: 0;
+    box-sizing: border-box;
+    display: block;
+  }
+  .discuss-btn-follow {
+    margin-top: 0;
+  }
 } 

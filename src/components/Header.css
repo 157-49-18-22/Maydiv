@@ -1200,9 +1200,14 @@ body {
     height: auto;
   }
   .gradient-text, .gradient-text1 {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+    width: 100% !important;
+    display: block !important;
+    text-align: center !important;
     height: auto;
     margin-top: 0;
+    margin-bottom: 0.2em;
+    word-break: break-word;
   }
   .header-buttons {
     flex-direction: column;

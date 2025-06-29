@@ -503,10 +503,10 @@ body, html, * {
   .row-layout .service-card,
   .stack-center-card {
     width: 120px !important;
-    height: 120px !important;
+    height: 170px !important;
     margin: 0 -49px !important;
     max-width: 80vw;
-    max-height: 80vw;
+    max-height: 170px !important;
     box-shadow: 0 2px 8px #b983ff22;
     border-radius: 14px;
     scroll-snap-align: center;

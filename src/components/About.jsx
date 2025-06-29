@@ -78,30 +78,28 @@ export default function About() {
           </div>
         )}
         {/* Mobile drawer */}
-        {isMobile && drawerOpen && (
-          <ul className="header-links open">
-            <div className="mobile-menu-close" onClick={() => setDrawerOpen(false)}>
-              <FaTimes />
-            </div>
-            <li><Link href="/" onClick={handleNavClick}>Home</Link></li>
-            <li className="dropdown">
-              <span className="dropdown-toggle" onClick={handleDrawerDropdownToggle}>
-                Services <FaChevronDown style={{marginLeft: 8, fontSize: '1rem'}} />
-              </span>
-              {drawerDropdownOpen && (
-                <ul className="dropdown-menu" style={{display: 'flex', flexDirection: 'column', position: 'static', boxShadow: 'none', background: 'transparent', padding: 0, margin: 0, opacity: 1, pointerEvents: 'auto', transform: 'none'}}>
-                  <li><Link href="/real-projects" onClick={handleNavClick}><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
-                  <li><Link href="/real-services" onClick={handleNavClick}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
-                  <li><Link href="/real-testimonials" onClick={handleNavClick}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
-                  <li><Link href="/real-apps" onClick={handleNavClick}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
-                  <li><Link href="/real-ai" onClick={handleNavClick}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
-                </ul>
-              )}
-            </li>
-            <li><Link href="/new" onClick={handleNavClick}>Projects</Link></li>
-            <li><Link href="/contact" onClick={handleNavClick}>Contact</Link></li>
-            <li><Link href="/about" onClick={handleNavClick}>About Us</Link></li>
-          </ul>
+        {isMobile && (
+          <div className={`mobile-drawer${drawerOpen ? ' open' : ''}`}>
+            <button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close menu"><FaTimes /></button>
+            <ul>
+              <li><Link href="/" onClick={() => setDrawerOpen(false)}>Home</Link></li>
+              <li>
+                <button className={`drawer-dropdown${drawerDropdownOpen ? ' open' : ''}`} onClick={() => setDrawerDropdownOpen(v => !v)}>
+                  Services <FaChevronDown style={{ marginLeft: 8, transform: drawerDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                </button>
+                <div className={`drawer-dropdown-list${drawerDropdownOpen ? ' open' : ''}`} style={{ display: drawerDropdownOpen ? 'flex' : 'none' }}>
+                  <Link href="/real-projects" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
+                  <Link href="/real-services" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>
+                  <Link href="/real-testimonials" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
+                  <Link href="/real-apps" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
+                  <Link href="/real-ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
+                </div>
+              </li>
+              <li><Link href="/new" onClick={() => setDrawerOpen(false)}>Projects</Link></li>
+              <li><Link href="/contact" onClick={() => setDrawerOpen(false)}>Contact</Link></li>
+              <li><Link href="/about" onClick={() => setDrawerOpen(false)}>About Us</Link></li>
+            </ul>
+          </div>
         )}
         <div className="header-socials">
           <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>

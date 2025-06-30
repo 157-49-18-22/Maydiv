@@ -19,7 +19,7 @@ import newAnimation from '../../public/new.json';
 
 const projects = [
   {
-    title: 'Mobile App1',
+    title: 'Mobile App',
     image: '/1.7.webp',
     technologies: ['React', 'Next.js', 'CSS'],
     link: 'https://play.google.com/store/apps/details?id=com.blackhatcode.in.ssa_app.new&hl=en_US',
@@ -29,7 +29,7 @@ const projects = [
     status: 'Completed',
   },
   {
-    title: 'Mobile App2',
+    title: 'Mobile App',
     image: '/2.7.webp',
     technologies: ['React', 'Redux', 'Node.js', 'MongoDB'],
     link: 'https://play.google.com/store/apps/details?id=com.rathifarms&hl=en_US',
@@ -49,7 +49,7 @@ const projects = [
     status: 'In Progress',
   },
   {
-    title: 'Mobile App3',
+    title: 'Mobile App',
     image: '/4.7.webp',
     technologies: ['React', 'Styled Components'],
     link: 'https://play.google.com/store/apps/details?id=com.myjobee&hl=en_US',
@@ -79,7 +79,7 @@ const projects = [
     status: 'In Progress',
   },
   {
-    title: 'Mobile App4',
+    title: 'Mobile App',
     image: '/7.7.webp',
     technologies: ['React Native', 'Expo'],
     link: 'https://play.google.com/store/apps/details?id=com.colyr&hl=en_US',
@@ -169,6 +169,7 @@ export default function New() {
             </li>
             <li><Link href="/new"><span>Projects</span></Link></li>
             <li><Link href="/contact"><span>Contact</span></Link></li>
+            <li><Link href="/about"><span>About Us</span></Link></li>
 
           </ul>
         )}
@@ -277,13 +278,13 @@ export default function New() {
                 </div>
                 <a 
                   href={
-                    project.title === 'Mobile App1'
+                    project.title === 'Mobile App'
                       ? 'https://play.google.com/store/apps/details?id=com.blackhatcode.in.ssa_app.new&hl=en_US'
-                      : project.title === 'Mobile App2'
+                      : project.title === 'Mobile App'
                         ? 'https://play.google.com/store/apps/details?id=com.rathifarms&hl=en_US'
-                        : project.title === 'Mobile App3'
+                        : project.title === 'Mobile App'
                           ? 'https://play.google.com/store/apps/details?id=com.myjobee&hl=en_US'
-                          : project.title === 'Mobile App4'
+                          : project.title === 'Mobile App'
                             ? 'https://play.google.com/store/apps/details?id=com.colyr&hl=en_US'
                             : project.title === 'College Website'
                               ? 'https://www.collegedisha.com/'

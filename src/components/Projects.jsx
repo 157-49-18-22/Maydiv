@@ -281,22 +281,22 @@ const Projects = () => {
         </div>
         <div className="showcase-grid">
           <div className="showcase-card">
-            <img src="/Our1.png" alt="Project 1" />
+            <img src="/Project 1.png" alt="Project 1" />
           </div>
           <div className="showcase-card">
-            <img src="/Our2.png" alt="Project 2" />
+            <img src="/2.png" alt="Project 2" />
           </div>
           <div className="showcase-card">
-            <img src="/Our3.png" alt="Project 3" />
+            <img src="/3.png" alt="Project 3" />
           </div>
           <div className="showcase-card">
-            <img src="/Our4.png" alt="Project 4" />
+            <img src="/4.png" alt="Project 4" />
           </div>
           <div className="showcase-card">
-            <img src="/Our5.png" alt="Project 5" />
+            <img src="/5.png" alt="Project 5" />
           </div>
           <div className="showcase-card">
-            <img src="/Our6.png" alt="Project 6" />
+            <img src="/6.jpeg" alt="Project 6" />
           </div>
         </div>
         <div className="showcase-viewmore-wrap">

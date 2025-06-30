@@ -1991,8 +1991,10 @@ button:hover {
     padding-bottom: 10px;
   }
   .header-nav {
+    position: relative;
     flex-direction: column;
-    padding: 8px 2px 0 2px;
+    align-items: center;
+    padding: 16px 8px 0 8px;
     height: auto;
   }
   .header-logo img {

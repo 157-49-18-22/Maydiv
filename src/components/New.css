@@ -1025,6 +1025,13 @@
     display: inline-block;
   }
   .header-nav {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 8px 0 8px;
+    height: auto;
+  }
+  .header-nav {
     padding: 16px 10px 0 10px;
     height: 60px;
   }

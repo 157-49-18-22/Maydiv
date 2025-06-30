@@ -102,6 +102,14 @@ export default function New() {
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
+    // Auto-refresh once per session, instantly
+    if (typeof window !== 'undefined' && !sessionStorage.getItem('newPageRefreshed')) {
+      sessionStorage.setItem('newPageRefreshed', 'true');
+      window.location.reload();
+    }
+  }, []);
+
+  useEffect(() => {
     const timer1 = setTimeout(() => setCenterCardVisible(true), 200);
     const timer2 = setTimeout(() => setSideCardsVisible(true), 600);
     // Responsive slidesPerView

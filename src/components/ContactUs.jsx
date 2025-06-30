@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaTwitter, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
@@ -15,6 +15,14 @@ export default function ContactUs() {
   const [burgerOpen, setBurgerOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const dropdownTimeout = useRef(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth <= 480 && !sessionStorage.getItem('contactPageMobileRefreshed')) {
+      sessionStorage.setItem('contactPageMobileRefreshed', 'true');
+      window.location.reload();
+    }
+  }, []);
+
   const handleFieldFocus = () => {
     if (!showPhone) setShowPhone(true);
   };

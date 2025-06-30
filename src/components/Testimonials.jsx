@@ -86,8 +86,9 @@ const Testimonials = () => {
   )}
   <div className="header-socials">
   <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+            <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+         
     
   </div>
   {/* Mobile Drawer (only render on mobile) */}
@@ -235,41 +236,6 @@ const Testimonials = () => {
           <Link href="/contact">
   <button className="why-maydiv-btn">Contact Us</button>
 </Link>
-        </div>
-      </div>
-    </section>
-    <section className="latest-work-section">
-      <h2 className="latest-work-title">Our latest work</h2>
-      <div className="latest-work-cards">
-        <div className="latest-work-card-group">
-          <div className="latest-work-card">
-           
-            <img src="/Artem.png" alt="Artem Icon" className="latest-work-icon" />
-          </div>
-          <div className="latest-work-card-content">
-            <div className="latest-work-card-title">Artem - Digital Marketing campaign</div>
-            <div className="latest-work-card-desc">Artem is a high-impact digital campaign built to boost visibility, drive engagement, and deliver real growth.</div>
-          </div>
-        </div>
-        <div className="latest-work-card-group">
-          <div className="latest-work-card">
-         
-            <img src="/Mayhem.png" alt="Mayhem Icon" className="latest-work-icon" />
-          </div>
-          <div className="latest-work-card-content">
-            <div className="latest-work-card-title">Mayhem - Search engine Optimization</div>
-            <div className="latest-work-card-desc">Mayhem is SEO with purpose — built to boost rankings, drive traffic, and dominate search results.</div>
-          </div>
-        </div>
-        <div className="latest-work-card-group">
-          <div className="latest-work-card">
-       
-            <img src="/Basic.png" alt="Basic Icon" className="latest-work-icon" />
-          </div>
-          <div className="latest-work-card-content">
-            <div className="latest-work-card-title">Basic - Pay per click (PPC)</div>
-            <div className="latest-work-card-desc">Basic is your launchpad into high-impact PPC. We create targeted ads that get clicks, drive traffic, and deliver real ROI — fast..</div>
-          </div>
         </div>
       </div>
     </section>

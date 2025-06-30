@@ -1344,6 +1344,8 @@ margin-bottom: 23%;
   color: #bdbdbd;
   font-size: 1.08rem;
   margin-right: 12px;
+  
+ 
 }
 
 .customers-count {
@@ -2140,6 +2142,7 @@ margin-bottom: 23%;
   .customers-label {
     font-size: 0.95rem;
     margin-right: 0;
+ 
   }
   .customers-count {
     font-size: 1rem;

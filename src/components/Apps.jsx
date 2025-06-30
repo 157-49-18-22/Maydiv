@@ -13,10 +13,10 @@ const LottiePlayer = dynamic(
 );
 
 const webProjectImages = [
-  { src: '/Webapp1.png', alt: 'Web App 1' },
-  { src: '/Webapp2.png', alt: 'Web App 2' },
-  { src: '/Webapp3.png', alt: 'Web App 3' },
-  { src: '/Webapp4.png', alt: 'Web App 4' },
+  { src: '/Square.jpg', alt: 'Web App 1' },
+  { src: '/Click.jpeg', alt: 'Web App 2' },
+  { src: '/Fruit.png', alt: 'Web App 3' },
+  { src: '/Kisan.png', alt: 'Web App 4' },
 ];
 
 function WebProjectsCards() {
@@ -136,8 +136,8 @@ const Apps = () => {
             </div>
           )}
           <div className="header-socials">
-            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+          <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
           </div>
         </nav>
@@ -261,7 +261,7 @@ const Apps = () => {
                 />
               </div>
               <div className="appdev-content">
-                <h2 className="appdev-title gradient-title">App development</h2>
+                <h2 className="appdev-title gradient-title">App Development</h2>
                 <p className="appdev-desc">
                   Mobile app development services encompass a wide range of specialized solutions that help businesses and individuals create, deploy, and maintain mobile applications for various platforms.
                 </p>
@@ -314,18 +314,17 @@ const Apps = () => {
             <WebProjectsCards />
           </section>
 
-          <div className="android-section">
-            <div className="service-content">
+         
 
 
 
-              <div className="mobile-image-container">
+         
 
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+         
+       
+      
       <Testimonial />
       <Discuss />
       <Footer />

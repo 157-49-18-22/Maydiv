@@ -5,7 +5,7 @@ import './BestProject.css';
 import Testimonial from './Testimonial';
 
 const images = [
-  '/1.png', '/2.png',
+  '/Project 1.png', '/2.png',
   '/3.png', '/4.png',
   '/5.png', '/6.jpeg'
 ];
@@ -54,28 +54,17 @@ const BestProject = () => {
         {images.map((img, idx) => {
           // Left column: even idx, right column: odd idx
           const isLeft = idx % 2 === 0;
-          return (
-            <div
-              key={img}
-              className={`best-project-image-wrapper ${inView ? (isLeft ? 'slide-in-left' : 'slide-in-right') : ''}`}
-              onMouseEnter={() => {
-                if (idx === 0) setFirstHovered(true);
-                if (idx === 1) setSecondHovered(true);
-                if (idx === 2) setThirdHovered(true);
-                if (idx === 3) setFourthHovered(true);
-                if (idx === 4) setFifthHovered(true);
-                if (idx === 5) setSixthHovered(true);
-              }}
-              onMouseLeave={() => {
-                if (idx === 0) setFirstHovered(false);
-                if (idx === 1) setSecondHovered(false);
-                if (idx === 2) setThirdHovered(false);
-                if (idx === 3) setFourthHovered(false);
-                if (idx === 4) setFifthHovered(false);
-                if (idx === 5) setSixthHovered(false);
-              }}
-              style={{ position: 'relative' }}
-            >
+          // Define links for each card
+          const links = [
+            'https://fika-india.com/',
+            'https://www.melanieindia.com/',
+            'https://www.collegedisha.com/',
+            'https://schools18.com/',
+            'https://play.google.com/store/apps/details?id=com.myjobee&hl=en_US',
+            null // 6th card, no link
+          ];
+          const cardContent = (
+            <>
               {/* Overlay Fik image on first card */}
               {idx === 0 && (
                 <img
@@ -194,6 +183,63 @@ const BestProject = () => {
                 height={340}
                 className="best-project-image"
               />
+            </>
+          );
+          // If link exists, wrap card in <a>
+          return links[idx] ? (
+            <a
+              key={img}
+              href={links[idx]}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <div
+                className={`best-project-image-wrapper ${inView ? (isLeft ? 'slide-in-left' : 'slide-in-right') : ''}`}
+                onMouseEnter={() => {
+                  if (idx === 0) setFirstHovered(true);
+                  if (idx === 1) setSecondHovered(true);
+                  if (idx === 2) setThirdHovered(true);
+                  if (idx === 3) setFourthHovered(true);
+                  if (idx === 4) setFifthHovered(true);
+                  if (idx === 5) setSixthHovered(true);
+                }}
+                onMouseLeave={() => {
+                  if (idx === 0) setFirstHovered(false);
+                  if (idx === 1) setSecondHovered(false);
+                  if (idx === 2) setThirdHovered(false);
+                  if (idx === 3) setFourthHovered(false);
+                  if (idx === 4) setFifthHovered(false);
+                  if (idx === 5) setSixthHovered(false);
+                }}
+                style={{ position: 'relative' }}
+              >
+                {cardContent}
+              </div>
+            </a>
+          ) : (
+            <div
+              key={img}
+              className={`best-project-image-wrapper ${inView ? (isLeft ? 'slide-in-left' : 'slide-in-right') : ''}`}
+              onMouseEnter={() => {
+                if (idx === 0) setFirstHovered(true);
+                if (idx === 1) setSecondHovered(true);
+                if (idx === 2) setThirdHovered(true);
+                if (idx === 3) setFourthHovered(true);
+                if (idx === 4) setFifthHovered(true);
+                if (idx === 5) setSixthHovered(true);
+              }}
+              onMouseLeave={() => {
+                if (idx === 0) setFirstHovered(false);
+                if (idx === 1) setSecondHovered(false);
+                if (idx === 2) setThirdHovered(false);
+                if (idx === 3) setFourthHovered(false);
+                if (idx === 4) setFifthHovered(false);
+                if (idx === 5) setSixthHovered(false);
+              }}
+              style={{ position: 'relative' }}
+            >
+              {cardContent}
             </div>
           );
         })}

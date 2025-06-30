@@ -70,8 +70,8 @@ const AI = () => {
             </button>
           )}
           <div className="header-socials">
-            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+          <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
           </div>
           {/* Mobile Drawer (only render on mobile) */}
@@ -221,48 +221,7 @@ const AI = () => {
         </div>
       </section>
 
-      {/* Our Projects Section */}
-      <section className="ai-our-projects-section">
-        <h2 className="ai-our-projects-heading">AI Driven Projects</h2>
-        <div className="ai-our-projects-grid">
-          <div className="ai-our-projects-card">
-            <img src="/Our1.png" alt="Project 1" />
-            <div className="ai-our-projects-title">VPN Mobile App</div>
-            <div className="ai-our-projects-subtitle">Mobile App</div>
-          </div>
-          <div className="ai-our-projects-card">
-            <img src="/Our2.png" alt="Project 2" />
-            <div className="ai-our-projects-title">Streaming Mobile App</div>
-            <div className="ai-our-projects-subtitle">Mobile App</div>
-          </div>
-          <div className="ai-our-projects-card">
-            <img src="/Our3.png" alt="Project 3" />
-            <div className="ai-our-projects-title">Creative Digital Agency</div>
-            <div className="ai-our-projects-subtitle">Landing Page</div>
-          </div>
-          <div className="ai-our-projects-card">
-            <img src="/Our4.png" alt="Project 4" />
-            <div className="ai-our-projects-title">Podcast Mobile App</div>
-            <div className="ai-our-projects-subtitle">Mobile App</div>
-          </div>
-          <div className="ai-our-projects-card">
-            <img src="/Our5.png" alt="Project 5" />
-            <div className="ai-our-projects-title">Multimedia Design Platform</div>
-            <div className="ai-our-projects-subtitle">Web Design</div>
-          </div>
-          <div className="ai-our-projects-card">
-            <img src="/Our6.png" alt="Project 6" />
-            <div className="ai-our-projects-title">Parking Mobile App</div>
-            <div className="ai-our-projects-subtitle">Mobile App</div>
-          </div>
-        </div>
-        <div className="ai-our-projects-description">
-          <p>Explore more of our AI-driven, innovative, and user-centric digital projects designed to elevate your business.</p>
-        </div>
-        <div className="ai-our-projects-viewmore-wrap">
-          <button className="fancy"><span className="top-key"></span><span className="text">View more</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
-        </div>
-      </section>
+      {/* Our Projects Section removed as per request */}
       <Testimonial />
       <section className="ai-get-section ai-gradient-cta-section">
         <div className="ai-gradient-cta-content">

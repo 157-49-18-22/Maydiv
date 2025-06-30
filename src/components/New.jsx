@@ -181,9 +181,9 @@ export default function New() {
         )}
         <div className="header-socials">
         <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+            <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-        </div>
+          </div>
       </nav>
       {/* Mobile Drawer (only render on mobile) */}
       {isMobile && (
@@ -277,23 +277,7 @@ export default function New() {
                   ))}
                 </div>
                 <a 
-                  href={
-                    project.title === 'Mobile App'
-                      ? 'https://play.google.com/store/apps/details?id=com.blackhatcode.in.ssa_app.new&hl=en_US'
-                      : project.title === 'Mobile App'
-                        ? 'https://play.google.com/store/apps/details?id=com.rathifarms&hl=en_US'
-                        : project.title === 'Mobile App'
-                          ? 'https://play.google.com/store/apps/details?id=com.myjobee&hl=en_US'
-                          : project.title === 'Mobile App'
-                            ? 'https://play.google.com/store/apps/details?id=com.colyr&hl=en_US'
-                            : project.title === 'College Website'
-                              ? 'https://www.collegedisha.com/'
-                              : project.title === 'Company Website'
-                                ? 'https://www.melanieindia.com/'
-                                : project.title === 'E-commerce Website'
-                                  ? 'https://fika-india.com/'
-                                  : project.link
-                  }
+                  href={project.link}
                   className="project-link fancy"
                   target="_blank"
                   rel="noopener noreferrer"

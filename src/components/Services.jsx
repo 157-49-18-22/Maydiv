@@ -133,10 +133,10 @@ const Services = () => {
           <li><Link href="/about"><span>About Us</span></Link></li>
         </ul>
         <div className="header-socials">
-          <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-          <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
-          <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-        </div>
+        <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+            <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+          </div>
         {/* Burger menu for mobile */}
         <button className="burger-menu" style={{display: 'none'}} onClick={() => setDrawerOpen(true)} aria-label="Open menu">
           <FaBars />
@@ -359,34 +359,29 @@ const Services = () => {
         </div>
         <div className="projects-cards-grid">
           <div className="project-card">
-            <img src="/Vpn.png" alt="VPN Mobile App Design" className="project-card-img" />
-            <div className="project-card-title">VPN Mobile App Design</div>
-            <div className="project-card-subtitle">Mobile App Design</div>
+            <img src="/Project 1.png" alt="VPN Mobile App Design" className="project-card-img" />
+          
           </div>
           <div className="project-card">
-            <img src="/Streaming.png" alt="Streaming App Design" className="project-card-img" />
-            <div className="project-card-title">Streaming App Design</div>
-            <div className="project-card-subtitle">Mobile App Design</div>
+            <img src="/2.png" alt="Streaming App Design" className="project-card-img" />
+        
           </div>
           <div className="project-card">
-            <img src="/Creative.png" alt="Creative Digital Agency" className="project-card-img" />
+            <img src="/3.png" alt="Creative Digital Agency" className="project-card-img" />
             <div className="project-card-title">Creative Digital Agency</div>
             <div className="project-card-subtitle">Landing Page Design</div>
           </div>
           <div className="project-card">
-            <img src="/Podcast.png" alt="Podcast Mobile App" className="project-card-img" />
-            <div className="project-card-title">Podcast Mobile App</div>
-            <div className="project-card-subtitle">Mobile App Design</div>
+            <img src="/4.png" alt="Podcast Mobile App" className="project-card-img" />
+          
           </div>
           <div className="project-card">
-            <img src="/Multimedia.png" alt="Multimedia Design Platform" className="project-card-img" />
-            <div className="project-card-title">Multimedia Design Platform</div>
-            <div className="project-card-subtitle">Web Design</div>
+            <img src="/5.png" alt="Multimedia Design Platform" className="project-card-img" />
+          
           </div>
           <div className="project-card">
-            <img src="/Parking.png" alt="Parking Mobile App" className="project-card-img" />
-            <div className="project-card-title">Parking Mobile App</div>
-            <div className="project-card-subtitle">Mobile App Design</div>
+            <img src="/6.jpeg" alt="Parking Mobile App" className="project-card-img" />
+           
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '../components/Header';
+import WhatsAppFloat from '../components/WhatsAppFloat';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Header />
+        <WhatsAppFloat />
         {children}
       </body>
     </html>

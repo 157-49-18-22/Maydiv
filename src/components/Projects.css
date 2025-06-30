@@ -880,7 +880,7 @@ body, html, * {
     width: 100%;
     height: auto;
     max-width: 100%;
-    object-fit: cover;
+    object-fit: fill;
     border-radius: 8px;
     display: block;
   }
@@ -1741,7 +1741,7 @@ body, html, * {
     width: 100%;
     height: auto;
     max-width: 100%;
-    object-fit: cover;
+    object-fit: fill;
     border-radius: 8px;
     display: block;
   }

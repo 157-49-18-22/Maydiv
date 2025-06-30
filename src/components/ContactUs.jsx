@@ -62,10 +62,10 @@ export default function ContactUs() {
           <li><Link href="/about">About Us</Link></li>
         </ul>
         <div className="header-socials">
-          <a href="#" aria-label="GitHub"><FaGithub /></a>
-          <a href="#" aria-label="Instagram"><FaInstagram /></a>
-          <a href="#" aria-label="Facebook"><FaFacebook /></a>
-        </div>
+        <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+            <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+          </div>
         {/* Burger menu for mobile */}
         <button className="burger-menu" onClick={() => setBurgerOpen(true)} aria-label="Open menu">
           <FaBars />
@@ -100,24 +100,24 @@ export default function ContactUs() {
       <div className="contactus-main">
         <div className="contactus-form-card">
           <h1 className="contactus-heading"><span className="wave-text">Get in Touch</span></h1>
-          <form className="contactus-form-modern">
+          <form className="contactus-form-modern" action="https://formspree.io/f/xovwregw" method="POST">
             <div className="contactus-row">
               <div className="contactus-field">
                 <label>Name</label>
-                <input type="text" placeholder="" />
+                <input type="text" name="name" placeholder="" required />
               </div>
               <div className="contactus-field">
                 <label>Phone</label>
-                <input type="text" placeholder="" />
+                <input type="text" name="phone" placeholder="" />
               </div>
             </div>
             <div className="contactus-field">
               <label>Email</label>
-              <input type="email" placeholder="" />
+              <input type="email" name="email" placeholder="" required />
             </div>
             <div className="contactus-field">
               <label>Message...</label>
-              <textarea rows={2} placeholder="" />
+              <textarea rows={2} name="message" placeholder="" required />
             </div>
             <button type="submit" className="contactus-submit-btn">SUBMIT</button>
           </form>

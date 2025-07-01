@@ -166,7 +166,7 @@ export default function New() {
                   <Link href="/ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
               </ul>
             </li>
-            <li><Link href="/new"><span>Projects</span></Link></li>
+            <li><Link href="/projects"><span>Projects</span></Link></li>
             <li><Link href="/contact"><span>Contact</span></Link></li>
             <li><Link href="/about"><span>About Us</span></Link></li>
 

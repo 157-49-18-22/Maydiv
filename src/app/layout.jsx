@@ -1,3 +1,4 @@
+"use client";
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '../components/Header';
@@ -5,6 +6,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Lottie from 'lottie-react';
 import whatsappAnimation from '../../public/Whatsapp.json';
+
 
 const inter = Inter({ subsets: ['latin'] });
 

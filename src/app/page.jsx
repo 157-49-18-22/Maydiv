@@ -6,11 +6,13 @@ import BestProject from '../components/BestProject';
 import Discuss from '../components/Discuss';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import WhatsappLottie from '../components/WhatsappLottie';
 
 export default function Home() {
   const pathname = usePathname();
   return (
     <main>
+      <WhatsappLottie />
       <Header />
       <OurService key={pathname} />
       <BestProject />

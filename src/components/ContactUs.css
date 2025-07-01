@@ -83,7 +83,7 @@ body, html, * {
   transform-origin: left;
   transition: transform 0.3s cubic-bezier(0.77,0,0.175,1);
   pointer-events: none;
-  margin-bottom: -1px;
+  margin-bottom: -7px;
 
 }
 
@@ -110,8 +110,8 @@ body, html, * {
 
 .header-socials a:hover {
   color: #b983ff;
-
-  }.contactus-bg {
+}
+.contactus-bg {
   min-height: unset;
   display: flex;
   align-items: center;

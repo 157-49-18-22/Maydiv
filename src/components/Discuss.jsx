@@ -36,7 +36,7 @@ const Discuss = () => {
             </button>
             <button
               className="discuss-btn discuss-btn-follow"
-              onClick={() => window.open('https://your-follow-link.com', '_blank')}
+              onClick={() => window.open('/contact', '_blank')}
             >
               Follow us
             </button>
@@ -47,4 +47,4 @@ const Discuss = () => {
   );
 };
 
-export default Discuss; 
+export default Discuss;

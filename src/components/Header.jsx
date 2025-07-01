@@ -93,7 +93,7 @@ const Header = () => {
                   display: dropdownOpen ? 'flex' : 'none',
                   opacity: dropdownOpen ? 1 : 0,
                   pointerEvents: dropdownOpen ? 'auto' : 'none',
-                  transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'
+                  transform: dropdownOpen ? 'translateX(-43%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'
                 }}>
                   <li><Link href="/web-development"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
                   <li><Link href="/apps/ui-ux"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>

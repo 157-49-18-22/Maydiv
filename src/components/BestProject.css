@@ -9,7 +9,7 @@ body, html, * {
 .best-project-section {
   background: #0a0a0a;
   color: #fff;
-  padding: 4rem 0;
+  
   position: relative;
   z-index: 1;
   overflow: hidden;

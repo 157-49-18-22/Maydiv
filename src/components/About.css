@@ -1576,12 +1576,7 @@ justify-content: center;
     order: 1;
    
   }
-  .header-logo img {
-    width: 200px !important;
-    height: 80px !important;
-    object-fit: contain;
-    margin-left: 104px;
-  }
+
   .burger-icon {
     display: flex;
     align-items: center;

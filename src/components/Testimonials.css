@@ -1879,12 +1879,7 @@ margin-bottom: 23%;
   }
 
 
-  .header-logo img {
-    height: 60px;
-    width: 60px;
-    margin-left: 190px;
-   
-  }
+ 
   .header-links {
     flex-direction: column;
     gap: 18px;

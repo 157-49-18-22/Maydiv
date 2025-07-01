@@ -38,7 +38,7 @@ export default function ContactUs() {
     <>
       <nav className="header-nav">
         <div className="header-logo">
-          <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} />
+          <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized />
         </div>
         <ul className="header-links">
           <li><Link href="/">Home</Link></li>

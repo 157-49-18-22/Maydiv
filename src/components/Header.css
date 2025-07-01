@@ -1207,6 +1207,9 @@ body {
     margin-bottom: 0.2em;
     word-break: break-word;
   }
+  .gradient-text{
+    margin-left: -27px;
+  }
   .header-buttons {
     flex-direction: column;
     gap: 8px;
@@ -1276,7 +1279,7 @@ body {
   .how-we-work-section {
     margin: 24px auto 0 auto;
     max-width: 98vw;
-    margin-top: 30px;
+    margin-top: -24px;
   }
   .how-we-work-content {
     flex-direction: column;

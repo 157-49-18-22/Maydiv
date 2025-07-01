@@ -83,7 +83,7 @@ export default function ContactUs() {
                 {servicesOpen && (
                   <ul className="mobile-services-dropdown">
                     <li><Link href="/web-development" onClick={() => setBurgerOpen(false)}><FaCode className="dropdown-icon" /> Web Development</Link></li>
-                    <li><Link href="/services" onClick={() => setBurgerOpen(false)}><FaPalette className="dropdown-icon" /> UI/UX Design</Link></li>
+                    <li><Link href="/apps/ui-ux" onClick={() => setBurgerOpen(false)}><FaPalette className="dropdown-icon" /> UI/UX Design</Link></li>
                     <li><Link href="/marketing" onClick={() => setBurgerOpen(false)}><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</Link></li>
                     <li><Link href="/app-development" onClick={() => setBurgerOpen(false)}><FaMobileAlt className="dropdown-icon" /> App Development</Link></li>
                     <li><Link href="/ai" onClick={() => setBurgerOpen(false)}><FaBrain className="dropdown-icon" /> Artificial Intelligence</Link></li>

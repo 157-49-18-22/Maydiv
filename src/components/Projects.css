@@ -1805,10 +1805,13 @@ display: none;
   background: #181828;
   box-shadow: -2px 0 24px #0008;
   z-index: 2000;
-  display: flex;
+  display: none;
   flex-direction: column;
   padding: 32px 18px 18px 18px;
   animation: slideInDrawer 0.25s cubic-bezier(0.4,0.2,0.2,1);
+}
+.mobile-drawer.open {
+  display: flex;
 }
 @keyframes slideInDrawer {
   from { right: -100vw; opacity: 0; }

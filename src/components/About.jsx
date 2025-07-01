@@ -14,8 +14,8 @@ import aboutAnimation from '../../public/About.json';
 export default function About() {
   // Fast reload on first visit
   useEffect(() => {
-    if (typeof window !== "undefined" && !window.__about_reloaded) {
-      window.__about_reloaded = true;
+    if (typeof window !== "undefined" && !localStorage.getItem("about_reloaded")) {
+      localStorage.setItem("about_reloaded", "true");
       window.location.reload();
     }
   }, []);
@@ -259,6 +259,9 @@ Since then, we've been turning ideas into impactful digital products — from mo
           <div className="about-team-image about-team-image-small">
           <Image src="/Ayush.jpeg" alt="Ayush" width={170} height={170} quality={100} />
           </div>
+          <div className="about-team-image about-team-image-small">
+    <Image src="/Hbp.jpg" alt="Hbp" width={170} height={170} quality={100} />
+  </div>
           <div className="about-team-image about-team-image-large">
           <Image src="/Ravi.jpeg" alt="Ravi" width={170} height={170} quality={100} />
           </div>

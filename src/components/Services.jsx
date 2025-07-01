@@ -121,11 +121,10 @@ const Services = () => {
           >
             <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
             <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
-              <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
-              <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
-              <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
-              <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
-              <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
+            <Link href="/web-development" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
+   <Link href="/apps/ui-ux" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>                  <Link href="/marketing" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
+                  <Link href="/app-development" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
+                  <Link href="/ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
             </ul>
           </li>
           <li><Link href="/new"><span>Projects</span></Link></li>
@@ -156,7 +155,7 @@ const Services = () => {
             <div className={`drawer-dropdown-list${drawerDropdownOpen ? ' open' : ''}`} style={{display: drawerDropdownOpen ? 'flex' : 'none'}}>
               <Link href="/real-projects" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
               <Link href="/real-services" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>
-              <Link href="/real-testimonials" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
+              <Link href="/marketing" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
               <Link href="/real-apps" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
               <Link href="/real-ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
             </div>
@@ -336,7 +335,7 @@ const Services = () => {
               <img src="/Costume.png" alt="Custome Service" className="features-card-icon" />
               <div>
                 <div className="features-card-title">Custome Service</div>
-                <div className="features-card-desc">Delivering support that’s fast, friendly, and always on.</div>
+                <div className="features-card-desc">Delivering support that's fast, friendly, and always on.</div>
               </div>
               <span className="features-card-arrow">→</span>
             </div>
@@ -368,8 +367,7 @@ const Services = () => {
           </div>
           <div className="project-card">
             <img src="/3.png" alt="Creative Digital Agency" className="project-card-img" />
-            <div className="project-card-title">Creative Digital Agency</div>
-            <div className="project-card-subtitle">Landing Page Design</div>
+          
           </div>
           <div className="project-card">
             <img src="/4.png" alt="Podcast Mobile App" className="project-card-img" />

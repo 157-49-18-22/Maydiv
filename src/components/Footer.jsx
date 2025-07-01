@@ -1,48 +1,42 @@
 import React from 'react';
 import Link from 'next/link';
+import { FaInstagram, FaFacebook, FaGithub } from 'react-icons/fa';
 import './Footer.css';
 
 const Footer = () => {
   return (
-    <footer className="footer-section">
-      <div className="footer-content">
-        <div className="footer-col footer-brand">
-          <div className="footer-logo">MAYDIV</div>
-          <div className="footer-desc">We Code. You Grow</div>
-        
+    <footer className="footer-section floating-footer">
+      <div className="footer-logo-centered">MAYDIV</div>
+      <div className="footer-content footer-columns">
+        <div className="footer-col footer-divider">
+          <div className="footer-title">Contact Details</div>
+          <div className="footer-address">+91 9220438999</div>
+          <div className="footer-address">operations@maydiv.com</div>
         </div>
-        <div className="footer-col">
-          <div className="footer-title">Explore</div>
-          <a href="#" className="footer-link">Resources</a>
-          <a href="#" className="footer-link">Blog</a>
-          <a href="#" className="footer-link">Documents</a>
+        <div className="footer-col footer-divider">
+          <div className="footer-title">Office Location</div>
+          <div className="footer-address">SCO-105 Second Floor World street,<br/>Faridabad , HR 121004</div>
         </div>
-        <div className="footer-col">
-          <div className="footer-title">Menu</div>
+        <div className="footer-col footer-divider">
+          <div className="footer-title">Quick Links</div>
           <Link href="/" className="footer-link">Home</Link>
           <Link href="/about" className="footer-link">About Us</Link>
           <a href="/contact" className="footer-link">Contact Us</a>
         </div>
         <div className="footer-col">
-          <div className="footer-title">OFFICE LOCATION</div>
-          <div className="footer-address">SCO-105 Second Floor World street, Faridabad , HR 121004</div>
-          <div className="footer-address">Contact: +91 9220438999</div>
-          <div className="footer-address">Email: <a href="mailto:operations@maydiv.com" style={{color: '#bdbdbd'}}>operations@maydiv.com</a></div>
+          <div className="footer-title">Follow us</div>
+          <div className="footer-socials-centered">
+            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" className="footer-social" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="https://www.facebook.com/profile.php?id=615720000000000" className="footer-social" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+            <a href="https://github.com/" className="footer-social" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+          </div>
         </div>
       </div>
-      <div className="footer-bottom">
-        <div className="footer-bottom-links">
-          <a href="#" className="footer-link">Terms</a>
-          <a href="#" className="footer-link">Privacy</a>
-          <a href="#" className="footer-link">Cookies</a>
-        </div>
-       
-        <div className="footer-socials">
-          <a href="#" className="footer-social"><i className="fa fa-facebook"></i></a>
-          <a href="#" className="footer-social"><i className="fa fa-linkedin"></i></a>
-          <a href="#" className="footer-social"><i className="fa fa-twitter"></i></a>
-        </div>
+      <div className="footer-bottom-centered">
+        <div>© 2025 Maydiv. All rights reserved.</div>
+        <div>Crafted by MayDiv Infotech</div>
       </div>
+    
     </footer>
   );
 };

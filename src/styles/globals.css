@@ -25,7 +25,7 @@
 }
 
 body {
-  background: var(--background);
+  background: #000;
   color: var(--foreground);
   --font-family: 'coco', sans-serif;
   max-width: 1200px;

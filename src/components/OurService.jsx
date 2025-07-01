@@ -39,7 +39,7 @@ const services = [
     id: 3,
     image: "/ourservice.png",
     alt: "Service Card",
-    link: "/real-testimonials",
+    link: "/marketing",
     className: 'service-card-img'
   }
 ];

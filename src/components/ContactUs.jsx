@@ -50,14 +50,14 @@ export default function ContactUs() {
           >
             <span className="dropdown-toggle">Services</span>
             <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-50%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
-              <li><Link href="/real-projects"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
-              <li><Link href="/real-services"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
-              <li><Link href="/real-testimonials"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
-              <li><Link href="/real-apps"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
-              <li><Link href="/real-ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
+              <li><Link href="/web-development"><span><FaCode className="dropdown-icon" /> Web Development</span></Link></li>
+              <li><Link href="/apps/ui-ux"><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link></li>
+              <li><Link href="/marketing"><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link></li>
+              <li><Link href="/app-development"><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link></li>
+              <li><Link href="/ai"><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link></li>
             </ul>
           </li>
-          <li><Link href="/new">Projects</Link></li>
+          <li><Link href="/projects">Projects</Link></li>
           <li><Link href="/contact">Contact</Link></li>
           <li><Link href="/about">About Us</Link></li>
         </ul>
@@ -82,15 +82,15 @@ export default function ContactUs() {
                 </button>
                 {servicesOpen && (
                   <ul className="mobile-services-dropdown">
-                    <li><Link href="/real-projects" onClick={() => setBurgerOpen(false)}><FaCode className="dropdown-icon" /> Web Development</Link></li>
-                    <li><Link href="/real-services" onClick={() => setBurgerOpen(false)}><FaPalette className="dropdown-icon" /> UI/UX Design</Link></li>
-                    <li><Link href="/real-testimonials" onClick={() => setBurgerOpen(false)}><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</Link></li>
-                    <li><Link href="/real-apps" onClick={() => setBurgerOpen(false)}><FaMobileAlt className="dropdown-icon" /> App Development</Link></li>
-                    <li><Link href="/real-ai" onClick={() => setBurgerOpen(false)}><FaBrain className="dropdown-icon" /> Artificial Intelligence</Link></li>
+                    <li><Link href="/web-development" onClick={() => setBurgerOpen(false)}><FaCode className="dropdown-icon" /> Web Development</Link></li>
+                    <li><Link href="/services" onClick={() => setBurgerOpen(false)}><FaPalette className="dropdown-icon" /> UI/UX Design</Link></li>
+                    <li><Link href="/marketing" onClick={() => setBurgerOpen(false)}><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</Link></li>
+                    <li><Link href="/app-development" onClick={() => setBurgerOpen(false)}><FaMobileAlt className="dropdown-icon" /> App Development</Link></li>
+                    <li><Link href="/ai" onClick={() => setBurgerOpen(false)}><FaBrain className="dropdown-icon" /> Artificial Intelligence</Link></li>
                   </ul>
                 )}
               </li>
-              <li><Link href="/new" onClick={() => setBurgerOpen(false)}>Projects</Link></li>
+              <li><Link href="/projects" onClick={() => setBurgerOpen(false)}>Projects</Link></li>
               <li><Link href="/contact" onClick={() => setBurgerOpen(false)}>Contact</Link></li>  
               <li><Link href="/about" onClick={() => setBurgerOpen(false)}>About Us</Link></li>
             </ul>

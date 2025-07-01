@@ -1,1 +1,5 @@
-export default function ProjectsPage() { return null; } 
+import New from '../../components/New';
+
+export default function ContactPage() {
+  return <New />;
+}

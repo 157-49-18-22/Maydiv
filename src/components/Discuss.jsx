@@ -30,7 +30,7 @@ const Discuss = () => {
           <div className="discuss-btn-group">
             <button
               className="discuss-btn discuss-btn-connect"
-              onClick={() => window.open('/contact', '_blank')}
+              onClick={() => window.open('https://wa.me/919220438999', '_blank')}
             >
               Connect Now
             </button>

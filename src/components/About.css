@@ -1568,14 +1568,18 @@ justify-content: center;
     position: relative;
   }
   .header-logo {
-    width: 100%;
-    display: flex !important;
+    display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    order: 1;
-   
+    flex: 1;
   }
+  .header-logo img {
+    height: 60px;
+    width: 60px;
+    margin: 0 auto;
+    display: block;
+  }
+  
 
   .burger-icon {
     display: flex;
@@ -2030,18 +2034,7 @@ justify-content: center;
     padding: 16px 8px 0 8px;
     height: auto;
   }
-  .header-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-  }
-  .header-logo img {
-    height: 60px;
-    width: 60px;
-    margin: 0 auto;
-    display: block;
-  }
+
   .header-links, .header-socials {
     display: none !important;
   }

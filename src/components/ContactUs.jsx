@@ -17,6 +17,13 @@ export default function ContactUs() {
   const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const dropdownTimeout = useRef(null);
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
+  });
+  const [focus, setFocus] = useState('');
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.innerWidth <= 480 && !sessionStorage.getItem('contactPageMobileRefreshed')) {
@@ -90,21 +97,52 @@ export default function ContactUs() {
           <form className="contactus-form-modern" action="https://formspree.io/f/xovwregw" method="POST">
             <div className="contactus-row">
               <div className="contactus-field">
-                <label>Name</label>
-                <input type="text" name="name" placeholder="" required />
+                {!(focus === 'name' || form.name) && <label>Name</label>}
+                <input
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={e => setForm({ ...form, name: e.target.value })}
+                  onFocus={() => setFocus('name')}
+                  onBlur={() => setFocus('')}
+                  required
+                />
               </div>
               <div className="contactus-field">
-                <label>Phone</label>
-                <input type="text" name="phone" placeholder="" />
+                {!(focus === 'phone' || form.phone) && <label>Phone</label>}
+                <input
+                  type="text"
+                  name="phone"
+                  value={form.phone}
+                  onChange={e => setForm({ ...form, phone: e.target.value })}
+                  onFocus={() => setFocus('phone')}
+                  onBlur={() => setFocus('')}
+                />
               </div>
             </div>
             <div className="contactus-field">
-              <label>Email</label>
-              <input type="email" name="email" placeholder="" required />
+              {!(focus === 'email' || form.email) && <label>Email</label>}
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={e => setForm({ ...form, email: e.target.value })}
+                onFocus={() => setFocus('email')}
+                onBlur={() => setFocus('')}
+                required
+              />
             </div>
             <div className="contactus-field">
-              <label>Message...</label>
-              <textarea rows={2} name="message" placeholder="" required />
+              {!(focus === 'message' || form.message) && <label>Message...</label>}
+              <textarea
+                rows={2}
+                name="message"
+                value={form.message}
+                onChange={e => setForm({ ...form, message: e.target.value })}
+                onFocus={() => setFocus('message')}
+                onBlur={() => setFocus('')}
+                required
+              />
             </div>
             <button type="submit" className="contactus-submit-btn">SUBMIT</button>
           </form>

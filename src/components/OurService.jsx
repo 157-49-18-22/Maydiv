@@ -11,28 +11,28 @@ const services = [
     id: 1,
     image: "/ourservice.png",
     alt: "Service Card",
-    link: "/real-projects",
+    link: "/web-development",
     className: 'service-card-img'
   },
   {
     id: 2,
     image: "/ourservice.png",
     alt: "Service Card",
-    link: "/real-services",
+    link: "/apps/ui-ux",
     className: 'service-card-img'
   },
   {
     id: 5,
     image: "/ourservice.png",
     alt: "Service Card",
-    link: "/real-ai",
+    link: "/ai",
     className: 'service-card-img4'
   },
   {
     id: 4,
     image: "/ourservice.png",
     alt: "Service Card",
-    link: "/real-apps",
+    link: "/app-development",
     className: 'service-card-img1'
   },
   {
@@ -210,7 +210,6 @@ const OurService = () => {
       </h2>
 
       <div className="carousel-row-container">
-        <button className="carousel-arrow left" onClick={goLeft}>&lt;</button>
         <div className="carousel-row">
           {[-2, -1, 0, 1, 2].map((offset) => {
             let i = (activeIndex + offset + services.length) % services.length;
@@ -260,7 +259,7 @@ const OurService = () => {
                     filter: blur,
                     transition: 'transform 0.7s cubic-bezier(.4,2,.6,1), opacity 0.7s, filter 0.4s',
                     transitionDelay,
-                    boxShadow: hoveredIndex === i ? '0 0 30px rgba(0, 0, 0, 0.3)' : 'none'
+                  
                   }}
                   onMouseEnter={() => handleMouseEnter(i)}
                   onMouseLeave={handleMouseLeave}
@@ -284,7 +283,28 @@ const OurService = () => {
             );
           })}
         </div>
-        <button className="carousel-arrow right" onClick={goRight}>&gt;</button>
+      </div>
+      {/* Navigation Dots at the bottom center */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem', gap: '12px' }}>
+        {services.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setActiveIndex(idx)}
+            style={{
+              width: '14px',
+              height: '14px',
+              borderRadius: '50%',
+              border: 'none',
+              background: idx === activeIndex ? '#b983ff' : '#333',
+              boxShadow: idx === activeIndex ? '0 0 8px #b983ff88' : 'none',
+              cursor: 'pointer',
+              transition: 'background 0.2s, box-shadow 0.2s',
+              outline: 'none',
+              padding: 0,
+            }}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
       </div>
     </section>
   );

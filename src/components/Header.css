@@ -1173,6 +1173,20 @@ body {
     margin-top: 0;
     margin-bottom: 16px;
   }
+  .header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin-left: 55px;
+    margin-bottom: -10px;
+  }
+  .header-logo img {
+    height: 60px;
+    width: 60px;
+    margin: 0 auto;
+    display: block;
+  }
   .header-links.open {
     display: flex !important;
   }
@@ -1207,6 +1221,7 @@ body {
     margin-bottom: 0.2em;
     word-break: break-word;
   }
+ 
  .btn{
   font-size: 0.8rem;
   margin-top: -10px;

@@ -82,4 +82,18 @@
   .mobile-drawer .drawer-dropdown-list.open {
     display: flex;
   }
+  .mobile-drawer .header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .mobile-drawer .header-logo img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+  }
 } 

@@ -50,15 +50,18 @@ const Projects = () => {
     };
   }, []);
 
-  // Add this useEffect instead:
+  // Mobile auto-reload logic
   useEffect(() => {
-    const handleBeforeUnload = () => {
-      window.location.reload();
-    };
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth <= 900;
+      const hasReloaded = sessionStorage.getItem('projectsMobileReloaded');
+      if (isMobile && !hasReloaded) {
+        sessionStorage.setItem('projectsMobileReloaded', 'true');
+        window.location.reload();
+      } else if (!isMobile) {
+        sessionStorage.removeItem('projectsMobileReloaded');
+      }
+    }
   }, []);
 
   const handleDropdownEnter = () => {

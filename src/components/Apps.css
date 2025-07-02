@@ -1256,10 +1256,11 @@ body {
     flex: 1;
   }
   .header-logo img {
-    height: 60px;
-    width: 60px;
+   height: 90px;
+    width: 90px;
     margin: 0 auto;
     display: block;
+    margin-top: -20px;
   }
   
   .apps-container {

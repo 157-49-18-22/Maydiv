@@ -85,6 +85,20 @@ const Services = () => {
     logosRowRef.current && logosRowRef.current.scrollBy({ left: 150, behavior: 'smooth' });
   };
 
+  // Mobile auto-reload logic
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth <= 900;
+      const hasReloaded = sessionStorage.getItem('servicesMobileReloaded');
+      if (isMobile && !hasReloaded) {
+        sessionStorage.setItem('servicesMobileReloaded', 'true');
+        window.location.reload();
+      } else if (!isMobile) {
+        sessionStorage.removeItem('servicesMobileReloaded');
+      }
+    }
+  }, []);
+
   // Cleanup nav/drawer/dropdown state on unmount
   useEffect(() => {
     return () => {
@@ -101,7 +115,6 @@ const Services = () => {
       document.documentElement.style.overflowX = 'hidden';
       const next = document.getElementById('__next');
       if (next) next.style.overflowX = 'hidden';
-      window.location.reload(); // Force full page reload on unmount
     };
   }, []);
 

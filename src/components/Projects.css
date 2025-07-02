@@ -688,12 +688,7 @@ body, html, * {
     max-width: 100vw !important;
     overflow-x: hidden !important;
   }
-  .header-logo img {
-    height: 60px;
-    width: 60px;
-    margin: 0 auto;
-    display: block;
-  }
+  
   .services-container,
   .projects-hero-section,
   .projects-hero-image-wrap,
@@ -1399,10 +1394,11 @@ display: none;
     flex: 1;
   }
   .header-logo img {
-    height: 60px;
-    width: 60px;
+   height: 90px;
+    width: 90px;
     margin: 0 auto;
     display: block;
+    margin-top: -20px;
   }
   
   .burger-icon {

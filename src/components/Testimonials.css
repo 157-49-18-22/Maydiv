@@ -605,22 +605,7 @@ margin-bottom: 23%;
     width: 100% !important;
     min-width: 100% !important;
   }
-  .header-nav {
-    padding: 16px 10px 0 10px;
-    height: 60px;
-  }
-  .header-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-  }
-  .header-logo img {
-    height: 60px;
-    width: 60px;
-    margin: 0 auto;
-    display: block;
-  }
+
   .header-links, .header-socials {
     display: none !important;
   }
@@ -1870,13 +1855,7 @@ margin-bottom: 23%;
   .header-container {
     padding-bottom: 16px;
   }
-  .header-nav {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px 8px 0 8px;
-    height: auto;
-    gap: 10px;
-  }
+
 
 
  

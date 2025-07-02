@@ -8,6 +8,7 @@ import "./Services.css";
 import Testimonial from './Testimonial';
 import Discuss from './Discuss';
 import Footer from './Footer';
+import MobileDrawer from './MobileDrawer';
 
 const Services = () => {
   const [showBulb, setShowBulb] = useState(false);
@@ -111,60 +112,44 @@ const Services = () => {
         <div className="header-logo">
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized/>
         </div>
-        <ul className="header-links">
-          <li><Link href="/">Home</Link></li>
-          <li className="dropdown"
-            onMouseEnter={handleDropdownEnter}
-            onMouseLeave={handleDropdownLeave}
-            onFocus={handleDropdownEnter}
-            onBlur={handleDropdownLeave}
-          >
-            <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
-            <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-43%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
-            <Link href="/web-development" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
-   <Link href="/apps/ui-ux" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>                  <Link href="/marketing" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
-                  <Link href="/app-development" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
-                  <Link href="/ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
-            </ul>
-          </li>
-          <li><Link href="/projects"><span>Projects</span></Link></li>
-          <li><Link href="/contact"><span>Contact</span></Link></li>
-          <li><Link href="/about"><span>About Us</span></Link></li>
-        </ul>
+        {/* Desktop nav links */}
+        {isDesktop && (
+          <ul className="header-links">
+            <li><Link href="/">Home</Link></li>
+            <li className="dropdown"
+              onMouseEnter={handleDropdownEnter}
+              onMouseLeave={handleDropdownLeave}
+              onFocus={handleDropdownEnter}
+              onBlur={handleDropdownLeave}
+            >
+              <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
+              <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-43%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
+                <Link href="/web-development" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
+                <Link href="/apps/ui-ux" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>
+                <Link href="/marketing" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
+                <Link href="/app-development" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
+                <Link href="/ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
+              </ul>
+            </li>
+            <li><Link href="/projects"><span>Projects</span></Link></li>
+            <li><Link href="/contact"><span>Contact</span></Link></li>
+            <li><Link href="/about"><span>About Us</span></Link></li>
+          </ul>
+        )}
+        {/* MobileDrawer usage here */}
+        <MobileDrawer
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          drawerDropdownOpen={drawerDropdownOpen}
+          setDrawerDropdownOpen={setDrawerDropdownOpen}
+          isMobile={!isDesktop}
+        />
         <div className="header-socials">
         <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
             <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
           </div>
-        {/* Burger menu for mobile */}
-        <button className="burger-menu" style={{display: 'none'}} onClick={() => setDrawerOpen(true)} aria-label="Open menu">
-          <FaBars />
-        </button>
       </nav>
-      {/* Mobile Drawer */}
-      <div className={`mobile-drawer${drawerOpen ? ' open' : ''}`}>
-        <button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close menu">
-          <FaTimes />
-        </button>
-        <ul>
-          <li><Link href="/" onClick={() => setDrawerOpen(false)}>Home</Link></li>
-          <li>
-            <button className={`drawer-dropdown${drawerDropdownOpen ? ' open' : ''}`} onClick={() => setDrawerDropdownOpen(v => !v)}>
-              Services <FaChevronDown style={{marginLeft: 8, transform: drawerDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s'}} />
-            </button>
-            <div className={`drawer-dropdown-list${drawerDropdownOpen ? ' open' : ''}`} style={{display: drawerDropdownOpen ? 'flex' : 'none'}}>
-            <Link href="/web-development" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
-                    <Link href="/apps/ui-ux" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>
-                    <Link href="/marketing" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
-                    <Link href="/app-development" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
-                    <Link href="/ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
-            </div>
-          </li>
-          <li><Link href="/projects" onClick={() => setDrawerOpen(false)}>Projects</Link></li>
-          <li><Link href="/contact" onClick={() => setDrawerOpen(false)}>Contact</Link></li>
-          <li><Link href="/about" onClick={() => setDrawerOpen(false)}>About Us</Link></li>
-        </ul>
-      </div>
       {/* Hero Content Row */}
       <div className="hero-pattern-bg">
         <div className="services-hero-row">

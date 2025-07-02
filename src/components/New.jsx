@@ -16,6 +16,7 @@ import Discuss from './Discuss';
 import Footer from './Footer';
 import Lottie from 'lottie-react';
 import newAnimation from '../../public/new.json';
+import MobileDrawer from './MobileDrawer';
 
 const projects = [
   {
@@ -172,44 +173,20 @@ export default function New() {
 
           </ul>
         )}
-        {/* Burger menu for mobile (only render on mobile) */}
-        {isMobile && (
-          <button className="burger-menu" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
-            <FaBars />
-          </button>
-        )}
+        {/* MobileDrawer usage here */}
+        <MobileDrawer
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          drawerDropdownOpen={drawerDropdownOpen}
+          setDrawerDropdownOpen={setDrawerDropdownOpen}
+          isMobile={isMobile}
+        />
         <div className="header-socials">
         <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
             <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
           </div>
       </nav>
-      {/* Mobile Drawer (only render on mobile) */}
-      {isMobile && (
-        <div className={`mobile-drawer${drawerOpen ? ' open' : ''}`}>
-          <button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close menu">
-            <FaTimes />
-        </button>
-          <ul>
-            <li><Link href="/" onClick={() => setDrawerOpen(false)}>Home</Link></li>
-            <li>
-              <button className={`drawer-dropdown${drawerDropdownOpen ? ' open' : ''}`} onClick={() => setDrawerDropdownOpen(v => !v)}>
-                Services <FaChevronDown style={{marginLeft: 8, transform: drawerDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s'}} />
-                </button>
-              <div className={`drawer-dropdown-list${drawerDropdownOpen ? ' open' : ''}`} style={{display: drawerDropdownOpen ? 'flex' : 'none'}}>
-              <Link href="/web-development" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
-                    <Link href="/apps/ui-ux" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>
-                    <Link href="/marketing" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
-                    <Link href="/app-development" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
-                    <Link href="/ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
-              </div>
-              </li>
-            <li><Link href="/projects" onClick={() => setDrawerOpen(false)}>Projects</Link></li>
-            <li><Link href="/contact" onClick={() => setDrawerOpen(false)}>Contact</Link></li>
-            <li><Link href="/about" onClick={() => setDrawerOpen(false)}>About Us</Link></li>
-            </ul>
-          </div>
-        )}
 
       {/* Projects Hero Section */}
       <div className="projects-hero-flex">

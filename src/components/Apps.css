@@ -1254,8 +1254,6 @@ body {
     justify-content: center;
     align-items: center;
     flex: 1;
-    margin-left: 55px;
-    margin-bottom: -10px;
   }
   .header-logo img {
     height: 60px;
@@ -1263,6 +1261,7 @@ body {
     margin: 0 auto;
     display: block;
   }
+  
   .apps-container {
     min-height: unset;
     padding: 0;

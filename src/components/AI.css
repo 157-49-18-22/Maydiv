@@ -2710,6 +2710,7 @@ Ai-our-projects-section {
   margin: 0 auto;
   display: block;
 }
+
 .burger-menu {
   display: flex !important;
   background: none;
@@ -2812,12 +2813,7 @@ display: none;
     padding: 16px 10px 0 10px;
     height: 60px;
   }
-  .header-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-  }
+
  
   .header-links, .header-socials {
     display: none !important;

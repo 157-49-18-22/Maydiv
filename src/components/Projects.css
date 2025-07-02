@@ -1393,11 +1393,18 @@ display: none;
 @media (max-width: 480px) {
   
   .header-logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1202;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
   }
+  .header-logo img {
+    height: 60px;
+    width: 60px;
+    margin: 0 auto;
+    display: block;
+  }
+  
   .burger-icon {
     display: block;
     position: absolute;

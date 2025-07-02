@@ -1445,7 +1445,7 @@ display: none;
     margin-bottom: 18px;
   }
   .projects-hero-image {
-    width: 98vw;
+    width: 93vw;
     height: auto;
     min-height: 120px;
     max-width: 100vw;
@@ -1578,7 +1578,7 @@ display: none;
     max-width: 95vw;
     border-radius: 10px;
     margin-right: 204px;
-    margin-bottom: 8px;
+    margin-top: 82px
   }
   .online-text {
     margin-top: -166px;

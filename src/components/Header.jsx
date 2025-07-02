@@ -128,8 +128,8 @@ const Header = () => {
             <span className="gradient-text1">Scalable AI.</span>
           </h1>
           <div className="header-buttons">
-            <Link href="/ai"><button className="btn">Get started</button></Link>
-            <Link href="/projects"><button className="btn">Our Portfolio</button></Link>
+            <Link href="/ai"><button className="underline-btn">Get started</button></Link>
+            <Link href="/projects"><button className="underline-btn">Our Portfolio</button></Link>
           </div>
           <div className="header-hero-robot-group" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', margin: '0 auto' }}>
             <Image src="/Animation.png" alt="Animation" width={1205} height={419} className="header-animation-img" />

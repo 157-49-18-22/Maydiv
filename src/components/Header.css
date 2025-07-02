@@ -1135,13 +1135,17 @@ body {
     height: auto;
   }
   .header-logo {
-    margin-bottom: 8px;
-    margin-top: -57px;
-    width: 100%;
     display: flex;
     justify-content: center;
-    z-index: 1101;
-    margin-top: -22px;
+    align-items: center;
+    flex: 1;
+  }
+  .header-logo img {
+   height: 90px;
+    width: 90px;
+    margin: 0 auto;
+    display: block;
+    margin-top: -20px;
   }
   .header-hamburger {
     display: flex !important;
@@ -1173,21 +1177,8 @@ body {
     margin-top: 0;
     margin-bottom: 16px;
   }
-  .header-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    margin-left: 55px;
-    margin-bottom: -10px;
-  }
-  .header-logo img {
-   height: 90px;
-    width: 90px;
-    margin: 0 auto;
-    display: block;
-   margin-top: -20px;
-  }
+
+ 
   .header-links.open {
     display: flex !important;
   }

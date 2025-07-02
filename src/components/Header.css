@@ -1198,7 +1198,7 @@ body {
     height: auto;
   }
   .gradient-text, .gradient-text1 {
-    font-size: 1.3rem;
+    font-size: 1rem;
     width: 100% !important;
     display: block !important;
     text-align: center !important;
@@ -1207,9 +1207,10 @@ body {
     margin-bottom: 0.2em;
     word-break: break-word;
   }
-  .gradient-text{
-    margin-left: -27px;
-  }
+ .btn{
+  font-size: 0.8rem;
+  margin-top: -10px;
+ }
   .header-buttons {
     flex-direction: column;
     gap: 8px;

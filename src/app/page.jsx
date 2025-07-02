@@ -21,5 +21,6 @@ export default function Home() {
         <Link href="/about" className="footer-link">About Us</Link>
       </Footer>
     </main>
+    
   );
 } 

@@ -2709,7 +2709,7 @@ Ai-our-projects-section {
   width: 90px;
   margin: 0 auto;
   display: block;
-  margin-top: -20px;
+  margin-top: -4px;
 }
 
 .burger-menu {
@@ -2884,6 +2884,7 @@ display: none;
     font-weight: 500;
     display: flex;
     align-items: center;
+    padding: 0px 196px 0px 0px;
     cursor: pointer;
   }
   .mobile-drawer .drawer-dropdown-list {

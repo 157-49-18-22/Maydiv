@@ -1398,19 +1398,19 @@ display: none;
     width: 90px;
     margin: 0 auto;
     display: block;
-    margin-top: -20px;
+    margin-top: -17px;
   }
   
   .burger-icon {
-    display: block;
+    display: flex !important;
     position: absolute;
-    right: 8px;
-    top: 10px;
-    z-index: 1203;
+    right:22px;
+    top: 4px;
+    z-index: 1200;
     background: none;
     border: none;
+    font-size: 2.2rem;
     color: #fff;
-    font-size: 2rem;
     cursor: pointer;
   }
   .header-links,
@@ -1630,6 +1630,7 @@ display: none;
     margin: 0;
     margin-right: 74px;
   }
+  
   .services-section {
     margin: 12px auto 0 auto;
     flex-direction: column;
@@ -1758,15 +1759,7 @@ display: none;
 }
 
 /* --- Burger Menu & Mobile Drawer for Projects.jsx --- */
-.burger-menu {
-  display: none;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 1201;
-}
+
 @media (max-width: 480px) {
   .header-nav {
     justify-content: center;
@@ -1778,24 +1771,8 @@ display: none;
     padding: 16px 10px 0 10px;
     height: 60px;
   }
-  .header-logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1202;
-  }
-  .burger-icon {
-    display: block;
-    position: absolute;
-    right: 8px;
-    top: 10px;
-    z-index: 1203;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
-  }
+ 
+
   .header-links,
   .header-socials {
     display: none !important;
@@ -1863,7 +1840,7 @@ display: none;
   border: none;
   color: #fff;
   width: 100%;
-  padding: 8px 0;
+  padding: 0px 196px 0px 0px;
   cursor: pointer;
 }
 .mobile-drawer .drawer-dropdown-list {

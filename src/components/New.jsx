@@ -204,7 +204,7 @@ export default function New() {
                     <Link href="/ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
               </div>
               </li>
-            <li><Link href="/new" onClick={() => setDrawerOpen(false)}>Projects</Link></li>
+            <li><Link href="/projects" onClick={() => setDrawerOpen(false)}>Projects</Link></li>
             <li><Link href="/contact" onClick={() => setDrawerOpen(false)}>Contact</Link></li>
             <li><Link href="/about" onClick={() => setDrawerOpen(false)}>About Us</Link></li>
             </ul>

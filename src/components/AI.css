@@ -2396,6 +2396,7 @@ Ai-our-projects-section {
     max-width: 120px;
     padding: 4px 8px;
     font-size: 0.8rem;
+    margin-left: 10px;
     
   }
   .fancy .text {
@@ -2616,7 +2617,7 @@ Ai-our-projects-section {
     justify-content: center;
     text-align: left;
     padding-left: 4px;
-    margin-bottom: 118px;
+    margin-bottom: 87px;
   }
   .ai-integration-right {
     align-items: center;

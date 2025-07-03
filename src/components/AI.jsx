@@ -177,7 +177,7 @@ const AI = () => {
             <div className="ai-multiverse-subheading">Optimized Reach</div>
             <p className="ai-multiverse-desc">It's all about getting your message in front of the right audience and creating those valuable <span className="ai-multiverse-link">relationships</span>.<br/>Learn More about how DOML can help you do just that - all with a simple, easy-to-use platform.</p>
             <img src="/Frame 14.png" alt="divider" className="ai-multiverse-divider-img" />
-            <button className="fancy"><span className="top-key"></span><span className="text">Learn more →</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
+
           </div>
         </div>
       </section>
@@ -193,7 +193,7 @@ const AI = () => {
             <div className="ai-multiverse-subheading">Optimized Reach</div>
             <p className="ai-multiverse-desc">DOML is a digital media agency powered by AI technology providing real time, <span className="ai-multiverse-link">data-driven insights</span> on your business and audience. The mission of DOML is to create the best experiences for companies through intelligent insights, powerful analytics and <span className="ai-multiverse-link">strategic execution</span>.</p>
             <img src="/Frame 14.png" alt="divider" className="ai-multiverse-divider-img" />
-            <button className="fancy"><span className="top-key"></span><span className="text">Learn more →</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
+
           </div>
         </div>
       </section>

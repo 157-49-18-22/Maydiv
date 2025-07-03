@@ -1321,7 +1321,7 @@ body {
   .how-we-work-section {
     margin: 24px auto 0 auto;
     max-width: 98vw;
-    margin-top: -24px;
+    
   }
   .how-we-work-content {
     flex-direction: column;

@@ -152,9 +152,7 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="header-trusted-section">
-            <TrustedLogos />
-          </div>
+          
 
           <div className="how-we-work-section">
             <div className="how-we-work-heading gradient-text2">HOW WE WORK</div>

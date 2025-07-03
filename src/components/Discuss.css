@@ -197,7 +197,7 @@
   border: 2.5px solid #fff;
 }
 .discuss-btn-follow:hover {
-  background: #fff;
+  background: black;
   color: #a100ff;
   border-color: #a100ff;
 }
@@ -287,5 +287,114 @@
   }
   .discuss-btn-follow {
     margin-top: 0;
+  }
+}
+
+/* Discuss Modal Styles */
+.discuss-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.discuss-modal {
+  background: #181818;
+  color: #fff;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+  min-width: 260px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+.discuss-modal h3 {
+  margin: 0 0 0.7rem 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.discuss-modal-btn {
+  background: #fff;
+  color: #181818;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin: 0.2rem 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.discuss-modal-btn:hover {
+  background: #a100ff;
+  color: #fff;
+}
+.discuss-modal-close {
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 1.1rem;
+  margin-top: 0.7rem;
+  cursor: pointer;
+  text-decoration: underline;
+  align-self: flex-end;
+}
+@media (max-width: 480px) {
+  .discuss-modal {
+    min-width: 80vw;
+    padding: 1.1rem 0.5rem 0.7rem 0.5rem;
+  }
+  .discuss-modal-btn {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0.6rem 0;
+  }
+}
+
+.discuss-dropdown-modal {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #181818;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.18);
+  padding: 0.7rem 1.2rem;
+  display: flex;
+  gap: 1.1rem;
+  z-index: 20;
+  min-width: 120px;
+  justify-content: center;
+  align-items: center;
+}
+.discuss-icon-btn {
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.7rem;
+  transition: color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.discuss-icon-btn:hover {
+  color: #a100ff;
+  transform: scale(1.18);
+}
+@media (max-width: 480px) {
+  .discuss-dropdown-modal {
+    min-width: 90px;
+    padding: 0.5rem 0.5rem;
+    gap: 0.7rem;
+  }
+  .discuss-icon-btn {
+    font-size: 1.3rem;
   }
 } 

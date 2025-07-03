@@ -1696,6 +1696,7 @@ justify-content: center;
   .about-hero-section {
     min-height: 50vh;
     padding-top: 30px;
+    margin-top: -90px;
   }
   .about-gradient-heading {
     font-size: 2rem;
@@ -1726,6 +1727,7 @@ justify-content: center;
   }
   .about-features-section {
     padding: 0 4px;
+    margin-top: -65px;
   }
   .about-features-heading {
     font-size: 1.3rem;

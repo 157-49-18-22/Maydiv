@@ -212,9 +212,9 @@ const Services = () => {
         </div>
         <div className="partners-logos-row-wrapper">
           <div className="partners-logos-topline"></div>
-          <button className="custom-partners-arrow-btn left" onClick={handleScrollLeft}>
-            &lt;
-          </button>
+          
+          
+         
           <div className="partners-logos-row" ref={logosRowRef}>
             {logos.map((logo, idx) => (
               <img
@@ -225,9 +225,7 @@ const Services = () => {
               />
             ))}
           </div>
-          <button className="custom-partners-arrow-btn right" onClick={handleScrollRight}>
-            &gt;
-          </button>
+         
         </div>
       </div>
       {/* Explore Section (new) */}

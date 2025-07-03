@@ -18,7 +18,7 @@ body {
   background: #0a0a0a;
   color: #fff;
   
-  padding-bottom: 40px;
+ 
   position: relative;
   overflow: visible;
   width: 100vw;
@@ -1874,9 +1874,7 @@ margin-bottom: 23%;
 }
 
 @media (max-width: 480px) {
-  .header-container {
-    padding-bottom: 16px;
-  }
+ 
 
 
 
@@ -1904,6 +1902,7 @@ margin-bottom: 23%;
     flex-direction: column;
     padding: 24px 0 16px 0;
     gap: 12px;
+    margin-top: -59px;
   }
   .marketing-hero-left {
     padding-left: 8px;

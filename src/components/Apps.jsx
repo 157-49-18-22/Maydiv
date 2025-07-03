@@ -2,16 +2,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaBars, FaTimes, FaGithub, FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaChevronDown } from 'react-icons/fa';
-import dynamic from 'next/dynamic';
+import { Player } from '@lottiefiles/react-lottie-player';
 import './Apps.css';
 import Testimonial from './Testimonial';
 import Discuss from './Discuss';
 import Footer from './Footer';
 import MobileDrawer from './MobileDrawer';
-const LottiePlayer = dynamic(
-  () => import('@lottiefiles/react-lottie-player').then(mod => mod.Player),
-  { ssr: false }
-);
+
+// Client-only wrapper for Lottie
+const ClientOnlyLottie = (props) => {
+  const [show, setShow] = useState(false);
+  useEffect(() => setShow(true), []);
+  if (!show) return null;
+  return <Player {...props} />;
+};
 
 const webProjectImages = [
   { src: '/Square.png', alt: 'Web App 1' },
@@ -143,11 +147,11 @@ const Apps = () => {
                     <p>performance, user experience, and</p>
                     <p>access to device-specific features.</p>
                   </div>
-                  <div className="logo-section" style={{gap: '12px', justifyContent: 'flex-start'}}>
-                    <LottiePlayer
+                  <div className="logo-section" style={{gap: '12px', justifyContent: 'flex-start', alignItems: 'center', minHeight: 60}}>
+                    <ClientOnlyLottie
                       autoplay
                       loop
-                      src="/Apple.json"
+                      src="/Android.json"
                       style={{ width: 120, height: 60, background: 'none', marginLeft: 0, display: 'block' }}
                     />
                     <span className="arrow">→</span>
@@ -176,7 +180,7 @@ const Apps = () => {
                     </p>
                   </div>
                   <div style={{ marginTop: '18px', marginLeft: '0px', width: '90px', height: '90px', display: 'flex', alignItems: 'center', zIndex: 10, position: 'relative' }}>
-                    <LottiePlayer
+                    <ClientOnlyLottie
                       autoplay
                       loop
                       src="/Android.json"
@@ -236,7 +240,7 @@ const Apps = () => {
           <section className="appdev-section">
             <div className="appdev-row">
               <div className="appdev-illustration">
-                <LottiePlayer
+                <ClientOnlyLottie
                   autoplay
                   loop
                   src="/Appdev.json"
@@ -293,7 +297,7 @@ const Apps = () => {
             <div className="nucleus-bg-extra2"></div>
             <div className="nucleus-bg-extra3"></div>
             <div className="nucleus-bg-extra4"></div>
-            <h2 className="webprojects-title gradient-title">Our Web Projects</h2>
+            <h2 className="webprojects-title gradient-title">Our App Projects</h2>
             <WebProjectsCards />
           </section>
 

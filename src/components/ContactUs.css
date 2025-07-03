@@ -984,6 +984,7 @@ body, html, * {
   }
   .contactus-info-item:nth-child(2) svg {
     font-size: 2.2rem !important;
+    margin-left:-3px;
   }
   .contactus-main {
     padding: 20px 10px;

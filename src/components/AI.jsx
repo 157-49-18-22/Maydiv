@@ -121,25 +121,25 @@ const AI = () => {
                 <Image src="/chart.png" alt="Performance" width={36} height={36} className="ai-growth-card-icon" />
                 <div className="ai-growth-card-title">Performance</div>
                 <div className="ai-growth-card-desc">Get exponential growth with our marketing strategies.</div>
-                <a href="#" className="ai-growth-card-link">Learn More</a>
+                
               </div>
               <div className="ai-growth-card">
                 <Image src="/people.png" alt="Retention" width={36} height={36} className="ai-growth-card-icon" />
                 <div className="ai-growth-card-title">Retention</div>
                 <div className="ai-growth-card-desc">Let us help you retarget your customer base.</div>
-                <a href="#" className="ai-growth-card-link">Learn More</a>
+                
               </div>
               <div className="ai-growth-card">
                 <Image src="/shoppingcart.png" alt="Marketplaces" width={36} height={36} className="ai-growth-card-icon" />
                 <div className="ai-growth-card-title">Marketplaces</div>
                 <div className="ai-growth-card-desc">Get more visibility, more customers, and more sales.</div>
-                <a href="#" className="ai-growth-card-link">Learn More</a>
+                
               </div>
               <div className="ai-growth-card">
                 <Image src="/arrowsquare.png" alt="Other Services" width={36} height={36} className="ai-growth-card-icon" />
                 <div className="ai-growth-card-title">Other Services</div>
                 <div className="ai-growth-card-desc">Besides marketing, we do a lot more.</div>
-                <a href="#" className="ai-growth-card-link">Learn More</a>
+               
               </div>
             </div>
           </div>

@@ -152,12 +152,12 @@ export default function ContactUs() {
           <h2 className="contactus-info-heading">Contact info</h2>
           <div className="contactus-info-list">
             <div className="contactus-info-item"><FaPhone /> 91+ 9220438999</div>
-            <div className="contactus-info-item1"><FaEnvelope />operations@maydiv.com</div>
+            <div className="contactus-info-item"><FaEnvelope />operations@maydiv.com</div>
             <div className="contactus-info-item"><FaMapMarkerAlt /> SCO-105 Second floor world street, Faridabad , HR 121004</div>
           </div>
           <div className="contactus-info-socials">
           <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+            <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
             <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
           </div>
           <img src="/MAYDIV.png" alt="MAYDIV" className="maydiv-watermark" />

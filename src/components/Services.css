@@ -2109,7 +2109,7 @@ html, body, .services-container, .hero-pattern-bg, .services-hero-row {
     gap: 0;
   }
   .projects-seeall-link {
-    margin-right: 0 !important;
+    margin-right: 7px !important;
     text-align: right;
     display: block;
   }
@@ -2211,7 +2211,7 @@ html, body, .services-container, .hero-pattern-bg, .services-hero-row {
   height: 20px;
 }
 .custom-partners-arrow-btn.right {
-  right: 0;
+  right: 4px;
   width: 20px;
   height: 20px;
 }

@@ -324,6 +324,8 @@ const Projects = () => {
         </div>
       </div> */}
       <Testimonial />
+      <br /> 
+      <br /> 
       <Discuss />
       <Footer />
     </div>

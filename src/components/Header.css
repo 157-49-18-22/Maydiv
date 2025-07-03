@@ -1199,7 +1199,12 @@ body {
     margin-top: 0;  
     margin-bottom: 0.2em;
     word-break: break-word;
+    z-index: 1000;
+  }    
+  .gradient-text{
+   height: 27px;
   }
+
   
  
  .underline-btn{
@@ -1290,6 +1295,22 @@ body {
   .how-we-work-btn {
     font-size: 0.9rem;
     padding: 8px 16px;
+  }
+  .how-we-work-heading {
+    font-size: 1.4rem;
+    letter-spacing: 1.5px;
+    background: linear-gradient(90deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5, #FF3BFF);
+    background-size: 300% 300%;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    text-fill-color: transparent !important;
+    display: inline-block;
+    font-weight: 100;
+    font-family: 'Poppins', sans-serif !important;
+
+    animation: gradient-move 3s linear infinite;
   }
   .how-we-work-right p {
     color: #bdbdbd;

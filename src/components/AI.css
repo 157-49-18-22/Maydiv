@@ -1693,6 +1693,7 @@ Ai-our-projects-section {
   transform: translateY(0);
 }
 
+
 .dropdown:hover .dropdown-menu li:nth-child(1) {
   transition-delay: 0.05s;
 }
@@ -2127,6 +2128,8 @@ Ai-our-projects-section {
   width: 100%;
   text-align: justify;  /* Align text to both left and right */
   color: #e0e0e0;
+  padding-left: 10px;
+
 }
 
   .ai-growth-cards {
@@ -2178,6 +2181,9 @@ Ai-our-projects-section {
   .ai-integration-desc, .ai-multiverse-desc, .ai-our-projects-title, .ai-our-projects-subtitle, .ai-get-text p, .ai-gradient-cta-heading span {
     font-size: 0.6rem;
     margin-bottom: 2px;
+  }
+  .ai-multiverse-desc{
+    padding-right: 10px;
   }
   .ai-integration-avatar {
     width: 16px;

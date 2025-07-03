@@ -1094,7 +1094,7 @@ margin-bottom: 23%;
 }
 
 .expertise-row-top .expertise-card {
-  flex: 0 0 22vw;
+  flex: 0 0 23vw;
   min-width: 0;
   max-width: 24vw;
   margin: 0;
@@ -2004,8 +2004,8 @@ margin-bottom: 23%;
     flex-wrap: nowrap !important;
     gap: 43px !important;
     justify-content: flex-start !important;
-    overflow-x: auto !important;
-    width: 100vw !important;
+   
+    width: 97vw !important;
     max-width: 100vw !important;
   }
   .featured-in-logo-card {
@@ -2080,7 +2080,8 @@ margin-bottom: 23%;
     padding: 12px 8px 10px 8px;
   }
   .expertise-title {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 600;
   }
   .expertise-icon img {
     width: 36px;

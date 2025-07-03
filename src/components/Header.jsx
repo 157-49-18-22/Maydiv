@@ -155,7 +155,7 @@ const Header = () => {
           </div>
 
           <div className="how-we-work-section">
-            <div className="how-we-work-heading gradient-text">HOW WE WORK</div>
+            <div className="how-we-work-heading gradient-text2">HOW WE WORK</div>
             <div className="how-we-work-content">
               <div className="how-we-work-left">
                 <h2>Get a dedicated UX design service at fraction of the cost.</h2>

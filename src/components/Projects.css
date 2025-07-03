@@ -810,6 +810,11 @@ body, html, * {
     margin-bottom: 0;
     max-width: 100%;
   }
+  .nextgen-girl.animate {
+    animation: none;
+    margin-top: -41px !important;
+    margin-left: 64px !important;
+  }
   .services-right {
     width: 52vw;
     min-width: 0;
@@ -1858,5 +1863,14 @@ display: none;
 }
 .mobile-drawer .drawer-dropdown-list a:hover {
   color: #fff;
+}
+
+.discuss-section {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  background: #0a0a0a !important;
 }
 

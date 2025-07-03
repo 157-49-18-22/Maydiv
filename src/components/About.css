@@ -1449,11 +1449,11 @@ justify-content: center;
 
 /* From Uiverse.io by cssbuttons-io */
 .fancy {
-  background-color: transparent;
-  border: 2px solid #000;
+  background-color: white;
+  border: 2px solid #fff;
   border-radius: 0;
   box-sizing: border-box;
-  color: #fff;
+  color: #000;
   cursor: pointer;
   display: inline-block;
   float: right;
@@ -1476,7 +1476,7 @@ justify-content: center;
   content: " ";
   width: 1.5625rem;
   height: 2px;
-  background: black;
+  background: white;
   top: 50%;
   left: 1.5em;
   position: absolute;
@@ -1494,7 +1494,7 @@ justify-content: center;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 .fancy .top-key {
@@ -1503,7 +1503,7 @@ justify-content: center;
   top: -2px;
   left: 0.625rem;
   position: absolute;
-  background: #e8e8e8;
+  background: #181818;
   transition: width 0.5s ease-out, left 0.3s ease-out;
 }
 
@@ -1513,7 +1513,7 @@ justify-content: center;
   right: 1.875rem;
   bottom: -2px;
   position: absolute;
-  background: #e8e8e8;
+  background: #181818;
   transition: width 0.5s ease-out, right 0.3s ease-out;
 }
 
@@ -1523,23 +1523,22 @@ justify-content: center;
   right: 0.625rem;
   bottom: -2px;
   position: absolute;
-  background: #e8e8e8;
+  background: #181818;
   transition: width 0.5s ease-out, right 0.3s ease-out;
 }
 
 .fancy:hover {
-  color: white;
-  background: black;
+  color: black;
+  background: white;
 }
 
 .fancy:hover::before {
   width: 0.9375rem;
-  background: white;
+  background: black;
 }
 
 .fancy:hover .text {
-  color: white;
-  padding-left: 1.5em;
+  color: black;
 }
 
 .fancy:hover .top-key {
@@ -1579,6 +1578,9 @@ justify-content: center;
     margin: 0 auto;
     display: block;
     margin-top: -20px;
+  }
+  .fancy::before{
+    display: none;
   }
   
 

@@ -826,8 +826,8 @@ Ai-our-projects-section {
   background: linear-gradient(120deg, #181818 60%, #3a1c71 100%);
   border-radius: 2.2rem;
   box-shadow: 0 0 32px 8px #b983ff55, 0 8px 48px 0 rgba(92,36,255,0.10);
-  border: 2.5px solid;
-  border-image: linear-gradient(90deg, #7e3ff2 0%, #b983ff 100%) 1;
+ 
+ 
   padding: 2.5rem 3.5rem;
   max-width: 950px;
   width: 100%;

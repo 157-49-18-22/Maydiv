@@ -1,5 +1,11 @@
 import ContactUs from '../../components/ContactUs';
+import WhatsappLottie from '../../components/WhatsappLottie';
 
 export default function ContactPage() {
-  return <ContactUs />;
+  return (
+    <main>
+      <WhatsappLottie />
+      <ContactUs />
+    </main>
+  );
 }

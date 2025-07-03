@@ -1,5 +1,11 @@
 'use client';
 import Apps from '../../components/Apps';
+import WhatsappLottie from '../../components/WhatsappLottie';
 export default function RealAppsPage() {
-  return <Apps />;
+  return (
+    <main>
+      <WhatsappLottie />
+      <Apps />
+    </main>
+  );
 } 

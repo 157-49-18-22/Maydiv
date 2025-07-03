@@ -1166,6 +1166,7 @@ Ai-our-projects-section {
   color: transparent;
   text-fill-color: transparent;
   display: inline-block;
+  font-size: 1.14rem;
 }
 
 .ai-multiverse-subheading {
@@ -2055,6 +2056,7 @@ Ai-our-projects-section {
     margin: 0 auto;
     gap: 2.5rem;
     opacity: 1;
+    margin-top: 20px;
   }
   
   
@@ -2135,6 +2137,7 @@ Ai-our-projects-section {
   .ai-growth-cards {
     grid-template-columns: 1fr;
     gap: 2px;
+    margin-left: -13px;
   }
   .ai-growth-card {
     padding: 4px 2px 2px 2px;
@@ -2467,6 +2470,11 @@ Ai-our-projects-section {
     margin: 0 auto;
     justify-items: center;
     align-items: stretch;
+    margin-left: -13px;
+  }
+  .ai-growth-cards{
+    margin-left: -13px;
+    
   }
   .ai-growth-card {
     min-width: 0;

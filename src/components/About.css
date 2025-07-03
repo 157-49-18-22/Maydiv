@@ -1320,7 +1320,7 @@ justify-content: center;
   color: #fff;
   position: relative;
   z-index: 2;
-  border: 1.5px solid #b983ff44;
+
   margin-left: auto;
   margin-right: auto;
 }
@@ -1449,11 +1449,11 @@ justify-content: center;
 
 /* From Uiverse.io by cssbuttons-io */
 .fancy {
-  background-color: white;
-  border: 2px solid #fff;
+  background-color: transparent;
+  border: 2px solid white;
   border-radius: 0;
   box-sizing: border-box;
-  color: #000;
+  color: #fff;
   cursor: pointer;
   display: inline-block;
   float: right;
@@ -1503,7 +1503,7 @@ justify-content: center;
   top: -2px;
   left: 0.625rem;
   position: absolute;
-  background: #181818;
+  background: black;
   transition: width 0.5s ease-out, left 0.3s ease-out;
 }
 
@@ -1513,7 +1513,7 @@ justify-content: center;
   right: 1.875rem;
   bottom: -2px;
   position: absolute;
-  background: #181818;
+  background: black;
   transition: width 0.5s ease-out, right 0.3s ease-out;
 }
 
@@ -1523,22 +1523,26 @@ justify-content: center;
   right: 0.625rem;
   bottom: -2px;
   position: absolute;
-  background: #181818;
+  background: black;
   transition: width 0.5s ease-out, right 0.3s ease-out;
 }
 
 .fancy:hover {
-  color: black;
-  background: white;
+  color: white;
+  background: black;
+  box-shadow: 0 0 16px 4px #ff3bff80, 0 0 32px 8px #5c24ff60;
+  transform: scale(1.06);
+  z-index: 2;
 }
 
 .fancy:hover::before {
   width: 0.9375rem;
-  background: black;
+  background: white;
 }
 
 .fancy:hover .text {
-  color: black;
+  color: white;
+  padding-left: 1.5em;
 }
 
 .fancy:hover .top-key {
@@ -1547,9 +1551,9 @@ justify-content: center;
 }
 
 .fancy:hover .bottom-key-1,
- .fancy:hover .bottom-key-2 {
- right: 0;
- width: 0;
+.fancy:hover .bottom-key-2 {
+  right: 0;
+  width: 0;
 }
 
 @media (max-width: 480px) {

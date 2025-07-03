@@ -280,6 +280,32 @@ body, html, * {
   font-size: 15px;
   line-height: 1.5;
 }
+.contactus-info-card {
+  background: #181818;
+  color: #fff;
+  border-radius: 0 20px 20px 0;
+  min-width: 340px;
+  max-width: 400px;
+  height: 494px;
+  margin-left: 1px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  padding: 32px 36px 32px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.contactus-info-card h3 {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #333;
+}
+.contactus-info-card p {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.5;
+}
 .contactus-socials {
   display: flex;
   gap: 16px;
@@ -874,7 +900,7 @@ body, html, * {
     flex-direction: row;
     gap: 6px;
     padding: 8px 0;
-    width: 100vw;
+    width: 95vw;
     align-items: stretch;
     justify-content: center;
     height: auto;
@@ -955,6 +981,12 @@ body, html, * {
     left: 50%;
     transform: translateX(-50%);
     display: block;
+  }
+  .contactus-info-item:nth-child(2) svg {
+    font-size: 2.2rem !important;
+  }
+  .contactus-main {
+    padding: 20px 10px;
   }
 }
 

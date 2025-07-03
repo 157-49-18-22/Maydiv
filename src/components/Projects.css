@@ -746,6 +746,7 @@ body, html, * {
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
+  padding-right: 3px;
 }
 
   .online-avatars-row {
@@ -864,6 +865,21 @@ body, html, * {
   .showcase-filters {
  display: none;
   }
+  .showcase-card1 {
+    background: #181828;
+    border-radius: 10px;
+    
+    box-shadow: 0 4px 32px #b983ff22;
+    overflow: hidden;
+    transition: transform 0.18s, box-shadow 0.18s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 90%;
+  }
+  
   .showcase-filters button {
     font-size: 0.95rem;
     padding: 5px 10px;
@@ -880,7 +896,7 @@ body, html, * {
   }
   .showcase-card {
     width: 100%;
-    border-radius: 10px;
+   
     overflow: hidden;
     box-sizing: border-box;
   }
@@ -1600,6 +1616,10 @@ display: none;
   .online-text h2 {
     font-size: 0.8rem;
     margin-top: 20px;
+    padding-right: 12px;
+  }
+  .online-separator{
+    display: none;
   }
   .online-text p {
   font-size: 0.72rem;
@@ -1742,7 +1762,7 @@ display: none;
     box-sizing: border-box;
   }
   .showcase-card {
-    width: 100%;
+    width: 90%;
     border-radius: 10px;
     overflow: hidden;
     box-sizing: border-box;

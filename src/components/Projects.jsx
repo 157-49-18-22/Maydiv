@@ -85,7 +85,9 @@ const Projects = () => {
       {/* Hero Section */}
       <nav className="header-nav">
         <div className="header-logo">
+          <Link href="/">
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized/>
+          </Link>
         </div>
         {/* Desktop nav links */}
         {!isMobile && (
@@ -298,7 +300,7 @@ const Projects = () => {
           <div className="showcase-card">
             <img src="/5.png" alt="Project 5" />
           </div>
-          <div className="showcase-card">
+          <div className="showcase-card1">
             <img src="/6.jpeg" alt="Project 6" />
           </div>
         </div>

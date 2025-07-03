@@ -857,6 +857,7 @@ body {
     min-width: 0;
     align-items: flex-start;
     text-align: left;
+    padding-left: 10px;
   }
   .about-heading {
     text-align: left;
@@ -2018,6 +2019,7 @@ html, body, .services-container, .hero-pattern-bg, .services-hero-row {
     align-items: flex-start;
     margin-bottom: 0;
     padding-left: 0;
+    padding-right: 9px;
   }
   .explore-heading {
     text-align: left;
@@ -2064,6 +2066,7 @@ html, body, .services-container, .hero-pattern-bg, .services-hero-row {
     margin-left: 0;
     gap: 4px;
     padding-top: 0;
+    padding-right: 4px;
   }
   .features-card {
     min-width: 0;

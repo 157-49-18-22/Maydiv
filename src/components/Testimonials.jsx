@@ -53,7 +53,9 @@ const Testimonials = () => {
 
         <nav className="header-nav">
           <div className="header-logo">
+          <Link href="/">
             <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized />
+</Link>
           </div>
           {/* Desktop nav links */}
           {!isMobile && (

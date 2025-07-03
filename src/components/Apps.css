@@ -1397,6 +1397,8 @@ body {
     margin-left: 0;
     width: 88vw;
     padding: 0 0.5rem;
+    margin-left: 26px;
+}
   }
   .projects-partners-heading {
     margin-left: 0;
@@ -1408,6 +1410,7 @@ body {
     flex-wrap: wrap;
     gap: 10px !important;
     justify-content: flex-start !important;
+    margin-left: 26px;
   }
   .partner-logo {
     max-width: 70px !important;
@@ -1557,7 +1560,7 @@ body {
   .burger-menu {
     display: block !important;
   }
-}
+
 
 .burger-menu {
   display: none;

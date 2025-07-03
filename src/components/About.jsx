@@ -54,7 +54,9 @@ export default function About() {
       {/* Hero Section */}
       <nav className="header-nav">
         <div className="header-logo">
-          <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized/>
+          <Link href="/">
+          <Image src="/logo.png"  alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized/>
+          </Link>
         </div>
         {/* Desktop nav links */}
         {!isMobile && (
@@ -106,8 +108,8 @@ export default function About() {
           Step into the future with maydiv! I offer a range of digital solutions that can transform your business landscape. With our expertise, your digital needs will be met with creativity and innovation.
         </p>
         <div className="about-btn-row">
-          <button className="fancy"><span className="top-key"></span><span className="text">Get started</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
-          <button className="fancy"><span className="top-key"></span><span className="text">Our Portfolio</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
+          <button className="fancy1"><span className="top-key"></span><span className="text">Get started</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
+          <button className="fancy1"><span className="top-key"></span><span className="text">Our Portfolio</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
         </div>
       </section>
       <TrustedLogos />

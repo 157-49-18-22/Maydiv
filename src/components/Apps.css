@@ -287,14 +287,11 @@ body {
   margin-left: -10%;
 }
 
-.projects-partners-section{
   
-  width: 100%;
-  margin-left: -112px;
-}
 .projects-partners-heading{
-  margin-left: 30%;
-  width: 100%;
+  display: flex;
+justify-content: center;
+ 
   margin-bottom: 3%;
   background: linear-gradient(to right, #b983ff, #ff5ecd);
   -webkit-background-clip: text;
@@ -359,22 +356,12 @@ body {
  
 }
 
-.mobiles-image {
-  width: 84%;
-  height: auto;
-  object-fit: contain;
-  animation:
-    slideInMobiles 1.1s cubic-bezier(0.77,0,0.175,1) 1.3s forwards,
-    floatMobiles 5.2s ease-in-out 2.4s infinite;
-    margin-left: -38%;
-   
-}
 
 .ios-box {
   position: relative;
   background: #000;
   border-radius: 20px;
-  overflow: hidden;
+  overflow: visible;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -485,14 +472,6 @@ body {
   transform: translateX(5px);
 }
 
-.projects-partners-grid {
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 24px !important;
-  justify-content: center !important;
-  align-items: center !important;
-  flex-wrap: wrap !important;
-}
 
 .projects-partner-card {
   display: flex !important;
@@ -553,7 +532,8 @@ body {
   justify-content: center;
   min-width: 180px;
   max-width: 260px;
- 
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .appdev-content {
@@ -563,6 +543,12 @@ body {
   align-items: flex-start;
   justify-content: center;
   min-width: 260px;
+  max-width: none;
+  width: auto !important;
+  box-sizing: border-box !important;
+  padding-right: 0 !important;
+  word-break: normal;
+  margin-top: 0;
 }
 
 .appdev-title {
@@ -572,8 +558,9 @@ body {
   background: linear-gradient(90deg, #b983ff, #ff5ecd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-left: -10%;
-  width: 100%;
+  margin-left: 0 !important;
+  width: auto;
+  word-break: normal;
 }
 .appdev-title::first-letter {
   text-transform: uppercase;
@@ -584,6 +571,10 @@ body {
   color: #fff;
   max-width: 480px;
   margin-bottom: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  word-break: normal;
 }
 
 .tech-title {
@@ -671,6 +662,21 @@ body {
   .tech-cards-row {
     flex-direction: column;
     gap: 18px;
+  }
+  .nucleus-bg-extra1,
+  .nucleus-bg-extra2,
+  .nucleus-bg-extra3,
+  .nucleus-bg-extra4 {
+    display: none !important;
+  }
+  .logo-section .lottie-player,
+  .ios-content1 .lottie-player {
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
   }
 }
 
@@ -761,11 +767,16 @@ body {
   .webprojects-cards-row {
     grid-template-columns: 1fr;
     grid-template-rows: none;
-    gap: 18px;
+    gap: 12px;
   }
   .webprojects-card {
-    max-width: 100%;
     min-width: 0;
+    max-width: 90vw;
+    padding: 8px;
+  }
+  .webprojects-img {
+    max-width: 80vw;
+    max-height: 12rem;
   }
 }
 
@@ -882,7 +893,6 @@ body {
 }
 
 .Android {
-  opacity: 0;
   animation:
     slideInAndroid 1.2s cubic-bezier(0.77,0,0.175,1) 1.2s forwards,
     floatAndroid 6.2s ease-in-out 2.4s infinite;
@@ -927,7 +937,7 @@ body {
   vertical-align: middle;
   margin-bottom: 0 !important;
   margin-top: 0 !important;
-  line-height: 1.5;
+  
 }
 
 .dropdown-toggle:hover {
@@ -1111,6 +1121,7 @@ body {
   z-index: 200;
 }
 
+
 .dropdown-avatar {
   position: absolute;
   top: -28px;
@@ -1249,6 +1260,13 @@ body {
     width: 44px;
     height: 44px;
   }
+  .Android {
+    animation:
+      slideInAndroid 1.2s cubic-bezier(0.77,0,0.175,1) 1.2s forwards,
+      floatAndroid 6.2s ease-in-out 2.4s infinite;
+      margin-top: 140px;
+      margin-right:-100px;
+  }
   .header-logo {
     display: flex;
     justify-content: center;
@@ -1319,6 +1337,16 @@ body {
   .ios-description p {
     font-size: 1rem;
   }
+  .mobiles-image {
+    width: 84%;
+    height: auto;
+    object-fit: contain;
+    animation:
+      slideInMobiles 1.1s cubic-bezier(0.77,0,0.175,1) 1.3s forwards,
+      floatMobiles 5.2s ease-in-out 2.4s infinite;
+      margin-left: -38%;
+     
+  }
   .logo-section {
     margin-top: 1rem;
     flex-direction: row;
@@ -1371,6 +1399,12 @@ body {
     height: auto;
 
   }
+  .projects-partners-grid {
+    flex-wrap: wrap;
+    gap: 10px !important;
+    justify-content: flex-start !important;
+    margin-left: 26px;
+  }
   .apps2-image {
     width: 100vw;
     max-width: 100vw;
@@ -1406,11 +1440,20 @@ body {
     text-align: left;
     margin-bottom: 1rem;
   }
+
   .projects-partners-grid {
     flex-wrap: wrap;
     gap: 10px !important;
     justify-content: flex-start !important;
     margin-left: 26px;
+  }
+  .projects-partners-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 24px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
   }
   .partner-logo {
     max-width: 70px !important;
@@ -1505,7 +1548,7 @@ body {
     font-size: 0.9rem;
   }
   .webprojects-section {
-    max-width: 100vw;
+    max-width: 89vw;
     margin-left: 0;
     padding: 0 0.2rem 16px 0.2rem;
   }
@@ -1515,6 +1558,7 @@ body {
     text-align: left;
     .webprojects-title::first-letter {
       text-transform: uppercase;
+      
     }
   }
   .webprojects-cards-row {
@@ -1534,29 +1578,14 @@ body {
 
   .webprojects-img {
     max-width: 100vw;
-    max-height: 120px;
+    max-height: 24rem;
   }
-  .nucleus-bg-extra1, .nucleus-bg-extra2, .nucleus-bg-extra3, .nucleus-bg-extra4 {
-    display: none !important;
-  }
-  .Android {
-    position: absolute;
-    right: 10px;
-    top: 120px;
-    margin: 0;
-    width: 200px;
-    height: auto;
-    z-index: 10;
-    opacity: 0.85;
-    pointer-events: none;
-  }
+ 
+ 
   .apps-hero {
     position: relative;
   }
-  .header-links,
-  .header-socials {
-    display: none !important;
-  }
+ 
   .burger-menu {
     display: block !important;
   }
@@ -1761,6 +1790,270 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* --- Desktop styles for App Development section (force desktop layout for website view) --- */
+@media (min-width: 1025px) {
+  .appdev-section {
+    max-width: 1100px;
+    margin: 48px auto 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+  }
+  .appdev-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    width: 100%;
+    margin-bottom: 32px;
+  }
+  .appdev-illustration {
+    flex: 0 0 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    max-width: 260px;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .appdev-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 260px;
+    max-width: none;
+    width: auto !important;
+    box-sizing: border-box !important;
+    padding-right: 0 !important;
+    word-break: normal;
+    margin-top: 0;
+  }
+  .appdev-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    background: linear-gradient(90deg, #b983ff, #ff5ecd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: 0 !important;
+    width: auto;
+    word-break: normal;
+  }
+  .appdev-desc {
+    font-size: 1.15rem;
+    color: #fff;
+    max-width: 480px;
+    margin-bottom: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    word-break: normal;
+  }
+  .projects-partners-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 3%;
+    padding: 18px 0 12px 0;
+    background: linear-gradient(to right, #b983ff, #ff5ecd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-right: 14%;
+  }
+  .projects-partners-grid {
+    gap: 28px !important;
+    padding: 12px 0;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-right: 14%;
+  }
+  .partner-logo {
+    max-width: 120px !important;
+    max-height: 60px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    margin: 0 !important;
+    transition: transform 0.25s cubic-bezier(0.4,0.2,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0.2,0.2,1);
+    animation: floatLogo 3.5s ease-in-out infinite;
+  }
+  .partner-logo:hover {
+    transform: scale(1.12) translateY(-6px);
+    box-shadow: 0 8px 32px 0 rgba(185,131,255,0.22), 0 2px 8px 0 rgba(255,94,205,0.12);
+    z-index: 2;
+    animation-play-state: paused;
+  }
+  @keyframes floatLogo {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+    100% { transform: translateY(0); }
+  }
+   .nucleus-bg-extra3, .nucleus-bg-extra4 {
+    position: absolute;
+    top: auto;
+    bottom: -30px;
+    left: 10%;
+    width: 360px;
+    height: 180px;
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: 2;
+    transform: translate(-50%, -50%) rotate(-30deg);
+  }
+  .nucleus-bg-extra1, .nucleus-bg-extra2{
+    position: absolute;
+    top: auto;
+    bottom: -20px;
+    left: 10%;
+    width: 360px;
+    height: 180px;
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: 2;
+    transform: translate(-50%, -50%) rotate(-30deg);
 
+}
 
+/* --- Desktop styles for Technology we use section (force desktop layout for website view) --- */
+@media (min-width: 1025px) {
+  .tech-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 32px 0 18px 0;
+    background: linear-gradient(90deg, #b983ff, #ff5ecd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: 0;
+    text-align: center;
+    margin-right: 14%;
+  }
+  .tech-cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    margin-right: 14%;
+  
+  }
+  .tech-card {
+    background: rgba(255,255,255,0.04);
+    border: 2px solid #b983ff;
+    border-radius: 18px;
+    padding: 24px 18px 18px 18px;
+    min-width: 220px;
+    max-width: 320px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 12px 0 rgba(185,131,255,0.08);
+    transition: box-shadow 0.2s, border 0.2s, transform 0.22s cubic-bezier(0.4,0.2,0.2,1);
+  }
+  .tech-card:hover {
+    box-shadow: 0 8px 32px 0 rgba(185,131,255,0.22);
+    border-color: #ff5ecd;
+    transform: scale(1.06);
+    z-index: 2;
+  }
+  .tech-logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 12px;
+  }
+  .tech-logo1 {
+    width: 140px;
+    height: 80px;
+    margin-bottom: 12px;
+  }
+  .tech-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #b983ff;
+    margin-bottom: 8px;
+  }
+  .tech-card-desc {
+    font-size: 1rem;
+    color: #bdbdbd;
+    text-align: center;
+  }
+ 
 
+  @keyframes floatNucleus {
+    0% { transform: translate(-50%, -50%) rotate(-30deg) translateY(0); }
+    50% { transform: translate(-50%, -50%) rotate(-30deg) translateY(-30px); }
+    100% { transform: translate(-50%, -50%) rotate(-30deg) translateY(0); }
+  }
+  @keyframes floatNucleus2 {
+    0% { transform: translate(-50%, -50%) rotate(40deg) translateY(0); }
+    50% { transform: translate(-50%, -50%) rotate(40deg) translateY(30px); }
+    100% { transform: translate(-50%, -50%) rotate(40deg) translateY(0); }
+  }
+  @keyframes floatNucleus3 {
+    0% { transform: translate(-50%, -50%) rotate(-30deg) translateX(0); }
+    50% { transform: translate(-50%, -50%) rotate(-30deg) translateX(30px); }
+    100% { transform: translate(-50%, -50%) rotate(-30deg) translateX(0); }
+  }
+  @keyframes floatNucleus4 {
+    0% { transform: translate(-50%, -50%) rotate(8deg) scale(1); }
+    50% { transform: translate(-50%, -50%) rotate(8deg) scale(1.08); }
+    100% { transform: translate(-50%, -50%) rotate(8deg) scale(1); }
+  }
+  
+}
+@media (min-width: 1025px) {
+  .webprojects-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .ios-section, .android-section {
+    gap: 48px;
+    margin-bottom: 32px;
+  }
+  .ios-box, .ios-content1 {
+    margin-bottom: 0;
+    margin-top: 0;
+    min-width: 320px;
+    max-width: 480px;
+  }
+  
+}
+}
+
+@media (min-width: 901px) {
+  .webprojects-cards-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    width: 100%;
+    justify-items: center;
+    align-items: stretch;
+  }
+  .webprojects-card {
+    min-width: 320px;
+    max-width: 420px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .webprojects-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 16px;
+  }
+}

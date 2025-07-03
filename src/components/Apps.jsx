@@ -14,11 +14,12 @@ const LottiePlayer = dynamic(
 );
 
 const webProjectImages = [
-  { src: '/Square.jpg', alt: 'Web App 1' },
-  { src: '/Click.jpeg', alt: 'Web App 2' },
-  { src: '/Fruit.png', alt: 'Web App 3' },
+  { src: '/Square.png', alt: 'Web App 1' },
+  { src: '/Click.png', alt: 'Web App 2' },
+  { src: '/Fruit.png', alt: 'Web App 3' } ,
   { src: '/Kisan.png', alt: 'Web App 4' },
 ];
+
 
 function WebProjectsCards() {
   const [rotated, setRotated] = useState([false, false, false, false]);
@@ -31,12 +32,13 @@ function WebProjectsCards() {
     setRotated(r => r.map((v, i) => (i === idx ? false : v)));
   };
 
+  // Use a two-column grid for desktop
   return (
     <div className="webprojects-cards-row">
       {webProjectImages.map((img, idx) => (
         <div
           key={img.src}
-          className={`webprojects-card${rotated[idx] ? ' is-rotated' : ''}`}
+          className={`webprojects-card webproject-card-${idx + 1}${rotated[idx] ? ' is-rotated' : ''}`}
           onMouseEnter={() => handleMouseEnter(idx)}
           onAnimationEnd={() => handleAnimationEnd(idx)}
         >
@@ -141,12 +143,12 @@ const Apps = () => {
                     <p>performance, user experience, and</p>
                     <p>access to device-specific features.</p>
                   </div>
-                  <div className="logo-section">
-                  <LottiePlayer
+                  <div className="logo-section" style={{gap: '12px', justifyContent: 'flex-start'}}>
+                    <LottiePlayer
                       autoplay
                       loop
                       src="/Apple.json"
-                      style={{ width: 240, height: 100, background: 'none',marginLeft:'-30%' }}
+                      style={{ width: 120, height: 60, background: 'none', marginLeft: 0, display: 'block' }}
                     />
                     <span className="arrow">→</span>
                   </div>
@@ -173,12 +175,12 @@ const Apps = () => {
                       largest mobile platform in the world.
                     </p>
                   </div>
-                  <div style={{marginTop: '18px', marginLeft: '0px', width: '90px', height: '90px', display: 'flex', alignItems: 'center'}}>
+                  <div style={{ marginTop: '18px', marginLeft: '0px', width: '90px', height: '90px', display: 'flex', alignItems: 'center', zIndex: 10, position: 'relative' }}>
                     <LottiePlayer
                       autoplay
                       loop
                       src="/Android.json"
-                      style={{ width: '180px', height: '103px', background: 'none',marginLeft:'-30%' }}
+                      style={{ width: 90, height: 90, background: 'none', marginLeft: 0 }}
                     />
                     <span className="arrow">→</span>
                   </div>

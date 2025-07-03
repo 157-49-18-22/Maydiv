@@ -286,7 +286,7 @@ body {
 }
 
 .about-features-label {
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: 2px;
   color: #7b61ff;
@@ -296,7 +296,7 @@ body {
 }
 
 .about-features-heading {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 800;
   background: linear-gradient(90deg, #7b61ff 0%, #00e0ff 100%);
   -webkit-background-clip: text;
@@ -1727,7 +1727,7 @@ justify-content: center;
   }
   .about-features-section {
     padding: 0 4px;
-    margin-top: -65px;
+    margin-top: -31px;
   }
   .about-features-heading {
     font-size: 1.3rem;
@@ -1743,6 +1743,7 @@ justify-content: center;
     height: auto;
     padding: 0;
     border-radius: 18px;
+    padding-inline: 20px;
   }
   .about-feature-card {
     padding: 18px 0;

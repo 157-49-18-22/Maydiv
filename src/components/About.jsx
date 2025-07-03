@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaTwitter, FaLinkedin, FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
 import './About.css';
-import TrustedLogos from './TrustedLogos';
 import Testimonial from './Testimonial';
 import Discuss from './Discuss';
 import Footer from './Footer';
@@ -112,7 +111,6 @@ export default function About() {
           <button className="fancy1"><span className="top-key"></span><span className="text">Our Portfolio</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
         </div>
       </section>
-      <TrustedLogos />
       {/* Features Section */}
       <section className="about-features-section">
         <div className="about-features-label">FEATURES</div>

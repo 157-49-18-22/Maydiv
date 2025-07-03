@@ -1105,7 +1105,7 @@ Ai-our-projects-section {
   .ai-multiverse-link{
     color: #7e3ff2;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.7rem;
   }
   .section-left, .section-right {
     width: 50%;
@@ -2117,7 +2117,7 @@ Ai-our-projects-section {
   .ai-multiverse-link{
     color: #7e3ff2;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.7rem;
   }
   .ai-growth-title {
     font-size: 0.8rem;
@@ -2189,8 +2189,8 @@ Ai-our-projects-section {
     padding-right: 10px;
   }
   .ai-integration-avatar {
-    width: 16px;
-    height: 16px;
+    width: 30px;
+    height: 30px;
   }
   .ai-multiverse-divider-img, .ai-get-img, .ai-gradient-cta-img {
     max-width: 134px;
@@ -2471,6 +2471,8 @@ Ai-our-projects-section {
     justify-items: center;
     align-items: stretch;
     margin-left: -13px;
+    margin-bottom: 70px;
+
   }
   .ai-growth-cards{
     margin-left: -13px;
@@ -2519,7 +2521,7 @@ Ai-our-projects-section {
   .ai-integration-user-role {
     text-align: left !important;
     width: 100%;
-    margin-left: 0;
+    margin-left: 10px;
     margin-right: 0;
   }
 }

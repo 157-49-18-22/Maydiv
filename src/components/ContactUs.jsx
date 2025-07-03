@@ -152,7 +152,7 @@ export default function ContactUs() {
           <h2 className="contactus-info-heading">Contact info</h2>
           <div className="contactus-info-list">
             <div className="contactus-info-item"><FaPhone /> 91+ 9220438999</div>
-            <div className="contactus-info-item"><FaEnvelope /> operations@maydiv.com</div>
+            <div className="contactus-info-item1"><FaEnvelope /> operations@maydiv.com</div>
             <div className="contactus-info-item"><FaMapMarkerAlt /> SCO-105 Second floor world street, Faridabad , HR 121004</div>
           </div>
           <div className="contactus-info-socials">

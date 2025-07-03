@@ -904,6 +904,13 @@ body, html, * {
     line-height: 1.6;
     padding-bottom: 4px;
   }
+  .contactus-info-item1 {
+    font-size: 0.95rem;
+    gap: 2px;
+    line-height: 1.1;
+    padding-bottom: 4px;
+    
+  }
   .contactus-heading {
     font-size: 1.1rem;
     margin-bottom: 10px;

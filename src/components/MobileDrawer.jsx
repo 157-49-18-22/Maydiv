@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaBars, FaTimes, FaChevronDown, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaInstagram, FaFacebook, FaGithub, FaMoon, FaSun } from 'react-icons/fa';
+import { FaBars, FaTimes, FaChevronDown, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaInstagram, FaFacebook, FaGithub, FaRegLightbulb } from 'react-icons/fa';
 import './MobileDrawer.css';
 
 const socialLinks = [
@@ -31,9 +31,14 @@ const MobileDrawer = ({
         <FaBars />
       </button>
       <div className={`mobile-drawer${drawerOpen ? ' open' : ''} glass-bg`}>
-        <button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close menu"><FaTimes /></button>
+        <div className="drawer-top-bar">
+          <button className="theme-toggle top" onClick={handleThemeToggle} aria-label="Toggle theme">
+            <FaRegLightbulb style={{ color: theme === 'light' ? '#FFD600' : '#fff', fontSize: '1.5rem' }} />
+          </button>
+          <button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close menu"><FaTimes /></button>
+        </div>
         <div className="drawer-profile">
-          <Image src="/lo.png" alt="MayDiv Logo" width={60} height={60} className="drawer-logo" />
+          <Image src="/Lo.png" alt="MayDiv Logo" width={60} height={60} className="drawer-logo" />
           <div className="drawer-tagline">Welcome to MayDiv</div>
         </div>
         <ul className="drawer-list">
@@ -60,9 +65,6 @@ const MobileDrawer = ({
               <a key={i} href={s.href} aria-label={s.label} target="_blank" rel="noopener noreferrer">{s.icon}</a>
             ))}
           </div>
-          <button className="theme-toggle" onClick={handleThemeToggle} aria-label="Toggle theme">
-            {theme === 'dark' ? <FaSun /> : <FaMoon />}
-          </button>
         </div>
       </div>
     </>

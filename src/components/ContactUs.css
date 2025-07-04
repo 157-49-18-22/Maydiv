@@ -924,12 +924,18 @@ body, html, * {
     gap: 16px;
     margin-bottom: 10px;
   }
-  .contactus-info-item {
-    font-size: 0.95rem;
-    gap: 8px;
-    line-height: 1.6;
-    
-  }
+    .contactus-info-item {
+      font-size: 0.95rem;
+      gap: 8px;
+      line-height: 1.6;
+      
+    }
+    .contactus-info-item1{
+      font-size: 0.84rem;
+      gap: 8px;
+      line-height: 1.6;
+      
+    }
   
   .contactus-heading {
     font-size: 1.1rem;

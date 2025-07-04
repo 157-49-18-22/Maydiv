@@ -1238,6 +1238,7 @@ body {
   }    
   .gradient-text{
    height: 27px;
+   margin-top: -10px;
   }
 
   

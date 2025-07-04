@@ -124,7 +124,7 @@ const Projects = () => {
               <li><Link href="/" onClick={() => setDrawerOpen(false)}>Home</Link></li>
               <li>
                 <button className={`drawer-dropdown${drawerDropdownOpen ? ' open' : ''}`} onClick={handleDrawerDropdownToggle}>
-                  Services <FaChevronDown style={{ marginRight: 15, transform: drawerDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                  Services <FaChevronDown style={{ marginRight: 20, transform: drawerDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
                 </button>
                 <div className={`drawer-dropdown-list${drawerDropdownOpen ? ' open' : ''}`} style={{ display: drawerDropdownOpen ? 'flex' : 'none' }}>
                   <Link href="/web-development" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>

@@ -6,7 +6,9 @@ import './Footer.css';
 const Footer = () => {
   return (
     <footer className="footer-section floating-footer">
-      <div className="footer-logo-centered">MAYDIV</div>
+      <div className="footer-logo-centered">
+        <img src="/logo.png" width={200} height="auto" alt="Maydiv Logo" className="footer-logo" />
+      </div>
       <div className="footer-content footer-columns">
         <div className="footer-col footer-divider">
           <div className="footer-title">Contact Details</div>

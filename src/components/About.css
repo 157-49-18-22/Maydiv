@@ -296,7 +296,7 @@ body {
 }
 
 .about-features-heading {
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 800;
   background: linear-gradient(90deg, #7b61ff 0%, #00e0ff 100%);
   -webkit-background-clip: text;
@@ -1727,10 +1727,10 @@ justify-content: center;
   }
   .about-features-section {
     padding: 0 4px;
-    margin-top: -31px;
+    margin-top: -20px;
   }
   .about-features-heading {
-    font-size: 1.3rem;
+    font-size: 1rem;
     margin-bottom: 8px;
   }
   .about-features-desc {

@@ -1284,7 +1284,7 @@ justify-content: center;
     width: 90px;
     margin: 0 auto;
     display: block;
-    margin-top: -20px;
+    margin-top: -14px;
   }
   
   .apps-container {
@@ -1599,10 +1599,7 @@ justify-content: center;
     position: relative;
   }
  
-  .burger-menu {
-    display: block !important;
-  }
-
+ 
 
 .burger-menu {
   display: none;

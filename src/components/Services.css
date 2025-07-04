@@ -1914,7 +1914,7 @@ body {
   .partners-logos-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 24px;
     justify-content: center;
     align-items: center;
     width: 100vw;

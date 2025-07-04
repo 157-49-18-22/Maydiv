@@ -24,6 +24,13 @@ const AI = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !sessionStorage.getItem('aiReloaded')) {
+      sessionStorage.setItem('aiReloaded', 'true');
+      window.location.reload();
+    }
+  }, []);
+
   const handleDropdownEnter = () => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
     setDropdownOpen(true);
@@ -155,10 +162,10 @@ const AI = () => {
             <h2 className="ai-integration-title">Ai Automation & Integration</h2>
             <p className="ai-integration-desc">Ever since implementing Wonderchat on our site, I've seen up to a 70% reduction of customer support queries in my inbox."</p>
             <div className="ai-integration-user">
-              <img src="/Pic4.png" alt="Bryce Conway" className="ai-integration-avatar" />
+              <img src="/Security.jpg" alt="Bryce Conway" className="ai-integration-avatar" />
               <div>
-                <div className="ai-integration-user-name">BRYCE CONWAY</div>
-                <div className="ai-integration-user-role">Founder and CEO of Maydiv</div>
+                <div className="ai-integration-user-name">Divyanshu</div>
+                <div className="ai-integration-user-role">Founder of Maydiv</div>
               </div>
             </div>
           </div>
@@ -211,7 +218,7 @@ const AI = () => {
             <h2 className="ai-gradient-cta-heading">Get exponential reach via <span>AI Technology</span></h2>
             <form className="ai-gradient-cta-form" onSubmit={e => e.preventDefault()}>
               <input type="email" className="ai-gradient-cta-input" placeholder="Enter your work email" required />
-              <button type="submit" className="fancy"><span className="top-key"></span><span className="text">Get in touch →</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
+              <button type="submit" className="fancy"><span className="top-key"></span><span className="text">Get in touch </span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
             </form>
           </div>
         </div>

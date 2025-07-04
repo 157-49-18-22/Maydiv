@@ -14,8 +14,8 @@ import MobileDrawer from './MobileDrawer';
 export default function About() {
   // Fast reload on first visit
   useEffect(() => {
-    if (typeof window !== "undefined" && !localStorage.getItem("about_reloaded")) {
-      localStorage.setItem("about_reloaded", "true");
+    if (typeof window !== 'undefined' && !sessionStorage.getItem('aboutReloaded')) {
+      sessionStorage.setItem('aboutReloaded', 'true');
       window.location.reload();
     }
   }, []);

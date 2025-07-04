@@ -7,9 +7,18 @@ import Discuss from '../components/Discuss';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import WhatsappLottie from '../components/WhatsappLottie';
+import { useEffect } from 'react';
 
 export default function Home() {
   const pathname = usePathname();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !sessionStorage.getItem('pageReloaded')) {
+      sessionStorage.setItem('pageReloaded', 'true');
+      window.location.reload();
+    }
+  }, []);
+
   return (
     <main>
       <WhatsappLottie />

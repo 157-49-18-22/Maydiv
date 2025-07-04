@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import './OurService.css';
@@ -85,20 +85,40 @@ const OurService = () => {
   const [phase, setPhase] = useState('center'); // 'center' or 'fan'
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const sectionRef = useRef(null);
 
   // Reset state on mount
-  React.useEffect(() => {
+  useEffect(() => {
     setActiveIndex(2);
     setPhase('center');
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => setPhase('fan'), 1000); // 1 second
     return () => clearTimeout(timer);
   }, []);
 
+  // Intersection Observer to reset animation/state when section comes into view
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setActiveIndex(2);
+          setPhase('center');
+          setHoveredIndex(null);
+          setIsAutoPlaying(true);
+          setTimeout(() => setPhase('fan'), 1000);
+        }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   // Auto-play functionality
-  React.useEffect(() => {
+  useEffect(() => {
     let interval;
     if (isAutoPlaying) {
       interval = setInterval(() => {
@@ -133,7 +153,7 @@ const OurService = () => {
   };
 
   return (
-    <section className="our-services-section">
+    <section className="our-services-section" ref={sectionRef}>
       {/* Nucleus backgrounds */}
       <Image
         src="/Nucleus.png"

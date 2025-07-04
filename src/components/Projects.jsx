@@ -18,6 +18,17 @@ const Projects = () => {
   const [isMobile, setIsMobile] = useState(false);
   const dropdownTimeout = useRef(null);
 
+ 
+  useEffect(() => {
+    return () => {
+      document.body.style.overflowX = 'hidden';
+      document.documentElement.style.overflowX = 'hidden';
+      const next = document.getElementById('__next');
+      if (next) next.style.overflowX = 'hidden';
+      window.location.reload(); // Force full page reload on unmount
+    };
+  }, []);
+
   useEffect(() => {
     const observer = new window.IntersectionObserver(
       ([entry]) => {
@@ -48,20 +59,6 @@ const Projects = () => {
       setDrawerOpen(false);
       setDrawerDropdownOpen(false);
     };
-  }, []);
-
-  // Mobile auto-reload logic
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const isMobile = window.innerWidth <= 900;
-      const hasReloaded = sessionStorage.getItem('projectsMobileReloaded');
-      if (isMobile && !hasReloaded) {
-        sessionStorage.setItem('projectsMobileReloaded', 'true');
-        window.location.reload();
-      } else if (!isMobile) {
-        sessionStorage.removeItem('projectsMobileReloaded');
-      }
-    }
   }, []);
 
   const handleDropdownEnter = () => {
@@ -127,7 +124,7 @@ const Projects = () => {
               <li><Link href="/" onClick={() => setDrawerOpen(false)}>Home</Link></li>
               <li>
                 <button className={`drawer-dropdown${drawerDropdownOpen ? ' open' : ''}`} onClick={handleDrawerDropdownToggle}>
-                  Services <FaChevronDown style={{ marginLeft: 8, transform: drawerDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                  Services <FaChevronDown style={{ marginRight: 25, transform: drawerDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
                 </button>
                 <div className={`drawer-dropdown-list${drawerDropdownOpen ? ' open' : ''}`} style={{ display: drawerDropdownOpen ? 'flex' : 'none' }}>
                   <Link href="/web-development" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>

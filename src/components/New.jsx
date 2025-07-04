@@ -103,6 +103,13 @@ export default function New() {
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && !sessionStorage.getItem('newReloaded')) {
+      sessionStorage.setItem('newReloaded', 'true');
+      window.location.reload();
+    }
+  }, []);
+
+  useEffect(() => {
     // Auto-refresh once per session, instantly
     if (typeof window !== 'undefined' && !sessionStorage.getItem('newPageRefreshed')) {
       sessionStorage.setItem('newPageRefreshed', 'true');

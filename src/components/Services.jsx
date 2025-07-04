@@ -87,16 +87,13 @@ const Services = () => {
 
   // Mobile auto-reload logic
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const isMobile = window.innerWidth <= 900;
-      const hasReloaded = sessionStorage.getItem('servicesMobileReloaded');
-      if (isMobile && !hasReloaded) {
-        sessionStorage.setItem('servicesMobileReloaded', 'true');
-        window.location.reload();
-      } else if (!isMobile) {
-        sessionStorage.removeItem('servicesMobileReloaded');
-      }
-    }
+    return () => {
+      document.body.style.overflowX = 'hidden';
+      document.documentElement.style.overflowX = 'hidden';
+      const next = document.getElementById('__next');
+      if (next) next.style.overflowX = 'hidden';
+      window.location.reload(); // Force full page reload on unmount
+    };
   }, []);
 
   // Cleanup nav/drawer/dropdown state on unmount
@@ -116,6 +113,13 @@ const Services = () => {
       const next = document.getElementById('__next');
       if (next) next.style.overflowX = 'hidden';
     };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !sessionStorage.getItem('servicesReloaded')) {
+      sessionStorage.setItem('servicesReloaded', 'true');
+      window.location.reload();
+    }
   }, []);
 
   return (
@@ -387,6 +391,7 @@ const Services = () => {
       <Footer />
     </div>
   );
+
 };
 
 export default Services;

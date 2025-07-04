@@ -72,6 +72,8 @@ const Apps = () => {
     }
   }, []);
 
+
+
   const handleDropdownEnter = () => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
     setDropdownOpen(true);
@@ -155,8 +157,8 @@ const Apps = () => {
                     <ClientOnlyLottie
                       autoplay
                       loop
-                      src="/Android.json"
-                      style={{ width: 120, height: 60, background: 'none', marginLeft: 0, display: 'block' }}
+                      src="/Apple.json"
+                      style={{ width: 99, height: 99, background: 'none', marginLeft: 0 }}
                     />
                     <span className="arrow">→</span>
                   </div>

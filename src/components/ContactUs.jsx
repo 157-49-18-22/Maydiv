@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaTwitter, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
+import { FiPhone } from 'react-icons/fi';
 
 import './ContactUs.css';
 import Discuss from './Discuss';
@@ -26,8 +27,8 @@ export default function ContactUs() {
   const [focus, setFocus] = useState('');
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.innerWidth <= 480 && !sessionStorage.getItem('contactPageMobileRefreshed')) {
-      sessionStorage.setItem('contactPageMobileRefreshed', 'true');
+    if (typeof window !== 'undefined' && !sessionStorage.getItem('contactReloaded')) {
+      sessionStorage.setItem('contactReloaded', 'true');
       window.location.reload();
     }
     const checkMobile = () => setIsMobile(window.innerWidth <= 480);
@@ -153,9 +154,9 @@ export default function ContactUs() {
         <div className="contactus-info-card">
           <h2 className="contactus-info-heading">Contact info</h2>
           <div className="contactus-info-list">
-            <div className="contactus-info-item"><FaPhone /> 91+ 9220438999</div>
-            <div className="contactus-info-item"><FaEnvelope />operations@maydiv.com</div>
-            <div className="contactus-info-item"><FaMapMarkerAlt /> SCO-105 Second floor world street, Faridabad , HR 121004</div>
+            <div className="contactus-info-item"><FiPhone className="contactus-info-icon" /> 91+ 9220438999</div>
+            <div className="contactus-info-item"><FaEnvelope className="contactus-info-icon" /> Operations@maydiv.com</div>
+            <div className="contactus-info-item"><FaMapMarkerAlt className="contactus-info-icon" /> SCO-105 Second floor world street, Faridabad , HR 121004</div>
           </div>
           <div className="contactus-info-socials">
           <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>

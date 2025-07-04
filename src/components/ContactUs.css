@@ -983,11 +983,20 @@ body, html, * {
     display: block;
   }
   .contactus-info-item:nth-child(2) svg {
-    font-size: 2.2rem !important;
-    margin-left:-3px;
+    font-size: 2.4rem !important;
+    margin-bottom: -49px;
   }
   .contactus-main {
     padding: 20px 10px;
+    margin-top: -23px;
+  
+  }
+  .contactus-info-icon {
+    font-size: 0.9rem !important;
+    color: #b983ff !important;
+    margin-left: -2px;
+    vertical-align: middle;
+    margin-top: -45px;
   }
 }
 

@@ -107,8 +107,8 @@ export default function About() {
           Step into the future with maydiv! I offer a range of digital solutions that can transform your business landscape. With our expertise, your digital needs will be met with creativity and innovation.
         </p>
         <div className="about-btn-row">
-          <button className="fancy1"><span className="top-key"></span><span className="text">Get started</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
-          <button className="fancy1"><span className="top-key"></span><span className="text">Our Portfolio</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button>
+          <Link href="/ai"><button className="fancy1"><span className="top-key"></span><span className="text">Get started</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button></Link>
+          <Link href="/projects"><button className="fancy1"><span className="top-key"></span><span className="text">Our Portfolio</span><span className="bottom-key-1"></span><span className="bottom-key-2"></span></button></Link>
         </div>
       </section>
       {/* Features Section */}

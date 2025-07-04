@@ -286,7 +286,7 @@ body {
 }
 
 .about-features-label {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: 2px;
   color: #7b61ff;
@@ -1723,7 +1723,7 @@ justify-content: center;
     min-width: 0;
     margin: 0 0 8px 0;
     box-sizing: border-box;
-    margin-left: 90px;
+    margin-right: 74px;
   }
   .about-features-section {
     padding: 0 4px;

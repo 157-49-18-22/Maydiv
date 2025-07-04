@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaBars, FaTimes, FaGithub, FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaChevronDown } from 'react-icons/fa';
-import { Player } from '@lottiefiles/react-lottie-player';
+import dynamic from 'next/dynamic';
 import './Apps.css';
 import Testimonial from './Testimonial';
 import Discuss from './Discuss';
@@ -53,6 +53,8 @@ function WebProjectsCards() {
   );
 }
 
+const Player = dynamic(() => import('@lottiefiles/react-lottie-player').then(mod => mod.Player), { ssr: false });
+
 const Apps = () => {
   // Dropdown state and timeout
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -62,10 +64,12 @@ const Apps = () => {
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 480);
+    const checkMobile = () => typeof window !== 'undefined' ? setIsMobile(window.innerWidth <= 480) : null;
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+    }
   }, []);
 
   const handleDropdownEnter = () => {

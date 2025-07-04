@@ -154,8 +154,8 @@ export default function ContactUs() {
         <div className="contactus-info-card">
           <h2 className="contactus-info-heading">Contact info</h2>
           <div className="contactus-info-list">
-            <div className="contactus-info-item"><FiPhone className="contactus-info-icon" /> 91+ 9220438999</div>
-            <div className="contactus-info-item"><FaEnvelope className="contactus-info-icon" /> Operations@maydiv.com</div>
+            <div className="contactus-info-item"><FiPhone className="contactus-info-icon1" /> 91+ 9220438999</div>
+            <div className="contactus-info-item"><FaEnvelope className="contactus-info-icon2" />  Operations@maydiv.com</div>
             <div className="contactus-info-item"><FaMapMarkerAlt className="contactus-info-icon" /> SCO-105 Second floor world street, Faridabad , HR 121004</div>
           </div>
           <div className="contactus-info-socials">

@@ -983,8 +983,9 @@ body, html, * {
     display: block;
   }
   .contactus-info-item:nth-child(2) svg {
-    font-size: 2.4rem !important;
-    margin-bottom: -49px;
+    font-size: 2rem !important;
+    margin-left: -4px;
+   
   }
   .contactus-main {
     padding: 20px 10px;
@@ -997,6 +998,21 @@ body, html, * {
     margin-left: -2px;
     vertical-align: middle;
     margin-top: -45px;
+  }
+  .contactus-info-icon1{
+    font-size: 0.9rem !important;
+    color: #b983ff !important;
+    margin-left: -2px;
+    vertical-align: middle;
+  
+  }
+  .contactus-info-icon2{   
+    font-size: 0.9rem !important;
+    color: #b983ff !important;
+    margin-left: -2px;
+    vertical-align: middle;
+   
+   
   }
 }
 

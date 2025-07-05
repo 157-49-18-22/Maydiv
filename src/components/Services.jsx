@@ -356,7 +356,7 @@ const Services = () => {
       <div className="projects-section">
         <div className="projects-header-row">
           <h2 className="projects-heading">UI/UX Projects</h2>
-          <a href="#" className="projects-seeall-link">See All &rarr;</a>
+         
         </div>
         <div className="projects-cards-grid">
           <div className="project-card">

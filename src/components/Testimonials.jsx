@@ -138,8 +138,8 @@ const Testimonials = () => {
         <div className="marketing-hero-graphic-t4">
           <img src="/T4.png" alt="Decorative T4" />
         </div>
-        <p className="marketing-hero-tagline">driving your business forward,</p>
-        <p className="marketing-hero-tagline1">with strong products marketing</p>
+        <p className="marketing-hero-tagline">Driving Your Business Forward,</p>
+        <p className="marketing-hero-tagline1">With Strong Products Marketing</p>
         <div className="marketing-hero-graphic-t3">
           <img src="/T3.png" alt="Decorative T3" />
           <img src="/950.png" alt="Overlay image" className="marketing-hero-graphic-950" />

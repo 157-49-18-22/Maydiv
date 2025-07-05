@@ -2122,6 +2122,7 @@ justify-content: center;
     gap: 12px;
     margin-left: 18px;
     margin-top: 8px;
+    margin-right: 10px;
   }
   .mobile-drawer .drawer-dropdown.open .drawer-dropdown-list {
     display: flex;

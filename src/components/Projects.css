@@ -1708,15 +1708,7 @@ display: none;
     margin-left: 0;
     box-sizing: border-box;
   }
-  .service-card {
-    padding: 8px 6px;
-    border-radius: 8px;
-    max-height: unset;
-    gap: 6px;
-    width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-  }
+
   .service-icon {
     width: 24px;
     height: 24px;
@@ -1875,6 +1867,7 @@ display: none;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-right: 10px;
 }
 .mobile-drawer .drawer-dropdown-list a {
   font-size: 1rem;

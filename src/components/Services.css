@@ -51,7 +51,7 @@ body {
   padding: 32px 64px 0 64px;
   width: 100%;
   box-sizing: border-box;
-  height: 80px;
+  height: 104px;
   font-family: 'Poppins', sans-serif !important;
   overflow: visible;
 }
@@ -1767,6 +1767,7 @@ body {
     gap: 12px;
     margin-left: 18px;
     margin-top: 8px;
+    margin-right: 10px;
   }
   .mobile-drawer .drawer-dropdown.open .drawer-dropdown-list {
     display: flex;

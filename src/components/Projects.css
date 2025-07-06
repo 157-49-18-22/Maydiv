@@ -733,6 +733,9 @@ body {
     box-sizing: border-box !important;
     min-width: 0 !important;
   }
+  body {
+    padding-top: -80px;
+  }
   .online-content {
     flex-direction: column;
     align-items: center;

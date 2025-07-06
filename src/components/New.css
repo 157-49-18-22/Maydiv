@@ -7,7 +7,7 @@
   }
   body {
     margin: 0px;
-    padding-top: 80px;
+
    
 
   
@@ -1116,9 +1116,7 @@
     border: none;
     cursor: pointer;
   }
-  body {
-    padding-top: -80px;
-  }
+ 
   .mobile-drawer ul {
     list-style: none;
     padding: 0;

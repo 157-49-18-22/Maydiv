@@ -1608,10 +1608,9 @@ justify-content: center;
   .header-socials {
     display: none !important;
   }
-  html {
-    margin: 0px;
-    padding-top: -80px;
-  }
+ body{
+  display: none;
+ }
   .header-links {
     display: none;
     position: absolute;

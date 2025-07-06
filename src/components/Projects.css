@@ -733,8 +733,8 @@ body {
     box-sizing: border-box !important;
     min-width: 0 !important;
   }
-  html {
-    padding-top: -80px;
+  body {
+    display: none;
   }
   .online-content {
     flex-direction: column;

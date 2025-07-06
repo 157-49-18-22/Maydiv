@@ -1608,7 +1608,7 @@ justify-content: center;
   .header-socials {
     display: none !important;
   }
-  body {
+  html {
     margin: 0px;
     padding-top: -80px;
   }

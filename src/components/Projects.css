@@ -136,6 +136,7 @@ body {
   border-radius: 0 0 48px 48px;
   position: relative;
   z-index: 1;
+  margin-top: 44px;
 }
 
 .projects-hero-badge {
@@ -727,6 +728,10 @@ body {
     margin-left: 0 !important;
     margin-right: 0 !important;
 
+  }
+
+  .services-container{
+    margin-top: -71px;
   }
   
   * {
@@ -1461,9 +1466,10 @@ display: none;
     display: none !important;
   }
   .projects-hero-section {
-    padding: 24px 0 12px 0;
+    padding: 0px 0 12px 0;
     max-width: 100vw;
     border-radius: 0 0 18px 18px;
+    margin-bottom: 44px;
   }
   .projects-hero-badge {
     font-size: 0.85rem;

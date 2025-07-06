@@ -1773,6 +1773,7 @@ body {
     display: flex;
     align-items: center;   
     cursor: pointer;
+    margin-left: -12px;
   }
   .mobile-drawer .drawer-dropdown-list {
     display: none;

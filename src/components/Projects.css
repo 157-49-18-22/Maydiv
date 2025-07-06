@@ -5,6 +5,7 @@
 
 body, html, * {
   font-family: var(--font-family) !important;
+
 }
 
 
@@ -724,9 +725,7 @@ body {
     margin-right: 0 !important;
 
   }
-  .services-section{
-    margin-top: -80px;
-  }
+  
   * {
     box-sizing: border-box !important;
     min-width: 0 !important;
@@ -1438,7 +1437,7 @@ display: none;
     width: 90px;
     margin: 0 auto;
     display: block;
-    margin-top: -17px;
+;
   }
   
   .burger-icon {

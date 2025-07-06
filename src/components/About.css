@@ -1575,6 +1575,8 @@ justify-content: center;
     justify-content: center;
     align-items: center;
     flex: 1;
+    z-index: 1000;
+
   }
   .header-logo img {
     height: 90px;

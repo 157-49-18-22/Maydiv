@@ -1608,9 +1608,7 @@ justify-content: center;
   .header-socials {
     display: none !important;
   }
- body{
-  display: none;
- }
+
   .header-links {
     display: none;
     position: absolute;

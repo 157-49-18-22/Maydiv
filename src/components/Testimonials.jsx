@@ -19,13 +19,21 @@ const Testimonials = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [navScrolled, setNavScrolled] = useState(false);
+  
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 480);
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    // Navbar scroll effect
+    const onScroll = () => setNavScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   const handleDropdownEnter = () => {
@@ -51,7 +59,7 @@ const Testimonials = () => {
     <>
       <header className="header-container">
 
-        <nav className="header-nav">
+        <nav className={`header-nav${navScrolled ? ' scrolled' : ''}`}>
           <div className="header-logo">
           <Link href="/">
             <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized />

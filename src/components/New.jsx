@@ -98,6 +98,7 @@ export default function New() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [navScrolled, setNavScrolled] = useState(false);
   const [slidesPerView, setSlidesPerView] = useState(3);
   const [spaceBetween, setSpaceBetween] = useState(0);
   const dropdownTimeout = useRef(null);
@@ -134,10 +135,14 @@ export default function New() {
     };
     handleResize();
     window.addEventListener('resize', handleResize);
+    // Navbar scroll effect
+    const onScroll = () => setNavScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll);
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', onScroll);
     };
   }, []);
 
@@ -152,7 +157,7 @@ export default function New() {
   return (
     <div className="services-container">
       {/* Hero Section */}
-      <nav className="header-nav">
+      <nav className={`header-nav${navScrolled ? ' scrolled' : ''}`}>
         <div className="header-logo">
           <Link href="/">
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized />

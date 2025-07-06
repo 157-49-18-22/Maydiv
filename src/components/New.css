@@ -7,6 +7,7 @@
   }
   body {
     margin: 0px;
+  
   }
   
   .header-container {
@@ -36,6 +37,18 @@
     height: 80px;
     font-family: 'Poppins', sans-serif !important;
     overflow: visible;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 2000;
+    background: transparent;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  
+  .header-nav.scrolled {
+    background: #0a0a0a;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.12);
   }
   
   .header-logo img {
@@ -819,7 +832,7 @@
   border-radius: 32px;
 
   position: relative;
-  top: 32px;
+  top: 80px;
   gap: 32px;
 }
 
@@ -1035,10 +1048,12 @@
     align-items: center;
     padding: 16px 8px 0 8px;
     height: auto;
+ 
   }
   .header-nav {
     padding: 16px 10px 0 10px;
     height: 60px;
+  
   }
   .header-logo {
     display: flex;

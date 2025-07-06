@@ -61,6 +61,7 @@ const Apps = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [navScrolled, setNavScrolled] = useState(false);
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
@@ -68,8 +69,15 @@ const Apps = () => {
     checkMobile();
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', checkMobile);
-      return () => window.removeEventListener('resize', checkMobile);
     }
+    const onScroll = () => setNavScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', checkMobile);
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
   }, []);
 
 
@@ -90,7 +98,7 @@ const Apps = () => {
   return (
     <>
       <header className="header-container">
-        <nav className="header-nav">
+        <nav className={`header-nav${navScrolled ? ' scrolled' : ''}`}>
           <div className="header-logo">
             <Link href="/">
             <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized/>

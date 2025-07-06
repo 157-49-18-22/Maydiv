@@ -14,6 +14,7 @@ const VISIBLE = 3;
 const Testimonial = () => {
   const [active, setActive] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [navScrolled, setNavScrolled] = useState(false);
   const total = testimonials.length;
 
   useEffect(() => {
@@ -21,6 +22,12 @@ const Testimonial = () => {
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setNavScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   // Get the indices of the visible testimonials

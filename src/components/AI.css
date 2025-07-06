@@ -8,6 +8,7 @@ body, html, * {
 body {
   margin: 0px;
   background: linear-gradient(120deg, #181818 60%, #3a1c71 100%, #7e3ff2 120%) !important;
+  padding-top: 80px;
 }
 
 .header-container {
@@ -37,6 +38,18 @@ body {
   height: 80px;
   font-family: 'Poppins', sans-serif !important;
   overflow: visible;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 2000;
+  background: transparent;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.header-nav.scrolled {
+  background: #0a0a0a;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
 }
 
 .header-logo img {

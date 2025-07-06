@@ -17,6 +17,7 @@ const Projects = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [navScrolled, setNavScrolled] = useState(false);
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
@@ -53,6 +54,12 @@ const Projects = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => setNavScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   // Cleanup nav/drawer/dropdown state on unmount
   useEffect(() => {
     return () => {
@@ -80,7 +87,7 @@ const Projects = () => {
   return (
     <div className="services-container">
       {/* Hero Section */}
-      <nav className="header-nav">
+      <nav className={`header-nav${navScrolled ? ' scrolled' : ''}`}>
         <div className="header-logo">
           <Link href="/">
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized/>

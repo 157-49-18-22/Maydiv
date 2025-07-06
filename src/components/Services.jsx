@@ -42,11 +42,19 @@ const Services = () => {
   const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
 
   const [isDesktop, setIsDesktop] = useState(false);
+  const [navScrolled, setNavScrolled] = useState(false);
+
   useEffect(() => {
     const checkScreen = () => setIsDesktop(window.innerWidth > 900);
     checkScreen();
     window.addEventListener('resize', checkScreen);
     return () => window.removeEventListener('resize', checkScreen);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setNavScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
@@ -125,7 +133,7 @@ const Services = () => {
   return (
     <div className="services-container">
       {/* Hero Section */}
-      <nav className="header-nav">
+      <nav className={`header-nav${navScrolled ? ' scrolled' : ''}`}>
         <div className="header-logo">
         <Link href="/">
           <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized/>

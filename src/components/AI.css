@@ -1993,6 +1993,7 @@ Ai-our-projects-section {
 @media (max-width: 480px) {
   .header-container {
     padding-bottom: 10px;
+    margin-top: -80px;
   }
   .header-nav {
     position: relative;

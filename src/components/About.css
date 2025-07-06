@@ -1583,7 +1583,7 @@ justify-content: center;
     width: 90px;
     margin: 0 auto;
     display: block;
-    margin-top: -20px;
+
   }
   .fancy1::before{
     display: none;

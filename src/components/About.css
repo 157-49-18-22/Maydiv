@@ -1608,6 +1608,10 @@ justify-content: center;
   .header-socials {
     display: none !important;
   }
+  body {
+    margin: 0px;
+    padding-top: -80px;
+  }
   .header-links {
     display: none;
     position: absolute;

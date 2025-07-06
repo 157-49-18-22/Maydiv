@@ -7,6 +7,7 @@ body, html, * {
 }
 body {
   margin: 0px;
+  padding-top: 80px;
 }
 
 .about-main {
@@ -1583,7 +1584,7 @@ justify-content: center;
     width: 90px;
     margin: 0 auto;
     display: block;
-
+    margin-top: -20px;
   }
   .fancy1::before{
     display: none;

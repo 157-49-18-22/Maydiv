@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaGithub, FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import TrustedLogos from './TrustedLogos';
 import './Header.css';
@@ -40,6 +41,7 @@ const Header = () => {
   const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 480);
@@ -65,6 +67,14 @@ const Header = () => {
     const onScroll = () => setNavScrolled(window.scrollY > 10);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const isMobileDevice = () => typeof window !== 'undefined' && window.innerWidth <= 480;
+    if (isMobileDevice() && !sessionStorage.getItem('reloaded')) {
+      sessionStorage.setItem('reloaded', 'true');
+      window.location.reload();
+    }
   }, []);
 
   const handleDropdownEnter = () => {

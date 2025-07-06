@@ -287,6 +287,7 @@
     margin-right: auto;
     margin-left: 0;
     order: 1;
+    background: linear-gradient(90deg, #5C24FF, #ECBFBF, #FF3BFF, #D94FD5, #5C24FF);
   }
   .drawer-close {
     order: 2;

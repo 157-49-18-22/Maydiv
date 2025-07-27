@@ -102,75 +102,132 @@ export default function ContactUs() {
           </div>
       </nav>
       <div className="contactus-main">
-        <div className="contactus-form-card">
-          <h1 className="contactus-heading"><span className="wave-text">Get in Touch</span></h1>
-          <form className="contactus-form-modern" action="https://formspree.io/f/xovwregw" method="POST">
-            <div className="contactus-row">
+        <div className="contactus-top-section">
+          <div className="contactus-form-card">
+            <h1 className="contactus-heading"><span className="wave-text">Get in Touch</span></h1>
+            <form className="contactus-form-modern" action="https://formspree.io/f/xovwregw" method="POST">
+              <div className="contactus-row">
+                <div className="contactus-field">
+                  {!(focus === 'name' || form.name) && <label>Name</label>}
+                  <input
+                    type="text"
+                    name="name"
+                    value={form.name}
+                    onChange={e => setForm({ ...form, name: e.target.value })}
+                    onFocus={() => setFocus('name')}
+                    onBlur={() => setFocus('')}
+                    required
+                  />
+                </div>
+                <div className="contactus-field">
+                  {!(focus === 'phone' || form.phone) && <label>Phone</label>}
+                  <input
+                    type="text"
+                    name="phone"
+                    value={form.phone}
+                    onChange={e => setForm({ ...form, phone: e.target.value })}
+                    onFocus={() => setFocus('phone')}
+                    onBlur={() => setFocus('')}
+                  />
+                </div>
+              </div>
               <div className="contactus-field">
-                {!(focus === 'name' || form.name) && <label>Name</label>}
+                {!(focus === 'email' || form.email) && <label>Email</label>}
                 <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={e => setForm({ ...form, name: e.target.value })}
-                  onFocus={() => setFocus('name')}
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={e => setForm({ ...form, email: e.target.value })}
+                  onFocus={() => setFocus('email')}
                   onBlur={() => setFocus('')}
                   required
                 />
               </div>
               <div className="contactus-field">
-                {!(focus === 'phone' || form.phone) && <label>Phone</label>}
-                <input
-                  type="text"
-                  name="phone"
-                  value={form.phone}
-                  onChange={e => setForm({ ...form, phone: e.target.value })}
-                  onFocus={() => setFocus('phone')}
+                {!(focus === 'message' || form.message) && <label>Message...</label>}
+                <textarea
+                  rows={2}
+                  name="message"
+                  value={form.message}
+                  onChange={e => setForm({ ...form, message: e.target.value })}
+                  onFocus={() => setFocus('message')}
                   onBlur={() => setFocus('')}
+                  required
                 />
               </div>
-            </div>
-            <div className="contactus-field">
-              {!(focus === 'email' || form.email) && <label>Email</label>}
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={e => setForm({ ...form, email: e.target.value })}
-                onFocus={() => setFocus('email')}
-                onBlur={() => setFocus('')}
-                required
-              />
-            </div>
-            <div className="contactus-field">
-              {!(focus === 'message' || form.message) && <label>Message...</label>}
-              <textarea
-                rows={2}
-                name="message"
-                value={form.message}
-                onChange={e => setForm({ ...form, message: e.target.value })}
-                onFocus={() => setFocus('message')}
-                onBlur={() => setFocus('')}
-                required
-              />
-            </div>
-            <button type="submit" className="contactus-submit-btn">SUBMIT</button>
-          </form>
-        </div>
+              <button type="submit" className="contactus-submit-btn">SUBMIT</button>
+            </form>
+          </div>
 
-        <div className="contactus-info-card">
-          <h2 className="contactus-info-heading">Contact info</h2>
-          <div className="contactus-info-list">
-            <div className="contactus-info-item"><FiPhone className="contactus-info-icon1" /> 91+ 9220438999</div>
-            <div className="contactus-info-item1"><FaEnvelope className="contactus-info-icon2" />  Operations@maydiv.com</div>
-            <div className="contactus-info-item"><FaMapMarkerAlt className="contactus-info-icon" /> SCO-105 Second floor world street, Faridabad , HR 121004</div>
+          <div className="contactus-info-card">
+            <h2 className="contactus-info-heading">Contact info</h2>
+            <div className="contactus-info-list">
+              <div className="contactus-info-item"><FiPhone className="contactus-info-icon1" /> 91+ 9220438999</div>
+              <div className="contactus-info-item1"><FaEnvelope className="contactus-info-icon2" />  Operations@maydiv.com</div>
+              <div className="contactus-info-item"><FaMapMarkerAlt className="contactus-info-icon" /> SCO-105 Second floor world street, Faridabad , HR 121004</div>
+            </div>
+            <div className="contactus-info-socials">
+            <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+              <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+              <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+            </div>
+            <img src="/MAYDIV.png" alt="MAYDIV" className="maydiv-watermark" />
           </div>
-          <div className="contactus-info-socials">
-          <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-            <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
-            <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+        </div>
+        
+        {/* Office Location Map */}
+        <div className="contactus-map-card">
+          <div className="map-decoration-top">
+            <div className="map-decoration-dot"></div>
+            <div className="map-decoration-dot"></div>
+            <div className="map-decoration-dot"></div>
           </div>
-          <img src="/MAYDIV.png" alt="MAYDIV" className="maydiv-watermark" />
+          
+          <h3 className="contactus-map-heading">📍 Our Office Location</h3>
+          
+          <div className="contactus-map-container">
+            <div className="map-overlay-info">
+              <div className="map-info-badge">
+                <FaMapMarkerAlt />
+                <span>MAYDIV HQ</span>
+              </div>
+            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.2233913121413!2d77.3193!3d28.4089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cdd8c2c0b0b0b%3A0x0!2zMjjCsDI0JzMyLjAiTiA3N8KwMTknMDkuNSJF!5e0!3m2!1sen!2sin!4v1234567890"
+              width="100%"
+              height="300"
+              style={{ border: 0, borderRadius: '12px' }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="MAYDIV Office Location"
+            ></iframe>
+          </div>
+          
+          <div className="contactus-map-actions">
+            <a 
+              href="https://maps.google.com/?q=SCO-105+Second+floor+world+street+Faridabad+HR+121004"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contactus-map-btn"
+            >
+              <FaMapMarkerAlt /> Open in Google Maps
+            </a>
+            <a 
+              href="https://maps.apple.com/?q=SCO-105+Second+floor+world+street+Faridabad+HR+121004"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contactus-map-btn"
+            >
+              <FaMapMarkerAlt /> Open in Apple Maps
+            </a>
+          </div>
+          
+          <div className="map-decoration-bottom">
+            <div className="map-decoration-line"></div>
+            <div className="map-decoration-star">⭐</div>
+            <div className="map-decoration-line"></div>
+          </div>
         </div>
       </div>
 

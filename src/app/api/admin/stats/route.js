@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 // Function to analyze code files
-function analyzeCodeFiles(dirPath) {
+function analyzeCodeFiles(dirPath, includeImages = false) {
   const stats = {
     totalFiles: 0,
     totalLines: 0,
@@ -29,13 +29,21 @@ function analyzeCodeFiles(dirPath) {
           }
         } else {
           const ext = path.extname(file).toLowerCase();
-          const codeExtensions = ['.js', '.jsx', '.ts', '.tsx', '.css', '.scss', '.json', '.md'];
+          const codeExtensions = ['.js', '.jsx', '.ts', '.tsx', '.css', '.scss', '.json', '.md', '.txt'];
+          const imageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico'];
+          const isPublicFolder = relativePath.startsWith('public');
           
-          if (codeExtensions.includes(ext)) {
+          if (codeExtensions.includes(ext) || (includeImages && imageExtensions.includes(ext))) {
             try {
-              const content = fs.readFileSync(fullPath, 'utf8');
-              const lines = content.split('\n').length;
+              let content = null;
+              let lines = 0;
               const size = stat.size;
+              
+              // Only read text files
+              if (codeExtensions.includes(ext)) {
+                content = fs.readFileSync(fullPath, 'utf8');
+                lines = content.split('\n').length;
+              }
               
               // Update stats
               stats.totalFiles++;
@@ -67,11 +75,13 @@ function analyzeCodeFiles(dirPath) {
               });
               
               // Track most complex files (by lines)
-              stats.mostComplexFiles.push({
-                path: fileRelativePath,
-                lines: lines,
-                size: size
-              });
+              if (lines > 0) {
+                stats.mostComplexFiles.push({
+                  path: fileRelativePath,
+                  lines: lines,
+                  size: size
+                });
+              }
               
             } catch (error) {
               console.error(`Error reading file ${fullPath}:`, error);
@@ -148,6 +158,7 @@ export async function GET(request) {
     // Analyze different directories
     const appStats = analyzeCodeFiles(path.join(projectRoot, 'src', 'app'));
     const componentsStats = analyzeCodeFiles(path.join(projectRoot, 'src', 'components'));
+    const publicStats = analyzeCodeFiles(path.join(projectRoot, 'public'), true); // Include images
     const overallStats = analyzeCodeFiles(path.join(projectRoot, 'src'));
     
     // Get package info
@@ -158,13 +169,15 @@ export async function GET(request) {
     
     // Calculate summary
     const summary = {
-      totalFiles: appStats.totalFiles + componentsStats.totalFiles,
-      totalLines: appStats.totalLines + componentsStats.totalLines,
-      totalSize: ((appStats.totalSize + componentsStats.totalSize) / 1024).toFixed(2) + ' KB',
+      totalFiles: appStats.totalFiles + componentsStats.totalFiles + publicStats.totalFiles,
+      totalLines: appStats.totalLines + componentsStats.totalLines + publicStats.totalLines,
+      totalSize: ((appStats.totalSize + componentsStats.totalSize + publicStats.totalSize) / 1024).toFixed(2) + ' KB',
       appFiles: appStats.totalFiles,
       componentFiles: componentsStats.totalFiles,
+      publicFiles: publicStats.totalFiles,
       appLines: appStats.totalLines,
-      componentLines: componentsStats.totalLines
+      componentLines: componentsStats.totalLines,
+      publicLines: publicStats.totalLines
     };
     
     return NextResponse.json({
@@ -173,6 +186,7 @@ export async function GET(request) {
         summary,
         app: appStats,
         components: componentsStats,
+        public: publicStats,
         overall: overallStats,
         package: packageInfo,
         git: gitInfo,

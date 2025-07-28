@@ -25,13 +25,19 @@ function readDirectoryRecursively(dirPath, basePath = '') {
           });
         }
       } else {
-        // Only include code files
+        // Include code files and public folder files
         const ext = path.extname(file).toLowerCase();
-        const codeExtensions = ['.js', '.jsx', '.ts', '.tsx', '.css', '.scss', '.json', '.md'];
+        const codeExtensions = ['.js', '.jsx', '.ts', '.tsx', '.css', '.scss', '.json', '.md', '.txt'];
+        const imageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico'];
+        const isPublicFolder = basePath.startsWith('public');
         
-        if (codeExtensions.includes(ext)) {
+        if (codeExtensions.includes(ext) || (isPublicFolder && (codeExtensions.includes(ext) || imageExtensions.includes(ext)))) {
           try {
-            const content = fs.readFileSync(fullPath, 'utf8');
+            let content = null;
+            // Only read text files, not binary files
+            if (codeExtensions.includes(ext)) {
+              content = fs.readFileSync(fullPath, 'utf8');
+            }
             items.push({
               type: 'file',
               name: file,
@@ -39,7 +45,8 @@ function readDirectoryRecursively(dirPath, basePath = '') {
               extension: ext,
               content: content,
               size: stat.size,
-              lastModified: stat.mtime
+              lastModified: stat.mtime,
+              isImage: imageExtensions.includes(ext)
             });
           } catch (error) {
             items.push({
@@ -49,7 +56,8 @@ function readDirectoryRecursively(dirPath, basePath = '') {
               extension: ext,
               content: `Error reading file: ${error.message}`,
               size: stat.size,
-              lastModified: stat.mtime
+              lastModified: stat.mtime,
+              isImage: imageExtensions.includes(ext)
             });
           }
         }
@@ -98,7 +106,7 @@ function getFileStats(dirPath) {
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
-    const type = searchParams.get('type') || 'all'; // 'app', 'components', or 'all'
+    const type = searchParams.get('type') || 'all'; // 'app', 'components', 'public', or 'all'
     
     const projectRoot = process.cwd();
     let result = {};
@@ -111,6 +119,11 @@ export async function GET(request) {
     if (type === 'all' || type === 'components') {
       const componentsPath = path.join(projectRoot, 'src', 'components');
       result.components = getFileStats(componentsPath);
+    }
+    
+    if (type === 'all' || type === 'public') {
+      const publicPath = path.join(projectRoot, 'public');
+      result.public = getFileStats(publicPath);
     }
     
     return NextResponse.json({

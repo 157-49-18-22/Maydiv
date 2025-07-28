@@ -1,6 +1,6 @@
 'use client';
 
-import { FiFolder, FiFile, FiSearch, FiDatabase, FiSettings, FiChevronRight, FiChevronDown, FiMoreVertical } from 'react-icons/fi';
+import { FiFolder, FiFile, FiSearch, FiDatabase, FiSettings, FiChevronRight, FiChevronDown, FiMoreVertical, FiImage } from 'react-icons/fi';
 
 const styles = {
   container: {
@@ -145,6 +145,9 @@ const styles = {
   },
   fileIconColor: {
     color: '#10b981',
+  },
+  imageIconColor: {
+    color: '#f59e0b',
   },
   fileContent: {
     flex: 1,
@@ -310,22 +313,26 @@ export default function FileExplorer({
                 {item.children?.length || 0}
               </div>
             </>
-          ) : (
-            <>
-              <FiFile style={{ ...styles.fileIcon, ...styles.fileIconColor }} />
-              <div style={styles.fileContent}>
-                <div style={{
-                  ...styles.fileName,
-                  ...(selectedFile?.path === item.path ? styles.fileNameSelected : {})
-                }}>
-                  {item.name}
+                      ) : (
+              <>
+                {item.isImage ? (
+                  <FiImage style={{ ...styles.fileIcon, ...styles.imageIconColor }} />
+                ) : (
+                  <FiFile style={{ ...styles.fileIcon, ...styles.fileIconColor }} />
+                )}
+                <div style={styles.fileContent}>
+                  <div style={{
+                    ...styles.fileName,
+                    ...(selectedFile?.path === item.path ? styles.fileNameSelected : {})
+                  }}>
+                    {item.name}
+                  </div>
+                  <div style={styles.fileDetails}>
+                    {item.extension} • {item.size} bytes • {item.isImage ? 'Image file' : `${item.content?.split('\n').length || 0} lines`}
+                  </div>
                 </div>
-                <div style={styles.fileDetails}>
-                  {item.extension} • {item.size} bytes • {item.content?.split('\n').length || 0} lines
-                </div>
-              </div>
-            </>
-          )}
+              </>
+            )}
         </div>
         
         {item.type === 'directory' && item.children && (
@@ -338,7 +345,8 @@ export default function FileExplorer({
   };
 
   const currentData = codeData && activeTab === 'app' ? codeData.app : 
-                     codeData && activeTab === 'components' ? codeData.components : null;
+                     codeData && activeTab === 'components' ? codeData.components :
+                     codeData && activeTab === 'public' ? codeData.public : null;
 
   return (
     <div style={styles.container}>
@@ -414,6 +422,28 @@ export default function FileExplorer({
           >
             <FiSettings style={{ fontSize: '1rem' }} />
             Components
+          </button>
+          <button
+            onClick={() => setActiveTab('public')}
+            style={{
+              ...styles.tab,
+              ...(activeTab === 'public' ? styles.tabActive : {}),
+            }}
+            onMouseEnter={(e) => {
+              if (activeTab !== 'public') {
+                e.target.style.background = styles.tabHover.background;
+                e.target.style.color = styles.tabHover.color;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (activeTab !== 'public') {
+                e.target.style.background = 'transparent';
+                e.target.style.color = '#64748b';
+              }
+            }}
+          >
+            <FiFolder style={{ fontSize: '1rem' }} />
+            Public
           </button>
         </div>
       </div>

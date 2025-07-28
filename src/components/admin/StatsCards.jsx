@@ -1,11 +1,11 @@
 'use client';
 
-import { FiCode, FiBarChart2, FiFolder, FiFile, FiTrendingUp, FiActivity, FiZap, FiDatabase } from 'react-icons/fi';
+import { FiCode, FiBarChart2, FiFolder, FiFile, FiImage, FiTrendingUp, FiActivity, FiZap, FiDatabase } from 'react-icons/fi';
 
 const styles = {
   container: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
     gap: '1.5rem',
     marginBottom: '2rem',
   },
@@ -161,6 +161,11 @@ const styles = {
       iconGlow: '#f59e0b',
       trendColor: '#ec4899',
     },
+    public: {
+      iconBg: 'linear-gradient(135deg, #ec4899, #db2777)',
+      iconGlow: '#ec4899',
+      trendColor: '#06b6d4',
+    },
   },
 };
 
@@ -197,6 +202,14 @@ export default function StatsCards({ stats }) {
       trend: '+5%',
       trendDirection: 'up',
       colorScheme: 'components',
+    },
+    {
+      icon: FiImage,
+      label: 'Public Files',
+      value: stats?.summary?.publicFiles || 0,
+      trend: '+10%',
+      trendDirection: 'up',
+      colorScheme: 'public',
     },
   ];
 

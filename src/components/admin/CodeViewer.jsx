@@ -1,6 +1,6 @@
 'use client';
 
-import { FiFile, FiEdit, FiSave, FiX, FiFolder, FiBarChart2, FiCode, FiDownload, FiCopy, FiMaximize2 } from 'react-icons/fi';
+import { FiFile, FiEdit, FiSave, FiX, FiFolder, FiBarChart2, FiCode, FiDownload, FiCopy, FiMaximize2, FiImage } from 'react-icons/fi';
 
 const styles = {
   container: {
@@ -378,7 +378,71 @@ export default function CodeViewer({
       {/* Content */}
       <div style={styles.content}>
         {selectedFile ? (
-          editingFile ? (
+          selectedFile.isImage ? (
+            <div style={styles.codeEditor}>
+              <div style={styles.editorHeader}>
+                <div style={styles.editorTitle}>
+                  <FiImage style={{ fontSize: '1rem' }} />
+                  {selectedFile.name}
+                </div>
+                <div style={styles.editorControls}>
+                  <button style={{ ...styles.controlButton, ...styles.closeButton }} />
+                  <button style={{ ...styles.controlButton, ...styles.minimizeButton }} />
+                  <button style={{ ...styles.controlButton, ...styles.maximizeButton }} />
+                </div>
+              </div>
+              <div style={styles.toolbar}>
+                <button
+                  style={styles.toolbarButton}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = styles.toolbarButtonHover.background;
+                    e.target.style.color = styles.toolbarButtonHover.color;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = 'transparent';
+                    e.target.style.color = '#a0aec0';
+                  }}
+                >
+                  <FiDownload style={{ fontSize: '0.75rem' }} />
+                  Download
+                </button>
+                <button
+                  style={styles.toolbarButton}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = styles.toolbarButtonHover.background;
+                    e.target.style.color = styles.toolbarButtonHover.color;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = 'transparent';
+                    e.target.style.color = '#a0aec0';
+                  }}
+                >
+                  <FiMaximize2 style={{ fontSize: '0.75rem' }} />
+                  Fullscreen
+                </button>
+              </div>
+              <div style={{
+                ...styles.codeDisplay,
+                background: '#f8fafc',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '2rem'
+              }}>
+                <img 
+                  src={`/${selectedFile.path}`} 
+                  alt={selectedFile.name}
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    objectFit: 'contain',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                  }}
+                />
+              </div>
+            </div>
+          ) : editingFile ? (
             <div style={styles.codeEditor}>
               <div style={styles.editorHeader}>
                 <div style={styles.editorTitle}>
@@ -471,7 +535,7 @@ export default function CodeViewer({
             <FiFile style={styles.emptyIcon} />
             <h3 style={styles.emptyTitle}>No file selected</h3>
             <p style={styles.emptyText}>
-              Select a file from the explorer to view its content. You can browse through the app and components folders to find the files you want to examine.
+              Select a file from the explorer to view its content. You can browse through the app, components, and public folders to find the files you want to examine.
             </p>
           </div>
         )}

@@ -31,7 +31,8 @@ function analyzeCodeFiles(dirPath, includeImages = false) {
           const ext = path.extname(file).toLowerCase();
           const codeExtensions = ['.js', '.jsx', '.ts', '.tsx', '.css', '.scss', '.json', '.md', '.txt'];
           const imageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico'];
-          const isPublicFolder = relativePath.startsWith('public');
+          // Note: isPublicFolder is used for future reference if needed
+          // const isPublicFolder = relativePath.startsWith('public');
           
           if (codeExtensions.includes(ext) || (includeImages && imageExtensions.includes(ext))) {
             try {
@@ -151,7 +152,7 @@ function getGitInfo() {
   return { hasGit: false };
 }
 
-export async function GET(request) {
+export async function GET() {
   try {
     const projectRoot = process.cwd();
     

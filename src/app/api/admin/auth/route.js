@@ -48,7 +48,7 @@ export async function POST(request) {
   }
 }
 
-export async function GET(request) {
+export async function GET() {
   // Simple health check endpoint
   return NextResponse.json({
     success: true,
@@ -57,7 +57,7 @@ export async function GET(request) {
   });
 }
 
-export async function OPTIONS(request) {
+export async function OPTIONS() {
   // Handle CORS preflight requests
   return new NextResponse(null, {
     status: 200,

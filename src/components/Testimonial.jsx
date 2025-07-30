@@ -7,6 +7,9 @@ const testimonials = [
   '/Testi1.png',
   '/Testi2.png',
   '/Testi3.png',
+  '/Testi4.png',
+  '/Testi5.png',
+  '/Testi6.png',
 ];
 
 const VISIBLE = 3;
@@ -33,7 +36,8 @@ const Testimonial = () => {
   // Get the indices of the visible testimonials
   const getVisible = () => {
     const arr = [];
-    for (let i = 0; i < VISIBLE; i++) {
+    const visibleCount = isMobile ? 3 : VISIBLE; // Show 3 on mobile, 3 on desktop
+    for (let i = 0; i < visibleCount; i++) {
       arr.push((active + i) % total);
     }
     return arr;

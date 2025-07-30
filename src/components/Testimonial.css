@@ -62,6 +62,7 @@ body {
 
 .testimonial-slider-controls {
   display: block;
+  margin-top: 46px;
 }
 
 .testimonial-arrow {
@@ -191,10 +192,8 @@ body {
   width: 472px;
   height: 520px;
   object-fit: cover;
-  object-position: center;
   transition: opacity 0.3s, transform 0.3s;
   cursor: pointer;
-  border-radius: 2.5rem;
 }
 
 .testimonial-card-img:hover {
@@ -234,9 +233,6 @@ body {
     min-width: 70px;
     max-width: 90px;
     height: auto !important;
-    aspect-ratio: 472/520;
-    object-fit: cover;
-    object-position: center;
     margin: 0 auto;
     border-radius: 0.8rem;
   }
@@ -247,7 +243,6 @@ body {
     gap: 0.3rem;
     margin-bottom: 1.5rem;
     margin-top: 1rem;
-    margin-top: -20px;
   }
   .testimonial-card {
     padding: 1rem 0.5rem 1rem 0.5rem;

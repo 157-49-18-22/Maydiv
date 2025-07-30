@@ -1,38 +1,180 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Maydiv - Portfolio Website
 
-## Getting Started
+A modern, responsive portfolio website built with Next.js, React, and Tailwind CSS. This project showcases web development, AI services, app development, and marketing solutions.
 
-First, run the development server:
+## 🌟 Features
+
+- **Modern UI/UX Design** - Beautiful and responsive design
+- **Multiple Service Pages** - Web Development, AI Services, App Development, Marketing
+- **Interactive Components** - Lottie animations, carousels, and smooth transitions
+- **Contact Forms** - Integrated contact functionality
+- **Testimonials** - Customer testimonials and reviews
+- **Project Showcase** - Portfolio of completed projects
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed on your system:
+
+- **Node.js** (version 18.0.0 or higher)
+- **npm** (comes with Node.js) or **yarn** or **pnpm**
+- **Git** (for cloning the repository)
+
+### Checking Your Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Check Node.js version
+node --version
+
+# Check npm version
+npm --version
+
+# Check Git version
+git --version
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If any of these commands fail, please install the missing software:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- **Node.js**: Download from [nodejs.org](https://nodejs.org/)
+- **Git**: Download from [git-scm.com](https://git-scm.com/)
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 🚀 Getting Started
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+### Step 1: Clone the Repository
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Clone the repository using HTTPS
+git clone https://github.com/Maydiv123/Maydiv.git
 
-## Learn More
+# Or using SSH (if you have SSH keys set up)
+git clone git@github.com:Maydiv123/Maydiv.git
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Step 2: Navigate to Project Directory
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+```bash
+cd Maydiv
+```
 
-## Deploy on Vercel
+### Step 3: Install Dependencies
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Choose one of the following package managers:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+```bash
+# Using npm (recommended)
+npm install
+
+
+### Step 4: Run the Development Server
+# Using npm
+npm run dev
+
+
+### Step 5: Open Your Browser
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+## 📁 Project Structure
+
+```
+Maydiv/
+├── public/                 # Static assets (images, icons, etc.)
+├── src/
+│   ├── app/               # Next.js app directory (pages and layouts)
+│   │   ├── about/         # About page
+│   │   ├── ai/            # AI services page
+│   │   ├── apps/          # App development page
+│   │   ├── contact/       # Contact page
+│   │   ├── marketing/     # Marketing page
+│   │   ├── projects/      # Projects page
+│   │   ├── testimonials/  # Testimonials page
+│   │   └── web-development/ # Web development page
+│   ├── components/        # React components
+│   └── styles/           # Global styles
+├── package.json          # Project dependencies and scripts
+├── next.config.ts        # Next.js configuration
+├── tsconfig.json         # TypeScript configuration
+└── README.md            # This file
+```
+
+## 🛠️ Available Scripts
+
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run export       # Export static files
+```
+
+
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**1. Port 3000 is already in use**
+```bash
+# Kill the process using port 3000
+npx kill-port 3000
+
+# Or use a different port
+npm run dev -- -p 3001
+```
+
+**2. Node modules issues**
+```bash
+# Clear npm cache
+npm cache clean --force
+
+# Delete node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**3. TypeScript errors**
+```bash
+# Check TypeScript configuration
+npx tsc --noEmit
+```
+
+**4. Build errors**
+```bash
+# Clear Next.js cache
+rm -rf .next
+npm run build
+```
+
+### Performance Issues
+
+- Ensure you're using a modern browser
+- Check that all images are optimized
+- Consider using a CDN for static assets
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+
+1. Check the [troubleshooting section](#-troubleshooting) above
+2. Search existing [GitHub issues](https://github.com/Maydiv123/Maydiv/issues)
+3. Create a new issue with detailed information about your problem
+
+
+
+## 🙏 Acknowledgments
+
+- Built with [Next.js](https://nextjs.org/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
+- Icons from [React Icons](https://react-icons.github.io/react-icons/)
+- Animations powered by [Lottie](https://lottiefiles.com/)
+
+---
+

@@ -1,5 +1,4 @@
 export const metadata = {
-  title: 'Maydiv',
   description: 'Maydiv Website',
   icons: {
     icon: '/Lo.png',

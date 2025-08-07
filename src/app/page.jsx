@@ -7,6 +7,7 @@ import Discuss from '../components/Discuss';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import WhatsappLottie from '../components/WhatsappLottie';
+import SEOHead from '../components/SEOHead';
 import { useEffect } from 'react';
 
 export default function Home() {
@@ -21,6 +22,13 @@ export default function Home() {
 
   return (
     <main>
+      <SEOHead 
+        title="Maydiv - Leading Digital Solutions Provider"
+        description="Transform your business with Maydiv's comprehensive digital solutions. We specialize in web development, app development, AI solutions, and digital marketing services."
+        keywords="digital solutions, web development, app development, AI, digital marketing, technology services"
+        ogImage="/logo.png"
+        canonical="https://maydiv.com"
+      />
       <WhatsappLottie />
       <Header />
       <OurService key={pathname} />

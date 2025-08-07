@@ -26,6 +26,7 @@ router.post('/seo', (req, res) => {
       pageTitle,
       metaTitle,
       metaDescription,
+      content,
       keywords,
       canonicalUrl,
       ogTitle,
@@ -40,13 +41,13 @@ router.post('/seo', (req, res) => {
 
     const result = db.prepare(`
       INSERT INTO seo (
-        pagePath, pageTitle, metaTitle, metaDescription, keywords, 
+        pagePath, pageTitle, metaTitle, metaDescription, content, keywords, 
         canonicalUrl, ogTitle, ogDescription, ogImage, 
         twitterTitle, twitterDescription, twitterImage, robots, seoScore,
         isPublished, createdAt, updatedAt
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     `).run(
-      pagePath, pageTitle, metaTitle, metaDescription, keywords,
+      pagePath, pageTitle, metaTitle, metaDescription, content, keywords,
       canonicalUrl, ogTitle, ogDescription, ogImage,
       twitterTitle, twitterDescription, twitterImage, robots, seoScore || 0
     );
@@ -73,6 +74,7 @@ router.put('/seo/:id', (req, res) => {
       pageTitle,
       metaTitle,
       metaDescription,
+      content,
       keywords,
       canonicalUrl,
       ogTitle,
@@ -87,13 +89,13 @@ router.put('/seo/:id', (req, res) => {
 
     const result = db.prepare(`
       UPDATE seo SET 
-        pagePath = ?, pageTitle = ?, metaTitle = ?, metaDescription = ?, keywords = ?,
+        pagePath = ?, pageTitle = ?, metaTitle = ?, metaDescription = ?, content = ?, keywords = ?,
         canonicalUrl = ?, ogTitle = ?, ogDescription = ?, ogImage = ?,
         twitterTitle = ?, twitterDescription = ?, twitterImage = ?, robots = ?, seoScore = ?,
         updatedAt = CURRENT_TIMESTAMP
       WHERE id = ?
     `).run(
-      pagePath, pageTitle, metaTitle, metaDescription, keywords,
+      pagePath, pageTitle, metaTitle, metaDescription, content, keywords,
       canonicalUrl, ogTitle, ogDescription, ogImage,
       twitterTitle, twitterDescription, twitterImage, robots, seoScore || 0,
       id

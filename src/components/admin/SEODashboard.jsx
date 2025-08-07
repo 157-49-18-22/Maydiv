@@ -14,6 +14,7 @@ const SEODashboard = () => {
     pagePath: '',
     title: '',
     description: '',
+    content: '',
     keywords: '',
     ogImage: '',
     canonical: '',
@@ -94,6 +95,7 @@ const SEODashboard = () => {
       pagePath: page.pagePath || '',
       title: page.title || '',
       description: page.description || '',
+      content: page.content || '',
       keywords: page.keywords || '',
       ogImage: page.ogImage || '',
       canonical: page.canonical || '',
@@ -120,6 +122,7 @@ const SEODashboard = () => {
       pagePath: '',
       title: '',
       description: '',
+      content: '',
       keywords: '',
       ogImage: '',
       canonical: '',
@@ -250,6 +253,17 @@ const SEODashboard = () => {
               </div>
 
               <div className="form-group">
+                <label>Page Content</label>
+                <textarea
+                  name="content"
+                  value={formData.content}
+                  onChange={handleInputChange}
+                  placeholder="Enter the main content for this page..."
+                  rows="6"
+                />
+              </div>
+
+              <div className="form-group">
                 <label>Keywords</label>
                 <input
                   type="text"
@@ -371,6 +385,7 @@ const SEODashboard = () => {
                 <div className="page-details">
                   <p><strong>Path:</strong> {page.pagePath}</p>
                   <p><strong>Description:</strong> {page.description?.substring(0, 100)}...</p>
+                  <p><strong>Content:</strong> {page.content?.substring(0, 150)}...</p>
                   <p><strong>Keywords:</strong> {page.keywords}</p>
                   <p><strong>No Index:</strong> {page.noIndex ? 'Yes' : 'No'}</p>
                   <p><strong>Updated:</strong> {formatDate(page.updatedAt)}</p>

@@ -15,6 +15,13 @@ const SEOSchema = new mongoose.Schema({
     trim: true
   },
   
+  // Page Content
+  content: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  
   // Basic SEO
   metaTitle: {
     type: String,

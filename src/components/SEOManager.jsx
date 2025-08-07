@@ -142,6 +142,17 @@ const SEOManager = ({
               </div>
 
               <div className="form-group">
+                <label>Page Content</label>
+                <textarea
+                  name="content"
+                  value={editForm.content || ''}
+                  onChange={handleInputChange}
+                  placeholder="Enter the main content for this page..."
+                  rows="6"
+                />
+              </div>
+
+              <div className="form-group">
                 <label>Keywords</label>
                 <input
                   type="text"

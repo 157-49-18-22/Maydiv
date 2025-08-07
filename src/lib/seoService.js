@@ -49,6 +49,7 @@ export class SEOService {
         pagePath: seoData.pagePath.trim(),
         title: seoData.title.trim(),
         description: seoData.description.trim(),
+        content: seoData.content ? seoData.content.trim() : '',
         keywords: seoData.keywords ? seoData.keywords.trim() : '',
         ogImage: seoData.ogImage ? seoData.ogImage.trim() : '',
         canonical: seoData.canonical ? seoData.canonical.trim() : '',

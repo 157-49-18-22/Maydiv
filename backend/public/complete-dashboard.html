@@ -387,6 +387,11 @@
                 <textarea id="seoDescription" rows="3" placeholder="Enter meta description"></textarea>
             </div>
             
+            <div class="form-group">
+                <label for="seoContent">Page Content</label>
+                <textarea id="seoContent" rows="6" placeholder="Enter the main content for this page..."></textarea>
+            </div>
+            
             <div class="row">
                 <div class="form-group">
                     <label for="seoKeywords">Keywords</label>
@@ -727,6 +732,7 @@
                 pageTitle: document.getElementById('seoTitle').value,
                 metaTitle: document.getElementById('seoMetaTitle').value,
                 metaDescription: document.getElementById('seoDescription').value,
+                content: document.getElementById('seoContent').value, // Added content field
                 keywords: document.getElementById('seoKeywords').value,
                 canonicalUrl: document.getElementById('seoCanonical').value,
                 ogTitle: document.getElementById('seoOgTitle').value,

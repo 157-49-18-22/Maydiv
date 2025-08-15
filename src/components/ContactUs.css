@@ -740,14 +740,16 @@ body, html, * {
 .contactus-row {
   display: flex;
   gap: 24px;
+  overflow: hidden;
+
 }
 
 .contactus-field {
   display: flex;
   flex-direction: column;
   flex: 1;
-  overflow: hidden;
-  
+
+
 }
 
 

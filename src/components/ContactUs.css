@@ -714,13 +714,14 @@ body, html, * {
   background: linear-gradient(120deg, rgba(255, 59, 255, 1) 0%, rgba(236, 191, 191, 1) 50%, rgba(92, 36, 255, 1) 100%,rgba(217, 79, 213, 1));
   border-radius: 20px 0 0 20px;
   padding: 48px 40px 40px 40px;
- width: 33%;
+  width: 33%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-family: 'Poppins', sans-serif;
   height: 471px;
-  
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .contactus-heading {
@@ -740,12 +741,16 @@ body, html, * {
 .contactus-row {
   display: flex;
   gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .contactus-field {
   display: flex;
   flex-direction: column;
   flex: 1;
+ 
 }
 
 
@@ -769,7 +774,12 @@ body, html, * {
   font-family: 'Poppins', sans-serif;
   margin-bottom: 0;
   resize: none;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
 }
+
 
 .contactus-field textarea {
   min-height: 36px;
@@ -950,6 +960,7 @@ body, html, * {
     display: flex;
     flex-direction: column;
     flex: 1 1 0;
+    overflow: hidden;
   }
   .contactus-info-list {
     gap: 12px;
@@ -976,10 +987,13 @@ body, html, * {
   }
   .contactus-form-modern {
     gap: 6px;
+    width: 100%;
+    overflow: hidden;
   }
   .contactus-row {
     flex-direction: column;
     gap: 4px;
+    width: 100%;
   }
   .contactus-field label {
     font-size: 0.85rem;
@@ -989,6 +1003,10 @@ body, html, * {
   .contactus-field textarea {
     font-size: 0.85rem;
     padding: 3px 2px;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow: hidden;
   }
   .contactus-submit-btn {
     width: 100%;

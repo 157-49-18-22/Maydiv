@@ -192,16 +192,17 @@ export default function ContactUs() {
                 <span>MAYDIV HQ</span>
               </div>
             </div>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.2233913121413!2d77.3193!3d28.4089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cdd8c2c0b0b0b%3A0x0!2zMjjCsDI0JzMyLjAiTiA3N8KwMTknMDkuNSJF!5e0!3m2!1sen!2sin!4v1234567890"
-              width="100%"
-              height="300"
-              style={{ border: 0, borderRadius: '12px' }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="MAYDIV Office Location"
-            ></iframe>
+                          <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.503067606764!2d77.3154326!3d28.4028139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cddad9eae97bb%3A0xb8dba58f55d234e!2sSCO-105%2C%20Second%20Floor%2C%20World%20Street%2C%20Sector%2079%2C%20Faridabad%2C%20Haryana%20121004!5e0!3m2!1sen!2sin!4v1692101234567!5m2!1sen!2sin"
+                width="100%"
+                height="300"
+                style={{ border: 0, borderRadius: '12px' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="MAYDIV Office Location"
+              ></iframe>
+
           </div>
           
           <div className="contactus-map-actions">

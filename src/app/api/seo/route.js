@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 import { SEOService } from '../../../lib/seoService.js';
 
+// Force static export for this API route
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);

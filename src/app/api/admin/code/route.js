@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+// Force static export for this API route
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 // Function to recursively read all files in a directory
 function readDirectoryRecursively(dirPath, basePath = '') {
   const items = [];

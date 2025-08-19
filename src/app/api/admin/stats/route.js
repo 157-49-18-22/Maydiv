@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+// Force static export for this API route
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 // Function to analyze code files
 function analyzeCodeFiles(dirPath, includeImages = false) {
   const stats = {

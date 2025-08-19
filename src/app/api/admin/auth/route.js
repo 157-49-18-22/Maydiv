@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server';
 
+// Force static export for this API route
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 // Simple authentication middleware
 // In production, you should use proper authentication with Firebase Auth or similar
 const ADMIN_CREDENTIALS = {

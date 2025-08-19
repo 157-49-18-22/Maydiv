@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+// Force static export for this API route
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);

@@ -14,5 +14,6 @@ const nextConfig: NextConfig = {
 /**
  * Next.js configuration for both Vercel and Hostinger deployment
  * Static export enabled for compatibility with both platforms
+ * Vercel can handle static exports perfectly
  */
 export default nextConfig;

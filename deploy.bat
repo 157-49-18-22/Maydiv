@@ -39,16 +39,28 @@ goto menu
 
 :hostinger
 echo 📦 Building for Hostinger...
+echo.
+echo ℹ️  Using unified config for both platforms...
 call npm run build:hostinger
 echo.
-echo 📁 Static build created in 'out' folder
-echo 📤 Upload the 'out' folder contents to Hostinger via FTP
-echo.
-echo FTP Upload Instructions:
-echo 1. Connect to your Hostinger FTP
-echo 2. Navigate to public_html folder
-echo 3. Upload all contents from the 'out' folder
-echo 4. Replace existing files if prompted
+if exist out (
+    echo ✅ Static build created successfully in 'out' folder
+    echo 📁 Folder size: 
+    dir out /s | find "File(s)"
+    echo.
+    echo 📤 Upload the 'out' folder contents to Hostinger via FTP
+    echo.
+    echo FTP Upload Instructions:
+    echo 1. Connect to your Hostinger FTP
+    echo 2. Navigate to public_html folder
+    echo 3. Upload all contents from the 'out' folder
+    echo 4. Replace existing files if prompted
+    echo.
+    echo 💡 Tip: You can use FileZilla or any FTP client
+) else (
+    echo ❌ Build failed! 'out' folder not created
+    echo 🔧 Try clearing cache first (option 3)
+)
 pause
 goto menu
 

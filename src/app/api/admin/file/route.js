@@ -87,11 +87,20 @@ export async function POST(request) {
     
     const projectRoot = process.cwd();
     const fullPath = path.join(projectRoot, filePath);
+    const srcRoot = path.join(projectRoot, 'src');
+    const appRoot = path.join(srcRoot, 'app');
     
     // Security check: ensure the file is within the src directory
-    if (!fullPath.includes(path.join(projectRoot, 'src'))) {
+    if (!fullPath.includes(srcRoot)) {
       return NextResponse.json(
         { success: false, error: 'Access denied: File must be within src directory' },
+        { status: 403 }
+      );
+    }
+    // Restrict write access to src/app only
+    if (!fullPath.startsWith(appRoot)) {
+      return NextResponse.json(
+        { success: false, error: 'Write access restricted: Only files under src/app can be modified' },
         { status: 403 }
       );
     }
@@ -144,11 +153,20 @@ export async function DELETE(request) {
     
     const projectRoot = process.cwd();
     const fullPath = path.join(projectRoot, filePath);
+    const srcRoot = path.join(projectRoot, 'src');
+    const appRoot = path.join(srcRoot, 'app');
     
     // Security check: ensure the file is within the src directory
-    if (!fullPath.includes(path.join(projectRoot, 'src'))) {
+    if (!fullPath.includes(srcRoot)) {
       return NextResponse.json(
         { success: false, error: 'Access denied: File must be within src directory' },
+        { status: 403 }
+      );
+    }
+    // Restrict delete access to src/app only
+    if (!fullPath.startsWith(appRoot)) {
+      return NextResponse.json(
+        { success: false, error: 'Delete access restricted: Only files under src/app can be deleted' },
         { status: 403 }
       );
     }

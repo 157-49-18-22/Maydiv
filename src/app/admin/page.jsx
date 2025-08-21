@@ -104,15 +104,25 @@ export default function AdminDashboard() {
 
   // Handle file edit
   const handleEditFile = () => {
-    if (selectedFile) {
-      setEditingFile(selectedFile);
-      setEditContent(selectedFile.content || '');
-    }
+    if (!selectedFile) return;
+    // Restrict editing to src/app pages for non-admin roles
+    try {
+      const authData = localStorage.getItem('adminAuth');
+      const currentUser = authData ? JSON.parse(authData) : null;
+      const isAdmin = currentUser?.role === 'admin';
+      const isAppPage = selectedFile.path?.startsWith('src/app/');
+      if (!isAdmin && !isAppPage) {
+        alert('You can only edit files under src/app');
+        return;
+      }
+    } catch {}
+    setEditingFile(selectedFile);
+    setEditContent(selectedFile.content || '');
   };
 
   // Handle save file
   const handleSaveFile = async () => {
-    if (!editingFile || !editContent) return;
+    if (!editingFile || editContent === undefined) return;
 
     try {
       const response = await fetch('/api/admin/file', {

@@ -6,10 +6,10 @@ export const revalidate = false;
 
 // Simple authentication middleware
 // In production, you should use proper authentication with Firebase Auth or similar
-const ADMIN_CREDENTIALS = {
-  username: 'admin',
-  password: 'maydiv2024' // Change this to a secure password
-};
+const USERS = [
+  { username: 'admin', password: 'maydiv2024', role: 'admin' },
+  { username: 'seoagent', password: 'Maydiv@2024!SEO', role: 'seo' }
+];
 
 export async function POST(request) {
   try {
@@ -29,19 +29,19 @@ export async function POST(request) {
       );
     }
     
-    if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+    const user = USERS.find(u => u.username === username && u.password === password);
+    if (user) {
       return NextResponse.json({
         success: true,
         message: 'Authentication successful',
-        user: { username, role: 'admin' },
+        user: { username: user.username, role: user.role },
         timestamp: new Date().toISOString()
       });
-    } else {
-      return NextResponse.json(
-        { success: false, error: 'Invalid credentials' },
-        { status: 401 }
-      );
     }
+    return NextResponse.json(
+      { success: false, error: 'Invalid credentials' },
+      { status: 401 }
+    );
     
   } catch (error) {
     console.error('Error in auth API:', error);

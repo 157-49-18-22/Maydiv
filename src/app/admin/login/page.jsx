@@ -141,9 +141,9 @@ export default function AdminLogin() {
           </div>
 
           <div className="text-center">
-            <p className="text-xs text-gray-500">
-              Default credentials: admin / maydiv2024
-            </p>
+            <p className="text-xs text-gray-500">Default credentials:</p>
+            <p className="text-xs text-gray-500">Admin: admin / maydiv2024</p>
+            <p className="text-xs text-gray-500">SEO Agent: seoagent / Maydiv@2024!SEO</p>
           </div>
         </form>
       </div>

@@ -44,6 +44,19 @@ export class SEOService {
       }
 
       // Clean and prepare data
+      const normalizeTags = (tags) => {
+        if (Array.isArray(tags)) {
+          return tags.map(tag => (typeof tag === 'string' ? tag.trim() : '')).filter(Boolean);
+        }
+        if (typeof tags === 'string') {
+          return tags
+            .split(',')
+            .map(tag => tag.trim())
+            .filter(Boolean);
+        }
+        return [];
+      };
+
       const cleanData = {
         id: Date.now().toString(),
         pagePath: seoData.pagePath.trim(),
@@ -55,6 +68,9 @@ export class SEOService {
         canonical: seoData.canonical ? seoData.canonical.trim() : '',
         noIndex: Boolean(seoData.noIndex),
         customMetaTags: Array.isArray(seoData.customMetaTags) ? seoData.customMetaTags : [],
+        h1Tag: typeof seoData.h1Tag === 'string' ? seoData.h1Tag.trim() : '',
+        h2Tags: normalizeTags(seoData.h2Tags),
+        h3Tags: normalizeTags(seoData.h3Tags),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
@@ -82,9 +98,33 @@ export class SEOService {
       const index = allData.findIndex(item => item.id === id);
       
       if (index !== -1) {
+        const normalizeTags = (tags) => {
+          if (Array.isArray(tags)) {
+            return tags.map(tag => (typeof tag === 'string' ? tag.trim() : '')).filter(Boolean);
+          }
+          if (typeof tags === 'string') {
+            return tags
+              .split(',')
+              .map(tag => tag.trim())
+              .filter(Boolean);
+          }
+          return undefined;
+        };
+
+        const normalized = { ...seoData };
+        if (seoData.h1Tag !== undefined) {
+          normalized.h1Tag = typeof seoData.h1Tag === 'string' ? seoData.h1Tag.trim() : '';
+        }
+        if (seoData.h2Tags !== undefined) {
+          normalized.h2Tags = normalizeTags(seoData.h2Tags) ?? allData[index].h2Tags ?? [];
+        }
+        if (seoData.h3Tags !== undefined) {
+          normalized.h3Tags = normalizeTags(seoData.h3Tags) ?? allData[index].h3Tags ?? [];
+        }
+
         allData[index] = {
           ...allData[index],
-          ...seoData,
+          ...normalized,
           updatedAt: new Date().toISOString()
         };
         

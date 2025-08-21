@@ -19,7 +19,10 @@ const SEODashboard = () => {
     ogImage: '',
     canonical: '',
     noIndex: false,
-    customMetaTags: []
+    customMetaTags: [],
+    h1Tag: '',
+    h2Tags: [],
+    h3Tags: []
   });
   const [message, setMessage] = useState({ type: '', text: '' });
   const [initializing, setInitializing] = useState(false);
@@ -100,7 +103,10 @@ const SEODashboard = () => {
       ogImage: page.ogImage || '',
       canonical: page.canonical || '',
       noIndex: page.noIndex || false,
-      customMetaTags: page.customMetaTags || []
+      customMetaTags: page.customMetaTags || [],
+      h1Tag: page.h1Tag || '',
+      h2Tags: Array.isArray(page.h2Tags) ? page.h2Tags : [],
+      h3Tags: Array.isArray(page.h3Tags) ? page.h3Tags : []
     });
     setShowForm(true);
   };
@@ -127,7 +133,10 @@ const SEODashboard = () => {
       ogImage: '',
       canonical: '',
       noIndex: false,
-      customMetaTags: []
+      customMetaTags: [],
+      h1Tag: '',
+      h2Tags: [],
+      h3Tags: []
     });
     setEditingPage(null);
     setShowForm(false);
@@ -260,6 +269,45 @@ const SEODashboard = () => {
                   onChange={handleInputChange}
                   placeholder="Enter the main content for this page..."
                   rows="6"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>H1 Tag</label>
+                <input
+                  type="text"
+                  name="h1Tag"
+                  value={formData.h1Tag}
+                  onChange={handleInputChange}
+                  placeholder="Main heading (H1)"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>H2 Tags (comma-separated)</label>
+                <input
+                  type="text"
+                  name="h2Tags"
+                  value={Array.isArray(formData.h2Tags) ? formData.h2Tags.join(', ') : ''}
+                  onChange={(e) => setFormData(prev => ({
+                    ...prev,
+                    h2Tags: e.target.value.split(',').map(s => s.trim()).filter(Boolean)
+                  }))}
+                  placeholder="Subheadings (H2)"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>H3 Tags (comma-separated)</label>
+                <input
+                  type="text"
+                  name="h3Tags"
+                  value={Array.isArray(formData.h3Tags) ? formData.h3Tags.join(', ') : ''}
+                  onChange={(e) => setFormData(prev => ({
+                    ...prev,
+                    h3Tags: e.target.value.split(',').map(s => s.trim()).filter(Boolean)
+                  }))}
+                  placeholder="Sub-subheadings (H3)"
                 />
               </div>
 

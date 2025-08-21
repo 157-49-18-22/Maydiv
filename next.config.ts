@@ -1,19 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactStrictMode: true,
-  // Enable static export for Hostinger deployment
-  output: 'export',
+  // Remove static export for Vercel deployment
+  // output: 'export', // Commented out for Vercel compatibility
   images: {
     unoptimized: true,
   },
-  // Disable trailing slash for better compatibility
   trailingSlash: false,
+  // Add proper Vercel settings
+  experimental: {
+    appDir: true,
+  },
 };
 
 /**
- * Next.js configuration
- * Note: Static export is disabled to enable API routes for admin dashboard
+ * Next.js configuration for Vercel deployment
+ * Static export is disabled to enable proper server-side rendering
  */
 export default nextConfig;

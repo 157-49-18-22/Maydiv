@@ -1,20 +1,18 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // Enable static export for Hostinger deployment
+  // Enable static export for Hostinger compatibility
   output: 'export',
   images: {
     unoptimized: true,
   },
   trailingSlash: false,
-  // Disable features that don't work with static export
-  experimental: {
-    appDir: false,
-  },
 };
 
 /**
- * Next.js configuration for Hostinger static deployment
- * This creates a static build that can be uploaded via FTP
+ * Next.js configuration for Hostinger deployment
+ * Static export enabled for compatibility with Hostinger
+ * Note: API routes won't work with static export
  */
-module.exports = nextConfig;
+export default nextConfig;

@@ -1,9 +1,5 @@
 import { NextResponse } from 'next/server';
 
-// Force static export for this API route
-export const dynamic = 'force-static';
-export const revalidate = false;
-
 // Simple authentication middleware
 // In production, you should use proper authentication with Firebase Auth or similar
 const USERS = [
@@ -13,12 +9,6 @@ const USERS = [
 
 export async function POST(request) {
   try {
-    // Add CORS headers
-    const response = NextResponse.next();
-    response.headers.set('Access-Control-Allow-Origin', '*');
-    response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    
     const body = await request.json();
     const { username, password } = body;
     

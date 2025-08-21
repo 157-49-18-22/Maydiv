@@ -2,18 +2,15 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // Enable static export for both Vercel and Hostinger compatibility
-  output: 'export',
+  // Remove static export to enable API routes on Vercel
   images: {
     unoptimized: true,
   },
   trailingSlash: false,
-  // Remove invalid experimental property that was causing build failure
 };
 
 /**
- * Next.js configuration for both Vercel and Hostinger deployment
- * Static export enabled for compatibility with both platforms
- * Vercel can handle static exports perfectly
+ * Next.js configuration for Vercel deployment
+ * API routes enabled for authentication functionality
  */
 export default nextConfig;

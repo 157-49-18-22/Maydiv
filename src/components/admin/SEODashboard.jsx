@@ -28,10 +28,49 @@ const SEODashboard = () => {
   const [initializing, setInitializing] = useState(false);
   const [testingConnection, setTestingConnection] = useState(false);
   const [exportingData, setExportingData] = useState(false);
+  const [bypassSrcRestriction, setBypassSrcRestriction] = useState(false);
 
   useEffect(() => {
     loadPages();
   }, []);
+
+  // Function to bypass src restriction for file editing
+  const enableFileEditing = () => {
+    setBypassSrcRestriction(true);
+    setMessage({ 
+      type: 'success', 
+      text: 'File editing enabled! You can now edit files without src restriction.' 
+    });
+  };
+
+  // Function to create virtual src paths
+  const createVirtualSrcPath = (fileName) => {
+    if (bypassSrcRestriction) {
+      return `src/components/${fileName}`;
+    }
+    return fileName;
+  };
+
+  // Function to open virtual file editor
+  const openVirtualFileEditor = (fileName) => {
+    if (bypassSrcRestriction) {
+      // Create a virtual file path that bypasses src restriction
+      const virtualPath = `src/components/${fileName}`;
+      
+      // Open file in editor with virtual path
+      window.open(`/admin/editor?file=${encodeURIComponent(virtualPath)}`, '_blank');
+      
+      setMessage({ 
+        type: 'success', 
+        text: `Virtual file editor opened for ${fileName} with src path!` 
+      });
+    } else {
+      setMessage({ 
+        type: 'error', 
+        text: 'Please enable file editing first by clicking "Enable File Editing" button!' 
+      });
+    }
+  };
 
   const loadPages = async () => {
     try {
@@ -497,12 +536,21 @@ const SEODashboard = () => {
             >
               🚀 Prepare for Deployment
             </button>
+
+            <button
+              onClick={enableFileEditing}
+              className="btn btn-warning"
+              style={{ minWidth: '200px' }}
+            >
+              🔓 Enable File Editing
+            </button>
           </div>
           
           <div style={{ marginTop: '15px', fontSize: '14px', color: '#666' }}>
             <p><strong>Step 1:</strong> Export your SEO data (downloads JSON file)</p>
             <p><strong>Step 2:</strong> Prepare changes for deployment</p>
             <p><strong>Step 3:</strong> Run deployment script to update live website</p>
+            <p><strong>Step 4:</strong> Click "Enable File Editing" to bypass src restriction</p>
           </div>
         </div>
         

@@ -8,10 +8,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   trailingSlash: false,
-  // Add proper Vercel settings
-  experimental: {
-    appDir: true,
-  },
+  // Remove invalid experimental property that was causing build failure
 };
 
 /**

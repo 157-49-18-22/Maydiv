@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:hostinger": "next build",
+    "build:hostinger": "next build --config next.config.hostinger.js",
     "start": "next start",
     "lint": "next lint"
   },

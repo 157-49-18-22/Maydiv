@@ -178,7 +178,7 @@ const Header = () => {
                 <h2>Get a dedicated UX design service at fraction of the cost.</h2>
               </div>
               <div className="how-we-work-right">
-                <p>Grow your brand with high-quality UI/UX design for a minimal fee. Work with senior designers. Contact and make as many requests as you need – no limits.</p>
+                <p>Grow nndjn brand with high-quality UI/UX design for a minimal fee. Work with senior designers. Contact and make as many requests as you need – no limits.</p>
                 <Link href="/contact"><button className="how-we-work-btn"><span>Contact Us</span></button></Link>
               </div>
             </div>

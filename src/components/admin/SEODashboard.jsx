@@ -27,6 +27,7 @@ const SEODashboard = () => {
   const [message, setMessage] = useState({ type: '', text: '' });
   const [initializing, setInitializing] = useState(false);
   const [testingConnection, setTestingConnection] = useState(false);
+  const [exportingData, setExportingData] = useState(false);
 
   useEffect(() => {
     loadPages();
@@ -174,6 +175,74 @@ const SEODashboard = () => {
       setMessage({ type: 'error', text: 'Connection test error: ' + error.message });
     } finally {
       setTestingConnection(false);
+    }
+  };
+
+  const exportSEOToFiles = async () => {
+    try {
+      setExportingData(true);
+      setMessage({ type: 'info', text: 'Exporting SEO data to files...' });
+      
+      // Get all SEO data
+      const allSEOData = await SEOService.getAllSEO();
+      
+      // Create export data
+      const exportData = {
+        timestamp: new Date().toISOString(),
+        totalPages: allSEOData.length,
+        seoData: allSEOData
+      };
+      
+      // Save to localStorage for backup
+      localStorage.setItem('maydiv_seo_export', JSON.stringify(exportData));
+      
+      // Create downloadable file
+      const dataStr = JSON.stringify(exportData, null, 2);
+      const dataBlob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `seo-export-${new Date().toISOString().split('T')[0]}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+      
+      setMessage({ 
+        type: 'success', 
+        text: `SEO data exported successfully! ${allSEOData.length} pages exported. Download the file and follow deployment instructions.` 
+      });
+      
+    } catch (error) {
+      setMessage({ type: 'error', text: 'Error exporting SEO data: ' + error.message });
+    } finally {
+      setExportingData(false);
+    }
+  };
+
+  const deploySEOChanges = async () => {
+    try {
+      setMessage({ type: 'info', text: 'Preparing SEO changes for deployment...' });
+      
+      // Get all SEO data
+      const allSEOData = await SEOService.getAllSEO();
+      
+      // Create a summary of changes
+      const changesSummary = allSEOData.map(page => ({
+        page: page.pagePath,
+        title: page.title,
+        description: page.description,
+        keywords: page.keywords
+      }));
+      
+      // Save changes summary
+      localStorage.setItem('maydiv_seo_changes_summary', JSON.stringify(changesSummary));
+      
+      setMessage({ 
+        type: 'success', 
+        text: `SEO changes prepared for deployment! ${allSEOData.length} pages ready. Now run the deployment script to update live website.` 
+      });
+      
+    } catch (error) {
+      setMessage({ type: 'error', text: 'Error preparing deployment: ' + error.message });
     }
   };
 
@@ -405,6 +474,37 @@ const SEODashboard = () => {
 
       <div className="seo-pages-list">
         <h3>SEO Data ({pages.length} pages)</h3>
+        
+        {/* Export and Deployment Section */}
+        <div className="export-section" style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
+          <h4 style={{ marginBottom: '15px', color: '#333' }}>🚀 Deploy SEO Changes to Live Website</h4>
+          
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <button
+              onClick={exportSEOToFiles}
+              disabled={exportingData || pages.length === 0}
+              className="btn btn-success"
+              style={{ minWidth: '200px' }}
+            >
+              {exportingData ? '📤 Exporting...' : '📤 Export SEO Data'}
+            </button>
+            
+            <button
+              onClick={deploySEOChanges}
+              disabled={pages.length === 0}
+              className="btn btn-primary"
+              style={{ minWidth: '200px' }}
+            >
+              🚀 Prepare for Deployment
+            </button>
+          </div>
+          
+          <div style={{ marginTop: '15px', fontSize: '14px', color: '#666' }}>
+            <p><strong>Step 1:</strong> Export your SEO data (downloads JSON file)</p>
+            <p><strong>Step 2:</strong> Prepare changes for deployment</p>
+            <p><strong>Step 3:</strong> Run deployment script to update live website</p>
+          </div>
+        </div>
         
         {pages.length === 0 ? (
           <div className="no-data">No SEO data found. Add your first page!</div>

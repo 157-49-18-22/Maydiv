@@ -175,7 +175,7 @@ const Header = () => {
             <div className="how-we-work-heading gradient-text2">HOW WE WORK</div>
             <div className="how-we-work-content">
               <div className="how-we-work-left">
-                <h2>Get a dedicated UX design service at fraction of the cost.</h2>
+                <h2>Get navi dedicated UX design service at fraction of the cost.</h2>
               </div>
               <div className="how-we-work-right">
                 <p>Grow your brand with high-quality UI/UX design for a minimal fee. Work with senior designers. Contact and make as many requests as you need – no limits.</p>

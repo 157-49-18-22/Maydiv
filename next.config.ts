@@ -2,7 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // Remove static export to enable API routes on Vercel
+  // Enable static export for Hostinger deployment
+  output: 'export',
   images: {
     unoptimized: true,
   },
@@ -10,7 +11,7 @@ const nextConfig: NextConfig = {
 };
 
 /**
- * Next.js configuration for Vercel deployment
- * API routes enabled for authentication functionality
+ * Next.js configuration for both Vercel and Hostinger deployment
+ * Static export enabled for compatibility with both platforms
  */
 export default nextConfig;

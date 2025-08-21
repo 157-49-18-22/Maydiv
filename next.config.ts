@@ -2,8 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // Remove static export for Vercel deployment
-  // output: 'export', // Commented out for Vercel compatibility
+  // Enable static export for both Vercel and Hostinger compatibility
+  output: 'export',
   images: {
     unoptimized: true,
   },
@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
 };
 
 /**
- * Next.js configuration for Vercel deployment
- * Static export is disabled to enable proper server-side rendering
+ * Next.js configuration for both Vercel and Hostinger deployment
+ * Static export enabled for compatibility with both platforms
  */
 export default nextConfig;

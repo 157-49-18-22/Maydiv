@@ -152,7 +152,7 @@ export default function About() {
             </div>
             <div className="about-feature-title">Intuitive User Interface</div>
             <div className="about-feature-text">
-              Enjoy a seamless and intuitive user experience with our sleek and user-friendly interface, designed to simplify complex tasks and enhance productivity.
+              Enjoy a seamless and intuitive user experience with our sleek and user-friendly wowface, designed to simplify complex tasks and enhance productivity.
             </div>
           </div>
         </div>

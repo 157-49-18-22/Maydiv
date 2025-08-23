@@ -125,6 +125,21 @@ const SEODashboard = () => {
         await SEOService.createSEO(formData);
         setMessage({ type: 'success', text: 'SEO data created successfully!' });
       }
+      
+      // 🚀 AUTOMATICALLY APPLY CHANGES TO LIVE WEBSITE FILES!
+      try {
+        const result = await SEOService.applySEOToFiles(formData);
+        setMessage({ 
+          type: 'success', 
+          text: `✅ SEO changes saved AND applied to live website! ${result.message}` 
+        });
+      } catch (fileError) {
+        setMessage({ 
+          type: 'warning', 
+          text: `⚠️ SEO data saved but file update failed: ${fileError.message}` 
+        });
+      }
+      
       resetForm();
       loadPages();
     } catch (error) {
@@ -259,29 +274,55 @@ const SEODashboard = () => {
 
   const deploySEOChanges = async () => {
     try {
-      setMessage({ type: 'info', text: 'Preparing SEO changes for deployment...' });
+      setMessage({ type: 'info', text: '🚀 Deploying ALL SEO changes to live website files...' });
       
       // Get all SEO data
       const allSEOData = await SEOService.getAllSEO();
       
-      // Create a summary of changes
-      const changesSummary = allSEOData.map(page => ({
-        page: page.pagePath,
-        title: page.title,
-        description: page.description,
-        keywords: page.keywords
-      }));
+      // Apply ALL SEO changes to files
+      let successCount = 0;
+      let errorCount = 0;
       
-      // Save changes summary
-      localStorage.setItem('maydiv_seo_changes_summary', JSON.stringify(changesSummary));
+      for (const page of allSEOData) {
+        try {
+          await SEOService.applySEOToFiles(page);
+          successCount++;
+        } catch (error) {
+          console.error(`Failed to apply SEO for ${page.pagePath}:`, error);
+          errorCount++;
+        }
+      }
       
-      setMessage({ 
-        type: 'success', 
-        text: `SEO changes prepared for deployment! ${allSEOData.length} pages ready. Now run the deployment script to update live website.` 
-      });
+      // Create deployment summary
+      const deploymentSummary = {
+        timestamp: new Date().toISOString(),
+        totalPages: allSEOData.length,
+        successful: successCount,
+        failed: errorCount,
+        pages: allSEOData.map(page => ({
+          page: page.pagePath,
+          title: page.title,
+          status: 'deployed'
+        }))
+      };
+      
+      // Save deployment summary
+      localStorage.setItem('maydiv_seo_deployment_summary', JSON.stringify(deploymentSummary));
+      
+      if (errorCount === 0) {
+        setMessage({ 
+          type: 'success', 
+          text: `🎉 ALL SEO changes deployed successfully! ${successCount} pages updated on live website. Changes are now LIVE!` 
+        });
+      } else {
+        setMessage({ 
+          type: 'warning', 
+          text: `⚠️ Partial deployment: ${successCount} successful, ${errorCount} failed. Check console for details.` 
+        });
+      }
       
     } catch (error) {
-      setMessage({ type: 'error', text: 'Error preparing deployment: ' + error.message });
+      setMessage({ type: 'error', text: '❌ Deployment failed: ' + error.message });
     }
   };
 
@@ -520,21 +561,21 @@ const SEODashboard = () => {
           
           <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
             <button
+              onClick={deploySEOChanges}
+              disabled={pages.length === 0}
+              className="btn btn-primary"
+              style={{ minWidth: '250px', fontSize: '16px', padding: '12px' }}
+            >
+              🚀 DEPLOY ALL SEO CHANGES NOW!
+            </button>
+            
+            <button
               onClick={exportSEOToFiles}
               disabled={exportingData || pages.length === 0}
               className="btn btn-success"
               style={{ minWidth: '200px' }}
             >
               {exportingData ? '📤 Exporting...' : '📤 Export SEO Data'}
-            </button>
-            
-            <button
-              onClick={deploySEOChanges}
-              disabled={pages.length === 0}
-              className="btn btn-primary"
-              style={{ minWidth: '200px' }}
-            >
-              🚀 Prepare for Deployment
             </button>
 
             <button
@@ -547,10 +588,10 @@ const SEODashboard = () => {
           </div>
           
           <div style={{ marginTop: '15px', fontSize: '14px', color: '#666' }}>
-            <p><strong>Step 1:</strong> Export your SEO data (downloads JSON file)</p>
-            <p><strong>Step 2:</strong> Prepare changes for deployment</p>
-            <p><strong>Step 3:</strong> Run deployment script to update live website</p>
-            <p><strong>Step 4:</strong> Click "Enable File Editing" to bypass src restriction</p>
+            <p><strong>🎯 NEW:</strong> SEO changes are now automatically applied to live website files!</p>
+            <p><strong>🚀 DEPLOY NOW:</strong> Click "DEPLOY ALL SEO CHANGES NOW!" to apply all changes immediately</p>
+            <p><strong>📁 Files Created:</strong> SEO files saved to `public/seo/` folder</p>
+            <p><strong>🌐 Live Updates:</strong> Changes appear on website after deployment</p>
           </div>
         </div>
         

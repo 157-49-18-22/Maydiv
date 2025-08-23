@@ -204,4 +204,63 @@ export class SEOService {
       return false;
     }
   }
+
+  // Apply SEO changes to actual website files
+  static async applySEOToFiles(seoData) {
+    try {
+      console.log('Applying SEO changes to website files:', seoData);
+      
+      // Create the actual HTML/Meta tags content
+      const metaTags = `
+<!-- SEO Meta Tags for ${seoData.pagePath} -->
+<title>${seoData.title}</title>
+<meta name="description" content="${seoData.description}" />
+<meta name="keywords" content="${seoData.keywords}" />
+<meta property="og:title" content="${seoData.title}" />
+<meta property="og:description" content="${seoData.description}" />
+<meta property="og:image" content="${seoData.ogImage}" />
+<meta property="og:url" content="https://maydiv.com${seoData.pagePath}" />
+<link rel="canonical" href="https://maydiv.com${seoData.pagePath}" />
+${seoData.noIndex ? '<meta name="robots" content="noindex, nofollow" />' : ''}
+${seoData.customMetaTags.map(tag => `<meta name="${tag.name}" content="${tag.content}" />`).join('\n')}
+<!-- End SEO Meta Tags -->
+`;
+
+      // Save to a file that can be included in pages
+      const fileName = `seo-${seoData.pagePath.replace(/\//g, '-').replace(/^-/, '')}.html`;
+      const filePath = `public/seo/${fileName}`;
+      
+      // Create directory if it doesn't exist
+      const fs = require('fs');
+      const path = require('path');
+      
+      const dir = path.dirname(filePath);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      
+      // Write the SEO file
+      fs.writeFileSync(filePath, metaTags, 'utf8');
+      
+      console.log(`SEO file created: ${filePath}`);
+      
+      // Also update the main SEO data file
+      const seoDataFile = 'public/seo/seo-data.json';
+      const allSEOData = await this.getAllSEO();
+      fs.writeFileSync(seoDataFile, JSON.stringify(allSEOData, null, 2), 'utf8');
+      
+      console.log('SEO data file updated:', seoDataFile);
+      
+      return {
+        success: true,
+        message: `SEO changes applied to files successfully!`,
+        filePath: filePath,
+        seoDataFile: seoDataFile
+      };
+      
+    } catch (error) {
+      console.error('Error applying SEO to files:', error);
+      throw new Error(`Failed to apply SEO to files: ${error.message}`);
+    }
+  }
 }

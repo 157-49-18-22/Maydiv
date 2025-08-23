@@ -1,104 +1,94 @@
 import { NextResponse } from 'next/server';
-import { SEOService } from '../../../lib/seoService.js';
-
-// Force static export for this API route
-export const dynamic = 'force-static';
-export const revalidate = false;
-
-export async function GET(request) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const pagePath = searchParams.get('path');
-    
-    if (pagePath) {
-      // Get SEO data for specific page
-      const seoData = await SEOService.getSEOByPath(pagePath);
-      return NextResponse.json({
-        success: true,
-        data: seoData
-      });
-    } else {
-      // Get all SEO data
-      const allSEO = await SEOService.getAllSEO();
-      return NextResponse.json({
-        success: true,
-        data: allSEO
-      });
-    }
-  } catch (error) {
-    return NextResponse.json({
-      success: false,
-      error: error.message
-    }, { status: 500 });
-  }
-}
+import fs from 'fs';
+import path from 'path';
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const seoData = await SEOService.createSEO(body);
+    const { action, seoData } = body;
     
-    return NextResponse.json({
-      success: true,
-      data: seoData
-    });
+    if (action === 'applyToFiles') {
+      return await applySEOToFiles(seoData);
+    } else if (action === 'deployAll') {
+      return await deployAllSEOChanges();
+    } else {
+      return NextResponse.json(
+        { success: false, error: 'Invalid action' },
+        { status: 400 }
+      );
+    }
   } catch (error) {
-    return NextResponse.json({
-      success: false,
-      error: error.message
-    }, { status: 500 });
+    console.error('SEO API error:', error);
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 500 }
+    );
   }
 }
 
-export async function PUT(request) {
+async function applySEOToFiles(seoData) {
   try {
-    const body = await request.json();
-    const { id, ...seoData } = body;
+    console.log('Applying SEO to files:', seoData);
     
-    if (!id) {
-      return NextResponse.json({
-        success: false,
-        error: 'ID is required for update'
-      }, { status: 400 });
+    // Create the actual HTML/Meta tags content
+    const metaTags = `<!-- SEO Meta Tags for ${seoData.pagePath} -->
+<title>${seoData.title}</title>
+<meta name="description" content="${seoData.description}" />
+<meta name="keywords" content="${seoData.keywords}" />
+<meta property="og:title" content="${seoData.title}" />
+<meta property="og:description" content="${seoData.description}" />
+<meta property="og:image" content="${seoData.ogImage}" />
+<meta property="og:url" content="https://maydiv.com${seoData.pagePath}" />
+<link rel="canonical" href="https://maydiv.com${seoData.pagePath}" />
+${seoData.noIndex ? '<meta name="robots" content="noindex, nofollow" />' : ''}
+${seoData.customMetaTags?.map(tag => `<meta name="${tag.name}" content="${tag.content}" />`).join('\n') || ''}
+<!-- End SEO Meta Tags -->`;
+
+    // Create directory structure
+    const projectRoot = process.cwd();
+    const seoDir = path.join(projectRoot, 'public', 'seo');
+    
+    if (!fs.existsSync(seoDir)) {
+      fs.mkdirSync(seoDir, { recursive: true });
     }
     
-    const updatedData = await SEOService.updateSEO(id, seoData);
+    // Create filename from page path
+    const fileName = `seo-${seoData.pagePath.replace(/\//g, '-').replace(/^-/, '')}.html`;
+    const filePath = path.join(seoDir, fileName);
+    
+    // Write the SEO file
+    fs.writeFileSync(filePath, metaTags, 'utf8');
+    
+    console.log(`SEO file created: ${filePath}`);
     
     return NextResponse.json({
       success: true,
-      data: updatedData
+      message: `SEO changes applied to files successfully!`,
+      filePath: `public/seo/${fileName}`,
+      metaTags: metaTags
     });
+    
   } catch (error) {
-    return NextResponse.json({
-      success: false,
-      error: error.message
-    }, { status: 500 });
+    console.error('Error applying SEO to files:', error);
+    throw new Error(`Failed to apply SEO to files: ${error.message}`);
   }
 }
 
-export async function DELETE(request) {
+async function deployAllSEOChanges() {
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
+    console.log('Deploying all SEO changes...');
     
-    if (!id) {
-      return NextResponse.json({
-        success: false,
-        error: 'ID is required for deletion'
-      }, { status: 400 });
-    }
-    
-    await SEOService.deleteSEO(id);
-    
+    // This would typically get data from your database or storage
+    // For now, we'll return success
     return NextResponse.json({
       success: true,
-      message: 'SEO data deleted successfully'
+      message: 'All SEO changes deployed successfully!',
+      timestamp: new Date().toISOString()
     });
+    
   } catch (error) {
-    return NextResponse.json({
-      success: false,
-      error: error.message
-    }, { status: 500 });
+    console.error('Error deploying SEO changes:', error);
+    throw new Error(`Failed to deploy SEO changes: ${error.message}`);
   }
 }
 

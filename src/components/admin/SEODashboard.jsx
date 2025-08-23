@@ -41,7 +41,8 @@ const SEODashboard = () => {
     { path: '/ai', name: 'AI Solutions', description: 'Artificial intelligence services' },
     { path: '/projects', name: 'Projects Portfolio', description: 'Our work portfolio' },
     { path: '/marketing', name: 'Digital Marketing', description: 'Digital marketing services' },
-    { path: '/seo-demo', name: 'SEO Demo', description: 'SEO demonstration page' }
+    { path: '/seo-demo', name: 'SEO Demo', description: 'SEO demonstration page' },
+    { path: '/seo-test', name: 'SEO Test Page', description: 'Test page for SEO functionality' }
   ];
 
   useEffect(() => {

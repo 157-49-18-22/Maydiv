@@ -2,6 +2,36 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+// GET method to serve SEO data
+export async function GET(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const pagePath = searchParams.get('page');
+    
+    if (pagePath) {
+      // Get SEO data for specific page
+      const seoData = await getSEODataForPage(pagePath);
+      return NextResponse.json({
+        success: true,
+        seoData: seoData
+      });
+    } else {
+      // Get all SEO data
+      const allSEOData = await getAllSEOData();
+      return NextResponse.json({
+        success: true,
+        seoData: allSEOData
+      });
+    }
+  } catch (error) {
+    console.error('SEO GET API error:', error);
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -11,6 +41,8 @@ export async function POST(request) {
       return await applySEOToFiles(seoData);
     } else if (action === 'deployAll') {
       return await deployAllSEOChanges();
+    } else if (action === 'saveData') {
+      return await saveSEOData(seoData);
     } else {
       return NextResponse.json(
         { success: false, error: 'Invalid action' },
@@ -26,9 +58,61 @@ export async function POST(request) {
   }
 }
 
+async function saveSEOData(seoData) {
+  try {
+    console.log('Saving SEO data:', seoData);
+    
+    // In production, we'll store this in a way that persists
+    // For now, we'll create a JSON file that can be served statically
+    
+    const projectRoot = process.cwd();
+    const seoDataDir = path.join(projectRoot, 'public', 'seo-data');
+    
+    if (!fs.existsSync(seoDataDir)) {
+      fs.mkdirSync(seoDataDir, { recursive: true });
+    }
+    
+    // Create a JSON file with all SEO data
+    const allSEOData = await getAllSEOData();
+    
+    // Update or add the new data
+    const existingIndex = allSEOData.findIndex(item => item.pagePath === seoData.pagePath);
+    if (existingIndex !== -1) {
+      allSEOData[existingIndex] = { ...allSEOData[existingIndex], ...seoData, updatedAt: new Date().toISOString() };
+    } else {
+      allSEOData.push({
+        id: Date.now().toString(),
+        ...seoData,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      });
+    }
+    
+    // Write to JSON file
+    const jsonFilePath = path.join(seoDataDir, 'seo-data.json');
+    fs.writeFileSync(jsonFilePath, JSON.stringify(allSEOData, null, 2), 'utf8');
+    
+    console.log(`SEO data saved to: ${jsonFilePath}`);
+    
+    return NextResponse.json({
+      success: true,
+      message: 'SEO data saved successfully!',
+      filePath: 'public/seo-data/seo-data.json',
+      totalPages: allSEOData.length
+    });
+    
+  } catch (error) {
+    console.error('Error saving SEO data:', error);
+    throw new Error(`Failed to save SEO data: ${error.message}`);
+  }
+}
+
 async function applySEOToFiles(seoData) {
   try {
     console.log('Applying SEO to files:', seoData);
+    
+    // First save the data
+    await saveSEOData(seoData);
     
     // Check if we're in Vercel production environment
     const isVercel = process.env.VERCEL === '1';
@@ -36,14 +120,13 @@ async function applySEOToFiles(seoData) {
     
     if (isVercel || isProduction) {
       // In Vercel/production, we can't write to file system
-      // Instead, we'll return success and store data in a way that works
-      console.log('Running in Vercel/production environment - using alternative storage method');
+      // But we can create a JSON file that gets served statically
+      console.log('Running in Vercel/production environment - data saved and available immediately');
       
-      // For now, we'll simulate success and suggest using localStorage
       return NextResponse.json({
         success: true,
-        message: `SEO changes saved successfully! (Production mode - using localStorage)`,
-        note: 'In production, SEO changes are stored in localStorage and applied dynamically',
+        message: `SEO changes saved successfully! (Production mode - data available immediately)`,
+        note: 'In production, SEO changes are stored and served via API for immediate access',
         seoData: seoData,
         environment: 'vercel-production'
       });
@@ -106,7 +189,7 @@ async function deployAllSEOChanges() {
       return NextResponse.json({
         success: true,
         message: 'SEO changes deployed successfully! (Production mode)',
-        note: 'In production, SEO changes are applied dynamically via localStorage',
+        note: 'In production, SEO changes are applied dynamically via API',
         timestamp: new Date().toISOString(),
         environment: 'vercel-production'
       });
@@ -122,6 +205,35 @@ async function deployAllSEOChanges() {
   } catch (error) {
     console.error('Error deploying SEO changes:', error);
     throw new Error(`Failed to deploy SEO changes: ${error.message}`);
+  }
+}
+
+// Helper function to get all SEO data
+async function getAllSEOData() {
+  try {
+    const projectRoot = process.cwd();
+    const jsonFilePath = path.join(projectRoot, 'public', 'seo-data', 'seo-data.json');
+    
+    if (fs.existsSync(jsonFilePath)) {
+      const data = fs.readFileSync(jsonFilePath, 'utf8');
+      return JSON.parse(data);
+    }
+    
+    return [];
+  } catch (error) {
+    console.error('Error reading SEO data:', error);
+    return [];
+  }
+}
+
+// Helper function to get SEO data for specific page
+async function getSEODataForPage(pagePath) {
+  try {
+    const allData = await getAllSEOData();
+    return allData.find(item => item.pagePath === pagePath) || null;
+  } catch (error) {
+    console.error('Error getting SEO data for page:', error);
+    return null;
   }
 }
 

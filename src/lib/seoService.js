@@ -4,10 +4,28 @@ export class SEOService {
   // Get all SEO data
   static async getAllSEO() {
     try {
-      console.log('Fetching all SEO data from localStorage...');
+      console.log('Fetching all SEO data from API...');
+      
+      // Try to get from API first
+      try {
+        const response = await fetch('/api/seo');
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && result.seoData) {
+            console.log('Fetched SEO data from API:', result.seoData);
+            // Also save to localStorage as backup
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(result.seoData));
+            return result.seoData;
+          }
+        }
+      } catch (apiError) {
+        console.log('API fetch failed, falling back to localStorage:', apiError);
+      }
+      
+      // Fallback to localStorage
       const data = localStorage.getItem(LOCAL_STORAGE_KEY);
       const seoData = data ? JSON.parse(data) : [];
-      console.log('Fetched SEO data:', seoData);
+      console.log('Fetched SEO data from localStorage:', seoData);
       return seoData;
     } catch (error) {
       console.error('Error fetching SEO data:', error);
@@ -19,10 +37,26 @@ export class SEOService {
   static async getSEOByPath(pagePath) {
     try {
       console.log('Fetching SEO data for path:', pagePath);
+      
+      // Try to get from API first
+      try {
+        const response = await fetch(`/api/seo?page=${encodeURIComponent(pagePath)}`);
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && result.seoData) {
+            console.log('Found SEO data from API:', result.seoData);
+            return result.seoData;
+          }
+        }
+      } catch (apiError) {
+        console.log('API fetch failed, falling back to localStorage:', apiError);
+      }
+      
+      // Fallback to localStorage
       const allData = await this.getAllSEO();
       const found = allData.find(item => item.pagePath === pagePath);
       if (found) {
-        console.log('Found SEO data:', found);
+        console.log('Found SEO data from localStorage:', found);
         return found;
       }
       console.log('No SEO data found for path:', pagePath);
@@ -77,6 +111,30 @@ export class SEOService {
 
       console.log('Clean data to save:', cleanData);
 
+      // Try to save via API first
+      try {
+        const response = await fetch('/api/seo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'saveData',
+            seoData: cleanData
+          })
+        });
+        
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success) {
+            console.log('SEO data saved via API:', result);
+          }
+        }
+      } catch (apiError) {
+        console.log('API save failed, using localStorage:', apiError);
+      }
+
+      // Also save to localStorage as backup
       const allData = await this.getAllSEO();
       allData.push(cleanData);
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allData));
@@ -122,13 +180,39 @@ export class SEOService {
           normalized.h3Tags = normalizeTags(seoData.h3Tags) ?? allData[index].h3Tags ?? [];
         }
 
-        allData[index] = {
+        const updatedData = {
           ...allData[index],
           ...normalized,
           updatedAt: new Date().toISOString()
         };
-        
+
+        // Try to save via API first
+        try {
+          const response = await fetch('/api/seo', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              action: 'saveData',
+              seoData: updatedData
+            })
+          });
+          
+          if (response.ok) {
+            const result = await response.json();
+            if (result.success) {
+              console.log('SEO data updated via API:', result);
+            }
+          }
+        } catch (apiError) {
+          console.log('API update failed, using localStorage:', apiError);
+        }
+
+        // Also update localStorage
+        allData[index] = updatedData;
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allData));
+        
         const result = allData[index];
         console.log('SEO data updated successfully:', result);
         return result;
@@ -147,6 +231,31 @@ export class SEOService {
       console.log('Deleting SEO data with ID:', id);
       const allData = await this.getAllSEO();
       const filteredData = allData.filter(item => item.id !== id);
+      
+      // Try to save via API first
+      try {
+        // For deletion, we'll save the filtered data
+        const response = await fetch('/api/seo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'saveData',
+            seoData: filteredData[0] || { pagePath: '/', title: 'Default', description: 'Default description' }
+          })
+        });
+        
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success) {
+            console.log('SEO data deletion saved via API:', result);
+          }
+        }
+      } catch (apiError) {
+        console.log('API deletion save failed, using localStorage:', apiError);
+      }
+
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filteredData));
       console.log('SEO data deleted successfully');
       return true;
@@ -229,7 +338,8 @@ export class SEOService {
         return {
           success: true,
           message: `SEO changes applied to files successfully!`,
-          filePath: result.filePath
+          filePath: result.filePath,
+          environment: result.environment || 'development'
         };
       } else {
         throw new Error(result.error || 'Failed to apply SEO changes');

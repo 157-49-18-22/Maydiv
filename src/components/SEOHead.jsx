@@ -1,117 +1,73 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { SEOService } from '../lib/seoService.js';
+import { useEffect } from 'react';
+import { useSEO } from '../lib/useSEO.js';
 
-const SEOHead = ({ 
-  title, 
-  description, 
-  keywords, 
-  ogImage, 
-  ogType = 'website',
-  canonical,
-  noIndex = false,
-  children 
-}) => {
-  const pathname = usePathname();
-  const [seoData, setSeoData] = useState(null);
-  const [loading, setLoading] = useState(true);
+export default function SEOHead({ pagePath, defaultTitle = 'Maydiv - Web Development', defaultDescription = 'Professional web development services' }) {
+  const { seoData, loading } = useSEO(pagePath);
 
   useEffect(() => {
-    const loadSEOData = async () => {
-      try {
-        setLoading(true);
-        const data = await SEOService.getSEOByPath(pathname);
-        setSeoData(data);
-      } catch (error) {
-        console.error('Error loading SEO data:', error);
-      } finally {
-        setLoading(false);
+    if (seoData && !loading) {
+      // Update page title
+      document.title = seoData.title || defaultTitle;
+      
+      // Update meta description
+      let metaDescription = document.querySelector('meta[name="description"]');
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.name = 'description';
+        document.head.appendChild(metaDescription);
       }
-    };
+      metaDescription.content = seoData.description || defaultDescription;
+      
+      // Update meta keywords
+      let metaKeywords = document.querySelector('meta[name="keywords"]');
+      if (!metaKeywords) {
+        metaKeywords = document.createElement('meta');
+        metaKeywords.name = 'keywords';
+        document.head.appendChild(metaKeywords);
+      }
+      metaKeywords.content = seoData.keywords || '';
+      
+      // Update Open Graph tags
+      let ogTitle = document.querySelector('meta[property="og:title"]');
+      if (!ogTitle) {
+        ogTitle = document.createElement('meta');
+        ogTitle.setAttribute('property', 'og:title');
+        document.head.appendChild(ogTitle);
+      }
+      ogTitle.content = seoData.title || defaultTitle;
+      
+      let ogDescription = document.querySelector('meta[property="og:description"]');
+      if (!ogDescription) {
+        ogDescription = document.createElement('meta');
+        ogDescription.setAttribute('property', 'og:description');
+        document.head.appendChild(ogDescription);
+      }
+      ogDescription.content = seoData.description || defaultDescription;
+      
+      // Update canonical URL
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.rel = 'canonical';
+        document.head.appendChild(canonical);
+      }
+      canonical.href = `https://maydiv.com${pagePath}`;
+      
+      console.log('✅ SEO data applied to page:', seoData);
+    }
+  }, [seoData, loading, pagePath, defaultTitle, defaultDescription]);
 
-    loadSEOData();
-  }, [pathname]);
-
-  // Use provided props as fallback if no SEO data from Firebase
-  const finalTitle = seoData?.title || title || 'Maydiv - Digital Solutions';
-  const finalDescription = seoData?.description || description || 'Leading digital solutions provider offering web development, app development, AI solutions, and more.';
-  const finalKeywords = seoData?.keywords || keywords || 'web development, app development, AI, digital solutions, technology';
-  const finalOgImage = seoData?.ogImage || ogImage || '/logo.png';
-  const finalCanonical = seoData?.canonical || canonical || `https://maydiv.com${pathname}`;
-  const finalNoIndex = seoData?.noIndex || noIndex;
-
-  // Debug logging
-  console.log('SEOHead rendering with title:', finalTitle, 'for path:', pathname);
-
+  // Show loading indicator (optional)
   if (loading) {
-    return null; // Don't render anything while loading
+    return (
+      <div style={{ display: 'none' }}>
+        Loading SEO data...
+      </div>
+    );
   }
 
-  return (
-    <>
-      {/* Basic Meta Tags */}
-      <title>{finalTitle}</title>
-      <meta name="description" content={finalDescription} />
-      <meta name="keywords" content={finalKeywords} />
-      <meta name="robots" content={finalNoIndex ? 'noindex, nofollow' : 'index, follow'} />
-      <meta name="author" content="Maydiv" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      
-      {/* Canonical URL */}
-      <link rel="canonical" href={finalCanonical} />
-      
-      {/* Open Graph Meta Tags */}
-      <meta property="og:title" content={finalTitle} />
-      <meta property="og:description" content={finalDescription} />
-      <meta property="og:image" content={finalOgImage} />
-      <meta property="og:type" content={ogType} />
-      <meta property="og:url" content={finalCanonical} />
-      <meta property="og:site_name" content="Maydiv" />
-      <meta property="og:locale" content="en_US" />
-      
-      {/* Twitter Card Meta Tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={finalTitle} />
-      <meta name="twitter:description" content={finalDescription} />
-      <meta name="twitter:image" content={finalOgImage} />
-      <meta name="twitter:site" content="@maydiv" />
-      
-      {/* Additional SEO Meta Tags */}
-      <meta name="theme-color" content="#000000" />
-      <meta name="msapplication-TileColor" content="#000000" />
-      <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-      <meta name="apple-mobile-web-app-title" content="Maydiv" />
-      
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Maydiv",
-            "url": "https://maydiv.com",
-            "logo": "https://maydiv.com/logo.png",
-            "description": finalDescription,
-            "sameAs": [
-              "https://www.linkedin.com/company/maydiv",
-              "https://twitter.com/maydiv"
-            ]
-          })
-        }}
-      />
-      
-      {/* Custom Meta Tags from Firebase */}
-      {seoData?.customMetaTags && seoData.customMetaTags.map((tag, index) => (
-        <meta key={index} name={tag.name} content={tag.content} />
-      ))}
-      
-      {children}
-    </>
-  );
-};
-
-export default SEOHead; 
+  // This component doesn't render anything visible
+  return null;
+} 

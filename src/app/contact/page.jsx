@@ -6,11 +6,9 @@ export default function ContactPage() {
   return (
     <main>
       <SEOHead 
-        title="Contact Us - Maydiv Digital Solutions"
-        description="Get in touch with Maydiv for your digital transformation needs. We're here to help you achieve your business goals with cutting-edge technology solutions."
-        keywords="contact maydiv, digital solutions contact, business inquiry, consultation"
-        ogImage="/logo.png"
-        canonical="https://maydiv.com/contact"
+        pagePath="/contact"
+        defaultTitle="Contact Us - Maydiv Digital Solutions"
+        defaultDescription="Get in touch with Maydiv for your digital transformation needs. We're here to help you achieve your business goals with cutting-edge technology solutions."
       />
       <WhatsappLottie />
       <ContactUs />

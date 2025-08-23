@@ -210,26 +210,6 @@ export class SEOService {
     try {
       console.log('Applying SEO changes to website files:', seoData);
       
-      // Create the actual HTML/Meta tags content
-      const metaTags = `
-<!-- SEO Meta Tags for ${seoData.pagePath} -->
-<title>${seoData.title}</title>
-<meta name="description" content="${seoData.description}" />
-<meta name="keywords" content="${seoData.keywords}" />
-<meta property="og:title" content="${seoData.title}" />
-<meta property="og:description" content="${seoData.description}" />
-<meta property="og:image" content="${seoData.ogImage}" />
-<meta property="og:url" content="https://maydiv.com${seoData.pagePath}" />
-<link rel="canonical" href="https://maydiv.com${seoData.pagePath}" />
-${seoData.noIndex ? '<meta name="robots" content="noindex, nofollow" />' : ''}
-${seoData.customMetaTags.map(tag => `<meta name="${tag.name}" content="${tag.content}" />`).join('\n')}
-<!-- End SEO Meta Tags -->
-`;
-
-      // Save to a file that can be included in pages
-      const fileName = `seo-${seoData.pagePath.replace(/\//g, '-').replace(/^-/, '')}.html`;
-      const filePath = `public/seo/${fileName}`;
-      
       // Use API route instead of direct file system access (client-side safe)
       const response = await fetch('/api/seo', {
         method: 'POST',
@@ -246,16 +226,14 @@ ${seoData.customMetaTags.map(tag => `<meta name="${tag.name}" content="${tag.con
       
       if (result.success) {
         console.log('SEO changes applied via API:', result);
+        return {
+          success: true,
+          message: `SEO changes applied to files successfully!`,
+          filePath: result.filePath
+        };
       } else {
         throw new Error(result.error || 'Failed to apply SEO changes');
       }
-      
-      return {
-        success: true,
-        message: `SEO changes applied to files successfully!`,
-        filePath: filePath,
-        seoDataFile: seoDataFile
-      };
       
     } catch (error) {
       console.error('Error applying SEO to files:', error);

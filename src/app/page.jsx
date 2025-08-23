@@ -23,11 +23,9 @@ export default function Home() {
   return (
     <main>
       <SEOHead 
-        title="Maydiv - Leading Digital Solutions Provider"
-        description="Transform your business with Maydiv's comprehensive digital solutions. We specialize in web development, app development, AI solutions, and digital marketing services."
-        keywords="digital solutions, web development, app development, AI, digital marketing, technology services"
-        ogImage="/logo.png"
-        canonical="https://maydiv.com"
+        pagePath="/"
+        defaultTitle="Maydiv - Leading Digital Solutions Provider"
+        defaultDescription="Transform your business with Maydiv's comprehensive digital solutions. We specialize in web development, app development, AI solutions, and digital marketing services."
       />
       <WhatsappLottie />
       <Header />

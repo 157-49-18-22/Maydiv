@@ -240,7 +240,7 @@ export class SEOService {
         } else {
           throw new Error(result.error || 'Failed to deploy SEO changes');
         }
-      } catch (error) {
+      } catch {
         console.log('API deployment failed, but localStorage changes are already active');
         return {
           success: true,

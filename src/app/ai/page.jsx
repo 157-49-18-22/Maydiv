@@ -8,11 +8,9 @@ export default function RealAiPage() {
   return (
     <main>
       <SEOHead 
-        title="AI Solutions - Maydiv"
-        description="Cutting-edge AI solutions by Maydiv. We leverage artificial intelligence to automate processes, enhance decision-making, and drive business innovation."
-        keywords="AI solutions, artificial intelligence, machine learning, automation, business AI"
-        ogImage="/Servicesai.png"
-        canonical="https://maydiv.com/ai"
+        pagePath="/ai"
+        defaultTitle="AI Solutions - Maydiv"
+        defaultDescription="Cutting-edge AI solutions by Maydiv. We leverage artificial intelligence to automate processes, enhance decision-making, and drive business innovation."
       />
       <WhatsappLottie />
       <AI />

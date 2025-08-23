@@ -4,11 +4,9 @@ export default function AppsPage() {
   return (
     <main>
       <SEOHead 
-        title="Mobile Apps & Web Applications - Maydiv"
-        description="Custom mobile apps and web applications by Maydiv. We create user-friendly, scalable applications that solve real business problems."
-        keywords="mobile apps, web applications, custom software, business applications"
-        ogImage="/Apps1.png"
-        canonical="https://maydiv.com/apps"
+        pagePath="/apps"
+        defaultTitle="Mobile Apps & Web Applications - Maydiv"
+        defaultDescription="Custom mobile apps and web applications by Maydiv. We create user-friendly, scalable applications that solve real business problems."
       />
     </main>
   ); 

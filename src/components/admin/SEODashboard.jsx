@@ -30,6 +30,20 @@ const SEODashboard = () => {
   const [exportingData, setExportingData] = useState(false);
   const [bypassSrcRestriction, setBypassSrcRestriction] = useState(false);
 
+  // Available pages for dropdown
+  const availablePages = [
+    { path: '/', name: 'Home Page', description: 'Main landing page' },
+    { path: '/about', name: 'About Page', description: 'Company information and team' },
+    { path: '/contact', name: 'Contact Page', description: 'Contact information and form' },
+    { path: '/web-development', name: 'Web Development', description: 'Web development services' },
+    { path: '/apps', name: 'Mobile Apps', description: 'Mobile app development services' },
+    { path: '/apps/ui-ux', name: 'UI/UX Design', description: 'UI/UX design services' },
+    { path: '/ai', name: 'AI Solutions', description: 'Artificial intelligence services' },
+    { path: '/projects', name: 'Projects Portfolio', description: 'Our work portfolio' },
+    { path: '/marketing', name: 'Digital Marketing', description: 'Digital marketing services' },
+    { path: '/seo-demo', name: 'SEO Demo', description: 'SEO demonstration page' }
+  ];
+
   useEffect(() => {
     loadPages();
   }, []);
@@ -101,6 +115,19 @@ const SEODashboard = () => {
     }));
   };
 
+  // Handle page selection from dropdown
+  const handlePageSelection = (selectedPath) => {
+    const selectedPage = availablePages.find(page => page.path === selectedPath);
+    if (selectedPage) {
+      setFormData(prev => ({
+        ...prev,
+        pagePath: selectedPath,
+        title: selectedPage.name,
+        description: selectedPage.description
+      }));
+    }
+  };
+
   const addCustomMetaTag = () => {
     setFormData(prev => ({
       ...prev,
@@ -165,6 +192,20 @@ const SEODashboard = () => {
     });
     setShowForm(true);
   };
+
+  // Auto-fill form with page data when page path changes
+  useEffect(() => {
+    if (formData.pagePath && !editingPage) {
+      const selectedPage = availablePages.find(page => page.path === formData.pagePath);
+      if (selectedPage && (!formData.title || formData.title === selectedPage.name)) {
+        setFormData(prev => ({
+          ...prev,
+          title: selectedPage.name,
+          description: selectedPage.description
+        }));
+      }
+    }
+  }, [formData.pagePath, editingPage]);
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this SEO data?')) {
@@ -358,6 +399,58 @@ const SEODashboard = () => {
         </div>
       </div>
 
+      {/* Quick Page Selector */}
+      <div className="quick-page-selector" style={{
+        backgroundColor: '#f8f9fa',
+        padding: '15px',
+        borderRadius: '8px',
+        marginBottom: '20px',
+        border: '1px solid #e9ecef'
+      }}>
+        <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', color: '#333' }}>
+          🚀 Quick SEO Management
+        </h3>
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          {availablePages.map((page) => (
+            <button
+              key={page.path}
+              onClick={() => {
+                setFormData({
+                  pagePath: page.path,
+                  title: page.name,
+                  description: page.description,
+                  content: '',
+                  keywords: '',
+                  ogImage: '',
+                  canonical: '',
+                  noIndex: false,
+                  customMetaTags: [],
+                  h1Tag: '',
+                  h2Tags: [],
+                  h3Tags: []
+                });
+                setShowForm(true);
+              }}
+              style={{
+                backgroundColor: '#007bff',
+                color: 'white',
+                border: 'none',
+                padding: '8px 16px',
+                borderRadius: '20px',
+                cursor: 'pointer',
+                fontSize: '12px',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              {page.name}
+            </button>
+          ))}
+        </div>
+        <div style={{ marginTop: '10px', fontSize: '12px', color: '#666' }}>
+          💡 Click any page button to quickly start editing its SEO data!
+        </div>
+      </div>
+
       {message.text && (
         <div className={`message message-${message.type}`}>
           {message.text}
@@ -376,14 +469,36 @@ const SEODashboard = () => {
             <form onSubmit={handleSubmit} className="seo-form">
               <div className="form-group">
                 <label>Page Path *</label>
-                <input
-                  type="text"
+                <select
                   name="pagePath"
                   value={formData.pagePath}
-                  onChange={handleInputChange}
-                  placeholder="/about"
+                  onChange={(e) => handlePageSelection(e.target.value)}
                   required
-                />
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ddd',
+                    borderRadius: '4px',
+                    fontSize: '14px'
+                  }}
+                >
+                  <option value="">Select a page...</option>
+                  {availablePages.map((page) => (
+                    <option key={page.path} value={page.path}>
+                      {page.name} - {page.path}
+                    </option>
+                  ))}
+                </select>
+                {formData.pagePath && (
+                  <div style={{ 
+                    marginTop: '5px', 
+                    fontSize: '12px', 
+                    color: '#666',
+                    fontStyle: 'italic'
+                  }}>
+                    📍 Selected: {formData.pagePath}
+                  </div>
+                )}
               </div>
 
               <div className="form-group">

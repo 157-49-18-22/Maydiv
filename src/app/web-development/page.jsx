@@ -9,11 +9,9 @@ export default function RealProjectsPage() {
   return (
     <main>
       <SEOHead 
-        title="Web Development Services - Maydiv"
-        description="Professional web development services by Maydiv. We create responsive, modern websites that drive business growth and enhance user experience."
-        keywords="web development, website design, responsive websites, custom web applications"
-        ogImage="/Web.png"
-        canonical="https://maydiv.com/web-development"
+        pagePath="/web-development"
+        defaultTitle="Web Development Services - Maydiv"
+        defaultDescription="Professional web development services by Maydiv. We create responsive, modern websites that drive business growth and enhance user experience."
       />
       <WhatsappLottie />
       <Projects key={pathname} />

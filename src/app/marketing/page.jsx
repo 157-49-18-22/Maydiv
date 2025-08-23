@@ -7,11 +7,9 @@ export default function RealTestimonialsPage() {
   return (
     <main>
       <SEOHead 
-        title="Digital Marketing Services - Maydiv"
-        description="Comprehensive digital marketing services by Maydiv. From SEO to social media marketing, we help businesses reach their target audience and grow online."
-        keywords="digital marketing, SEO, social media marketing, content marketing, online advertising"
-        ogImage="/Marketing.json"
-        canonical="https://maydiv.com/marketing"
+        pagePath="/marketing"
+        defaultTitle="Digital Marketing Services - Maydiv"
+        defaultDescription="Comprehensive digital marketing services by Maydiv. From SEO to social media marketing, we help businesses reach their target audience and grow online."
       />
       <WhatsappLottie />
       <Testimonials />

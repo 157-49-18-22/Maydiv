@@ -230,26 +230,25 @@ ${seoData.customMetaTags.map(tag => `<meta name="${tag.name}" content="${tag.con
       const fileName = `seo-${seoData.pagePath.replace(/\//g, '-').replace(/^-/, '')}.html`;
       const filePath = `public/seo/${fileName}`;
       
-      // Create directory if it doesn't exist
-      const fs = require('fs');
-      const path = require('path');
+      // Use API route instead of direct file system access (client-side safe)
+      const response = await fetch('/api/seo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'applyToFiles',
+          seoData: seoData
+        })
+      });
+
+      const result = await response.json();
       
-      const dir = path.dirname(filePath);
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
+      if (result.success) {
+        console.log('SEO changes applied via API:', result);
+      } else {
+        throw new Error(result.error || 'Failed to apply SEO changes');
       }
-      
-      // Write the SEO file
-      fs.writeFileSync(filePath, metaTags, 'utf8');
-      
-      console.log(`SEO file created: ${filePath}`);
-      
-      // Also update the main SEO data file
-      const seoDataFile = 'public/seo/seo-data.json';
-      const allSEOData = await this.getAllSEO();
-      fs.writeFileSync(seoDataFile, JSON.stringify(allSEOData, null, 2), 'utf8');
-      
-      console.log('SEO data file updated:', seoDataFile);
       
       return {
         success: true,

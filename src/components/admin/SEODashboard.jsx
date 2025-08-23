@@ -279,7 +279,7 @@ const SEODashboard = () => {
       // Get all SEO data
       const allSEOData = await SEOService.getAllSEO();
       
-      // Apply ALL SEO changes to files
+      // Apply ALL SEO changes to files via API
       let successCount = 0;
       let errorCount = 0;
       

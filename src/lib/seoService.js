@@ -104,6 +104,38 @@ export class SEOService {
     }
   }
 
+  static async getPagesForDashboard() {
+    try {
+      console.log('Fetching pages for dashboard...');
+      const allData = this.getAllSEO();
+      const sortedData = allData.sort((a, b) => 
+        new Date(b.updatedAt) - new Date(a.updatedAt)
+      );
+      console.log('Dashboard pages:', sortedData);
+      return sortedData;
+    } catch (error) {
+      console.error('Error fetching pages for dashboard:', error);
+      return [];
+    }
+  }
+
+  static async getSEOById(id) {
+    try {
+      console.log('Fetching SEO data by ID:', id);
+      const allData = this.getAllSEO();
+      const found = allData.find(item => item.id === id);
+      if (found) {
+        console.log('Found SEO data by ID:', found);
+        return found;
+      }
+      console.log('No SEO data found for ID:', id);
+      return null;
+    } catch (error) {
+      console.error('Error fetching SEO by ID:', error);
+      return null;
+    }
+  }
+
   static async applySEOToFiles(seoData) {
     try {
       console.log('Applying SEO changes to website files:', seoData);

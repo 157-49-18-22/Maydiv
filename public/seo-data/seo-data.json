@@ -15,5 +15,22 @@
     "h3Tags": [],
     "createdAt": "2025-08-23T12:42:17.071Z",
     "updatedAt": "2025-08-23T12:42:24.417Z"
+  },
+  {
+    "id": "1755952994668",
+    "pagePath": "/contact",
+    "title": "Contact Page",
+    "description": "Contact information and form",
+    "content": "",
+    "keywords": "",
+    "ogImage": "",
+    "canonical": "",
+    "noIndex": false,
+    "customMetaTags": [],
+    "h1Tag": "",
+    "h2Tags": [],
+    "h3Tags": [],
+    "createdAt": "2025-08-23T12:43:14.668Z",
+    "updatedAt": "2025-08-23T12:43:14.668Z"
   }
 ]

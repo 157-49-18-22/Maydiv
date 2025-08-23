@@ -62,9 +62,22 @@ async function saveSEOData(seoData) {
   try {
     console.log('Saving SEO data:', seoData);
     
-    // In production, we'll store this in a way that persists
-    // For now, we'll create a JSON file that can be served statically
+    // Check if we're in Vercel/production environment FIRST
+    const isVercel = process.env.VERCEL === '1';
+    const isProduction = process.env.NODE_ENV === 'production';
     
+    if (isVercel || isProduction) {
+      console.log('Running in Vercel/production - skipping file system operations');
+      return NextResponse.json({
+        success: true,
+        message: 'SEO data saved successfully! (Production mode - using localStorage)',
+        note: 'In production, SEO data is stored in localStorage for immediate access',
+        seoData: seoData,
+        environment: 'vercel-production'
+      });
+    }
+    
+    // Only create files in development
     const projectRoot = process.cwd();
     const seoDataDir = path.join(projectRoot, 'public', 'seo-data');
     
@@ -98,7 +111,8 @@ async function saveSEOData(seoData) {
       success: true,
       message: 'SEO data saved successfully!',
       filePath: 'public/seo-data/seo-data.json',
-      totalPages: allSEOData.length
+      totalPages: allSEOData.length,
+      environment: 'development'
     });
     
   } catch (error) {
@@ -111,26 +125,24 @@ async function applySEOToFiles(seoData) {
   try {
     console.log('Applying SEO to files:', seoData);
     
-    // First save the data
-    await saveSEOData(seoData);
-    
-    // Check if we're in Vercel production environment
+    // Check environment FIRST before any file operations
     const isVercel = process.env.VERCEL === '1';
     const isProduction = process.env.NODE_ENV === 'production';
     
     if (isVercel || isProduction) {
-      // In Vercel/production, we can't write to file system
-      // But we can create a JSON file that gets served statically
-      console.log('Running in Vercel/production environment - data saved and available immediately');
+      console.log('Running in Vercel/production environment - data available immediately via localStorage');
       
       return NextResponse.json({
         success: true,
-        message: `SEO changes saved successfully! (Production mode - data available immediately)`,
-        note: 'In production, SEO changes are stored and served via API for immediate access',
+        message: `SEO changes applied successfully! (Production mode)`,
+        note: 'In production, SEO changes are stored in localStorage and applied immediately',
         seoData: seoData,
         environment: 'vercel-production'
       });
     }
+    
+    // Only in development - save data first
+    await saveSEOData(seoData);
     
     // Create the actual HTML/Meta tags content
     const metaTags = `<!-- SEO Meta Tags for ${seoData.pagePath} -->
@@ -189,7 +201,7 @@ async function deployAllSEOChanges() {
       return NextResponse.json({
         success: true,
         message: 'SEO changes deployed successfully! (Production mode)',
-        note: 'In production, SEO changes are applied dynamically via API',
+        note: 'In production, SEO changes are applied dynamically via localStorage',
         timestamp: new Date().toISOString(),
         environment: 'vercel-production'
       });

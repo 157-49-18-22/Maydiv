@@ -26,7 +26,6 @@ const SEODashboard = () => {
   });
   const [message, setMessage] = useState({ type: '', text: '' });
   const [initializing, setInitializing] = useState(false);
-  const [testingConnection, setTestingConnection] = useState(false);
   const [exportingData, setExportingData] = useState(false);
   const [bypassSrcRestriction, setBypassSrcRestriction] = useState(false);
 
@@ -154,20 +153,22 @@ const SEODashboard = () => {
         setMessage({ type: 'success', text: 'SEO data created successfully!' });
       }
       
-      // 🚀 AUTOMATICALLY APPLY CHANGES TO LIVE WEBSITE FILES!
+      // Apply changes to files immediately
       try {
         const result = await SEOService.applySEOToFiles(formData);
+        setMessage({ 
+          type: 'success', 
+          text: `✅ ${result.message}` 
+        });
         
-        if (result.environment === 'vercel-production') {
-          setMessage({ 
-            type: 'success', 
-            text: `✅ SEO changes saved AND applied! (Production mode - using localStorage for dynamic updates)` 
-          });
-        } else {
-          setMessage({ 
-            type: 'success', 
-            text: `✅ SEO changes saved AND applied to live website! ${result.message}` 
-          });
+        // Show additional info if available
+        if (result.note) {
+          setTimeout(() => {
+            setMessage({ 
+              type: 'info', 
+              text: `ℹ️ ${result.note}` 
+            });
+          }, 2000);
         }
       } catch (fileError) {
         setMessage({ 
@@ -266,19 +267,27 @@ const SEODashboard = () => {
     }
   };
 
-  const handleTestConnection = async () => {
+  const testConnection = async () => {
     try {
-      setTestingConnection(true);
-      const isConnected = await SEOService.testConnection();
-      if (isConnected) {
-        setMessage({ type: 'success', text: 'Firebase connection successful!' });
+      setMessage({ type: 'info', text: 'Testing connection...' });
+      
+      // Test localStorage connection
+      const testKey = 'maydiv_test_connection';
+      localStorage.setItem(testKey, 'test_value');
+      const testValue = localStorage.getItem(testKey);
+      localStorage.removeItem(testKey);
+      
+      if (testValue === 'test_value') {
+        setMessage({ 
+          type: 'success', 
+          text: '✅ Connection test successful! localStorage is working properly.' 
+        });
       } else {
-        setMessage({ type: 'error', text: 'Firebase connection failed!' });
+        throw new Error('localStorage test failed');
       }
+      
     } catch (error) {
-      setMessage({ type: 'error', text: 'Connection test error: ' + error.message });
-    } finally {
-      setTestingConnection(false);
+      setMessage({ type: 'error', text: '❌ Connection test failed: ' + error.message });
     }
   };
 
@@ -324,70 +333,26 @@ const SEODashboard = () => {
 
   const deploySEOChanges = async () => {
     try {
-      setMessage({ type: 'info', text: '🚀 Deploying ALL SEO changes to live website files...' });
+      setMessage({ type: 'info', text: 'Deploying SEO changes...' });
       
-      // Get all SEO data
-      const allSEOData = await SEOService.getAllSEO();
+      const result = await SEOService.deployAllSEOChanges();
       
-      // Apply ALL SEO changes to files via API
-      let successCount = 0;
-      let errorCount = 0;
-      let environment = 'development';
+      setMessage({ 
+        type: 'success', 
+        text: `🚀 ${result.message}` 
+      });
       
-      for (const page of allSEOData) {
-        try {
-          const result = await SEOService.applySEOToFiles(page);
-          
-          // Check if we're in production mode
-          if (result.environment === 'vercel-production') {
-            environment = 'vercel-production';
-          }
-          
-          successCount++;
-        } catch (error) {
-          console.error(`Failed to apply SEO for ${page.pagePath}:`, error);
-          errorCount++;
-        }
-      }
-      
-      // Create deployment summary
-      const deploymentSummary = {
-        timestamp: new Date().toISOString(),
-        totalPages: allSEOData.length,
-        successful: successCount,
-        failed: errorCount,
-        environment: environment,
-        pages: allSEOData.map(page => ({
-          page: page.pagePath,
-          title: page.title,
-          status: 'deployed'
-        }))
-      };
-      
-      // Save deployment summary
-      localStorage.setItem('maydiv_seo_deployment_summary', JSON.stringify(deploymentSummary));
-      
-      if (errorCount === 0) {
-        if (environment === 'vercel-production') {
+      if (result.note) {
+        setTimeout(() => {
           setMessage({ 
-            type: 'success', 
-            text: `🎉 ALL SEO changes deployed successfully! ${successCount} pages updated. (Production mode - using localStorage for dynamic updates)` 
+            type: 'info', 
+            text: `ℹ️ ${result.note}` 
           });
-        } else {
-          setMessage({ 
-            type: 'success', 
-            text: `🎉 ALL SEO changes deployed successfully! ${successCount} pages updated on live website files. Changes are now LIVE!` 
-          });
-        }
-      } else {
-        setMessage({ 
-          type: 'warning', 
-          text: `⚠️ Partial deployment: ${successCount} successful, ${errorCount} failed. Check console for details.` 
-        });
+        }, 2000);
       }
       
     } catch (error) {
-      setMessage({ type: 'error', text: '❌ Deployment failed: ' + error.message });
+      setMessage({ type: 'error', text: 'Error deploying SEO changes: ' + error.message });
     }
   };
 
@@ -402,10 +367,10 @@ const SEODashboard = () => {
         <div className="header-actions">
           <button 
             className="btn btn-secondary"
-            onClick={handleTestConnection}
-            disabled={testingConnection}
+            onClick={testConnection}
+            disabled={false} // Removed testingConnection state
           >
-            {testingConnection ? 'Testing...' : 'Test Connection'}
+            Test Connection
           </button>
           <button 
             className="btn btn-secondary"

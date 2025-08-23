@@ -1,5 +1,5 @@
 // SEO Service for managing SEO data
-class SEOService {
+export class SEOService {
   static async createSEO(seoData) {
     try {
       console.log('Creating new SEO data:', seoData);
@@ -166,8 +166,8 @@ class SEOService {
         } else {
           throw new Error(result.error || 'Failed to apply SEO changes');
         }
-      } catch (apiError) {
-        console.log('API call failed, falling back to localStorage:', apiError);
+      } catch (error) {
+        console.log('API call failed, falling back to localStorage:', error);
         
         // Fallback to localStorage
         const existingData = this.getAllSEO();
@@ -240,7 +240,7 @@ class SEOService {
         } else {
           throw new Error(result.error || 'Failed to deploy SEO changes');
         }
-      } catch (apiError) {
+      } catch (error) {
         console.log('API deployment failed, but localStorage changes are already active');
         return {
           success: true,
@@ -256,5 +256,3 @@ class SEOService {
     }
   }
 }
-
-export default SEOService;

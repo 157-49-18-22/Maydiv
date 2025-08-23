@@ -156,10 +156,18 @@ const SEODashboard = () => {
       // 🚀 AUTOMATICALLY APPLY CHANGES TO LIVE WEBSITE FILES!
       try {
         const result = await SEOService.applySEOToFiles(formData);
-        setMessage({ 
-          type: 'success', 
-          text: `✅ SEO changes saved AND applied to live website! ${result.message}` 
-        });
+        
+        if (result.environment === 'vercel-production') {
+          setMessage({ 
+            type: 'success', 
+            text: `✅ SEO changes saved AND applied! (Production mode - using localStorage for dynamic updates)` 
+          });
+        } else {
+          setMessage({ 
+            type: 'success', 
+            text: `✅ SEO changes saved AND applied to live website! ${result.message}` 
+          });
+        }
       } catch (fileError) {
         setMessage({ 
           type: 'warning', 
@@ -323,10 +331,17 @@ const SEODashboard = () => {
       // Apply ALL SEO changes to files via API
       let successCount = 0;
       let errorCount = 0;
+      let environment = 'development';
       
       for (const page of allSEOData) {
         try {
-          await SEOService.applySEOToFiles(page);
+          const result = await SEOService.applySEOToFiles(page);
+          
+          // Check if we're in production mode
+          if (result.environment === 'vercel-production') {
+            environment = 'vercel-production';
+          }
+          
           successCount++;
         } catch (error) {
           console.error(`Failed to apply SEO for ${page.pagePath}:`, error);
@@ -340,6 +355,7 @@ const SEODashboard = () => {
         totalPages: allSEOData.length,
         successful: successCount,
         failed: errorCount,
+        environment: environment,
         pages: allSEOData.map(page => ({
           page: page.pagePath,
           title: page.title,
@@ -351,10 +367,17 @@ const SEODashboard = () => {
       localStorage.setItem('maydiv_seo_deployment_summary', JSON.stringify(deploymentSummary));
       
       if (errorCount === 0) {
-        setMessage({ 
-          type: 'success', 
-          text: `🎉 ALL SEO changes deployed successfully! ${successCount} pages updated on live website. Changes are now LIVE!` 
-        });
+        if (environment === 'vercel-production') {
+          setMessage({ 
+            type: 'success', 
+            text: `🎉 ALL SEO changes deployed successfully! ${successCount} pages updated. (Production mode - using localStorage for dynamic updates)` 
+          });
+        } else {
+          setMessage({ 
+            type: 'success', 
+            text: `🎉 ALL SEO changes deployed successfully! ${successCount} pages updated on live website files. Changes are now LIVE!` 
+          });
+        }
       } else {
         setMessage({ 
           type: 'warning', 

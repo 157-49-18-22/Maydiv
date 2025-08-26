@@ -28,6 +28,17 @@ export default function RootLayout({
             gtag('config', 'G-WZELL05P2J');
           `}
         </Script>
+        
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WZELL05P2J"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-WZELL05P2J');
+          `
+        }} />
       </head>
       <body>{children}</body>
     </html>

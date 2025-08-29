@@ -1,21 +1,31 @@
 @echo off
-echo Starting MayDiv Backend...
+echo Starting MayDiv Backend Server...
 echo.
 
-REM Check if .env file exists
-if not exist ".env" (
-    echo Error: .env file not found!
-    echo Please copy env.example to .env and configure it.
+echo Checking if Node.js is installed...
+node --version >nul 2>&1
+if %errorlevel% neq 0 (
+    echo ERROR: Node.js is not installed or not in PATH
+    echo Please install Node.js from https://nodejs.org/
     pause
     exit /b 1
 )
 
-REM Install dependencies if node_modules doesn't exist
-if not exist "node_modules" (
-    echo Installing dependencies...
-    npm install
-)
+echo Node.js version:
+node --version
 
-REM Start the server
-echo Starting server on port 5000...
-npm run dev 
+echo.
+echo Installing dependencies...
+npm install
+
+echo.
+echo Starting server...
+echo Server will be available at: http://localhost:3001
+echo Database file: data/maydiv.db
+echo.
+echo Press Ctrl+C to stop the server
+echo.
+
+node server.js
+
+pause 

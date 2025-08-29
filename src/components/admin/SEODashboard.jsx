@@ -89,13 +89,30 @@ const SEODashboard = () => {
   const loadPages = async () => {
     try {
       setLoading(true);
+      console.log('Loading pages...');
       const data = await SEOService.getPagesForDashboard();
+      console.log('Pages loaded:', data);
       setPages(data);
+      
+      if (data.length === 0) {
+        setMessage({ type: 'info', text: 'No SEO data found. Create some SEO data to get started!' });
+      } else {
+        setMessage({ type: 'success', text: `Loaded ${data.length} pages successfully!` });
+        // Clear message after 3 seconds
+        setTimeout(() => setMessage({ type: '', text: '' }), 3000);
+      }
     } catch (error) {
+      console.error('Error loading pages:', error);
       setMessage({ type: 'error', text: 'Error loading pages: ' + error.message });
     } finally {
       setLoading(false);
     }
+  };
+
+  // Manual refresh function
+  const handleRefresh = () => {
+    setMessage({ type: 'info', text: 'Refreshing data...' });
+    loadPages();
   };
 
   const handleInputChange = (e) => {
@@ -384,6 +401,13 @@ const SEODashboard = () => {
             onClick={() => setShowForm(true)}
           >
             Add New SEO Data
+          </button>
+          <button 
+            className="btn btn-info"
+            onClick={handleRefresh}
+            disabled={loading}
+          >
+            {loading ? 'Refreshing...' : 'Refresh Data'}
           </button>
         </div>
       </div>

@@ -140,17 +140,43 @@ async function saveSEOData(seoData) {
     // Create a JSON file with all SEO data
     const allSEOData = await getAllSEOData();
     
-    // Update or add the new data
+    // Check if this is an update or new data
     const existingIndex = allSEOData.findIndex(item => item.pagePath === seoData.pagePath);
+    
     if (existingIndex !== -1) {
-      allSEOData[existingIndex] = { ...allSEOData[existingIndex], ...seoData, updatedAt: new Date().toISOString() };
+      // Update existing data
+      allSEOData[existingIndex] = { 
+        ...allSEOData[existingIndex], 
+        ...seoData, 
+        updatedAt: new Date().toISOString() 
+      };
+      console.log('Updated existing SEO data for:', seoData.pagePath);
     } else {
-      allSEOData.push({
+      // Add new data
+      const newSEOData = {
         id: Date.now().toString(),
-        ...seoData,
+        pagePath: seoData.pagePath,
+        pageTitle: seoData.title || seoData.pageTitle,
+        metaTitle: seoData.title || seoData.metaTitle,
+        metaDescription: seoData.description || seoData.metaDescription,
+        content: seoData.content || '',
+        keywords: seoData.keywords || '',
+        canonicalUrl: seoData.canonical || seoData.canonicalUrl,
+        ogTitle: seoData.title || seoData.ogTitle,
+        ogDescription: seoData.description || seoData.ogDescription,
+        ogImage: seoData.ogImage || '',
+        twitterTitle: seoData.title || seoData.twitterTitle,
+        twitterDescription: seoData.description || seoData.twitterDescription,
+        twitterImage: seoData.ogImage || '',
+        robots: seoData.noIndex ? 'noindex, nofollow' : 'index, follow',
+        seoScore: 85,
+        isPublished: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
-      });
+      };
+      
+      allSEOData.push(newSEOData);
+      console.log('Added new SEO data for:', seoData.pagePath);
     }
     
     // Write to JSON file
@@ -166,12 +192,17 @@ async function saveSEOData(seoData) {
       console.log('Backend database save failed, but file save succeeded:', dbError);
     }
     
+    // Return the saved data
+    const savedData = existingIndex !== -1 ? allSEOData[existingIndex] : allSEOData[allSEOData.length - 1];
+    
     return NextResponse.json({
       success: true,
       message: 'SEO data saved successfully!',
+      seoData: savedData,
       filePath: 'public/seo-data/seo-data.json',
       totalPages: allSEOData.length,
-      environment: 'development'
+      environment: 'development',
+      isNew: existingIndex === -1
     });
     
   } catch (error) {

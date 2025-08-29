@@ -38,8 +38,8 @@ export class SEOService {
     try {
       console.log('Updating SEO data:', { id, seoData });
       
-      const response = await fetch(`/api/seo/${id}`, {
-        method: 'PUT',
+      const response = await fetch('/api/seo', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -72,11 +72,15 @@ export class SEOService {
     try {
       console.log('Deleting SEO data:', id);
       
-      const response = await fetch(`/api/seo/${id}`, {
-        method: 'DELETE',
+      const response = await fetch('/api/seo', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
+        body: JSON.stringify({
+          action: 'deleteData',
+          seoData: { id }
+        })
       });
 
       if (!response.ok) {

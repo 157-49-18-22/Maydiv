@@ -45,6 +45,10 @@ export async function POST(request) {
       return await saveSEOData(seoData);
     } else if (action === 'initializeDefault') {
       return await initializeDefaultSEO();
+    } else if (action === 'updateData') {
+      return await updateSEOData(seoData);
+    } else if (action === 'deleteData') {
+      return await deleteSEOData(seoData.id);
     } else {
       return NextResponse.json(
         { success: false, error: 'Invalid action' },

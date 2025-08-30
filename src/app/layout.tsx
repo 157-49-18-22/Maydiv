@@ -86,8 +86,28 @@ export default function RootLayout({
                     const serverData = await response.json();
                     console.log('📥 Pure Live SEO: Live data loaded from server:', serverData);
                     
-                    // Update local data
-                    this.data = serverData;
+                    // Update local data - Fix: use serverData.seoData
+                    if (serverData.success && serverData.seoData) {
+                      // Convert array to object with pagePath as key
+                      this.data = {};
+                      serverData.seoData.forEach(item => {
+                        this.data[item.pagePath] = {
+                          title: item.metaTitle || item.pageTitle,
+                          description: item.metaDescription,
+                          keywords: item.keywords,
+                          content: item.content,
+                          h1Tag: item.pageTitle,
+                          ogTitle: item.ogTitle,
+                          ogDescription: item.ogDescription,
+                          ogImage: item.ogImage,
+                          updatedAt: item.updatedAt,
+                          savedLive: true,
+                          liveTimestamp: Date.now()
+                        };
+                      });
+                    } else {
+                      this.data = {};
+                    }
                     
                     // Apply to current page
                     this.applyToCurrentPage();

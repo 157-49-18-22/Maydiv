@@ -39,6 +39,7 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
+    console.log('=== POST /api/seo START ===');
     const body = await request.json();
     console.log('POST /api/seo - Received body:', body);
     
@@ -53,7 +54,10 @@ export async function POST(request) {
         title: directData.title || directData.pageTitle,
         description: directData.description || directData.metaDescription
       };
-      return await saveSEOData(dataToSave);
+      console.log('POST /api/seo - Calling saveSEOData with:', dataToSave);
+      const result = await saveSEOData(dataToSave);
+      console.log('POST /api/seo - saveSEOData result:', result);
+      return result;
     }
     
     // Handle specific actions
@@ -132,7 +136,8 @@ export async function DELETE(request) {
 
 async function saveSEOData(seoData) {
   try {
-    console.log('Saving SEO data to database:', seoData);
+    console.log('=== saveSEOData START ===');
+    console.log('Input seoData:', seoData);
     
     // Check if we're in Vercel/production environment FIRST
     const isVercel = process.env.VERCEL === '1';
@@ -140,6 +145,8 @@ async function saveSEOData(seoData) {
     const isVercelProduction = isVercel || isProduction;
     
     console.log('Environment check - Vercel:', isVercel, 'Production:', isProduction, 'IsVercelProduction:', isVercelProduction);
+    console.log('process.env.VERCEL:', process.env.VERCEL);
+    console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
     
     // Fallback: If we can't determine environment, try backend first, then fallback to local
     if (isVercelProduction || process.env.NODE_ENV === undefined) {
@@ -194,6 +201,8 @@ async function saveSEOData(seoData) {
       }
     }
     
+    console.log('Running in development mode - saving to local file');
+    
     // In development, save to both file and database
     const projectRoot = process.cwd();
     const seoDataDir = path.join(projectRoot, 'public', 'seo-data');
@@ -203,7 +212,9 @@ async function saveSEOData(seoData) {
     }
     
     // Create a JSON file with all SEO data
+    console.log('Getting existing SEO data for development mode...');
     const allSEOData = await getAllSEOData();
+    console.log('Existing SEO data count (development):', allSEOData.length);
     
     // Check if this is an update or new data
     const existingIndex = allSEOData.findIndex(item => item.pagePath === seoData.pagePath);
@@ -260,6 +271,7 @@ async function saveSEOData(seoData) {
     // Return the saved data
     const savedData = existingIndex !== -1 ? allSEOData[existingIndex] : allSEOData[allSEOData.length - 1];
     
+    console.log('=== saveSEOData SUCCESS ===');
     return NextResponse.json({
       success: true,
       message: 'SEO data saved successfully!',
@@ -271,7 +283,9 @@ async function saveSEOData(seoData) {
     });
     
   } catch (error) {
+    console.error('=== saveSEOData ERROR ===');
     console.error('Error saving SEO data:', error);
+    console.error('Error stack:', error.stack);
     throw new Error(`Failed to save SEO data: ${error.message}`);
   }
 }

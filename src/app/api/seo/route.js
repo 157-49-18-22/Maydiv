@@ -18,6 +18,7 @@ export async function GET(request) {
     } else {
       // Get all SEO data
       const allSEOData = await getAllSEOData();
+      console.log('GET /api/seo - Retrieved data:', allSEOData);
       return NextResponse.json({
         success: true,
         seoData: allSEOData
@@ -411,6 +412,26 @@ async function deleteFromBackendDatabase(id) {
 // Helper function to get all SEO data
 async function getAllSEOData() {
   try {
+    // Check environment first
+    const isVercel = process.env.VERCEL === '1';
+    const isProduction = process.env.NODE_ENV === 'production';
+    
+    if (isVercel || isProduction) {
+      console.log('Running in Vercel/production - fetching from backend database');
+      try {
+        const response = await fetch('https://maydivcrm.onrender.com/api/v1/seo');
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Backend data fetched successfully:', data);
+          return data.seoData || data || [];
+        }
+      } catch (error) {
+        console.log('Backend fetch failed, returning empty array:', error.message);
+        return [];
+      }
+    }
+    
+    // In development, read from local file
     const projectRoot = process.cwd();
     const jsonFilePath = path.join(projectRoot, 'public', 'seo-data', 'seo-data.json');
     

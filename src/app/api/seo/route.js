@@ -137,10 +137,12 @@ async function saveSEOData(seoData) {
     // Check if we're in Vercel/production environment FIRST
     const isVercel = process.env.VERCEL === '1';
     const isProduction = process.env.NODE_ENV === 'production';
+    const isVercelProduction = isVercel || isProduction;
     
-    console.log('Environment check - Vercel:', isVercel, 'Production:', isProduction);
+    console.log('Environment check - Vercel:', isVercel, 'Production:', isProduction, 'IsVercelProduction:', isVercelProduction);
     
-    if (isVercel || isProduction) {
+    // Fallback: If we can't determine environment, try backend first, then fallback to local
+    if (isVercelProduction || process.env.NODE_ENV === undefined) {
       console.log('Running in Vercel/production - using database API');
       // In production, actually save to backend database
       try {
@@ -175,12 +177,20 @@ async function saveSEOData(seoData) {
         });
       } catch (dbError) {
         console.error('Failed to save to backend database:', dbError);
-        return NextResponse.json({
-          success: false,
-          message: 'Failed to save to backend database',
-          error: dbError.message,
-          environment: 'vercel-production'
-        }, { status: 500 });
+        
+        // If backend fails, try to save locally as fallback
+        try {
+          console.log('Backend failed, attempting local save as fallback...');
+          return await saveToLocalFile(seoData);
+        } catch (localError) {
+          console.error('Both backend and local save failed:', localError);
+          return NextResponse.json({
+            success: false,
+            message: 'Failed to save to both backend database and local storage',
+            error: `Backend: ${dbError.message}, Local: ${localError.message}`,
+            environment: 'vercel-production-fallback'
+          }, { status: 500 });
+        }
       }
     }
     
@@ -407,27 +417,33 @@ async function initializeDefaultSEO() {
 // Backend database integration functions
 async function saveToBackendDatabase(seoData) {
   try {
-            const response = await fetch('https://maydivcrm.onrender.com/api/v1/seo', {
+    console.log('Attempting to save to backend database:', seoData);
+    
+    const response = await fetch('https://maydivcrm.onrender.com/api/v1/seo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(seoData)
     });
     
     if (!response.ok) {
-      throw new Error(`Backend API error: ${response.status}`);
+      const errorText = await response.text();
+      console.error('Backend API error response:', response.status, errorText);
+      throw new Error(`Backend API error: ${response.status} - ${errorText}`);
     }
     
+    const result = await response.json();
+    console.log('Backend API response:', result);
     console.log('SEO data saved to backend database successfully');
     return true;
   } catch (error) {
-    console.log('Backend database save failed:', error.message);
+    console.error('Backend database save failed:', error.message);
     throw error;
   }
 }
 
 async function updateBackendDatabase(seoData) {
   try {
-            const response = await fetch(`https://maydivcrm.onrender.com/api/v1/seo/${seoData.id}`, {
+    const response = await fetch(`https://maydivcrm.onrender.com/api/v1/seo/${seoData.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(seoData)
@@ -447,7 +463,7 @@ async function updateBackendDatabase(seoData) {
 
 async function deleteFromBackendDatabase(id) {
   try {
-            const response = await fetch(`https://maydivcrm.onrender.com/api/v1/seo/${id}`, {
+    const response = await fetch(`https://maydivcrm.onrender.com/api/v1/seo/${id}`, {
       method: 'DELETE'
     });
     
@@ -469,8 +485,11 @@ async function getAllSEOData() {
     // Check environment first
     const isVercel = process.env.VERCEL === '1';
     const isProduction = process.env.NODE_ENV === 'production';
+    const isVercelProduction = isVercel || isProduction;
     
-    if (isVercel || isProduction) {
+    console.log('getAllSEOData - Environment check - Vercel:', isVercel, 'Production:', isProduction, 'IsVercelProduction:', isVercelProduction);
+    
+    if (isVercelProduction) {
       console.log('Running in Vercel/production - fetching from backend database');
       try {
         // Add delay to avoid rate limiting
@@ -502,6 +521,9 @@ async function getAllSEOData() {
             const retryData = await retryResponse.json();
             return retryData.seoData || retryData || [];
           }
+        } else {
+          console.log('Backend API error:', response.status);
+          return [];
         }
       } catch (error) {
         console.log('Backend fetch failed, returning empty array:', error.message);
@@ -601,6 +623,84 @@ ${seoData.customMetaTags?.map(tag => `<meta name="${tag.name}" content="${tag.co
   } catch (error) {
     console.error('Error applying SEO to files:', error);
     throw new Error(`Failed to apply SEO to files: ${error.message}`);
+  }
+}
+
+async function saveToLocalFile(seoData) {
+  try {
+    console.log('Saving SEO data to local file as fallback...');
+    
+    const projectRoot = process.cwd();
+    const seoDataDir = path.join(projectRoot, 'public', 'seo-data');
+    
+    if (!fs.existsSync(seoDataDir)) {
+      fs.mkdirSync(seoDataDir, { recursive: true });
+    }
+    
+    // Create a JSON file with all SEO data
+    const allSEOData = await getAllSEOData();
+    
+    // Check if this is an update or new data
+    const existingIndex = allSEOData.findIndex(item => item.pagePath === seoData.pagePath);
+    
+    if (existingIndex !== -1) {
+      // Update existing data
+      allSEOData[existingIndex] = { 
+        ...allSEOData[existingIndex], 
+        ...seoData, 
+        updatedAt: new Date().toISOString() 
+      };
+      console.log('Updated existing SEO data for:', seoData.pagePath);
+    } else {
+      // Add new data
+      const newSEOData = {
+        id: Date.now().toString(),
+        pagePath: seoData.pagePath,
+        pageTitle: seoData.title || seoData.pageTitle,
+        metaTitle: seoData.title || seoData.metaTitle,
+        metaDescription: seoData.description || seoData.metaDescription,
+        content: seoData.content || '',
+        keywords: seoData.keywords || '',
+        canonicalUrl: seoData.canonical || seoData.canonicalUrl,
+        ogTitle: seoData.title || seoData.ogTitle,
+        ogDescription: seoData.description || seoData.ogDescription,
+        ogImage: seoData.ogImage || '',
+        twitterTitle: seoData.title || seoData.twitterTitle,
+        twitterDescription: seoData.description || seoData.twitterDescription,
+        twitterImage: seoData.ogImage || '',
+        robots: seoData.noIndex ? 'noindex, nofollow' : 'index, follow',
+        seoScore: 85,
+        isPublished: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      
+      allSEOData.push(newSEOData);
+      console.log('Added new SEO data for:', seoData.pagePath);
+    }
+    
+    // Write to JSON file
+    const jsonFilePath = path.join(seoDataDir, 'seo-data.json');
+    fs.writeFileSync(jsonFilePath, JSON.stringify(allSEOData, null, 2), 'utf8');
+    
+    console.log(`SEO data saved to local file: ${jsonFilePath}`);
+    
+    // Return the saved data
+    const savedData = existingIndex !== -1 ? allSEOData[existingIndex] : allSEOData[allSEOData.length - 1];
+    
+    return NextResponse.json({
+      success: true,
+      message: 'SEO data saved successfully to local file (fallback mode)',
+      seoData: savedData,
+      filePath: 'public/seo-data/seo-data.json',
+      totalPages: allSEOData.length,
+      environment: 'vercel-production-fallback',
+      isNew: existingIndex === -1
+    });
+    
+  } catch (error) {
+    console.error('Error saving to local file:', error);
+    throw new Error(`Failed to save to local file: ${error.message}`);
   }
 }
 

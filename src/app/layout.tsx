@@ -72,7 +72,8 @@ export default function RootLayout({
                 try {
                   console.log('📥 Pure Live SEO: Loading live data from server...');
                   
-                  const response = await fetch('/api/save-seo?' + Date.now(), {
+                  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+                  const response = await fetch(\`\${apiUrl}/api/v1/seo?\${Date.now()}\`, {
                     cache: 'no-cache',
                     headers: {
                       'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -113,7 +114,8 @@ export default function RootLayout({
                   console.log('💾 Pure Live SEO: Saving live changes for', pagePath, ':', seoData);
                   
                   // Save to server live
-                  const response = await fetch('/api/save-seo', {
+                  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+                  const response = await fetch(\`\${apiUrl}/api/v1/seo\`, {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json',
@@ -410,7 +412,8 @@ export default function RootLayout({
                 }
                 
                 try {
-                  const response = await fetch('/api/save-seo', {
+                  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+                  const response = await fetch(\`\${apiUrl}/api/v1/seo\`, {
                     method: 'DELETE',
                     headers: { 
                       'Content-Type': 'application/json',

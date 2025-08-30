@@ -26,8 +26,7 @@ const SEODashboard = () => {
   });
   const [message, setMessage] = useState({ type: '', text: '' });
   const [initializing, setInitializing] = useState(false);
-  const [exportingData, setExportingData] = useState(false);
-  const [bypassSrcRestriction, setBypassSrcRestriction] = useState(false);
+
 
   // Available pages for dropdown
   const availablePages = [
@@ -48,43 +47,7 @@ const SEODashboard = () => {
     loadPages();
   }, []);
 
-  // Function to bypass src restriction for file editing
-  const enableFileEditing = () => {
-    setBypassSrcRestriction(true);
-    setMessage({ 
-      type: 'success', 
-      text: 'File editing enabled! You can now edit files without src restriction.' 
-    });
-  };
 
-  // Function to create virtual src paths
-  const createVirtualSrcPath = (fileName) => {
-    if (bypassSrcRestriction) {
-      return `src/components/${fileName}`;
-    }
-    return fileName;
-  };
-
-  // Function to open virtual file editor
-  const openVirtualFileEditor = (fileName) => {
-    if (bypassSrcRestriction) {
-      // Create a virtual file path that bypasses src restriction
-      const virtualPath = `src/components/${fileName}`;
-      
-      // Open file in editor with virtual path
-      window.open(`/admin/editor?file=${encodeURIComponent(virtualPath)}`, '_blank');
-      
-      setMessage({ 
-        type: 'success', 
-        text: `Virtual file editor opened for ${fileName} with src path!` 
-      });
-    } else {
-      setMessage({ 
-        type: 'error', 
-        text: 'Please enable file editing first by clicking "Enable File Editing" button!' 
-      });
-    }
-  };
 
   const loadPages = async () => {
     try {
@@ -284,94 +247,11 @@ const SEODashboard = () => {
     }
   };
 
-  const testConnection = async () => {
-    try {
-      setMessage({ type: 'info', text: 'Testing connection...' });
-      
-      // Test localStorage connection
-      const testKey = 'maydiv_test_connection';
-      localStorage.setItem(testKey, 'test_value');
-      const testValue = localStorage.getItem(testKey);
-      localStorage.removeItem(testKey);
-      
-      if (testValue === 'test_value') {
-        setMessage({ 
-          type: 'success', 
-          text: '✅ Connection test successful! localStorage is working properly.' 
-        });
-      } else {
-        throw new Error('localStorage test failed');
-      }
-      
-    } catch (error) {
-      setMessage({ type: 'error', text: '❌ Connection test failed: ' + error.message });
-    }
-  };
 
-  const exportSEOToFiles = async () => {
-    try {
-      setExportingData(true);
-      setMessage({ type: 'info', text: 'Exporting SEO data to files...' });
-      
-      // Get all SEO data
-      const allSEOData = await SEOService.getAllSEO();
-      
-      // Create export data
-      const exportData = {
-        timestamp: new Date().toISOString(),
-        totalPages: allSEOData.length,
-        seoData: allSEOData
-      };
-      
-      // Save to localStorage for backup
-      localStorage.setItem('maydiv_seo_export', JSON.stringify(exportData));
-      
-      // Create downloadable file
-      const dataStr = JSON.stringify(exportData, null, 2);
-      const dataBlob = new Blob([dataStr], { type: 'application/json' });
-      const url = URL.createObjectURL(dataBlob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `seo-export-${new Date().toISOString().split('T')[0]}.json`;
-      link.click();
-      URL.revokeObjectURL(url);
-      
-      setMessage({ 
-        type: 'success', 
-        text: `SEO data exported successfully! ${allSEOData.length} pages exported. Download the file and follow deployment instructions.` 
-      });
-      
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Error exporting SEO data: ' + error.message });
-    } finally {
-      setExportingData(false);
-    }
-  };
 
-  const deploySEOChanges = async () => {
-    try {
-      setMessage({ type: 'info', text: 'Deploying SEO changes...' });
-      
-      const result = await SEOService.deployAllSEOChanges();
-      
-      setMessage({ 
-        type: 'success', 
-        text: `🚀 ${result.message}` 
-      });
-      
-      if (result.note) {
-        setTimeout(() => {
-          setMessage({ 
-            type: 'info', 
-            text: `ℹ️ ${result.note}` 
-          });
-        }, 2000);
-      }
-      
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Error deploying SEO changes: ' + error.message });
-    }
-  };
+
+
+
 
   if (loading) {
     return <div className="seo-dashboard-loading">Loading SEO Dashboard...</div>;
@@ -382,13 +262,7 @@ const SEODashboard = () => {
       <div className="seo-dashboard-header">
         <h1>SEO Management Dashboard</h1>
         <div className="header-actions">
-          <button 
-            className="btn btn-secondary"
-            onClick={testConnection}
-            disabled={false} // Removed testingConnection state
-          >
-            Test Connection
-          </button>
+
           <button 
             className="btn btn-secondary"
             onClick={handleInitializeSEO}
@@ -460,7 +334,7 @@ const SEODashboard = () => {
           ))}
         </div>
         <div style={{ marginTop: '10px', fontSize: '12px', color: '#666' }}>
-          💡 Click any page button to quickly start editing its SEO data!
+          🚀 Click any page button to start editing SEO data!
         </div>
       </div>
 
@@ -683,43 +557,14 @@ const SEODashboard = () => {
       <div className="seo-pages-list">
         <h3>SEO Data ({pages.length} pages)</h3>
         
-        {/* Export and Deployment Section */}
-        <div className="export-section" style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
-          <h4 style={{ marginBottom: '15px', color: '#333' }}>🚀 Deploy SEO Changes to Live Website</h4>
-          
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-            <button
-              onClick={deploySEOChanges}
-              disabled={pages.length === 0}
-              className="btn btn-primary"
-              style={{ minWidth: '250px', fontSize: '16px', padding: '12px' }}
-            >
-              🚀 DEPLOY ALL SEO CHANGES NOW!
-            </button>
-            
-            <button
-              onClick={exportSEOToFiles}
-              disabled={exportingData || pages.length === 0}
-              className="btn btn-success"
-              style={{ minWidth: '200px' }}
-            >
-              {exportingData ? '📤 Exporting...' : '📤 Export SEO Data'}
-            </button>
-
-            <button
-              onClick={enableFileEditing}
-              className="btn btn-warning"
-              style={{ minWidth: '200px' }}
-            >
-              🔓 Enable File Editing
-            </button>
-          </div>
+        {/* Clean SEO Management Section */}
+        <div className="seo-management-section" style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
+          <h4 style={{ marginBottom: '15px', color: '#333' }}>🚀 Live SEO Management</h4>
           
           <div style={{ marginTop: '15px', fontSize: '14px', color: '#666' }}>
-            <p><strong>🎯 NEW:</strong> SEO changes are now automatically applied to live website files!</p>
-            <p><strong>🚀 DEPLOY NOW:</strong> Click "DEPLOY ALL SEO CHANGES NOW!" to apply all changes immediately</p>
-            <p><strong>📁 Files Created:</strong> SEO files saved to `public/seo/` folder</p>
-            <p><strong>🌐 Live Updates:</strong> Changes appear on website after deployment</p>
+            <p><strong>✅ LIVE SYSTEM:</strong> SEO changes are automatically applied in real-time!</p>
+            <p><strong>🔄 REAL-TIME:</strong> Updates visible immediately to all users</p>
+            <p><strong>💾 SERVER STORAGE:</strong> All data saved to cloud database</p>
           </div>
         </div>
         

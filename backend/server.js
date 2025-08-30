@@ -342,7 +342,7 @@ async function startServer() {
     
     // Start server
     const PORT = process.env.PORT || 3001;
-    const server = app.listen(PORT, () => {
+    const server = app.listen(PORT, '0.0.0.0', () => {
       console.log(`🚀 MayDiv API server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
       console.log(`📊 Health check: http://localhost:${PORT}/health`);
       console.log(`🔗 API Base URL: http://localhost:${PORT}/api/v1`);

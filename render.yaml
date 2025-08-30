@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: maydiv-frontend
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: https://maydiv-backend.onrender.com
+    healthCheckPath: /
+    autoDeploy: true

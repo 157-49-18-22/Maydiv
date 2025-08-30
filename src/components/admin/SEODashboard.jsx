@@ -26,6 +26,8 @@ const SEODashboard = () => {
   });
   const [message, setMessage] = useState({ type: '', text: '' });
   const [initializing, setInitializing] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
+  const [editingId, setEditingId] = useState(null);
 
 
   // Available pages for dropdown
@@ -125,10 +127,19 @@ const SEODashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log('Form submission - editingPage:', editingPage);
+      console.log('Form submission - formData:', formData);
+      
       if (editingPage) {
+        console.log('Updating existing SEO data...');
         await SEOService.updateSEO(editingPage.id, formData);
         setMessage({ type: 'success', text: 'SEO data updated successfully!' });
       } else {
+        console.log('Creating new SEO data...');
+        console.log('Page path:', formData.pagePath);
+        console.log('Title:', formData.title);
+        console.log('Description:', formData.description);
+        
         await SEOService.createSEO(formData);
         setMessage({ type: 'success', text: 'SEO data created successfully!' });
       }
@@ -159,24 +170,57 @@ const SEODashboard = () => {
       
       resetForm();
       loadPages();
+      
+      // Show success message for a longer time
+      setTimeout(() => {
+        setMessage({ type: '', text: '' });
+      }, 5000);
     } catch (error) {
-      setMessage({ type: 'error', text: 'Error saving SEO data: ' + error.message });
+      console.error('SEO form submission error:', error);
+      
+      // Provide more helpful error messages
+      let errorMessage = 'Error saving SEO data: ' + error.message;
+      
+      if (error.message.includes('500')) {
+        errorMessage = 'Server error (500): The backend server may be experiencing issues. Check the backend status above.';
+      } else if (error.message.includes('timeout')) {
+        errorMessage = 'Request timeout: The backend server is taking too long to respond. It may be overloaded or starting up.';
+      } else if (error.message.includes('fetch')) {
+        errorMessage = 'Network error: Unable to connect to the backend server. Check your internet connection and the backend status.';
+      } else if (error.message.includes('Backend API error')) {
+        errorMessage = 'Backend API error: The backend server is running but returned an error. Check the backend logs for details.';
+      }
+      
+      setMessage({ type: 'error', text: errorMessage });
+      
+      // If it's a backend error, also check the backend status
+      if (error.message.includes('500') || error.message.includes('timeout') || error.message.includes('fetch')) {
+        setTimeout(() => {
+          checkBackendStatus();
+        }, 1000);
+      }
     }
   };
 
   const handleEdit = (page) => {
+    console.log('Editing page data:', page);
     setEditingPage(page);
+    setEditingId(page.id);
+    
+    // Map backend data to frontend form fields
+    // Backend uses: pageTitle, metaTitle, metaDescription
+    // Frontend expects: title, description
     setFormData({
       pagePath: page.pagePath || '',
-      title: page.title || '',
-      description: page.description || '',
+      title: page.pageTitle || page.metaTitle || page.title || '',
+      description: page.metaDescription || page.description || '',
       content: page.content || '',
       keywords: page.keywords || '',
       ogImage: page.ogImage || '',
-      canonical: page.canonical || '',
-      noIndex: page.noIndex || false,
+      canonical: page.canonicalUrl || page.canonical || '',
+      noIndex: page.robots === 'noindex, nofollow' || page.noIndex || false,
       customMetaTags: page.customMetaTags || [],
-      h1Tag: page.h1Tag || '',
+      h1Tag: page.h1Tag || page.pageTitle || '',
       h2Tags: Array.isArray(page.h2Tags) ? page.h2Tags : [],
       h3Tags: Array.isArray(page.h3Tags) ? page.h3Tags : []
     });
@@ -200,11 +244,37 @@ const SEODashboard = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this SEO data?')) {
       try {
+        setDeletingId(id);
+        console.log('Deleting SEO data with ID:', id);
         await SEOService.deleteSEO(id);
         setMessage({ type: 'success', text: 'SEO data deleted successfully!' });
         loadPages();
       } catch (error) {
-        setMessage({ type: 'error', text: 'Error deleting SEO data: ' + error.message });
+        console.error('Error deleting SEO data:', error);
+        
+        // Provide more helpful error messages
+        let errorMessage = 'Error deleting SEO data: ' + error.message;
+        
+        if (error.message.includes('500')) {
+          errorMessage = 'Server error (500): The backend server may be experiencing issues. Check the backend status above.';
+        } else if (error.message.includes('timeout')) {
+          errorMessage = 'Request timeout: The backend server is taking too long to respond. It may be overloaded or starting up.';
+        } else if (error.message.includes('fetch')) {
+          errorMessage = 'Network error: Unable to connect to the backend server. Check your internet connection and the backend status.';
+        } else if (error.message.includes('Backend API error')) {
+          errorMessage = 'Backend API error: The backend server is running but returned an error. Check the backend logs for details.';
+        }
+        
+        setMessage({ type: 'error', text: errorMessage });
+        
+        // If it's a backend error, also check the backend status
+        if (error.message.includes('500') || error.message.includes('timeout') || error.message.includes('fetch')) {
+          setTimeout(() => {
+            checkBackendStatus();
+          }, 1000);
+        }
+      } finally {
+        setDeletingId(null);
       }
     }
   };
@@ -225,6 +295,7 @@ const SEODashboard = () => {
       h3Tags: []
     });
     setEditingPage(null);
+    setEditingId(null);
     setShowForm(false);
   };
 
@@ -575,29 +646,33 @@ const SEODashboard = () => {
             {pages.map((page) => (
               <div key={page.id} className="page-card">
                 <div className="page-header">
-                  <h4>{page.title || page.pagePath}</h4>
+                  <h4>{page.pageTitle || page.metaTitle || page.title || page.pagePath}</h4>
                   <div className="page-actions">
                     <button
                       onClick={() => handleEdit(page)}
                       className="btn btn-sm btn-primary"
+                      disabled={editingId === page.id}
                     >
-                      Edit
+                      {editingId === page.id ? 'Editing...' : 'Edit'}
                     </button>
                     <button
                       onClick={() => handleDelete(page.id)}
                       className="btn btn-sm btn-danger"
+                      disabled={deletingId === page.id}
                     >
-                      Delete
+                      {deletingId === page.id ? 'Deleting...' : 'Delete'}
                     </button>
                   </div>
                 </div>
                 
                 <div className="page-details">
                   <p><strong>Path:</strong> {page.pagePath}</p>
-                  <p><strong>Description:</strong> {page.description?.substring(0, 100)}...</p>
-                  <p><strong>Content:</strong> {page.content?.substring(0, 150)}...</p>
-                  <p><strong>Keywords:</strong> {page.keywords}</p>
-                  <p><strong>No Index:</strong> {page.noIndex ? 'Yes' : 'No'}</p>
+                  <p><strong>Title:</strong> {page.pageTitle || page.metaTitle || page.title || 'N/A'}</p>
+                  <p><strong>Description:</strong> {page.metaDescription || page.description || 'N/A'}</p>
+                  <p><strong>Content:</strong> {page.content ? page.content.substring(0, 150) + '...' : 'N/A'}</p>
+                  <p><strong>Keywords:</strong> {page.keywords || 'N/A'}</p>
+                  <p><strong>No Index:</strong> {page.robots === 'noindex, nofollow' || page.noIndex ? 'Yes' : 'No'}</p>
+                  <p><strong>SEO Score:</strong> {page.seoScore || 'N/A'}</p>
                   <p><strong>Updated:</strong> {formatDate(page.updatedAt)}</p>
                 </div>
               </div>

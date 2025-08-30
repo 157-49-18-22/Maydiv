@@ -8,9 +8,12 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const pagePath = searchParams.get('page');
     
+    console.log('GET /api/seo called with pagePath:', pagePath);
+    
     if (pagePath) {
       // Get SEO data for specific page
       const seoData = await getSEODataForPage(pagePath);
+      console.log('GET /api/seo - Page specific data:', seoData);
       return NextResponse.json({
         success: true,
         seoData: seoData
@@ -18,6 +21,7 @@ export async function GET(request) {
     } else {
       // Get all SEO data
       const allSEOData = await getAllSEOData();
+      console.log('GET /api/seo - Retrieved data count:', allSEOData.length);
       console.log('GET /api/seo - Retrieved data:', allSEOData);
       return NextResponse.json({
         success: true,
@@ -121,13 +125,25 @@ async function saveSEOData(seoData) {
     
     if (isVercel || isProduction) {
       console.log('Running in Vercel/production - using database API');
-      // In production, we'll use the backend database API
-      return NextResponse.json({
-        success: true,
-        message: 'SEO data saved successfully! (Production mode - using database)',
-        seoData: seoData,
-        environment: 'vercel-production'
-      });
+      // In production, actually save to backend database
+      try {
+        await saveToBackendDatabase(seoData);
+        console.log('SEO data saved to backend database successfully');
+        return NextResponse.json({
+          success: true,
+          message: 'SEO data saved successfully! (Production mode - using database)',
+          seoData: seoData,
+          environment: 'vercel-production'
+        });
+      } catch (dbError) {
+        console.error('Failed to save to backend database:', dbError);
+        return NextResponse.json({
+          success: false,
+          message: 'Failed to save to backend database',
+          error: dbError.message,
+          environment: 'vercel-production'
+        }, { status: 500 });
+      }
     }
     
     // In development, save to both file and database
@@ -419,11 +435,35 @@ async function getAllSEOData() {
     if (isVercel || isProduction) {
       console.log('Running in Vercel/production - fetching from backend database');
       try {
-        const response = await fetch('https://maydivcrm.onrender.com/api/v1/seo');
+        // Add delay to avoid rate limiting
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        const response = await fetch('https://maydivcrm.onrender.com/api/v1/seo', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
         if (response.ok) {
           const data = await response.json();
           console.log('Backend data fetched successfully:', data);
-          return data.seoData || data || [];
+          // Handle different response formats
+          if (data && data.seoData) {
+            return Array.isArray(data.seoData) ? data.seoData : [];
+          } else if (Array.isArray(data)) {
+            return data;
+          } else {
+            console.log('Unexpected backend response format:', data);
+            return [];
+          }
+        } else if (response.status === 429) {
+          console.log('Rate limited by backend API, retrying with longer delay...');
+          // Wait longer and retry once
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          const retryResponse = await fetch('https://maydivcrm.onrender.com/api/v1/seo');
+          if (retryResponse.ok) {
+            const retryData = await retryResponse.json();
+            return retryData.seoData || retryData || [];
+          }
         }
       } catch (error) {
         console.log('Backend fetch failed, returning empty array:', error.message);

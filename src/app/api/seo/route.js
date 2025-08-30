@@ -39,7 +39,7 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    console.log('=== POST /api/seo START ===');
+    console.log('=== POST /api/seo START (UPDATED) ===');
     const body = await request.json();
     console.log('POST /api/seo - Received body:', body);
     

@@ -139,149 +139,55 @@ async function saveSEOData(seoData) {
     console.log('=== saveSEOData START ===');
     console.log('Input seoData:', seoData);
     
-    // Check if we're in Vercel/production environment FIRST
-    const isVercel = process.env.VERCEL === '1';
-    const isProduction = process.env.NODE_ENV === 'production';
-    const isVercelProduction = isVercel || isProduction;
-    
-    console.log('Environment check - Vercel:', isVercel, 'Production:', isProduction, 'IsVercelProduction:', isVercelProduction);
-    console.log('process.env.VERCEL:', process.env.VERCEL);
-    console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
-    
-    // Fallback: If we can't determine environment, try backend first, then fallback to local
-    if (isVercelProduction || process.env.NODE_ENV === undefined) {
-      console.log('Running in Vercel/production - using database API');
-      // In production, actually save to backend database
-      try {
-        // Format data for backend API
-        const backendData = {
-          pagePath: seoData.pagePath,
-          pageTitle: seoData.title || seoData.pageTitle,
-          metaTitle: seoData.title || seoData.metaTitle,
-          metaDescription: seoData.description || seoData.metaDescription,
-          content: seoData.content || '',
-          keywords: seoData.keywords || '',
-          canonicalUrl: seoData.canonical || seoData.canonicalUrl || `https://maydiv.com${seoData.pagePath}`,
-          ogTitle: seoData.title || seoData.ogTitle,
-          ogDescription: seoData.description || seoData.ogDescription,
-          ogImage: seoData.ogImage || 'https://maydiv.com/og-image.jpg',
-          twitterTitle: seoData.title || seoData.twitterTitle,
-          twitterDescription: seoData.description || seoData.twitterDescription,
-          twitterImage: seoData.ogImage || 'https://maydiv.com/og-image.jpg',
-          robots: seoData.noIndex ? 'noindex, nofollow' : 'index, follow',
-          seoScore: 85,
-          isPublished: 1
-        };
-        
-        console.log('Sending to backend:', backendData);
-        await saveToBackendDatabase(backendData);
-        console.log('SEO data saved to backend database successfully');
-        return NextResponse.json({
-          success: true,
-          message: 'SEO data saved successfully! (Production mode - using database)',
-          seoData: backendData,
-          environment: 'vercel-production'
-        });
-      } catch (dbError) {
-        console.error('Failed to save to backend database:', dbError);
-        
-        // If backend fails, try to save locally as fallback
-        try {
-          console.log('Backend failed, attempting local save as fallback...');
-          return await saveToLocalFile(seoData);
-        } catch (localError) {
-          console.error('Both backend and local save failed:', localError);
-          return NextResponse.json({
-            success: false,
-            message: 'Failed to save to both backend database and local storage',
-            error: `Backend: ${dbError.message}, Local: ${localError.message}`,
-            environment: 'vercel-production-fallback'
-          }, { status: 500 });
-        }
-      }
-    }
-    
-    console.log('Running in development mode - saving to local file');
-    
-    // In development, save to both file and database
-    const projectRoot = process.cwd();
-    const seoDataDir = path.join(projectRoot, 'public', 'seo-data');
-    
-    if (!fs.existsSync(seoDataDir)) {
-      fs.mkdirSync(seoDataDir, { recursive: true });
-    }
-    
-    // Create a JSON file with all SEO data
-    console.log('Getting existing SEO data for development mode...');
-    const allSEOData = await getAllSEOData();
-    console.log('Existing SEO data count (development):', allSEOData.length);
-    
-    // Check if this is an update or new data
-    const existingIndex = allSEOData.findIndex(item => item.pagePath === seoData.pagePath);
-    
-    if (existingIndex !== -1) {
-      // Update existing data
-      allSEOData[existingIndex] = { 
-        ...allSEOData[existingIndex], 
-        ...seoData, 
-        updatedAt: new Date().toISOString() 
-      };
-      console.log('Updated existing SEO data for:', seoData.pagePath);
-    } else {
-      // Add new data
-      const newSEOData = {
-        id: Date.now().toString(),
+    // Always try backend first, then fallback to local
+    console.log('Attempting to save to backend database first...');
+    try {
+      // Format data for backend API
+      const backendData = {
         pagePath: seoData.pagePath,
         pageTitle: seoData.title || seoData.pageTitle,
         metaTitle: seoData.title || seoData.metaTitle,
         metaDescription: seoData.description || seoData.metaDescription,
         content: seoData.content || '',
         keywords: seoData.keywords || '',
-        canonicalUrl: seoData.canonical || seoData.canonicalUrl,
+        canonicalUrl: seoData.canonical || seoData.canonicalUrl || `https://maydiv.com${seoData.pagePath}`,
         ogTitle: seoData.title || seoData.ogTitle,
         ogDescription: seoData.description || seoData.ogDescription,
-        ogImage: seoData.ogImage || '',
+        ogImage: seoData.ogImage || 'https://maydiv.com/og-image.jpg',
         twitterTitle: seoData.title || seoData.twitterTitle,
         twitterDescription: seoData.description || seoData.twitterDescription,
-        twitterImage: seoData.ogImage || '',
+        twitterImage: seoData.ogImage || 'https://maydiv.com/og-image.jpg',
         robots: seoData.noIndex ? 'noindex, nofollow' : 'index, follow',
         seoScore: 85,
-        isPublished: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        isPublished: 1
       };
       
-      allSEOData.push(newSEOData);
-      console.log('Added new SEO data for:', seoData.pagePath);
-    }
-    
-    // Write to JSON file
-    const jsonFilePath = path.join(seoDataDir, 'seo-data.json');
-    fs.writeFileSync(jsonFilePath, JSON.stringify(allSEOData, null, 2), 'utf8');
-    
-    console.log(`SEO data saved to: ${jsonFilePath}`);
-    
-    // Also try to save to backend database if available
-    try {
-      await saveToBackendDatabase(seoData);
+      console.log('Sending to backend:', backendData);
+      await saveToBackendDatabase(backendData);
+      console.log('SEO data saved to backend database successfully');
+      return NextResponse.json({
+        success: true,
+        message: 'SEO data saved successfully! (Backend database)',
+        seoData: backendData,
+        environment: 'backend-database'
+      });
     } catch (dbError) {
-      console.log('Backend database save failed, but file save succeeded:', dbError);
+      console.error('Failed to save to backend database:', dbError);
+      
+      // If backend fails, try to save locally as fallback
+      try {
+        console.log('Backend failed, attempting local save as fallback...');
+        return await saveToLocalFile(seoData);
+      } catch (localError) {
+        console.error('Both backend and local save failed:', localError);
+        return NextResponse.json({
+          success: false,
+          message: 'Failed to save to both backend database and local storage',
+          error: `Backend: ${dbError.message}, Local: ${localError.message}`,
+          environment: 'fallback-failed'
+        }, { status: 500 });
+      }
     }
-    
-    // Return the saved data
-    const savedData = existingIndex !== -1 ? allSEOData[existingIndex] : allSEOData[allSEOData.length - 1];
-    
-    console.log('=== saveSEOData SUCCESS ===');
-    return NextResponse.json({
-      success: true,
-      message: 'SEO data saved successfully!',
-      seoData: savedData,
-      filePath: 'public/seo-data/seo-data.json',
-      totalPages: allSEOData.length,
-      environment: 'development',
-      isNew: existingIndex === -1
-    });
-    
   } catch (error) {
     console.error('=== saveSEOData ERROR ===');
     console.error('Error saving SEO data:', error);

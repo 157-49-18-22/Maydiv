@@ -40,8 +40,23 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { action, seoData } = body;
+    console.log('POST /api/seo - Received body:', body);
     
+    const { action, seoData, ...directData } = body;
+    
+    // If no action specified, treat as direct data creation
+    if (!action && (directData.pagePath || directData.page)) {
+      console.log('POST /api/seo - Direct data creation detected');
+      const dataToSave = {
+        ...directData,
+        pagePath: directData.pagePath || directData.page,
+        title: directData.title || directData.pageTitle,
+        description: directData.description || directData.metaDescription
+      };
+      return await saveSEOData(dataToSave);
+    }
+    
+    // Handle specific actions
     if (action === 'applyToFiles') {
       return await applySEOToFiles(seoData);
     } else if (action === 'deployAll') {
@@ -56,7 +71,7 @@ export async function POST(request) {
       return await deleteSEOData(seoData.id);
     } else {
       return NextResponse.json(
-        { success: false, error: 'Invalid action' },
+        { success: false, error: 'Invalid action or missing data' },
         { status: 400 }
       );
     }
@@ -123,16 +138,39 @@ async function saveSEOData(seoData) {
     const isVercel = process.env.VERCEL === '1';
     const isProduction = process.env.NODE_ENV === 'production';
     
+    console.log('Environment check - Vercel:', isVercel, 'Production:', isProduction);
+    
     if (isVercel || isProduction) {
       console.log('Running in Vercel/production - using database API');
       // In production, actually save to backend database
       try {
-        await saveToBackendDatabase(seoData);
+        // Format data for backend API
+        const backendData = {
+          pagePath: seoData.pagePath,
+          pageTitle: seoData.title || seoData.pageTitle,
+          metaTitle: seoData.title || seoData.metaTitle,
+          metaDescription: seoData.description || seoData.metaDescription,
+          content: seoData.content || '',
+          keywords: seoData.keywords || '',
+          canonicalUrl: seoData.canonical || seoData.canonicalUrl || `https://maydiv.com${seoData.pagePath}`,
+          ogTitle: seoData.title || seoData.ogTitle,
+          ogDescription: seoData.description || seoData.ogDescription,
+          ogImage: seoData.ogImage || 'https://maydiv.com/og-image.jpg',
+          twitterTitle: seoData.title || seoData.twitterTitle,
+          twitterDescription: seoData.description || seoData.twitterDescription,
+          twitterImage: seoData.ogImage || 'https://maydiv.com/og-image.jpg',
+          robots: seoData.noIndex ? 'noindex, nofollow' : 'index, follow',
+          seoScore: 85,
+          isPublished: 1
+        };
+        
+        console.log('Sending to backend:', backendData);
+        await saveToBackendDatabase(backendData);
         console.log('SEO data saved to backend database successfully');
         return NextResponse.json({
           success: true,
           message: 'SEO data saved successfully! (Production mode - using database)',
-          seoData: seoData,
+          seoData: backendData,
           environment: 'vercel-production'
         });
       } catch (dbError) {

@@ -366,7 +366,7 @@ async function initializeDefaultSEO() {
 // Backend database integration functions
 async function saveToBackendDatabase(seoData) {
   try {
-    const response = await fetch('http://localhost:3001/api/v1/seo', {
+            const response = await fetch('https://maydivcrm.onrender.com/api/v1/seo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(seoData)
@@ -386,7 +386,7 @@ async function saveToBackendDatabase(seoData) {
 
 async function updateBackendDatabase(seoData) {
   try {
-    const response = await fetch(`http://localhost:3001/api/v1/seo/${seoData.id}`, {
+            const response = await fetch(`https://maydivcrm.onrender.com/api/v1/seo/${seoData.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(seoData)
@@ -406,7 +406,7 @@ async function updateBackendDatabase(seoData) {
 
 async function deleteFromBackendDatabase(id) {
   try {
-    const response = await fetch(`http://localhost:3001/api/v1/seo/${id}`, {
+            const response = await fetch(`https://maydivcrm.onrender.com/api/v1/seo/${id}`, {
       method: 'DELETE'
     });
     

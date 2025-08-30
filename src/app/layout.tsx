@@ -72,7 +72,7 @@ export default function RootLayout({
                 try {
                   console.log('📥 Pure Live SEO: Loading live data from server...');
                   
-                  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+                  const apiUrl = 'https://maydivcrm.onrender.com';
                   const response = await fetch(\`\${apiUrl}/api/v1/seo?\${Date.now()}\`, {
                     cache: 'no-cache',
                     headers: {
@@ -114,7 +114,7 @@ export default function RootLayout({
                   console.log('💾 Pure Live SEO: Saving live changes for', pagePath, ':', seoData);
                   
                   // Save to server live
-                  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+                  const apiUrl = 'https://maydivcrm.onrender.com';
                   const response = await fetch(\`\${apiUrl}/api/v1/seo\`, {
                     method: 'POST',
                     headers: {
@@ -412,7 +412,7 @@ export default function RootLayout({
                 }
                 
                 try {
-                  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+                  const apiUrl = 'https://maydivcrm.onrender.com';
                   const response = await fetch(\`\${apiUrl}/api/v1/seo\`, {
                     method: 'DELETE',
                     headers: { 

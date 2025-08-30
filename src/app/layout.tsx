@@ -58,10 +58,10 @@ export default function RootLayout({
                 // Load data immediately
                 this.loadLiveData();
                 
-                // Set up auto-refresh every 1 second for real-time updates
-                setInterval(() => {
-                  this.loadLiveData();
-                }, 1000);
+                                 // Set up auto-refresh every 10 seconds for real-time updates (reduced from 1 second to avoid rate limiting)
+                 setInterval(() => {
+                   this.loadLiveData();
+                 }, 10000);
                 
                 this.isInitialized = true;
                 console.log('🚀 Pure Live SEO System Ready!');
@@ -362,7 +362,7 @@ export default function RootLayout({
                     
                     <div style="margin-bottom: 15px; padding: 10px; background: #f8d7da; border-radius: 5px; font-size: 12px;">
                       <strong>📊 Total Pages with Live SEO Data:</strong> \${Object.keys(allData).length}
-                      <br><strong>🔄 Auto-refresh:</strong> Every 1 second (Real-time!)
+                      <br><strong>🔄 Auto-refresh:</strong> Every 10 seconds (Rate limit optimized!)
                       <br><strong>📍 Current Page:</strong> \${this.currentPage}
                       <br><strong>💡 NO localStorage - Everything is LIVE and saved to server!</strong>
                     </div>

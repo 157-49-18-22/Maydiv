@@ -331,30 +331,16 @@ async function initializeDefaultSEO() {
   try {
     console.log('Initializing default SEO data...');
     
-    const defaultPages = [
-      { pagePath: '/', pageTitle: 'Home', metaTitle: 'MayDiv - Digital Agency', metaDescription: 'Leading digital agency providing web development, mobile apps, AI solutions and digital marketing services.' },
-      { pagePath: '/about', pageTitle: 'About', metaTitle: 'About MayDiv - Our Story', metaDescription: 'Learn about MayDiv, our team, mission and how we help businesses grow digitally.' },
-      { pagePath: '/contact', pageTitle: 'Contact', metaTitle: 'Contact MayDiv - Get In Touch', metaDescription: 'Contact MayDiv for web development, mobile apps, AI solutions and digital marketing services.' },
-      { pagePath: '/web-development', pageTitle: 'Web Development', metaTitle: 'Web Development Services - MayDiv', metaDescription: 'Professional web development services including custom websites, e-commerce, and web applications.' },
-      { pagePath: '/apps', pageTitle: 'Mobile Apps', metaTitle: 'Mobile App Development - MayDiv', metaDescription: 'Custom mobile app development for iOS and Android platforms with modern UI/UX design.' },
-      { pagePath: '/ai', pageTitle: 'AI Solutions', metaTitle: 'AI Solutions & Machine Learning - MayDiv', metaDescription: 'Cutting-edge AI solutions including machine learning, automation, and intelligent systems.' }
-    ];
+    // No hardcoded data - everything comes from database
+    const defaultPages = [];
     
-    const results = [];
-    for (const page of defaultPages) {
-      try {
-        const result = await saveSEOData(page);
-        results.push({ page: page.pagePath, success: true, result });
-      } catch (error) {
-        results.push({ page: page.pagePath, success: false, error: error.message });
-      }
-    }
+    console.log('✅ Default SEO data initialization completed - using database only!');
     
     return NextResponse.json({
       success: true,
-      message: 'Default SEO data initialized successfully!',
-      results: results,
-      totalPages: defaultPages.length
+      message: 'Default SEO data initialization completed - using database only!',
+      results: [],
+      totalPages: 0
     });
     
   } catch (error) {

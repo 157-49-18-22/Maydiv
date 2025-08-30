@@ -41,7 +41,7 @@ app.use(cors({
   origin: ['https://www.maydiv.com', 'https://maydiv-maydiv123s-projects.vercel.app', 'http://localhost:3000'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Cache-Control', 'Expires', 'Pragma']
 }));
 
 // Rate limiting
@@ -181,49 +181,80 @@ app.get('/api/v1/seo/page/:pagePath', async (req, res) => {
 
 app.post('/api/v1/seo', async (req, res) => {
   try {
-    const {
-      pagePath,
-      pageTitle,
-      metaTitle,
-      metaDescription,
-      content,
-      keywords,
-      canonicalUrl,
-      ogTitle,
-      ogDescription,
-      ogImage,
-      twitterTitle,
-      twitterDescription,
-      twitterImage,
-      robots,
-      seoScore
-    } = req.body;
-
+    const { page, data } = req.body;
     const db = getDatabase();
     
-    const result = db.prepare(`
-      INSERT INTO seo (
-        pagePath, pageTitle, metaTitle, metaDescription, content, keywords, 
-        canonicalUrl, ogTitle, ogDescription, ogImage, 
-        twitterTitle, twitterDescription, twitterImage, robots, seoScore,
-        isPublished, createdAt, updatedAt
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-    `).run(
-      pagePath, pageTitle, metaTitle, metaDescription, content, keywords,
-      canonicalUrl, ogTitle, ogDescription, ogImage,
-      twitterTitle, twitterDescription, twitterImage, robots, seoScore || 0
-    );
+    // Check if data already exists for this page
+    const existingData = db.prepare('SELECT * FROM seo WHERE pagePath = ?').get(page);
+    
+    if (existingData) {
+      // Update existing data
+      const result = db.prepare(`
+        UPDATE seo SET 
+          pageTitle = ?, metaTitle = ?, metaDescription = ?, content = ?, keywords = ?,
+          canonicalUrl = ?, ogTitle = ?, ogDescription = ?, ogImage = ?,
+          twitterTitle = ?, twitterDescription = ?, twitterImage = ?, robots = ?, seoScore = ?,
+          isPublished = 1, updatedAt = CURRENT_TIMESTAMP
+        WHERE pagePath = ?
+      `).run(
+        data.title || '', data.title || '', data.description || '', data.content || '', data.keywords || '',
+        `https://maydiv.com${page}`, data.title || '', data.description || '', 'https://maydiv.com/og-image.jpg',
+        data.title || '', data.description || '', 'https://maydiv.com/og-image.jpg', 'index, follow', 85,
+        page
+      );
+      
+      // Get the updated record
+      const updatedRecord = db.prepare('SELECT * FROM seo WHERE pagePath = ?').get(page);
+      
+      res.status(200).json({
+        success: true,
+        message: 'SEO data updated successfully',
+        seoData: updatedRecord,
+        pagePath: page
+      });
+    } else {
+      // Insert new data
+      const pagePath = page;
+      const pageTitle = data.title || '';
+      const metaTitle = data.title || '';
+      const metaDescription = data.description || '';
+      const content = data.content || '';
+      const keywords = data.keywords || '';
+      const canonicalUrl = `https://maydiv.com${page}`;
+      const ogTitle = data.title || '';
+      const ogDescription = data.description || '';
+      const ogImage = 'https://maydiv.com/og-image.jpg';
+      const twitterTitle = data.title || '';
+      const twitterDescription = data.description || '';
+      const twitterImage = 'https://maydiv.com/og-image.jpg';
+      const robots = 'index, follow';
+      const seoScore = 85;
+      
+      const result = db.prepare(`
+        INSERT INTO seo (
+          pagePath, pageTitle, metaTitle, metaDescription, content, keywords, 
+          canonicalUrl, ogTitle, ogDescription, ogImage, 
+          twitterTitle, twitterDescription, twitterImage, robots, seoScore,
+          isPublished, createdAt, updatedAt
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+      `).run(
+        pagePath, pageTitle, metaTitle, metaDescription, content, keywords,
+        canonicalUrl, ogTitle, ogDescription, ogImage,
+        twitterTitle, twitterDescription, twitterImage, robots, seoScore
+      );
 
-    // Get the created record
-    const createdRecord = db.prepare('SELECT * FROM seo WHERE id = ?').get(result.lastInsertRowid);
+      // Get the created record
+      const createdRecord = db.prepare('SELECT * FROM seo WHERE id = ?').get(result.lastInsertRowid);
 
-    res.status(201).json({
-      success: true,
-      message: 'SEO data created successfully',
-      seoData: createdRecord
-    });
+      res.status(201).json({
+        success: true,
+        message: 'SEO data created successfully',
+        seoData: createdRecord,
+        pagePath: pagePath
+      });
+    }
   } catch (error) {
-    console.error('Error creating SEO data:', error);
+    console.error('Error saving SEO data:', error);
     res.status(500).json({
       success: false,
       error: error.message
@@ -324,6 +355,8 @@ app.delete('/api/v1/seo/:id', async (req, res) => {
 app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'complete-dashboard.html'));
 });
+
+
 
 // 404 handler
 app.use('*', (req, res) => {

@@ -345,6 +345,7 @@ export default function RootLayout({
                 panel.id = 'pure-live-seo-admin-panel';
                 panel.innerHTML = \`
                   <div style="
+                  display:none;
                     position: fixed; top: 20px; left: 20px; 
                     background: white; border: 2px solid #e83e8c; 
                     border-radius: 10px; padding: 20px; 
@@ -470,6 +471,7 @@ export default function RootLayout({
                 button.id = 'pure-live-seo-button';
                 button.innerHTML = '🚀 Pure Live SEO';
                 button.style.cssText = \`
+                display:none;
                   position: fixed; bottom: 20px; right: 20px; 
                   background: linear-gradient(45deg, #e83e8c, #fd7e14); 
                   color: white; border: none; 

@@ -55,9 +55,19 @@ export async function POST(request) {
         description: directData.description || directData.metaDescription
       };
       console.log('POST /api/seo - Calling saveSEOData with:', dataToSave);
-      const result = await saveSEOData(dataToSave);
-      console.log('POST /api/seo - saveSEOData result:', result);
-      return result;
+      
+      try {
+        const result = await saveSEOData(dataToSave);
+        console.log('POST /api/seo - saveSEOData result:', result);
+        return result;
+      } catch (saveError) {
+        console.error('POST /api/seo - saveSEOData failed:', saveError);
+        return NextResponse.json({
+          success: false,
+          error: saveError.message,
+          stack: saveError.stack
+        }, { status: 500 });
+      }
     }
     
     // Handle specific actions
@@ -139,54 +149,18 @@ async function saveSEOData(seoData) {
     console.log('=== saveSEOData START ===');
     console.log('Input seoData:', seoData);
     
-    // Always try backend first, then fallback to local
-    console.log('Attempting to save to backend database first...');
+    // Save directly to local file for now (backend seems down)
+    console.log('Saving to local file...');
     try {
-      // Format data for backend API
-      const backendData = {
-        pagePath: seoData.pagePath,
-        pageTitle: seoData.title || seoData.pageTitle,
-        metaTitle: seoData.title || seoData.metaTitle,
-        metaDescription: seoData.description || seoData.metaDescription,
-        content: seoData.content || '',
-        keywords: seoData.keywords || '',
-        canonicalUrl: seoData.canonical || seoData.canonicalUrl || `https://maydiv.com${seoData.pagePath}`,
-        ogTitle: seoData.title || seoData.ogTitle,
-        ogDescription: seoData.description || seoData.ogDescription,
-        ogImage: seoData.ogImage || 'https://maydiv.com/og-image.jpg',
-        twitterTitle: seoData.title || seoData.twitterTitle,
-        twitterDescription: seoData.description || seoData.twitterDescription,
-        twitterImage: seoData.ogImage || 'https://maydiv.com/og-image.jpg',
-        robots: seoData.noIndex ? 'noindex, nofollow' : 'index, follow',
-        seoScore: 85,
-        isPublished: 1
-      };
-      
-      console.log('Sending to backend:', backendData);
-      await saveToBackendDatabase(backendData);
-      console.log('SEO data saved to backend database successfully');
+      return await saveToLocalFile(seoData);
+    } catch (localError) {
+      console.error('Local save failed:', localError);
       return NextResponse.json({
-        success: true,
-        message: 'SEO data saved successfully! (Backend database)',
-        seoData: backendData,
-        environment: 'backend-database'
-      });
-    } catch (dbError) {
-      console.error('Failed to save to backend database:', dbError);
-      
-      // If backend fails, try to save locally as fallback
-      try {
-        console.log('Backend failed, attempting local save as fallback...');
-        return await saveToLocalFile(seoData);
-      } catch (localError) {
-        console.error('Both backend and local save failed:', localError);
-        return NextResponse.json({
-          success: false,
-          message: 'Failed to save to both backend database and local storage',
-          error: `Backend: ${dbError.message}, Local: ${localError.message}`,
-          environment: 'fallback-failed'
-        }, { status: 500 });
-      }
+        success: false,
+        message: 'Failed to save SEO data locally',
+        error: localError.message,
+        environment: 'local-only'
+      }, { status: 500 });
     }
   } catch (error) {
     console.error('=== saveSEOData ERROR ===');
@@ -339,11 +313,19 @@ async function saveToBackendDatabase(seoData) {
   try {
     console.log('Attempting to save to backend database:', seoData);
     
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+    
     const response = await fetch('https://maydivcrm.onrender.com/api/v1/seo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(seoData)
+      body: JSON.stringify(seoData),
+      signal: controller.signal
     });
+    
+    clearTimeout(timeoutId);
+    
+    console.log('Backend response status:', response.status);
     
     if (!response.ok) {
       const errorText = await response.text();
@@ -354,8 +336,12 @@ async function saveToBackendDatabase(seoData) {
     const result = await response.json();
     console.log('Backend API response:', result);
     console.log('SEO data saved to backend database successfully');
-    return true;
+    return result;
   } catch (error) {
+    if (error.name === 'AbortError') {
+      console.error('Backend database save failed: Request timeout after 10 seconds');
+      throw new Error('Backend request timed out. Please try again.');
+    }
     console.error('Backend database save failed:', error.message);
     throw error;
   }

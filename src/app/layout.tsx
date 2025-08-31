@@ -1,9 +1,36 @@
 import Script from 'next/script'
 
 export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://maydiv.com'),
+  title: {
+    default: 'Maydiv Digital Solutions',
+    template: '%s | Maydiv',
+  },
   description: 'Maydiv Website',
   icons: {
     icon: '/Lo.png',
+  },
+  keywords: ['Maydiv', 'web development', 'UI/UX', 'apps', 'projects'],
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    siteName: 'Maydiv',
+    url: 'https://maydiv.com',
+    title: 'Maydiv Digital Solutions',
+    description: 'Building delightful digital products — websites, apps and more.',
+    images: [{ url: 'https://maydiv.com/Lo.png' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Maydiv Digital Solutions',
+    description: 'Building delightful digital products — websites, apps and more.',
+    images: ['https://maydiv.com/Lo.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 }
 
@@ -28,17 +55,44 @@ export default function RootLayout({
             gtag('config', 'G-WZELL05P2J');
           `}
         </Script>
-        
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WZELL05P2J"></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-WZELL05P2J');
-          `
-        }} />
+
+        {/* JSON-LD Schema */}
+        <Script
+          id="schema-org"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Maydiv',
+              url: 'https://maydiv.com',
+              logo: 'https://maydiv.com/Lo.png',
+              sameAs: [
+                'https://www.facebook.com/',
+                'https://www.instagram.com/'
+              ],
+            }),
+          }}
+        />
+        <Script
+          id="schema-website"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Maydiv',
+              url: 'https://maydiv.com',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: 'https://maydiv.com/?q={search_term_string}',
+                'query-input': 'required name=search_term_string',
+              },
+            }),
+          }}
+        />
 
         {/* Pure Live SEO System - Optimized for 300 second intervals */}
         <script dangerouslySetInnerHTML={{

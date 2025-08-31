@@ -36,7 +36,7 @@ const SEODashboard = () => {
     { path: '/about', name: 'About Page', description: 'Company information and team' },
     { path: '/contact', name: 'Contact Page', description: 'Contact information and form' },
     { path: '/web-development', name: 'Web Development', description: 'Web development services' },
-    { path: '/apps', name: 'Mobile Apps', description: 'Mobile app development services' },
+    { path: '/app-development', name: 'Mobile Apps', description: 'Mobile app development services' },
     { path: '/apps/ui-ux', name: 'UI/UX Design', description: 'UI/UX design services' },
     { path: '/ai', name: 'AI Solutions', description: 'Artificial intelligence services' },
     { path: '/projects', name: 'Projects Portfolio', description: 'Our work portfolio' },

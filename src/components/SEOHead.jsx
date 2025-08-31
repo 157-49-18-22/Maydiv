@@ -15,8 +15,10 @@ export default function SEOHead({ pagePath, defaultTitle = 'Maydiv - Web Develop
       console.log('✅ Applying SEO data to page:', seoData);
       
       // Update page title
-      const newTitle = seoData.title || defaultTitle;
-      document.title = newTitle;
+      const newTitle = seoData.metaTitle || seoData.title || defaultTitle;
+      if (typeof window !== 'undefined' && window.__ALLOW_TITLE_CHANGES__) {
+        document.title = newTitle;
+      }
       console.log('✅ Title updated to:', newTitle);
       
       // Update meta description
@@ -26,7 +28,7 @@ export default function SEOHead({ pagePath, defaultTitle = 'Maydiv - Web Develop
         metaDescription.name = 'description';
         document.head.appendChild(metaDescription);
       }
-      metaDescription.content = seoData.description || defaultDescription;
+      metaDescription.content = seoData.metaDescription || seoData.description || defaultDescription;
       console.log('✅ Meta description updated to:', metaDescription.content);
       
       // Update meta keywords
@@ -46,7 +48,7 @@ export default function SEOHead({ pagePath, defaultTitle = 'Maydiv - Web Develop
         ogTitle.setAttribute('property', 'og:title');
         document.head.appendChild(ogTitle);
       }
-      ogTitle.content = seoData.title || defaultTitle;
+      ogTitle.content = seoData.ogTitle || seoData.metaTitle || defaultTitle;
       console.log('✅ OG title updated to:', ogTitle.content);
       
       let ogDescription = document.querySelector('meta[property="og:description"]');
@@ -55,7 +57,7 @@ export default function SEOHead({ pagePath, defaultTitle = 'Maydiv - Web Develop
         ogDescription.setAttribute('property', 'og:description');
         document.head.appendChild(ogDescription);
       }
-      ogDescription.content = seoData.description || defaultDescription;
+      ogDescription.content = seoData.ogDescription || seoData.metaDescription || defaultDescription;
       console.log('✅ OG description updated to:', ogDescription.content);
       
       // Update canonical URL
@@ -93,7 +95,9 @@ export default function SEOHead({ pagePath, defaultTitle = 'Maydiv - Web Develop
     } else {
       console.log('⚠️ No SEO data available, using defaults');
       // Apply default values
-      document.title = defaultTitle;
+      if (typeof window !== 'undefined' && window.__ALLOW_TITLE_CHANGES__) {
+        document.title = defaultTitle;
+      }
       
       let metaDescription = document.querySelector('meta[name="description"]');
       if (!metaDescription) {

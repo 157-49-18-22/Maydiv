@@ -1,10 +1,10 @@
-// SEO Service for managing SEO data with database integration
+
 export class SEOService {
   static async createSEO(seoData) {
     try {
       console.log('Creating new SEO data:', seoData);
       
-      const response = await fetch('/api/seo', {
+      const response = await fetch('/api/v1/seo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ export class SEOService {
 
   static async getAllSEO() {
     try {
-      const response = await fetch('/api/seo');
+      const response = await fetch('/api/v1/seo');
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -142,7 +142,7 @@ export class SEOService {
 
   static async getSEOByPath(pagePath) {
     try {
-      const response = await fetch(`/api/seo?page=${encodeURIComponent(pagePath)}`);
+      const response = await fetch(`/api/v1/seo?page=${encodeURIComponent(pagePath)}`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -199,7 +199,7 @@ export class SEOService {
 
   static async initializeDefaultSEO() {
     try {
-      const response = await fetch('/api/seo', {
+      const response = await fetch('/api/v1/seo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -230,7 +230,7 @@ export class SEOService {
 
   static async applySEOToFiles(seoData) {
     try {
-      const response = await fetch('/api/seo', {
+      const response = await fetch('/api/v1/seo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -262,7 +262,7 @@ export class SEOService {
 
   static async deployAllSEOChanges() {
     try {
-      const response = await fetch('/api/seo', {
+      const response = await fetch('/api/v1/seo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -294,7 +294,7 @@ export class SEOService {
   // Test database connection
   static async testDatabaseConnection() {
     try {
-      const response = await fetch('/api/seo');
+      const response = await fetch('/api/v1/seo');
       return response.ok;
     } catch (error) {
       console.error('Database connection test failed:', error);

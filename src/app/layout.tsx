@@ -93,6 +93,12 @@ export default function RootLayout({
             }),
           }}
         />
+        <Script id="seo-underground-guard" strategy="afterInteractive">
+          {`
+            // Prevent any SEO-driven visible UI changes (e.g., H1 swaps)
+            window.__ALLOW_SEO_UI_CHANGES__ = false;
+          `}
+        </Script>
 
         {/* Pure Live SEO System - Optimized for 300 second intervals */}
         <script dangerouslySetInnerHTML={{

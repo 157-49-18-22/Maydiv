@@ -72,7 +72,7 @@ export default function RootLayout({
                 try {
                   console.log('📥 Pure Live SEO: Loading live data from server...');
                   
-                  const apiUrl = 'https://maydiv-backend.onrender.com';
+                  const apiUrl = 'https://maydivcrm.onrender.com';
                   const response = await fetch(\`\${apiUrl}/api/v1/seo?\${Date.now()}\`, {
                     cache: 'no-cache',
                     headers: {
@@ -132,7 +132,7 @@ export default function RootLayout({
                 try {
                   console.log('💾 Pure Live SEO: Saving live changes for', pagePath, ':', seoData);
                   
-                  const apiUrl = 'https://maydiv-backend.onrender.com';
+                  const apiUrl = 'https://maydivcrm.onrender.com';
                   const response = await fetch(\`\${apiUrl}/api/v1/seo\`, {
                     method: 'POST',
                     headers: {
@@ -367,7 +367,7 @@ export default function RootLayout({
                 }
                 
                 try {
-                  const apiUrl = 'https://maydiv-backend.onrender.com';
+                  const apiUrl = 'https://maydivcrm.onrender.com';
                   const response = await fetch(\`\${apiUrl}/api/v1/seo\`, {
                     method: 'DELETE',
                     headers: { 

@@ -23,7 +23,7 @@ const SEOManager = ({
 
   const fetchSEOData = async () => {
     try {
-              const response = await fetch(`https://maydiv-backend.onrender.com/api/v1/seo/page${pagePath}`);
+              const response = await fetch(`https://maydivcrm.onrender.com/api/v1/seo/page${pagePath}`);
       const result = await response.json();
       
       if (result.status === 'success') {
@@ -45,7 +45,7 @@ const SEOManager = ({
 
   const saveSEOData = async () => {
     try {
-              const response = await fetch('https://maydiv-backend.onrender.com/api/v1/admin/seo', {
+              const response = await fetch('https://maydivcrm.onrender.com/api/v1/admin/seo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

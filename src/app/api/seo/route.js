@@ -352,7 +352,7 @@ async function saveToBackendDatabase(seoData) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
     
-    const response = await fetch('https://maydiv-backend.onrender.com/api/v1/seo', {
+    const response = await fetch('https://maydivcrm.onrender.com/api/v1/seo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(seoData),
@@ -385,7 +385,7 @@ async function saveToBackendDatabase(seoData) {
 
 async function updateBackendDatabase(seoData) {
   try {
-    const response = await fetch(`https://maydiv-backend.onrender.com/api/v1/seo/${seoData.id}`, {
+    const response = await fetch(`https://maydivcrm.onrender.com/api/v1/seo/${seoData.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(seoData)
@@ -405,7 +405,7 @@ async function updateBackendDatabase(seoData) {
 
 async function deleteFromBackendDatabase(id) {
   try {
-    const response = await fetch(`https://maydiv-backend.onrender.com/api/v1/seo/${id}`, {
+    const response = await fetch(`https://maydivcrm.onrender.com/api/v1/seo/${id}`, {
       method: 'DELETE'
     });
     
@@ -437,7 +437,7 @@ async function getAllSEOData() {
         // Add delay to avoid rate limiting
         await new Promise(resolve => setTimeout(resolve, 1000));
         
-        const response = await fetch('https://maydiv-backend.onrender.com/api/v1/seo', {
+        const response = await fetch('https://maydivcrm.onrender.com/api/v1/seo', {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }
         });
@@ -458,7 +458,7 @@ async function getAllSEOData() {
           console.log('Rate limited by backend API, retrying with longer delay...');
           // Wait longer and retry once
           await new Promise(resolve => setTimeout(resolve, 3000));
-          const retryResponse = await fetch('https://maydiv-backend.onrender.com/api/v1/seo');
+          const retryResponse = await fetch('https://maydivcrm.onrender.com/api/v1/seo');
           if (retryResponse.ok) {
             const retryData = await retryResponse.json();
             return retryData.seoData || retryData || [];

@@ -4,7 +4,7 @@ export async function GET() {
   try {
     console.log('Testing backend connection...');
     
-    const response = await fetch('https://maydiv-backend.onrender.com/api/v1/seo', {
+    const response = await fetch('https://maydivcrm.onrender.com/api/v1/seo', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     });

@@ -38,14 +38,27 @@ export class SEOService {
     try {
       console.log('Updating SEO data:', { id, seoData });
       
-      const response = await fetch('/api/seo', {
-        method: 'POST',
+      const response = await fetch(`/api/seo/${id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          action: 'updateData',
-          seoData: { ...seoData, id }
+          pagePath: seoData.pagePath,
+          pageTitle: seoData.title || seoData.pageTitle,
+          metaTitle: seoData.title || seoData.metaTitle,
+          metaDescription: seoData.description || seoData.metaDescription,
+          content: seoData.content || '',
+          keywords: seoData.keywords || '',
+          canonicalUrl: seoData.canonical || seoData.canonicalUrl || `https://maydiv.com${seoData.pagePath}`,
+          ogTitle: seoData.title || seoData.ogTitle,
+          ogDescription: seoData.description || seoData.ogDescription,
+          ogImage: seoData.ogImage || 'https://maydiv.com/og-image.jpg',
+          twitterTitle: seoData.title || seoData.twitterTitle,
+          twitterDescription: seoData.description || seoData.twitterDescription,
+          twitterImage: seoData.ogImage || 'https://maydiv.com/og-image.jpg',
+          robots: seoData.noIndex ? 'noindex, nofollow' : 'index, follow',
+          seoScore: 85
         })
       });
 
@@ -72,15 +85,11 @@ export class SEOService {
     try {
       console.log('Deleting SEO data:', id);
       
-      const response = await fetch('/api/seo', {
-        method: 'POST',
+      const response = await fetch(`/api/seo/${id}`, {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: 'deleteData',
-          seoData: { id }
-        })
+        }
       });
 
       if (!response.ok) {
@@ -166,11 +175,16 @@ export class SEOService {
       return allData.map(item => ({
         id: item.id,
         pagePath: item.pagePath,
-        title: item.metaTitle || item.pageTitle,
-        description: item.metaDescription,
-        keywords: item.keywords,
-        ogImage: item.ogImage,
-        canonical: item.canonicalUrl,
+        pageTitle: item.pageTitle || item.metaTitle || item.title,
+        metaTitle: item.metaTitle || item.pageTitle || item.title,
+        metaDescription: item.metaDescription || item.description,
+        title: item.pageTitle || item.metaTitle || item.title,
+        description: item.metaDescription || item.description,
+        content: item.content || '',
+        keywords: item.keywords || '',
+        ogImage: item.ogImage || '',
+        canonicalUrl: item.canonicalUrl || item.canonical || '',
+        robots: item.robots || 'index, follow',
         noIndex: item.robots === 'noindex, nofollow',
         seoScore: item.seoScore || 0,
         isPublished: item.isPublished,

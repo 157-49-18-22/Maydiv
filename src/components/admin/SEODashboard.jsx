@@ -318,6 +318,20 @@ const SEODashboard = () => {
     }
   };
 
+  // Check backend status function
+  const checkBackendStatus = async () => {
+    try {
+      const response = await fetch('https://maydivcrm.onrender.com/health');
+      if (response.ok) {
+        console.log('Backend is running');
+      } else {
+        console.log('Backend is not responding properly');
+      }
+    } catch (error) {
+      console.log('Backend is not accessible:', error.message);
+    }
+  };
+
 
 
 

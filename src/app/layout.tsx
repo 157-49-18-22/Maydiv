@@ -329,7 +329,8 @@ export default function RootLayout({
                   meta.content = pageData.keywords;
                 }
                 
-                if (pageData.h1Tag) {
+                // Do not change visible UI unless explicitly allowed
+                if (window.__ALLOW_SEO_UI_CHANGES__ && pageData.h1Tag) {
                   const h1 = document.querySelector('h1');
                   if (h1) {
                     h1.textContent = pageData.h1Tag;

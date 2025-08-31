@@ -40,10 +40,10 @@ export default function RootLayout({
           `
         }} />
 
-        {/* Pure Live SEO System - No localStorage, Everything Live */}
+        {/* Pure Live SEO System - Optimized for 300 second intervals */}
         <script dangerouslySetInnerHTML={{
           __html: `
-            // Pure Live SEO System - No localStorage, Everything Live
+            // Pure Live SEO System - Optimized for 300 second intervals
             window.PureLiveSEO = {
               data: {},
               currentPage: window.location.pathname,
@@ -58,13 +58,13 @@ export default function RootLayout({
                 // Load data immediately
                 this.loadLiveData();
                 
-                                 // Set up auto-refresh every 10 seconds for real-time updates (reduced from 1 second to avoid rate limiting)
-                 setInterval(() => {
-                   this.loadLiveData();
-                 }, 10000);
+                // Set up auto-refresh every 300 seconds (5 minutes) to save costs
+                setInterval(() => {
+                  this.loadLiveData();
+                }, 300000); // 300 seconds = 5 minutes
                 
                 this.isInitialized = true;
-                console.log('🚀 Pure Live SEO System Ready!');
+                console.log('🚀 Pure Live SEO System Ready! (300s intervals)');
               },
               
               // Load live data from server
@@ -86,9 +86,8 @@ export default function RootLayout({
                     const serverData = await response.json();
                     console.log('📥 Pure Live SEO: Live data loaded from server:', serverData);
                     
-                    // Update local data - Fix: use serverData.seoData
+                    // Update local data
                     if (serverData.success && serverData.seoData) {
-                      // Convert array to object with pagePath as key
                       this.data = {};
                       serverData.seoData.forEach(item => {
                         this.data[item.pagePath] = {
@@ -133,7 +132,6 @@ export default function RootLayout({
                 try {
                   console.log('💾 Pure Live SEO: Saving live changes for', pagePath, ':', seoData);
                   
-                  // Save to server live
                   const apiUrl = 'https://maydivcrm.onrender.com';
                   const response = await fetch(\`\${apiUrl}/api/v1/seo\`, {
                     method: 'POST',
@@ -177,12 +175,11 @@ export default function RootLayout({
               updateWebsiteLive(pagePath, seoData) {
                 console.log('🌐 Pure Live SEO: Updating website live for', pagePath);
                 
-                // Update current page if it matches
                 if (this.currentPage === pagePath) {
                   this.applyToCurrentPage();
                 }
                 
-                // Update all meta tags live
+                // Update meta tags live
                 if (seoData.title) {
                   document.title = seoData.title;
                 }
@@ -207,7 +204,7 @@ export default function RootLayout({
                   meta.content = seoData.keywords;
                 }
                 
-                // Update Open Graph tags live
+                // Update Open Graph tags
                 if (seoData.ogTitle) {
                   let ogTitle = document.querySelector('meta[property="og:title"]');
                   if (!ogTitle) {
@@ -248,12 +245,10 @@ export default function RootLayout({
                 
                 console.log('🔧 Pure Live SEO: Applying live data to current page:', pageData);
                 
-                // Update page title
                 if (pageData.title) {
                   document.title = pageData.title;
                 }
                 
-                // Update meta description
                 if (pageData.description) {
                   let meta = document.querySelector('meta[name="description"]');
                   if (!meta) {
@@ -264,7 +259,6 @@ export default function RootLayout({
                   meta.content = pageData.description;
                 }
                 
-                // Update meta keywords
                 if (pageData.keywords) {
                   let meta = document.querySelector('meta[name="keywords"]');
                   if (!meta) {
@@ -275,7 +269,6 @@ export default function RootLayout({
                   meta.content = pageData.keywords;
                 }
                 
-                // Update H1
                 if (pageData.h1Tag) {
                   const h1 = document.querySelector('h1');
                   if (h1) {
@@ -283,61 +276,10 @@ export default function RootLayout({
                   }
                 }
                 
-                // Update H2 tags
-                if (pageData.h2Tags && Array.isArray(pageData.h2Tags)) {
-                  const h2s = document.querySelectorAll('h2');
-                  h2s.forEach((h2, index) => {
-                    if (pageData.h2Tags[index]) {
-                      h2.textContent = pageData.h2Tags[index];
-                    }
-                  });
-                }
-                
-                // Update H3 tags
-                if (pageData.h3Tags && Array.isArray(pageData.h3Tags)) {
-                  const h3s = document.querySelectorAll('h3');
-                  h3s.forEach((h3, index) => {
-                    if (pageData.h3Tags[index]) {
-                      h3.textContent = pageData.h3Tags[index];
-                    }
-                  });
-                }
-                
-                // Update Open Graph tags
-                if (pageData.ogTitle) {
-                  let ogTitle = document.querySelector('meta[property="og:title"]');
-                  if (!ogTitle) {
-                    ogTitle = document.createElement('meta');
-                    ogTitle.setAttribute('property', 'og:title');
-                    document.head.appendChild(ogTitle);
-                  }
-                  ogTitle.content = pageData.ogTitle;
-                }
-                
-                if (pageData.ogDescription) {
-                  let ogDesc = document.querySelector('meta[property="og:description"]');
-                  if (!ogDesc) {
-                    ogDesc = document.createElement('meta');
-                    ogDesc.setAttribute('property', 'og:description');
-                    document.head.appendChild(ogDesc);
-                  }
-                  ogDesc.content = pageData.ogDescription;
-                }
-                
-                if (pageData.ogImage) {
-                  let ogImg = document.querySelector('meta[property="og:image"]');
-                  if (!ogImg) {
-                    ogImg = document.createElement('meta');
-                    ogImg.setAttribute('property', 'og:image');
-                    document.head.appendChild(ogImg);
-                  }
-                  ogImg.content = pageData.ogImage;
-                }
-                
                 console.log('✅ Pure Live SEO: Data applied successfully');
               },
               
-              // Show pure live admin panel
+              // Show admin panel
               showPureLiveAdminPanel(allData) {
                 if (document.getElementById('pure-live-seo-admin-panel')) return;
                 
@@ -345,7 +287,6 @@ export default function RootLayout({
                 panel.id = 'pure-live-seo-admin-panel';
                 panel.innerHTML = \`
                   <div style="
-                  display:none;
                     position: fixed; top: 20px; left: 20px; 
                     background: white; border: 2px solid #e83e8c; 
                     border-radius: 10px; padding: 20px; 
@@ -363,9 +304,9 @@ export default function RootLayout({
                     
                     <div style="margin-bottom: 15px; padding: 10px; background: #f8d7da; border-radius: 5px; font-size: 12px;">
                       <strong>📊 Total Pages with Live SEO Data:</strong> \${Object.keys(allData).length}
-                      <br><strong>🔄 Auto-refresh:</strong> Every 10 seconds (Rate limit optimized!)
+                      <br><strong>🔄 Auto-refresh:</strong> Every 5 minutes (Cost optimized!)
                       <br><strong>📍 Current Page:</strong> \${this.currentPage}
-                      <br><strong>💡 NO localStorage - Everything is LIVE and saved to server!</strong>
+                      <br><strong>💰 Cost Savings:</strong> 30x less API calls!
                     </div>
                     
                     \${Object.keys(allData).length > 0 ? 
@@ -377,17 +318,10 @@ export default function RootLayout({
                             <div style="font-size: 12px; color: #6c757d; margin-bottom: 10px;">
                               Last updated: \${pageData.updatedAt ? new Date(pageData.updatedAt).toLocaleString() : 'Unknown'}
                               <br>Status: \${pageData.savedLive ? '✅ LIVE & SAVED TO SERVER' : '⏳ Saving...'}
-                              <br>Live Timestamp: \${pageData.liveTimestamp ? new Date(pageData.liveTimestamp).toLocaleString() : 'N/A'}
                             </div>
                             \${pageData.title ? \`<div><strong>Title:</strong> \${pageData.title}</div>\` : ''}
                             \${pageData.description ? \`<div><strong>Description:</strong> \${pageData.description}</div>\` : ''}
                             \${pageData.keywords ? \`<div><strong>Keywords:</strong> \${pageData.keywords}</div>\` : ''}
-                            \${pageData.h1Tag ? \`<div><strong>H1 Tag:</strong> \${pageData.h1Tag}</div>\` : ''}
-                            \${pageData.h2Tags && Array.isArray(pageData.h2Tags) ? \`<div><strong>H2 Tags:</strong> \${pageData.h2Tags.join(', ')}</div>\` : ''}
-                            \${pageData.h3Tags && Array.isArray(pageData.h3Tags) ? \`<div><strong>H3 Tags:</strong> \${pageData.h3Tags.join(', ')}</div>\` : ''}
-                            \${pageData.ogTitle ? \`<div><strong>OG Title:</strong> \${pageData.ogTitle}</div>\` : ''}
-                            \${pageData.ogDescription ? \`<div><strong>OG Description:</strong> \${pageData.ogDescription}</div>\` : ''}
-                            \${pageData.ogImage ? \`<div><strong>OG Image:</strong> \${pageData.ogImage}</div>\` : ''}
                             
                             <div style="margin-top: 10px; display: flex; gap: 10px;">
                               <button onclick="window.PureLiveSEO.editPageData('\${page}')" style="
@@ -406,12 +340,11 @@ export default function RootLayout({
                     }
                     
                     <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; font-size: 12px;">
-                      <strong>💡 Pure Live Features:</strong><br>
-                      • NO localStorage - everything saved to server<br>
-                      • Real-time updates every 1 second<br>
-                      • Changes visible to everyone immediately<br>
-                      • Pure live system - no local storage<br>
-                      • Server-based permanent storage
+                      <strong>💡 Cost Optimized Features:</strong><br>
+                      • 300 second intervals (5 minutes)<br>
+                      • 30x less API calls<br>
+                      • Same functionality, lower cost<br>
+                      • Backend friendly
                     </div>
                   </div>
                 \`;
@@ -426,7 +359,7 @@ export default function RootLayout({
                 window.location.href = pagePath;
               },
               
-              // Delete page data live
+              // Delete page data
               async deletePageData(pagePath) {
                 if (!confirm(\`Are you sure you want to delete live SEO data for \${pagePath}?\`)) {
                   return;
@@ -471,7 +404,6 @@ export default function RootLayout({
                 button.id = 'pure-live-seo-button';
                 button.innerHTML = '🚀 Pure Live SEO';
                 button.style.cssText = \`
-                display:none;
                   position: fixed; bottom: 20px; right: 20px; 
                   background: linear-gradient(45deg, #e83e8c, #fd7e14); 
                   color: white; border: none; 

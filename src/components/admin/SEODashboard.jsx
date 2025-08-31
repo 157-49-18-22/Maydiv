@@ -321,7 +321,7 @@ const SEODashboard = () => {
   // Check backend status function
   const checkBackendStatus = async () => {
     try {
-      const response = await fetch('https://maydivcrm.onrender.com/health');
+      const response = await fetch('https://maydiv-backend.onrender.com/health');
       if (response.ok) {
         console.log('Backend is running');
       } else {

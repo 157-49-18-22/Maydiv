@@ -4,17 +4,17 @@ import { NextResponse } from 'next/server';
 export async function PUT(request, { params }) {
   try {
     const { id } = params;
-    const body = await request.json();
+    const seoData = await request.json();
     
-    console.log('PUT /api/seo/[id] - Updating SEO data:', { id, body });
+    console.log('PUT /api/seo/[id] - Updating SEO data:', { id, body: seoData });
     
     // Forward the request to the backend
-    const response = await fetch(`https://maydivcrm.onrender.com/api/v1/seo/${id}`, {
+    const response = await fetch(`https://maydiv-backend.onrender.com/api/v1/seo/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(seoData)
     });
     
     if (!response.ok) {
@@ -50,7 +50,7 @@ export async function DELETE(request, { params }) {
     console.log('DELETE /api/seo/[id] - Deleting SEO data:', id);
     
     // Forward the request to the backend
-    const response = await fetch(`https://maydivcrm.onrender.com/api/v1/seo/${id}`, {
+    const response = await fetch(`https://maydiv-backend.onrender.com/api/v1/seo/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

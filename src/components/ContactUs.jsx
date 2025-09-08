@@ -193,7 +193,7 @@ export default function ContactUs() {
               </div>
             </div>
                           <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.503067606764!2d77.3154326!3d28.4028139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cddad9eae97bb%3A0xb8dba58f55d234e!2sSCO-105%2C%20Second%20Floor%2C%20World%20Street%2C%20Sector%2079%2C%20Faridabad%2C%20Haryana%20121004!5e0!3m2!1sen!2sin!4v1692101234567!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.503067606764!2d77.35479155509239!3d28.387195084317568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cddad9eae97bb%3A0xb8dba58f55d234e!2sSCO-105%2C%20Second%20Floor%2C%20World%20Street%2C%20Sector%2079%2C%20Faridabad%2C%20Haryana%20121004!5e0!3m2!1sen!2sin!4v1692101234567!5m2!1sen!2sin&markers=color:red%7Clabel:M%7C28.387195084317568,77.35479155509239"
                 width="100%"
                 height="300"
                 style={{ border: 0, borderRadius: '12px' }}
@@ -207,7 +207,7 @@ export default function ContactUs() {
           
           <div className="contactus-map-actions">
             <a 
-              href="https://maps.google.com/?q=SCO-105+Second+floor+world+street+Faridabad+HR+121004"
+              href="https://www.google.com/maps/place/28.387195084317568,77.35479155509239/@28.387195084317568,77.35479155509239,17z"
               target="_blank"
               rel="noopener noreferrer"
               className="contactus-map-btn"
@@ -215,7 +215,7 @@ export default function ContactUs() {
               <FaMapMarkerAlt /> Open in Google Maps
             </a>
             <a 
-              href="https://maps.apple.com/?q=SCO-105+Second+floor+world+street+Faridabad+HR+121004"
+              href="https://maps.apple.com/?ll=28.387195084317568,77.35479155509239&q=MAYDIV+Office&z=15"
               target="_blank"
               rel="noopener noreferrer"
               className="contactus-map-btn"

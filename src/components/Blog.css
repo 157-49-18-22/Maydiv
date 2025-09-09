@@ -423,7 +423,7 @@
   
   .fancy:hover .text {
     color: white;
-    padding-left: 1.5em;
+    padding-left: 3em;
   }
   
   .fancy:hover .top-key {
@@ -591,7 +591,7 @@
     .fancy .text {
       font-size: 0.6em;
       line-height: 1.2em;
-      padding-left: 1.2em;
+      padding-left: 4em;
     }
     
     .fancy::before {
@@ -691,7 +691,7 @@
     .top-blog-card .fancy .text {
       font-size: 0.6em !important;
       line-height: 1em !important;
-      padding-left: 0.8em !important;
+      padding-left: 2em !important;
     }
     
     .top-blog-card .fancy::before {

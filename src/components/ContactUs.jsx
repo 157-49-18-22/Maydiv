@@ -83,6 +83,7 @@ export default function ContactUs() {
               </ul>
             </li>
             <li><Link href="/projects">Projects</Link></li>
+            <li><Link href="/blog">Blog</Link></li>
             <li><Link href="/contact">Contact</Link></li>
             <li><Link href="/about">About Us</Link></li>
           </ul>

@@ -15,6 +15,7 @@ function Counter({ start, end, duration = 2000 }) {
   useEffect(() => {
     let startTimestamp = null;
     const step = (timestamp) => {
+      
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / duration, 1);
       const current = Math.floor(progress * (end - start) + start);
@@ -123,6 +124,7 @@ const Header = () => {
                 </ul>
               </li>
               <li><Link href="/projects">Projects</Link></li>
+              <li><Link href="/blog">Blog</Link></li>
               <li><Link href="/contact">Contact</Link></li>
               <li><Link href="/about">About Us</Link></li>
             </ul>

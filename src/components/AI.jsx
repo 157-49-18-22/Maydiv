@@ -76,6 +76,7 @@ const AI = () => {
                 </ul>
               </li>
               <li><Link href="/projects"><span>Projects</span></Link></li>
+              <li><Link href="/blog">Blog</Link></li>
               <li><Link href="/contact"><span>Contact</span></Link></li>
               <li><Link href="/about"><span>About Us</span></Link></li>
             </ul>

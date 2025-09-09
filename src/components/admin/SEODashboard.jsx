@@ -41,6 +41,7 @@ const SEODashboard = () => {
     { path: '/ai', name: 'AI Solutions', description: 'Artificial intelligence services' },
     { path: '/projects', name: 'Projects Portfolio', description: 'Our work portfolio' },
     { path: '/marketing', name: 'Digital Marketing', description: 'Digital marketing services' },
+    { path: '/blog', name: 'Blog | Maydiv Digital Solutions - Latest Tech Insights & Digital Solutions', description: 'Read our latest insights on web development, AI, digital solutions, and technology trends. Expert articles on UI/UX, marketing, and business growth strategies.' },
     { path: '/seo-demo', name: 'SEO Demo', description: 'SEO demonstration page' },
     { path: '/seo-test', name: 'SEO Test Page', description: 'Test page for SEO functionality' }
   ];
@@ -101,11 +102,24 @@ const SEODashboard = () => {
   const handlePageSelection = (selectedPath) => {
     const selectedPage = availablePages.find(page => page.path === selectedPath);
     if (selectedPage) {
+      // Set default keywords for specific pages
+      let defaultKeywords = '';
+      if (selectedPath === '/blog') {
+        defaultKeywords = 'blog, web development, AI, digital solutions, technology insights, UI/UX design, digital marketing, business growth, tech trends, software development';
+      } else if (selectedPath === '/') {
+        defaultKeywords = 'web development, UI/UX design, mobile apps, digital solutions, Maydiv';
+      } else if (selectedPath === '/about') {
+        defaultKeywords = 'about us, team, company, web development agency, digital solutions';
+      } else if (selectedPath === '/contact') {
+        defaultKeywords = 'contact us, get in touch, web development, digital solutions, Maydiv contact';
+      }
+      
       setFormData(prev => ({
         ...prev,
         pagePath: selectedPath,
         title: selectedPage.name,
-        description: selectedPage.description
+        description: selectedPage.description,
+        keywords: defaultKeywords
       }));
     }
   };
@@ -383,40 +397,54 @@ const SEODashboard = () => {
           🚀 Quick SEO Management
         </h3>
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          {availablePages.map((page) => (
-            <button
-              key={page.path}
-              onClick={() => {
-                setFormData({
-                  pagePath: page.path,
-                  title: page.name,
-                  description: page.description,
-                  content: '',
-                  keywords: '',
-                  ogImage: '',
-                  canonical: '',
-                  noIndex: false,
-                  customMetaTags: [],
-                  h1Tag: '',
-                  h2Tags: [],
-                  h3Tags: []
-                });
-                setShowForm(true);
-              }}
-              style={{
-                backgroundColor: '#007bff',
-                color: 'white',
-                border: 'none',
-                padding: '8px 16px',
-                borderRadius: '20px',
-                cursor: 'pointer',
-                fontSize: '12px',
-                whiteSpace: 'nowrap'
-              }}
-            >
-              {page.name}
-            </button>
-          ))}
+          {availablePages.map((page) => {
+            // Set default keywords for specific pages
+            let defaultKeywords = '';
+            if (page.path === '/blog') {
+              defaultKeywords = 'blog, web development, AI, digital solutions, technology insights, UI/UX design, digital marketing, business growth, tech trends, software development';
+            } else if (page.path === '/') {
+              defaultKeywords = 'web development, UI/UX design, mobile apps, digital solutions, Maydiv';
+            } else if (page.path === '/about') {
+              defaultKeywords = 'about us, team, company, web development agency, digital solutions';
+            } else if (page.path === '/contact') {
+              defaultKeywords = 'contact us, get in touch, web development, digital solutions, Maydiv contact';
+            }
+            
+            return (
+              <button
+                key={page.path}
+                onClick={() => {
+                  setFormData({
+                    pagePath: page.path,
+                    title: page.name,
+                    description: page.description,
+                    content: '',
+                    keywords: defaultKeywords,
+                    ogImage: '',
+                    canonical: '',
+                    noIndex: false,
+                    customMetaTags: [],
+                    h1Tag: '',
+                    h2Tags: [],
+                    h3Tags: []
+                  });
+                  setShowForm(true);
+                }}
+                style={{
+                  backgroundColor: '#007bff',
+                  color: 'white',
+                  border: 'none',
+                  padding: '8px 16px',
+                  borderRadius: '20px',
+                  cursor: 'pointer',
+                  fontSize: '12px',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {page.name}
+              </button>
+            );
+          })}
         </div>
         <div style={{ marginTop: '10px', fontSize: '12px', color: '#666' }}>
           🚀 Click any page button to start editing SEO data!

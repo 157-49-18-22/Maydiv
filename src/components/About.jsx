@@ -84,6 +84,7 @@ export default function About() {
               </ul>
             </li>
             <li><Link href="/projects">Projects</Link></li>
+            <li><Link href="/blog">Blog</Link></li>
             <li><Link href="/contact">Contact</Link></li>
             <li><Link href="/about">About Us</Link></li>
           </ul>
@@ -91,6 +92,7 @@ export default function About() {
         {/* MobileDrawer usage here */}
         <MobileDrawer
           drawerOpen={drawerOpen}
+          
           setDrawerOpen={setDrawerOpen}
           drawerDropdownOpen={drawerDropdownOpen}
           setDrawerDropdownOpen={setDrawerDropdownOpen}

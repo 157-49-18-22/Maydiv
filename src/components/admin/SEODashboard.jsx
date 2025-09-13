@@ -28,7 +28,11 @@ const SEODashboard = () => {
   const [initializing, setInitializing] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
   const [editingId, setEditingId] = useState(null);
-
+  const [importing, setImporting] = useState(false);
+  const [exporting, setExporting] = useState(false);
+  const [showSecretButtons, setShowSecretButtons] = useState(false);
+  const [tapCount, setTapCount] = useState(0);
+  const [lastTapTime, setLastTapTime] = useState(0);
 
   // Available pages for dropdown
   const availablePages = [
@@ -42,12 +46,16 @@ const SEODashboard = () => {
     { path: '/projects', name: 'Projects Portfolio', description: 'Our work portfolio' },
     { path: '/marketing', name: 'Digital Marketing', description: 'Digital marketing services' },
     { path: '/blog', name: 'Blog | Maydiv Digital Solutions - Latest Tech Insights & Digital Solutions', description: 'Read our latest insights on web development, AI, digital solutions, and technology trends. Expert articles on UI/UX, marketing, and business growth strategies.' },
-    { path: '/seo-demo', name: 'SEO Demo', description: 'SEO demonstration page' },
-    { path: '/seo-test', name: 'SEO Test Page', description: 'Test page for SEO functionality' }
+ 
   ];
 
   useEffect(() => {
     loadPages();
+    // Check if secret buttons were previously unlocked
+    const savedState = localStorage.getItem('maydiv_secret_buttons');
+    if (savedState === 'true') {
+      setShowSecretButtons(true);
+    }
   }, []);
 
 
@@ -346,6 +354,167 @@ const SEODashboard = () => {
     }
   };
 
+  // Export SEO data function
+  const handleExport = async () => {
+    try {
+      setExporting(true);
+      const exportData = {
+        exportInfo: {
+          exportedAt: new Date().toISOString(),
+          version: "1.0",
+          totalPages: pages.length,
+          exportedBy: "Maydiv SEO Dashboard"
+        },
+        seoData: pages.map(page => ({
+          id: page.id,
+          pagePath: page.pagePath,
+          pageTitle: page.pageTitle || page.metaTitle || page.title,
+          metaDescription: page.metaDescription || page.description,
+          content: page.content || '',
+          keywords: page.keywords || '',
+          ogImage: page.ogImage || '',
+          noIndex: page.robots === 'noindex, nofollow' || page.noIndex || false,
+          customMetaTags: page.customMetaTags || [],
+          h2Tags: page.h2Tags || [],
+          h3Tags: page.h3Tags || [],
+          seoScore: page.seoScore || 0,
+          createdAt: page.createdAt,
+          updatedAt: page.updatedAt
+        }))
+      };
+
+      const dataStr = JSON.stringify(exportData, null, 2);
+      const dataBlob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(dataBlob);
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `seo-data-export-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      
+      setMessage({ type: 'success', text: `Exported ${pages.length} pages successfully!` });
+      setTimeout(() => setMessage({ type: '', text: '' }), 3000);
+    } catch (error) {
+      console.error('Export error:', error);
+      setMessage({ type: 'error', text: 'Error exporting data: ' + error.message });
+    } finally {
+      setExporting(false);
+    }
+  };
+
+  // Import SEO data function
+  const handleImport = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (file.type !== 'application/json') {
+      setMessage({ type: 'error', text: 'Please select a valid JSON file' });
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      try {
+        setImporting(true);
+        const importData = JSON.parse(e.target.result);
+        
+        if (!importData.seoData || !Array.isArray(importData.seoData)) {
+          throw new Error('Invalid file format. Expected seoData array.');
+        }
+
+        let importedCount = 0;
+        let errorCount = 0;
+
+        for (const seoItem of importData.seoData) {
+          try {
+            // Format data for the API
+            const formattedData = {
+              pagePath: seoItem.pagePath,
+              title: seoItem.pageTitle || seoItem.title,
+              description: seoItem.metaDescription || seoItem.description,
+              content: seoItem.content || '',
+              keywords: seoItem.keywords || '',
+              ogImage: seoItem.ogImage || '',
+              canonical: seoItem.canonical || '',
+              noIndex: seoItem.noIndex || false,
+              customMetaTags: seoItem.customMetaTags || [],
+              h1Tag: seoItem.h1Tag || '',
+              h2Tags: seoItem.h2Tags || [],
+              h3Tags: seoItem.h3Tags || []
+            };
+
+            await SEOService.createSEO(formattedData);
+            importedCount++;
+          } catch (itemError) {
+            console.error('Error importing item:', itemError);
+            errorCount++;
+          }
+        }
+
+        if (importedCount > 0) {
+          setMessage({ 
+            type: 'success', 
+            text: `Successfully imported ${importedCount} pages${errorCount > 0 ? ` (${errorCount} failed)` : ''}` 
+          });
+          loadPages(); // Refresh the data
+        } else {
+          setMessage({ type: 'error', text: 'No pages were imported successfully' });
+        }
+      } catch (error) {
+        console.error('Import error:', error);
+        setMessage({ type: 'error', text: 'Error importing data: ' + error.message });
+      } finally {
+        setImporting(false);
+        // Reset file input
+        event.target.value = '';
+      }
+    };
+
+    reader.readAsText(file);
+  };
+
+  // Secret tap mechanism to reveal/hide buttons
+  const handleSecretTap = () => {
+    const currentTime = Date.now();
+    
+    // Reset tap count if more than 5 seconds have passed
+    if (currentTime - lastTapTime > 5000) {
+      setTapCount(1);
+    } else {
+      setTapCount(prev => prev + 1);
+    }
+    
+    setLastTapTime(currentTime);
+    
+    // If 5 taps within 5 seconds, toggle buttons
+    if (tapCount + 1 >= 5) {
+      if (showSecretButtons) {
+        // Hide buttons
+        setShowSecretButtons(false);
+        setTapCount(0);
+        localStorage.removeItem('maydiv_secret_buttons');
+        setMessage({ 
+          type: 'info', 
+          text: '🔒 Secret buttons hidden! Import/Export features are now locked.' 
+        });
+        setTimeout(() => setMessage({ type: '', text: '' }), 4000);
+      } else {
+        // Show buttons
+        setShowSecretButtons(true);
+        setTapCount(0);
+        localStorage.setItem('maydiv_secret_buttons', 'true');
+        setMessage({ 
+          type: 'success', 
+          text: '🔓 Secret buttons unlocked! Import/Export features are now available.' 
+        });
+        setTimeout(() => setMessage({ type: '', text: '' }), 4000);
+      }
+    }
+  };
+
 
 
 
@@ -361,7 +530,54 @@ const SEODashboard = () => {
       <div className="seo-dashboard-header">
         <h1>SEO Management Dashboard</h1>
         <div className="header-actions">
-
+          {/* Secret tap area */}
+          <div 
+            onClick={handleSecretTap}
+            style={{
+              cursor: 'pointer',
+              padding: '8px 12px',
+              borderRadius: '6px',
+              backgroundColor: '#f8f9fa',
+              border: '1px solid #e9ecef',
+              fontSize: '14px',
+              color: '#6c757d',
+              userSelect: 'none',
+              transition: 'all 0.2s',
+              marginRight: '10px'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#e9ecef';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = '#f8f9fa';
+            }}
+          >
+            🔧
+          </div>
+          
+          {/* Secret buttons - only show when unlocked */}
+          {showSecretButtons && (
+            <>
+              <button 
+                className="btn btn-success"
+                onClick={handleExport}
+                disabled={exporting || pages.length === 0}
+              >
+                {exporting ? 'Exporting...' : '📤 Export Data'}
+              </button>
+              <label className="btn btn-warning" style={{ cursor: 'pointer', margin: '0 5px' }}>
+                {importing ? 'Importing...' : '📥 Import Data'}
+                <input
+                  type="file"
+                  accept=".json"
+                  onChange={handleImport}
+                  disabled={importing}
+                  style={{ display: 'none' }}
+                />
+              </label>
+            </>
+          )}
+          
           <button 
             className="btn btn-secondary"
             onClick={handleInitializeSEO}

@@ -57,6 +57,7 @@ const MobileDrawer = ({
           </li>
           <li><Link href="/projects" onClick={() => setDrawerOpen(false)}>Projects</Link></li>
           <li><Link href="/blog" onClick={() => setDrawerOpen(false)}>Blog</Link></li>
+          <li><Link href="/career" onClick={() => setDrawerOpen(false)}>Career</Link></li>
           <li><Link href="/contact" onClick={() => setDrawerOpen(false)}>Contact</Link></li>
           <li><Link href="/about" onClick={() => setDrawerOpen(false)}>About Us</Link></li>
         </ul>

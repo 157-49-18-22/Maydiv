@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/seo-demo',
     '/seo-test',
     '/marketing',
+    '/blog',
+    '/career',
   ]
 
   const now = new Date().toISOString()

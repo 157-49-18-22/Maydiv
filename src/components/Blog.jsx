@@ -16,11 +16,13 @@ const Blog = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
+    setMounted(true);
     const checkMobile = () => setIsMobile(window.innerWidth <= 480);
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -112,7 +114,7 @@ const Blog = () => {
       "@type": "BlogPosting",
       "headline": blog.title,
       "description": blog.description,
-      "datePublished": new Date().toISOString(),
+      "datePublished": "2024-01-01T00:00:00.000Z", // Fixed date to prevent hydration mismatch
       "author": {
         "@type": "Organization",
         "name": "Maydiv Digital Solutions"
@@ -146,7 +148,7 @@ const Blog = () => {
           </Link>
         </div>
         {/* Desktop nav links */}
-        {!isMobile && (
+        {mounted && !isMobile && (
           <ul className="header-links">
             <li><Link href="/">Home</Link></li>
             <li className="dropdown"

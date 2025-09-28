@@ -1219,14 +1219,7 @@ body {
     display: flex !important;
   }
   .header-socials {
-    flex-direction: column;
-    position: absolute;
-    top: 87px;
-    right: 23px;
-    width: auto;
-    display: flex;
-    align-items: flex-end;
-    gap: 18px;
+    display: none;
     margin: 0;
     z-index: 1201;
   }

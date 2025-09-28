@@ -17,11 +17,13 @@ const Career = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
+    setMounted(true);
     const checkMobile = () => setIsMobile(window.innerWidth <= 480);
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -138,8 +140,8 @@ const Career = () => {
     },
     "employmentType": ["FULL_TIME", "PART_TIME", "CONTRACTOR"],
     "workHours": "Flexible",
-    "datePosted": new Date().toISOString(),
-    "validThrough": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+    "datePosted": "2024-01-01T00:00:00.000Z",
+    "validThrough": "2024-12-31T23:59:59.000Z"
   };
 
   return (
@@ -164,7 +166,7 @@ const Career = () => {
           </Link>
         </div>
         {/* Desktop nav links */}
-        {!isMobile && (
+        {mounted && !isMobile && (
           <ul className="header-links">
             <li><Link href="/">Home</Link></li>
             <li className="dropdown"
@@ -329,3 +331,6 @@ const Career = () => {
 };
 
 export default Career;
+
+
+      

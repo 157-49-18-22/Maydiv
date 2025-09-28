@@ -484,7 +484,7 @@
     /* Blog Filters Mobile */
     .blog-filters {
       padding: 1rem 0.3rem;
-      gap: 0.3rem;
+      gap: 0.1rem;
       margin-top: -150px;
       flex-wrap: nowrap;
       justify-content: center;
@@ -536,12 +536,12 @@
     .card-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
     
     .blog-card-content {
       flex: 0 0 60%;
-      padding: 1rem;
+      padding: 0.7rem;
       text-align: left;
     }
     .blog-card-title {

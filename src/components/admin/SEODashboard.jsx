@@ -46,6 +46,8 @@ const SEODashboard = () => {
     { path: '/projects', name: 'Projects Portfolio', description: 'Our work portfolio' },
     { path: '/marketing', name: 'Digital Marketing', description: 'Digital marketing services' },
     { path: '/blog', name: 'Blog | Maydiv Digital Solutions - Latest Tech Insights & Digital Solutions', description: 'Read our latest insights on web development, AI, digital solutions, and technology trends. Expert articles on UI/UX, marketing, and business growth strategies.' },
+    { path: '/career', name: 'Careers | Maydiv Digital Solutions - Join Our Team', description: 'Explore exciting career opportunities at Maydiv Digital Solutions. Join our team of talented professionals working on cutting-edge digital projects. Competitive salaries and flexible work arrangements.' },
+
  
   ];
 
@@ -120,6 +122,8 @@ const SEODashboard = () => {
         defaultKeywords = 'about us, team, company, web development agency, digital solutions';
       } else if (selectedPath === '/contact') {
         defaultKeywords = 'contact us, get in touch, web development, digital solutions, Maydiv contact';
+      } else if (selectedPath === '/career') {
+        defaultKeywords = 'careers, jobs, employment, web development jobs, UI/UX designer jobs, digital marketing jobs, remote work, tech careers, software development careers';
       }
       
       setFormData(prev => ({
@@ -624,6 +628,8 @@ const SEODashboard = () => {
               defaultKeywords = 'about us, team, company, web development agency, digital solutions';
             } else if (page.path === '/contact') {
               defaultKeywords = 'contact us, get in touch, web development, digital solutions, Maydiv contact';
+            } else if (page.path === '/career') {
+              defaultKeywords = 'careers, jobs, employment, web development jobs, UI/UX designer jobs, digital marketing jobs, remote work, tech careers, software development careers';
             }
             
             return (

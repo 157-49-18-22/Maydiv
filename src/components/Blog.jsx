@@ -127,7 +127,7 @@ const Blog = () => {
   };
 
   return (
-    <>
+    <div style={{ marginTop: 0, paddingTop: 0 }}>
       <SEOHead 
         pagePath="/blog"
         defaultTitle="Blog | Maydiv Digital Solutions - Latest Tech Insights & Digital Solutions"
@@ -294,7 +294,7 @@ const Blog = () => {
       <Testimonial />
       
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -145,7 +145,7 @@ const Career = () => {
   };
 
   return (
-    <>
+    <div style={{ marginTop: 0, paddingTop: 0 }}>
       <SEOHead 
         pagePath="/career"
         defaultTitle="Careers | Maydiv Digital Solutions - Join Our Team"
@@ -326,7 +326,7 @@ const Career = () => {
       <Testimonial />
       
       <Footer />
-    </>
+    </div>
   );
 };
 

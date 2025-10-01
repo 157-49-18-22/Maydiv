@@ -1,4 +1,5 @@
 import Script from 'next/script'
+import '../styles/chat-widget.css'
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://maydiv.com'),
@@ -99,6 +100,13 @@ export default function RootLayout({
             window.__ALLOW_SEO_UI_CHANGES__ = false;
           `}
         </Script>
+
+        {/* Chat Widget */}
+        <Script
+          id="omnidimension-web-widget"
+          src="https://backend.omnidim.io/web_widget.js?secret_key=6cbf7c369bb60a6ce4f7aa99390bc9c7"
+          strategy="afterInteractive"
+        />
 
         {/* Pure Live SEO System - Optimized for 300 second intervals */}
         <script dangerouslySetInnerHTML={{

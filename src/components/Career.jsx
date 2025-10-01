@@ -20,6 +20,7 @@ const Career = () => {
   const [mounted, setMounted] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
+  const [selectedFileName, setSelectedFileName] = useState('');
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
@@ -112,6 +113,15 @@ const Career = () => {
 
   const handleFilterClick = (filter) => {
     setActiveFilter(filter);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFileName(file.name);
+    } else {
+      setSelectedFileName('');
+    }
   };
 
   // Structured data for SEO
@@ -277,24 +287,61 @@ const Career = () => {
           
           <h2 className="contact-section-title">Get In Touch</h2>
           
-          <div className="contact-form-wrapper">
+          <form 
+            className="contact-form-wrapper"
+            action="https://getform.io/f/amdyxyyb"
+            method="POST"
+            encType="multipart/form-data"
+          >
             <div className="form-field">
               <FaBriefcase className="field-icon" />
-              <input type="text" placeholder="Name" className="contact-input" />
+              <input 
+                type="text" 
+                name="name"
+                placeholder="Name" 
+                className="contact-input" 
+                required 
+              />
             </div>
             
             <div className="form-field">
               <FaBriefcase className="field-icon" />
-              <input type="email" placeholder="Email" className="contact-input" />
+              <input 
+                type="email" 
+                name="email"
+                placeholder="Email" 
+                className="contact-input" 
+                required 
+              />
             </div>
             
             <div className="form-field">
               <FaBriefcase className="field-icon" />
-              <textarea placeholder="Message" className="contact-textarea"></textarea>
+              <textarea 
+                name="message"
+                placeholder="Message" 
+                className="contact-textarea"
+                required
+              ></textarea>
             </div>
             
-            <button className="contact-send-btn">Send</button>
-          </div>
+            <div className="form-field file-field">
+              <FaBriefcase className="field-icon" />
+              <input 
+                type="file" 
+                name="resume"
+                accept=".pdf,.doc,.docx,.txt" 
+                className="contact-file-input" 
+                id="resume-upload"
+                onChange={handleFileChange}
+              />
+              <label htmlFor="resume-upload" className="file-label">
+                {selectedFileName ? `📄 ${selectedFileName}` : 'Upload Resume/CV'}
+              </label>
+            </div>
+            
+            <button type="submit" className="contact-send-btn">Send</button>
+          </form>
           
           <div className="company-contact-info">
             <div className="contact-detail">
@@ -331,6 +378,3 @@ const Career = () => {
 };
 
 export default Career;
-
-
-      

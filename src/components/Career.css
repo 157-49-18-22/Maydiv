@@ -1389,12 +1389,14 @@
 
   .contact-form-wrapper {
     margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
   }
 
   .form-field {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 0.8rem;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 0.4rem;
@@ -1427,6 +1429,48 @@
   .contact-textarea {
     min-height: 60px;
     resize: vertical;
+  }
+
+  /* File Upload Field Styling */
+  .file-field {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-file-input {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+  }
+
+  .file-label {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .file-label:hover {
+    color: #e83e8c;
+  }
+
+  .file-label::after {
+    content: "📁";
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
   }
 
   .contact-send-btn {
@@ -1635,11 +1679,13 @@
     
     .contact-form-wrapper {
       margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
     }
     
     .form-field {
       padding: 0.5rem;
-      margin-bottom: 0.8rem;
       display: flex;
       align-items: center;
       width: 100%;
@@ -1680,6 +1726,46 @@
     .contact-input::placeholder,
     .contact-textarea::placeholder {
       color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* File Upload Field Mobile Styling */
+    .file-field {
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      min-height: 45px;
+    }
+
+    .file-label {
+      font-size: 0.9rem;
+      padding: 0.5rem;
+      flex: 1;
+      width: 100%;
+      box-sizing: border-box;
+      border: none;
+      background: transparent;
+      color: #fff;
+      outline: none;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      word-break: break-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .file-label::after {
+      content: "📁";
+      font-size: 1rem;
+      margin-left: 0.5rem;
+      flex-shrink: 0;
     }
     
     .contact-send-btn {

@@ -276,39 +276,38 @@ export default function New() {
         >
           {projects.map((project, idx) => (
             <SwiperSlide key={idx}>
-              <div 
-                className={`project-card ${centerCardVisible && idx === 0 ? 'show-center' : ''} ${sideCardsVisible && idx !== 0 ? 'show-side' : ''}`}
-                onMouseEnter={() => {
-                  // Optional: Add hover effect here if needed
-                }}
+              <a 
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-card-link"
               >
-                {project.image && (
-                  <img src={project.image} alt={project.title} className="project-image" />
-                )}
-                <div className="card-separator"></div>
-                <h2 className="project-name">{project.title}</h2>
-                <div className="project-dates">
-                  <span className="project-date">🗓️ {project.startDate} - {project.endDate}</span>
-                  <span className={`project-status ${project.status === 'Completed' ? 'completed' : 'inprogress'}`}>{project.status}</span>
-                </div>
-                <div className="project-desc">{project.description}</div>
-                <div className="project-tech">
-                  {project.technologies.map((tech, i) => (
-                    <span className="tech-badge" key={i}>{tech}</span>
-                  ))}
-                </div>
-                <a 
-                  href={project.link}
-                  className="project-link fancy"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <div 
+                  className={`project-card ${centerCardVisible && idx === 0 ? 'show-center' : ''} ${sideCardsVisible && idx !== 0 ? 'show-side' : ''}`}
                 >
-                  <span className="top-key"></span>
-                  <span className="text">Visit Website</span>
-                  <span className="bottom-key-1"></span>
-                  <span className="bottom-key-2"></span>
-                </a>
-              </div>
+                  {project.image && (
+                    <img src={project.image} alt={project.title} className="project-image" />
+                  )}
+                  <div className="card-separator"></div>
+                  <h2 className="project-name">{project.title}</h2>
+                  <div className="project-dates">
+                    <span className="project-date">🗓️ {project.startDate} - {project.endDate}</span>
+                    <span className={`project-status ${project.status === 'Completed' ? 'completed' : 'inprogress'}`}>{project.status}</span>
+                  </div>
+                  <div className="project-desc">{project.description}</div>
+                  <div className="project-tech">
+                    {project.technologies.map((tech, i) => (
+                      <span className="tech-badge" key={i}>{tech}</span>
+                    ))}
+                  </div>
+                  <div className="project-link fancy">
+                    <span className="top-key"></span>
+                    <span className="text">Visit Website</span>
+                    <span className="bottom-key-1"></span>
+                    <span className="bottom-key-2"></span>
+                  </div>
+                </div>
+              </a>
             </SwiperSlide>
           ))}
         </Swiper>

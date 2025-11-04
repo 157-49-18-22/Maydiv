@@ -20,6 +20,36 @@ import MobileDrawer from './MobileDrawer';
 
 const projects = [
   {
+    title: 'JMS CRM',
+    image: '/Jms.png',
+    technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
+    link: 'https://maytm.online/dashboard/admin',
+    startDate: 'Jan 2024',
+    endDate: 'Present',
+    description: 'A comprehensive CRM solution for managing customer relationships, sales, and business processes.',
+    status: 'In Progress',
+  },
+  {
+    title: 'Maydiv CRM',
+    image: '/Crm.png',
+    technologies: ['React', 'Next.js', 'Tailwind CSS', 'Node.js'],
+    link: 'https://crmfrontend-kappa.vercel.app/',
+    startDate: 'Feb 2024',
+    endDate: 'Present',
+    description: 'Custom CRM platform built with modern technologies for efficient business management.',
+    status: 'In Progress',
+  },
+  {
+    title: 'TVARA India',
+    image: '/Tvara.png',
+    technologies: ['React', 'Next.js', 'Tailwind CSS', 'Node.js'],
+    link: 'https://tvaraindia.com/',
+    startDate: 'Mar 2024',
+    endDate: 'Present',
+    description: 'Official website for TVARA India, showcasing their services and portfolio.',
+    status: 'In Progress',
+  },
+  {
     title: 'Mobile App',
     image: '/1.7.webp',
     technologies: ['React', 'Next.js', 'CSS'],

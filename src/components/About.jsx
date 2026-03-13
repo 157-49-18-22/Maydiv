@@ -193,6 +193,9 @@ export default function About() {
           </div> */}
         </div>
       </section>
+      <div className="about-leader-image-container">
+        <Image src="/ceo2.jpeg" alt="Managing Director" width={800} height={500} quality={100} className="about-leader-img" />
+      </div>
       {/* Security Section */}
       <section className="about-security-section">
         <Image src="/Bg1.png" alt="Decorative Dots" width={70} height={260} className="about-security-bg-dots" />
@@ -217,6 +220,9 @@ Since then, we've been turning ideas into impactful digital products — from mo
           </div>
         </div>
       </section>
+      <div className="about-leader-image-container">
+        <Image src="/ceo.jpeg" alt="Founder" width={800} height={500} quality={100} className="about-leader-img" />
+      </div>
       {/* Meet Our Team Section */}
       <section className="about-team-section">
         <h2 className="about-team-heading">Meet our team</h2>

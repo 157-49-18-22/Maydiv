@@ -1557,6 +1557,23 @@ justify-content: center;
   width: 0;
 }
 
+.about-leader-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
+  max-width: 1100px;
+  padding: 0 32px;
+}
+
+.about-leader-img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
 @media (max-width: 480px) {
   .about-main {
     padding: 0;

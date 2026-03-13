@@ -422,7 +422,7 @@ body {
     z-index: 2;
   }
   
-  .trusted-logos img, .trusted-logos :global(img) {
+  .trusted-logos img {
     width: auto !important;
     height: 30px !important;
     object-fit: contain;

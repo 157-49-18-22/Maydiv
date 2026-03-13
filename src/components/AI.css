@@ -529,13 +529,13 @@ body {
   box-shadow: 0 4px 24px 0 rgba(185,131,255,0.18);
 }
 
-.trusted-logo img, .trusted-logo :global(img) {
+.trusted-logo img {
   filter: grayscale(1) brightness(0.85) drop-shadow(0 2px 8px #0002);
   transition: filter 0.3s, transform 0.3s;
   border-radius: 0.7rem;
 }
 
-.trusted-logo:hover img, .trusted-logo:hover :global(img) {
+.trusted-logo:hover img {
   filter: grayscale(0) brightness(1.1) drop-shadow(0 4px 16px #b983ff55);
   transform: scale(1.12) translateY(-2px);
   z-index: 2;

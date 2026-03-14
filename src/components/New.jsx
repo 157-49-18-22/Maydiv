@@ -218,6 +218,9 @@ export default function New() {
     const processCards = document.querySelectorAll('.process-card');
     processCards.forEach(card => observer.observe(card));
 
+    const projectCards = document.querySelectorAll('.project-card-link');
+    projectCards.forEach(card => observer.observe(card));
+
     return () => observer.disconnect();
   }, []);
 

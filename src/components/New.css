@@ -423,9 +423,13 @@ body {
   border: none !important;
   position: sticky;
   top: 120px;
-  margin-bottom: 50vh;
+  margin-bottom: 30vh; /* Reduced from 50vh for tighter flow */
   z-index: 1;
   width: 100%; /* Ensure container takes full width */
+}
+
+.project-card-link:last-child {
+  margin-bottom: 0;
 }
 
 /* Ensure the grid doesn't clip the sticky cards */
@@ -676,8 +680,31 @@ body {
 
 @media (max-width: 768px) {
   .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 25px;
+    display: block; /* Maintain block for sticky stacking */
+    gap: 0;
+    width: 100%;
+  }
+
+  .project-card-link {
+    top: 70px;
+    margin-bottom: 12vh; /* Reduced from 30vh to move cards closer together */
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+
+  .project-card-link:last-child {
+    margin-bottom: 0;
+  }
+
+  .project-card-link.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .new-project-card {
+    border-radius: 20px;
+    margin-bottom: 0;
   }
 
   .projects-hero-flex {
@@ -718,7 +745,15 @@ body {
   }
 
   .projects-grid {
-    gap: 20px;
+    gap: 0;
+  }
+
+  .project-image-container {
+    padding: 20px;
+  }
+
+  .project-info {
+    padding: 15px 20px;
   }
 
   .projects-hero-title {

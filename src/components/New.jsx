@@ -320,7 +320,7 @@ export default function New() {
           <a href="#contact" className="projects-hero-btn">Let's Collaborate</a>
         </div>
         <div className="projects-hero-lottie">
-          <Lottie animationData={newAnimation} style={{ width: 320, height: 320 }} loop autoplay />
+          <Lottie animationData={newAnimation} className="hero-lottie-canvas" loop autoplay />
         </div>
       </div>
 

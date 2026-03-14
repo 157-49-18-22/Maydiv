@@ -2,33 +2,34 @@
   --font-family: 'coco', sans-serif;
 }
 
-body,
 html,
+body {
+  margin: 0;
+  padding: 0;
+  /* Removed overflow-x: hidden as it breaks position: sticky */
+}
+
+/* Use clip instead to prevent horizontal scroll without breaking sticky */
+.services-container {
+  overflow-x: clip;
+}
+
 * {
+  box-sizing: border-box;
   font-family: var(--font-family) !important;
 }
 
 body {
   margin: 0px;
-
-
-
-
 }
 
 .header-container {
   background: #0a0a0a;
   color: #fff;
-
   padding-bottom: 40px;
   position: relative;
   overflow: hidden;
-  width: 100vw;
-  max-width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  width: 100%;
   box-sizing: border-box;
   z-index: 1000;
 }
@@ -46,7 +47,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   z-index: 2000;
   background: transparent;
   transition: background 0.3s, box-shadow 0.3s;
@@ -414,25 +415,25 @@ body {
   letter-spacing: -1px;
 }
 
-.projects-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 100px;
-  /* Increased gap for better scrolling sensation */
-  max-width: 650px;
-  margin: 0 auto;
-  padding-bottom: 200px;
-}
-
 .project-card-link {
   text-decoration: none !important;
   color: inherit !important;
-  display: block;
+  display: flex;
+  justify-content: center;
   border: none !important;
   position: sticky;
-  top: 100px;
-  /* Adjust this value to set where cards stop at the top */
+  top: 120px;
+  margin-bottom: 50vh;
   z-index: 1;
+  width: 100%; /* Ensure container takes full width */
+}
+
+/* Ensure the grid doesn't clip the sticky cards */
+.projects-grid {
+  display: block; /* Simpler than flex for sticky stacking */
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
 }
 
 /* Add slight scaling/shadow effect as they stack */
@@ -501,6 +502,8 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.03);
   display: flex;
   flex-direction: column;
+  width: 100%; /* Force consistent width */
+  max-width: 650px; /* Keep them compact as requested earlier */
 }
 
 .new-project-card:hover {
@@ -590,18 +593,22 @@ body {
 .projects-hero-flex {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
   padding: 120px 40px 60px;
   background: transparent;
-  gap: 40px;
+  gap: 80px;
   position: relative;
+  text-align: left;
 }
 
 .projects-hero-content {
-  flex: 1.5;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .projects-hero-title {
@@ -642,6 +649,13 @@ body {
   flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.hero-lottie-canvas {
+  width: 320px;
+  height: 320px;
+  max-width: 100%;
 }
 
 /* Discuss and Footer alignment */
@@ -670,6 +684,11 @@ body {
     flex-direction: column;
     padding: 100px 24px 40px;
     text-align: center;
+    gap: 40px;
+  }
+
+  .projects-hero-content {
+    align-items: center;
   }
 
   .projects-hero-desc {
@@ -927,13 +946,33 @@ body {
 
 @media (max-width: 480px) {
   .tools-grid {
-    grid-template-columns: 1fr;
-    max-width: 280px;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
+    gap: 12px;
+  }
+
+  .tool-card {
+    padding: 20px 10px;
+    border-radius: 40px;
+  }
+
+  .tool-icon-box {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+
+  .tool-name {
+    font-size: 0.95rem;
+  }
+
+  .tool-desc {
+    font-size: 0.7rem;
   }
 
   .tool-card:nth-child(odd),
   .tool-card:nth-child(even) {
-    transform: translateY(50px);
+    transform: translateY(40px);
     /* Simpler animation for mobile */
   }
 }

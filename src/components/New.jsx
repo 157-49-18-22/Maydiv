@@ -3,14 +3,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
-import { FaGithub,FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import 'swiper/css/autoplay';
+import { FaGithub,FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes, FaChevronDown, FaReact, FaNodeJs, FaSearch, FaSitemap, FaPencilRuler, FaCheckCircle } from 'react-icons/fa';
+import { SiMysql, SiNextdotjs, SiTailwindcss, SiMongodb, SiFirebase, SiFigma } from 'react-icons/si';
+import { HiArrowUpRight } from "react-icons/hi2";
 import './New.css';
 import Discuss from './Discuss';
 import Footer from './Footer';
@@ -161,17 +156,70 @@ const projects = [
   },
 ];
 
+const masteredTools = [
+  { name: 'React', desc: 'Frontend Framework', icon: <FaReact /> },
+  { name: 'Node.js', desc: 'Backend Runtime', icon: <FaNodeJs /> },
+  { name: 'MySQL', desc: 'Database Management', icon: <SiMysql /> },
+  { name: 'Next.js', desc: 'Full-stack Framework', icon: <SiNextdotjs /> },
+  { name: 'Tailwind', desc: 'CSS Framework', icon: <SiTailwindcss /> },
+  { name: 'MongoDB', desc: 'NoSQL Database', icon: <SiMongodb /> },
+  { name: 'Firebase', desc: 'BaaS Platform', icon: <SiFirebase /> },
+  { name: 'Figma', desc: 'Design Tool', icon: <SiFigma /> },
+];
+
+const workProcess = [
+  {
+    num: '01.',
+    title: 'Discovery Session',
+    desc: 'Understanding your goals and requirements specialized to your project.',
+    icon: <FaSearch />
+  },
+  {
+    num: '02.',
+    title: 'Strategy Mapping',
+    desc: 'Creating a roadmap and defining the architecture of your solution.',
+    icon: <FaSitemap />
+  },
+  {
+    num: '03.',
+    title: 'Prototype Creation',
+    desc: 'Designing interactive mockups to visualize the user experience.',
+    icon: <FaPencilRuler />
+  },
+  {
+    num: '04.',
+    title: 'Final Delivery',
+    desc: 'Polishing and deploying the final product for your users.',
+    icon: <FaRocket />
+  }
+];
+
 export default function New() {
-  const [centerCardVisible, setCenterCardVisible] = useState(false);
-  const [sideCardsVisible, setSideCardsVisible] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerDropdownOpen, setDrawerDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
-  const [slidesPerView, setSlidesPerView] = useState(3);
-  const [spaceBetween, setSpaceBetween] = useState(0);
   const dropdownTimeout = useRef(null);
+  const toolsRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const toolCards = document.querySelectorAll('.tool-card');
+    toolCards.forEach(card => observer.observe(card));
+
+    const processCards = document.querySelectorAll('.process-card');
+    processCards.forEach(card => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && !sessionStorage.getItem('newReloaded')) {
@@ -189,19 +237,9 @@ export default function New() {
   }, []);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setCenterCardVisible(true), 200);
-    const timer2 = setTimeout(() => setSideCardsVisible(true), 600);
-    // Responsive slidesPerView
+    // Responsive check
     const handleResize = () => {
-      if (window.innerWidth <= 480) {
-        setIsMobile(true);
-        setSlidesPerView(1.2);
-        setSpaceBetween(12);
-      } else {
-        setIsMobile(false);
-        setSlidesPerView(3);
-        setSpaceBetween(0);
-      }
+      setIsMobile(window.innerWidth <= 480);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -209,8 +247,6 @@ export default function New() {
     const onScroll = () => setNavScrolled(window.scrollY > 10);
     window.addEventListener('scroll', onScroll);
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', onScroll);
     };
@@ -289,68 +325,78 @@ export default function New() {
       </div>
 
       <div className="projects-page">
-        <h1 className="projects-title">our Projects</h1>
-        <Swiper
-          effect={'coverflow'}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={slidesPerView}
-          spaceBetween={spaceBetween}
-          coverflowEffect={{
-            rotate: 25,
-            stretch: 0,
-            depth: 180,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          pagination={{ clickable: true }}
-          navigation={true}
-          loop={true}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true
-          }}
-          modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-          className="projects-list"
-        >
+        <h1 className="projects-title">Our Projects</h1>
+        <div className="projects-grid">
           {projects.map((project, idx) => (
-            <SwiperSlide key={idx}>
-              <a 
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-card-link"
-              >
-                <div 
-                  className={`project-card ${centerCardVisible && idx === 0 ? 'show-center' : ''} ${sideCardsVisible && idx !== 0 ? 'show-side' : ''}`}
-                >
+            <a 
+              key={idx}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card-link"
+            >
+              <div className="new-project-card">
+                <div className="project-image-container">
                   {project.image && (
                     <img src={project.image} alt={project.title} className="project-image" />
                   )}
-                  <div className="card-separator"></div>
-                  <h2 className="project-name">{project.title}</h2>
-                  <div className="project-dates">
-                    <span className={`project-status ${project.status === 'Completed' ? 'completed' : 'inprogress'}`}>{project.status}</span>
+                </div>
+                <div className="project-info">
+                  <div className="project-text">
+                    <h2 className="project-name">{project.title}</h2>
+                    <p className="project-categories">
+                      {project.technologies.join(', ')}
+                    </p>
                   </div>
-                  <div className="project-desc">{project.description}</div>
-                  <div className="project-tech">
-                    {project.technologies.map((tech, i) => (
-                      <span className="tech-badge" key={i}>{tech}</span>
-                    ))}
-                  </div>
-                  <div className="project-link fancy">
-                    <span className="top-key"></span>
-                    <span className="text">Visit Website</span>
-                    <span className="bottom-key-1"></span>
-                    <span className="bottom-key-2"></span>
+                  <div className="project-arrow">
+                    <HiArrowUpRight />
                   </div>
                 </div>
-              </a>
-            </SwiperSlide>
+              </div>
+            </a>
           ))}
-        </Swiper>
+        </div>
       </div>
+      <div className="tools-section">
+        <h2 className="tools-title">Mastered <span>Tools</span></h2>
+        <p className="tools-subtitle">Proficient in industry-standard technologies <br /> and design tools.</p>
+        
+        <div className="tools-grid">
+          {masteredTools.map((tool, idx) => (
+            <div key={idx} className="tool-card">
+              <div className="tool-icon-box">
+                {tool.icon}
+              </div>
+              <div className="tool-info">
+                <h3 className="tool-name">{tool.name}</h3>
+                <p className="tool-desc">{tool.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="process-section">
+        <h2 className="process-title">Work <span>Process</span></h2>
+        <p className="process-subtitle">A glimpse into our collaborative and iterative development process.</p>
+        
+        <div className="process-grid">
+          {workProcess.map((step, idx) => (
+            <div key={idx} className="process-card">
+              <div className="process-card-header">
+                <div className="process-icon-box">
+                  {step.icon}
+                </div>
+                <div className="process-number">{step.num}</div>
+              </div>
+              <div className="process-card-footer">
+                <h3 className="process-card-title">{step.title}</h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <Discuss />
       <Footer />
     </div>

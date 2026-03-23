@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { FaGithub,FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes, FaChevronDown, FaReact, FaNodeJs, FaSearch, FaSitemap, FaPencilRuler, FaCheckCircle } from 'react-icons/fa';
+import { FaGithub, FaInstagram, FaFacebook, FaRocket, FaPhone, FaSync, FaCode, FaPalette, FaBullhorn, FaMobileAlt, FaBrain, FaBars, FaTimes, FaChevronDown, FaReact, FaNodeJs, FaSearch, FaSitemap, FaPencilRuler, FaCheckCircle } from 'react-icons/fa';
 import { SiMysql, SiNextdotjs, SiTailwindcss, SiMongodb, SiFirebase, SiFigma } from 'react-icons/si';
 import { HiArrowUpRight } from "react-icons/hi2";
 import './New.css';
@@ -14,26 +14,7 @@ import newAnimation from '../../public/new.json';
 import MobileDrawer from './MobileDrawer';
 
 const projects = [
-  {
-    title: 'JMS CRM',
-    image: '/Jms.png',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
-    link: 'https://maytm.online/dashboard/admin',
-    startDate: 'Jan 2025',
-    endDate: 'Mar 2025',
-    description: 'A comprehensive CRM solution for managing customer relationships, sales, and business processes.',
-    status: 'Completed',
-  },
-  {
-    title: 'Maydiv CRM',
-    image: '/Crm.png',
-    technologies: ['React', 'Next.js', 'Tailwind CSS', 'Node.js'],
-    link: 'https://crmfrontend-kappa.vercel.app/',
-    startDate: 'Feb 2025',
-    endDate: 'Apr 2025',
-    description: 'Custom CRM platform built with modern technologies for efficient business management.',
-    status: 'Completed',
-  },
+
   {
     title: 'TVARA India',
     image: '/Tvara.png',
@@ -269,25 +250,25 @@ export default function New() {
       <nav className={`header-nav${navScrolled ? ' scrolled' : ''}`}>
         <div className="header-logo">
           <Link href="/">
-          <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized />
+            <Image src="/logo.png" alt="MayDiv Logo" width={150} height={50} quality={100} unoptimized />
           </Link>
         </div>
         {/* Desktop nav links */}
         {!isMobile && (
-        <ul className="header-links">
-        <li><Link href="/">Home</Link></li>
+          <ul className="header-links">
+            <li><Link href="/">Home</Link></li>
             <li className="dropdown"
-                onMouseEnter={handleDropdownEnter}
-                onMouseLeave={handleDropdownLeave}
-                onFocus={handleDropdownEnter}
-                onBlur={handleDropdownLeave}
+              onMouseEnter={handleDropdownEnter}
+              onMouseLeave={handleDropdownLeave}
+              onFocus={handleDropdownEnter}
+              onBlur={handleDropdownLeave}
             >
-              <span className="dropdown-toggle" style={{marginBottom: '10px'}}>Services</span>
-              <ul className="dropdown-menu" style={{display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-43%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)'}}>
-              <Link href="/web-development" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
-   <Link href="/apps/ui-ux" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>                  <Link href="/marketing" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
-                  <Link href="/app-development" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
-                  <Link href="/ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
+              <span className="dropdown-toggle" style={{ marginBottom: '10px' }}>Services</span>
+              <ul className="dropdown-menu" style={{ display: dropdownOpen ? 'flex' : 'none', opacity: dropdownOpen ? 1 : 0, pointerEvents: dropdownOpen ? 'auto' : 'none', transform: dropdownOpen ? 'translateX(-43%) translateY(0) scale(1)' : 'translateX(-50%) translateY(10px) scale(0.95)' }}>
+                <Link href="/web-development" onClick={() => setDrawerOpen(false)}><span><FaCode className="dropdown-icon" /> Web Development</span></Link>
+                <Link href="/apps/ui-ux" onClick={() => setDrawerOpen(false)}><span><FaPalette className="dropdown-icon" /> UI/UX Design</span></Link>                  <Link href="/marketing" onClick={() => setDrawerOpen(false)}><span><FaBullhorn className="dropdown-icon" /> Social Media and Marketing</span></Link>
+                <Link href="/app-development" onClick={() => setDrawerOpen(false)}><span><FaMobileAlt className="dropdown-icon" /> App Development</span></Link>
+                <Link href="/ai" onClick={() => setDrawerOpen(false)}><span><FaBrain className="dropdown-icon" /> Artificial Intelligence</span></Link>
               </ul>
             </li>
             <li><Link href="/projects"><span>Projects</span></Link></li>
@@ -306,10 +287,10 @@ export default function New() {
           isMobile={isMobile}
         />
         <div className="header-socials">
-        <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-            <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
-            <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-          </div>
+          <a href="https://www.instagram.com/maydiv_infotech?igsh=YjE4YnB5NmJ0MzFy" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+          <a href="https://www.facebook.com/profile.php?id=615720000000000" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+          <a href="https://github.com/" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+        </div>
       </nav>
 
       {/* Projects Hero Section */}
@@ -331,7 +312,7 @@ export default function New() {
         <h1 className="projects-title">Our Projects</h1>
         <div className="projects-grid">
           {projects.map((project, idx) => (
-            <a 
+            <a
               key={idx}
               href={project.link}
               target="_blank"
@@ -363,7 +344,7 @@ export default function New() {
       <div className="tools-section">
         <h2 className="tools-title">Mastered <span>Tools</span></h2>
         <p className="tools-subtitle">Proficient in industry-standard technologies <br /> and design tools.</p>
-        
+
         <div className="tools-grid">
           {masteredTools.map((tool, idx) => (
             <div key={idx} className="tool-card">
@@ -382,7 +363,7 @@ export default function New() {
       <div className="process-section">
         <h2 className="process-title">Work <span>Process</span></h2>
         <p className="process-subtitle">A glimpse into our collaborative and iterative development process.</p>
-        
+
         <div className="process-grid">
           {workProcess.map((step, idx) => (
             <div key={idx} className="process-card">

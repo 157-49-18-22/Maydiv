@@ -124,10 +124,8 @@ export default function ResumesDashboard() {
     );
   });
 
-  const getResumeUrl = (filename) => {
-    if (!filename || filename === 'No file uploaded') return null;
-    return `https://maydiv.com/uploads/resumes/${filename}`;
-  };
+  const getViewUrl = (id) => `/api/admin/resumes/view?id=${id}`;
+  const getDownloadUrl = (id) => `/api/admin/resumes/view?id=${id}&download=true`;
 
   // --- LOGIN SCREEN ---
   if (!isAuthenticated) {
@@ -588,10 +586,10 @@ export default function ResumesDashboard() {
                         </td>
                         <td style={{ padding: '1.2rem', textAlign: 'right' }}>
                           <div style={{ display: 'inline-flex', gap: '0.5rem', alignItems: 'center' }}>
-                            {resumeUrl ? (
+                            {app.resume_file && app.resume_file !== 'No file uploaded' ? (
                               <>
                                 <a
-                                  href={resumeUrl}
+                                  href={getViewUrl(app.id)}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   style={{
@@ -613,7 +611,7 @@ export default function ResumesDashboard() {
                                   <FaEye /> View
                                 </a>
                                 <a
-                                  href={resumeUrl}
+                                  href={getDownloadUrl(app.id)}
                                   download
                                   style={{
                                     background: 'rgba(46, 213, 115, 0.15)',

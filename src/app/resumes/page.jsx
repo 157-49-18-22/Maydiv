@@ -27,6 +27,7 @@ const ADMIN_CREDENTIALS = {
 };
 
 export default function ResumesDashboard() {
+  const [mounted, setMounted] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
@@ -39,11 +40,16 @@ export default function ResumesDashboard() {
   const [actionMessage, setActionMessage] = useState({ type: '', text: '' });
 
   useEffect(() => {
-    const savedAuth = localStorage.getItem('maydiv_resume_auth');
-    if (savedAuth === 'true') {
-      setIsAuthenticated(true);
-      fetchApplications();
-    } else {
+    setMounted(true);
+    try {
+      const savedAuth = localStorage.getItem('maydiv_resume_auth');
+      if (savedAuth === 'true') {
+        setIsAuthenticated(true);
+        fetchApplications();
+      } else {
+        setLoading(false);
+      }
+    } catch (e) {
       setLoading(false);
     }
   }, []);
@@ -58,7 +64,9 @@ export default function ResumesDashboard() {
       passwordInput === ADMIN_CREDENTIALS.password
     ) {
       setIsAuthenticated(true);
-      localStorage.setItem('maydiv_resume_auth', 'true');
+      try {
+        localStorage.setItem('maydiv_resume_auth', 'true');
+      } catch (e) {}
       fetchApplications();
     } else {
       setLoginError('Invalid username or password. Please check your credentials.');
@@ -67,7 +75,9 @@ export default function ResumesDashboard() {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('maydiv_resume_auth');
+    try {
+      localStorage.removeItem('maydiv_resume_auth');
+    } catch (e) {}
     setUsernameInput('');
     setPasswordInput('');
   };
@@ -117,15 +127,31 @@ export default function ResumesDashboard() {
   const filteredApplications = applications.filter(app => {
     const q = searchQuery.toLowerCase();
     return (
-      app.name?.toLowerCase().includes(q) ||
-      app.email?.toLowerCase().includes(q) ||
-      app.message?.toLowerCase().includes(q) ||
-      app.resume_file?.toLowerCase().includes(q)
+      (app.name && app.name.toLowerCase().includes(q)) ||
+      (app.email && app.email.toLowerCase().includes(q)) ||
+      (app.message && app.message.toLowerCase().includes(q)) ||
+      (app.resume_file && app.resume_file.toLowerCase().includes(q))
     );
   });
 
   const getViewUrl = (id) => `/api/admin/resumes/view?id=${id}`;
   const getDownloadUrl = (id) => `/api/admin/resumes/view?id=${id}&download=true`;
+
+  if (!mounted) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        background: '#090a0f',
+        color: '#fff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: "'Segoe UI', Roboto, sans-serif"
+      }}>
+        <div style={{ textAlign: 'center', color: '#8892b0' }}>Loading Resume Portal...</div>
+      </div>
+    );
+  }
 
   // --- LOGIN SCREEN ---
   if (!isAuthenticated) {
@@ -335,7 +361,7 @@ export default function ResumesDashboard() {
               cursor: 'pointer'
             }}
           >
-            <FaSync style={{ animation: loading ? 'spin 1s linear infinite' : 'none' }} />
+            <FaSync />
             Refresh
           </button>
 
@@ -497,7 +523,7 @@ export default function ResumesDashboard() {
                 {loading ? (
                   <tr>
                     <td colSpan="6" style={{ padding: '3rem', textAlign: 'center', color: '#8892b0' }}>
-                      <FaSync style={{ animation: 'spin 1s linear infinite', fontSize: '1.5rem', marginBottom: '0.8rem' }} />
+                      <div style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>⏳</div>
                       <div>Loading applications from database...</div>
                     </td>
                   </tr>
@@ -509,7 +535,6 @@ export default function ResumesDashboard() {
                   </tr>
                 ) : (
                   filteredApplications.map((app) => {
-                    const resumeUrl = getResumeUrl(app.resume_file);
                     const isDeleting = deleteLoadingId === app.id;
 
                     return (
@@ -520,8 +545,6 @@ export default function ResumesDashboard() {
                           transition: 'background 0.2s ease',
                           opacity: isDeleting ? 0.5 : 1
                         }}
-                        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)'}
-                        onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                       >
                         <td style={{ padding: '1.2rem', color: '#a5b4fc', fontWeight: '700' }}>
                           #{app.id}
@@ -663,13 +686,6 @@ export default function ResumesDashboard() {
           </div>
         </div>
       </main>
-
-      <style jsx global>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 }

@@ -21,6 +21,10 @@ const Career = () => {
   const [navScrolled, setNavScrolled] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedFileName, setSelectedFileName] = useState('');
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [resumeFile, setResumeFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
   const dropdownTimeout = useRef(null);
 
   useEffect(() => {
@@ -48,52 +52,20 @@ const Career = () => {
   const careerData = [
     {
       id: 1,
-      title: "Frontend Developer (React.js)",
-      description: "Build responsive and high-performance web applications with modern frameworks.",
+      title: "Business Development Executive (Sales)",
+      description: "Drive business growth, identify new prospective clients, and build strong client relationships.",
       image: "/Rectangle 2.png",
-      category: "Development",
+      category: "Sales",
       location: "Remote / On-site",
       type: "Full-time",
-      experience: "2-4 years",
-      isReversed: false
+      experience: "1-3 years"
     },
     {
       id: 2,
-      title: "Backend Developer (Node.js / Python)",
-      description: "Develop scalable server-side applications and APIs to support our products.",
-      image: "/Rectangle 2 (1).png",
-      category: "Development",
-      location: "Remote / On-site",
-      type: "Full-time",
-      experience: "2-4 years",
-      isReversed: true
-    },
-    {
-      id: 3,
-      title: "Digital Marketing Specialist",
-      description: "Create campaigns, manage social media, and drive brand growth.",
+      title: "Performance & Growth Marketing Specialist",
+      description: "Plan and execute targeted ad campaigns, optimize conversion funnels, and drive inbound leads.",
       image: "/im89.png",
       category: "Marketing",
-      location: "Remote / On-site",
-      type: "Full-time",
-      experience: "1-3 years"
-    },
-    {
-      id: 4,
-      title: "Content Writer / Copywriter",
-      description: "Craft compelling content for websites, blogs, and social media that resonates with our audience.",
-      image: "/img (1).png",
-      category: "Content",
-      location: "Remote / On-site",
-      type: "Full-time",
-      experience: "1-3 years"
-    },
-    {
-      id: 5,
-      title: "Graphic Designer",
-      description: "Create visual assets for digital campaigns, branding, and user interfaces.",
-      image: "/img (2).png",
-      category: "Design",
       location: "Remote / On-site",
       type: "Full-time",
       experience: "1-3 years"
@@ -115,12 +87,80 @@ const Career = () => {
     setActiveFilter(filter);
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setSelectedFileName(file.name);
+      setResumeFile(file);
     } else {
       setSelectedFileName('');
+      setResumeFile(null);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: '', message: '' });
+
+    try {
+      const data = new FormData();
+      data.append('name', formData.name);
+      data.append('email', formData.email);
+      data.append('message', formData.message);
+      if (resumeFile) {
+        data.append('resume', resumeFile);
+      }
+
+      let response;
+      try {
+        response = await fetch('/career.php', {
+          method: 'POST',
+          body: data
+        });
+        if (!response.ok && response.status === 404) {
+          response = await fetch('/api/career', {
+            method: 'POST',
+            body: data
+          });
+        }
+      } catch (err) {
+        response = await fetch('/api/career', {
+          method: 'POST',
+          body: data
+        });
+      }
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: result.message || 'Thank you! Your application has been submitted successfully.'
+        });
+        setFormData({ name: '', email: '', message: '' });
+        setResumeFile(null);
+        setSelectedFileName('');
+        const fileInput = document.getElementById('resume-upload');
+        if (fileInput) fileInput.value = '';
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: result.error || 'Failed to submit application. Please try again.'
+        });
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: 'Something went wrong. Please check your connection and try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -289,18 +329,35 @@ const Career = () => {
           
           <form 
             className="contact-form-wrapper"
-            action="https://getform.io/f/amdyxyyb"
-            method="POST"
-            encType="multipart/form-data"
+            onSubmit={handleSubmit}
           >
+            {submitStatus.message && (
+              <div style={{
+                padding: '0.8rem 1rem',
+                borderRadius: '8px',
+                fontSize: '0.9rem',
+                marginBottom: '0.5rem',
+                backgroundColor: submitStatus.type === 'success' ? 'rgba(46, 213, 115, 0.15)' : 'rgba(255, 71, 87, 0.15)',
+                color: submitStatus.type === 'success' ? '#2ed573' : '#ff4757',
+                border: submitStatus.type === 'success' ? '1px solid #2ed573' : '1px solid #ff4757',
+                textAlign: 'center'
+              }}>
+                {submitStatus.type === 'success' ? '✅ ' : '⚠️ '}
+                {submitStatus.message}
+              </div>
+            )}
+
             <div className="form-field">
               <FaBriefcase className="field-icon" />
               <input 
                 type="text" 
                 name="name"
+                value={formData.name}
+                onChange={handleInputChange}
                 placeholder="Name" 
                 className="contact-input" 
                 required 
+                disabled={isSubmitting}
               />
             </div>
             
@@ -309,9 +366,12 @@ const Career = () => {
               <input 
                 type="email" 
                 name="email"
+                value={formData.email}
+                onChange={handleInputChange}
                 placeholder="Email" 
                 className="contact-input" 
                 required 
+                disabled={isSubmitting}
               />
             </div>
             
@@ -319,9 +379,12 @@ const Career = () => {
               <FaBriefcase className="field-icon" />
               <textarea 
                 name="message"
+                value={formData.message}
+                onChange={handleInputChange}
                 placeholder="Message" 
                 className="contact-textarea"
                 required
+                disabled={isSubmitting}
               ></textarea>
             </div>
             
@@ -334,13 +397,21 @@ const Career = () => {
                 className="contact-file-input" 
                 id="resume-upload"
                 onChange={handleFileChange}
+                disabled={isSubmitting}
               />
               <label htmlFor="resume-upload" className="file-label">
                 {selectedFileName ? `📄 ${selectedFileName}` : 'Upload Resume/CV'}
               </label>
             </div>
             
-            <button type="submit" className="contact-send-btn">Send</button>
+            <button 
+              type="submit" 
+              className="contact-send-btn"
+              disabled={isSubmitting}
+              style={{ opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
+            >
+              {isSubmitting ? 'Submitting...' : 'Send'}
+            </button>
           </form>
           
           <div className="company-contact-info">
@@ -356,7 +427,7 @@ const Career = () => {
               <FaBriefcase className="detail-icon" />
               <div className="detail-content">
                 <span className="detail-label">Email</span>
-                <span className="detail-text">operations@maydiv.com</span>
+                <span className="detail-text">career@maydiv.com</span>
               </div>
             </div>
 

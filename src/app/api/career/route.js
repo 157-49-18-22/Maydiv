@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
+import os from 'os';
+import { writeFile, mkdir } from 'fs/promises';
 
 export async function POST(request) {
   try {
@@ -19,20 +20,49 @@ export async function POST(request) {
 
     let savedFileName = 'No file uploaded';
     if (resume && typeof resume === 'object' && resume.size > 0) {
-      const bytes = await resume.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-
-      const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'resumes');
-      await mkdir(uploadDir, { recursive: true });
-
       const sanitizedName = (resume.name || 'resume.pdf').replace(/[^a-zA-Z0-9.-]/g, '_');
       savedFileName = `${Date.now()}_${sanitizedName}`;
-      const filePath = path.join(uploadDir, savedFileName);
 
-      await writeFile(filePath, buffer);
+      try {
+        // Handle serverless (Vercel/Lambda) vs local environment
+        const uploadDir = path.join(os.tmpdir(), 'uploads', 'resumes');
+        await mkdir(uploadDir, { recursive: true });
+        const buffer = Buffer.from(await resume.arrayBuffer());
+        await writeFile(path.join(uploadDir, savedFileName), buffer);
+      } catch (fileErr) {
+        console.warn('Local disk write skipped in serverless environment:', fileErr.message);
+      }
     }
 
-    // Try inserting into MySQL Database
+    // Forward to Hostinger career.php to save in Hostinger MySQL & Hostinger uploads folder
+    try {
+      const hostingerFormData = new FormData();
+      hostingerFormData.append('name', name);
+      hostingerFormData.append('email', email);
+      hostingerFormData.append('message', message);
+      if (resume && typeof resume === 'object' && resume.size > 0) {
+        hostingerFormData.append('resume', resume);
+      }
+
+      const phpRes = await fetch('https://maydiv.com/career.php', {
+        method: 'POST',
+        body: hostingerFormData,
+      });
+
+      if (phpRes.ok) {
+        const phpData = await phpRes.json();
+        if (phpData.success) {
+          return NextResponse.json({
+            success: true,
+            message: phpData.message || 'Thank you! Your application has been submitted successfully.'
+          });
+        }
+      }
+    } catch (forwardErr) {
+      console.warn('Notice when forwarding to Hostinger career.php:', forwardErr.message);
+    }
+
+    // Direct MySQL connection if running on same server
     try {
       const mysql = await import('mysql2/promise');
       const connection = await mysql.createConnection({
@@ -48,7 +78,7 @@ export async function POST(request) {
       );
       await connection.end();
     } catch (dbErr) {
-      console.warn('MySQL direct connection warning (saving locally succeeded):', dbErr.message);
+      console.warn('Direct MySQL note:', dbErr.message);
     }
 
     return NextResponse.json({

@@ -123,21 +123,24 @@ const Career = () => {
           method: 'POST',
           body: data
         });
-        if (!response.ok && response.status === 404) {
-          response = await fetch('/api/career', {
-            method: 'POST',
-            body: data
-          });
-        }
       } catch (err) {
+        console.warn('Direct /career.php fetch failed, trying /api/career:', err);
         response = await fetch('/api/career', {
           method: 'POST',
           body: data
         });
       }
 
-      const result = await response.json();
-      if (result.success) {
+      let result;
+      const text = await response.text();
+      try {
+        result = JSON.parse(text);
+      } catch (jsonErr) {
+        console.error('Server returned non-JSON response:', text);
+        throw new Error(text.slice(0, 150) || 'Server returned invalid response');
+      }
+
+      if (response.ok && result.success) {
         setSubmitStatus({
           type: 'success',
           message: result.message || 'Thank you! Your application has been submitted successfully.'
@@ -154,10 +157,10 @@ const Career = () => {
         });
       }
     } catch (error) {
-      console.error('Submission error:', error);
+      console.error('Submission error details:', error);
       setSubmitStatus({
         type: 'error',
-        message: 'Something went wrong. Please check your connection and try again.'
+        message: error.message || 'Something went wrong. Please check your connection and try again.'
       });
     } finally {
       setIsSubmitting(false);

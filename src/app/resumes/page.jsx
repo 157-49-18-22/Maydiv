@@ -209,11 +209,11 @@ export default function ResumesDashboard() {
               <Image 
                 src="/logo.png" 
                 alt="MayDiv Logo" 
-                width={170} 
-                height={48} 
+                width={240} 
+                height={75} 
                 priority 
                 unoptimized 
-                style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
+                style={{ height: '56px', width: 'auto', objectFit: 'contain' }}
               />
             </Link>
           </div>
@@ -327,11 +327,11 @@ export default function ResumesDashboard() {
             <Image 
               src="/logo.png" 
               alt="MayDiv Logo" 
-              width={160} 
-              height={45} 
+              width={180} 
+              height={55} 
               priority 
               unoptimized 
-              style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+              style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
             />
           </Link>
           <div className="resume-timer-badge" title="Auto logout in 30 minutes for security">

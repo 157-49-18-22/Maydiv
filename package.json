@@ -12,6 +12,7 @@
     "@lottiefiles/react-lottie-player": "^3.6.0",
     "framer-motion": "^12.36.0",
     "lottie-react": "^2.4.1",
+    "mysql2": "^3.24.4",
     "next": "^16.1.6",
     "react": "^19.2.4",
     "react-countup": "^6.5.3",

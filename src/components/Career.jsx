@@ -119,13 +119,20 @@ const Career = () => {
 
       let response;
       try {
-        response = await fetch('/career.php', {
+        response = await fetch('/api/career', {
           method: 'POST',
           body: data
         });
+
+        if (!response.ok && (response.status === 404 || response.status === 405)) {
+          response = await fetch('/career.php', {
+            method: 'POST',
+            body: data
+          });
+        }
       } catch (err) {
-        console.warn('Direct /career.php fetch failed, trying /api/career:', err);
-        response = await fetch('/api/career', {
+        console.warn('POST to /api/career failed, trying /career.php:', err);
+        response = await fetch('/career.php', {
           method: 'POST',
           body: data
         });

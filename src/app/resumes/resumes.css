@@ -39,7 +39,7 @@ body {
 }
 
 /* ==========================================================================
-   LOGIN SCREEN (PROPORTIONAL & LUXURY)
+   LOGIN SCREEN
    ========================================================================== */
 
 .resume-login-wrapper {
@@ -55,18 +55,6 @@ body {
     #06080d;
   position: relative;
   overflow: hidden;
-}
-
-.resume-login-wrapper::before {
-  content: '';
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(255, 59, 255, 0.06) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
 }
 
 .resume-login-card {
@@ -113,11 +101,6 @@ body {
   max-width: 220px;
   object-fit: contain;
   filter: drop-shadow(0 4px 15px rgba(255, 59, 255, 0.25));
-  transition: transform 0.3s ease;
-}
-
-.resume-login-logo img:hover {
-  transform: scale(1.04);
 }
 
 .resume-login-badge {
@@ -165,7 +148,6 @@ body {
   font-weight: 600;
   color: #cbd5e1;
   margin-bottom: 0.5rem;
-  letter-spacing: 0.2px;
 }
 
 .resume-input-box {
@@ -225,12 +207,8 @@ body {
   box-shadow: 0 12px 35px -4px rgba(255, 59, 255, 0.65);
 }
 
-.resume-btn-submit:active {
-  transform: translateY(0);
-}
-
 /* ==========================================================================
-   DASHBOARD VIEW
+   DASHBOARD HEADER & STATS
    ========================================================================== */
 
 .resume-dash-header {
@@ -253,12 +231,6 @@ body {
   gap: 1.5rem;
 }
 
-.resume-header-logo img {
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-}
-
 .resume-timer-badge {
   background: rgba(16, 185, 129, 0.12);
   border: 1px solid rgba(16, 185, 129, 0.35);
@@ -270,7 +242,6 @@ body {
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
 }
 
 .resume-stats-grid {
@@ -295,7 +266,7 @@ body {
 .resume-stat-card:hover {
   border-color: rgba(255, 59, 255, 0.35);
   transform: translateY(-4px);
-  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 59, 255, 0.1);
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
 .resume-stat-number {
@@ -330,8 +301,130 @@ body {
 }
 
 /* ==========================================================================
-   TABLE & ACTION BUTTONS
+   FILTER & BULK ACTIONS TOOLBAR
    ========================================================================== */
+
+.resume-toolbar-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.resume-search-bar {
+  flex: 1;
+  min-width: 280px;
+  background: rgba(18, 22, 34, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 0.85rem 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.resume-filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.resume-select-filter {
+  background: rgba(18, 22, 34, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.resume-select-filter:hover, .resume-select-filter:focus {
+  border-color: #FF3BFF;
+}
+
+.resume-date-input {
+  background: rgba(18, 22, 34, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.resume-bulk-bar {
+  background: linear-gradient(135deg, rgba(99, 32, 238, 0.25), rgba(255, 59, 255, 0.15));
+  border: 1px solid rgba(255, 59, 255, 0.4);
+  border-radius: 16px;
+  padding: 0.9rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  animation: cardFadeIn 0.3s ease;
+}
+
+.btn-bulk-delete {
+  background: rgba(244, 63, 94, 0.2);
+  border: 1px solid #f43f5e;
+  color: #fda4af;
+  padding: 0.55rem 1.2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.86rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-bulk-delete:hover {
+  background: #f43f5e;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.5);
+}
+
+.btn-cleanup-trigger {
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.35);
+  color: #fda4af;
+  padding: 0.8rem 1.2rem;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-cleanup-trigger:hover {
+  background: #f43f5e;
+  color: #fff;
+}
+
+/* ==========================================================================
+   CHECKBOX & TABLE
+   ========================================================================== */
+
+.custom-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #FF3BFF;
+  cursor: pointer;
+}
 
 .resume-table-card {
   background: rgba(12, 16, 26, 0.8);
@@ -355,15 +448,19 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.9px;
-  padding: 1.2rem 1.5rem;
+  padding: 1.2rem 1.2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .resume-table td {
-  padding: 1.3rem 1.5rem;
+  padding: 1.2rem 1.2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   vertical-align: middle;
   font-size: 0.92rem;
+}
+
+.resume-table tr.selected td {
+  background: rgba(99, 32, 238, 0.08);
 }
 
 .resume-table tr:hover td {
@@ -384,7 +481,6 @@ body {
   font-weight: 700;
   color: #ffffff;
   font-size: 1rem;
-  letter-spacing: -0.2px;
 }
 
 .resume-candidate-email {
@@ -417,28 +513,19 @@ body {
   scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
 
-.resume-message-bubble::-webkit-scrollbar {
-  width: 4px;
-}
-
-.resume-message-bubble::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 4px;
-}
-
 /* Action Buttons */
 .btn-action-view {
   background: rgba(56, 189, 248, 0.12);
   color: #38bdf8;
   border: 1.5px solid rgba(56, 189, 248, 0.4);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.9rem;
   border-radius: 10px;
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 700;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   transition: all 0.25s ease;
   cursor: pointer;
 }
@@ -446,7 +533,7 @@ body {
 .btn-action-view:hover {
   background: #38bdf8;
   color: #06080d;
-  box-shadow: 0 0 18px rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
   transform: translateY(-2px);
 }
 
@@ -454,14 +541,14 @@ body {
   background: rgba(16, 185, 129, 0.12);
   color: #10b981;
   border: 1.5px solid rgba(16, 185, 129, 0.4);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.9rem;
   border-radius: 10px;
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 700;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   transition: all 0.25s ease;
   cursor: pointer;
 }
@@ -469,7 +556,7 @@ body {
 .btn-action-download:hover {
   background: #10b981;
   color: #06080d;
-  box-shadow: 0 0 18px rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
   transform: translateY(-2px);
 }
 
@@ -493,7 +580,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* Header Buttons */
 .btn-header-refresh {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -537,8 +623,34 @@ body {
 }
 
 /* ==========================================================================
-   MOBILE RESPONSIVENESS
+   CLEANUP MODAL
    ========================================================================== */
+
+.resume-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.resume-modal-content {
+  background: #0f131f;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 2.2rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+  animation: loginCardPop 0.3s ease;
+}
 
 @media (max-width: 768px) {
   .resume-dash-header {
@@ -548,11 +660,8 @@ body {
     align-items: flex-start;
   }
   
-  .resume-stats-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .resume-login-card {
-    padding: 2.2rem 1.5rem;
+  .resume-toolbar-container {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

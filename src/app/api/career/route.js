@@ -5,9 +5,9 @@ import path from 'path';
 export async function POST(request) {
   try {
     const formData = await request.formData();
-    const name = formData.get('name') || '';
-    const email = formData.get('email') || '';
-    const message = formData.get('message') || '';
+    const name = (formData.get('name') || '').toString().trim();
+    const email = (formData.get('email') || '').toString().trim();
+    const message = (formData.get('message') || '').toString().trim();
     const resume = formData.get('resume');
 
     if (!name || !email || !message) {
@@ -30,6 +30,25 @@ export async function POST(request) {
       const filePath = path.join(uploadDir, savedFileName);
 
       await writeFile(filePath, buffer);
+    }
+
+    // Try inserting into MySQL Database
+    try {
+      const mysql = await import('mysql2/promise');
+      const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'u435351083_u123456_maydiv',
+        password: 'Maydivjms1@3',
+        database: 'u435351083_u123456_maydiv',
+      });
+
+      await connection.execute(
+        'INSERT INTO career_applications (name, email, message, resume_file, applied_at) VALUES (?, ?, ?, ?, NOW())',
+        [name, email, message, savedFileName]
+      );
+      await connection.end();
+    } catch (dbErr) {
+      console.warn('MySQL direct connection warning (saving locally succeeded):', dbErr.message);
     }
 
     return NextResponse.json({

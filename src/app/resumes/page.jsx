@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -16,8 +16,12 @@ import {
   FaEnvelope, 
   FaClock,
   FaCheckCircle,
-  FaExclamationTriangle
+  FaExclamationTriangle,
+  FaShieldAlt,
+  FaUsers,
+  FaFileAlt
 } from 'react-icons/fa';
+import './resumes.css';
 
 // Hardcoded Admin Credentials
 const ADMIN_CREDENTIALS = {
@@ -26,12 +30,17 @@ const ADMIN_CREDENTIALS = {
   password: 'Maydiv@2026'
 };
 
+// 30 Minutes Session Timeout
+const SESSION_DURATION_MS = 30 * 60 * 1000;
+
 export default function ResumesDashboard() {
   const [mounted, setMounted] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [loginError, setLoginError] = useState('');
+  const [sessionNotice, setSessionNotice] = useState('');
+  const [minutesRemaining, setMinutesRemaining] = useState(30);
 
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -39,50 +48,20 @@ export default function ResumesDashboard() {
   const [deleteLoadingId, setDeleteLoadingId] = useState(null);
   const [actionMessage, setActionMessage] = useState({ type: '', text: '' });
 
-  useEffect(() => {
-    setMounted(true);
-    try {
-      const savedAuth = localStorage.getItem('maydiv_resume_auth');
-      if (savedAuth === 'true') {
-        setIsAuthenticated(true);
-        fetchApplications();
-      } else {
-        setLoading(false);
-      }
-    } catch (e) {
-      setLoading(false);
-    }
-  }, []);
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    setLoginError('');
-
-    const inputUser = usernameInput.trim().toLowerCase();
-    if (
-      (inputUser === ADMIN_CREDENTIALS.username || inputUser === ADMIN_CREDENTIALS.email) &&
-      passwordInput === ADMIN_CREDENTIALS.password
-    ) {
-      setIsAuthenticated(true);
-      try {
-        localStorage.setItem('maydiv_resume_auth', 'true');
-      } catch (e) {}
-      fetchApplications();
-    } else {
-      setLoginError('Invalid username or password. Please check your credentials.');
-    }
-  };
-
-  const handleLogout = () => {
+  const handleLogout = useCallback((expiredReason = '') => {
     setIsAuthenticated(false);
     try {
       localStorage.removeItem('maydiv_resume_auth');
+      localStorage.removeItem('maydiv_resume_auth_time');
     } catch (e) {}
     setUsernameInput('');
     setPasswordInput('');
-  };
+    if (expiredReason) {
+      setSessionNotice(expiredReason);
+    }
+  }, []);
 
-  const fetchApplications = async () => {
+  const fetchApplications = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch('/api/admin/resumes');
@@ -93,14 +72,82 @@ export default function ResumesDashboard() {
         setActionMessage({ type: 'error', text: data.error || 'Failed to fetch data' });
       }
     } catch (err) {
-      setActionMessage({ type: 'error', text: 'Error connecting to server database.' });
+      setActionMessage({ type: 'error', text: 'Error connecting to database.' });
     } finally {
       setLoading(false);
+    }
+  }, []);
+
+  // Check auth and session validity on load & tick timer every 10 seconds
+  useEffect(() => {
+    setMounted(true);
+    try {
+      const savedAuth = localStorage.getItem('maydiv_resume_auth');
+      const savedTime = localStorage.getItem('maydiv_resume_auth_time');
+
+      if (savedAuth === 'true' && savedTime) {
+        const elapsed = Date.now() - parseInt(savedTime, 10);
+        if (elapsed < SESSION_DURATION_MS) {
+          setIsAuthenticated(true);
+          setMinutesRemaining(Math.ceil((SESSION_DURATION_MS - elapsed) / 60000));
+          fetchApplications();
+        } else {
+          handleLogout('Your session has expired (30 mins limit). Please log in again.');
+        }
+      } else {
+        setLoading(false);
+      }
+    } catch (e) {
+      setLoading(false);
+    }
+
+    // Interval to enforce 30-minute auto logout
+    const timerInterval = setInterval(() => {
+      try {
+        const isAuth = localStorage.getItem('maydiv_resume_auth') === 'true';
+        const loginTime = localStorage.getItem('maydiv_resume_auth_time');
+
+        if (isAuth && loginTime) {
+          const elapsed = Date.now() - parseInt(loginTime, 10);
+          const remaining = SESSION_DURATION_MS - elapsed;
+
+          if (remaining <= 0) {
+            handleLogout('Session expired after 30 minutes. Logged out automatically for security.');
+          } else {
+            setMinutesRemaining(Math.ceil(remaining / 60000));
+          }
+        }
+      } catch (e) {}
+    }, 10000);
+
+    return () => clearInterval(timerInterval);
+  }, [fetchApplications, handleLogout]);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setLoginError('');
+    setSessionNotice('');
+
+    const inputUser = usernameInput.trim().toLowerCase();
+    if (
+      (inputUser === ADMIN_CREDENTIALS.username || inputUser === ADMIN_CREDENTIALS.email) &&
+      passwordInput === ADMIN_CREDENTIALS.password
+    ) {
+      setIsAuthenticated(true);
+      const now = Date.now().toString();
+      try {
+        localStorage.setItem('maydiv_resume_auth', 'true');
+        localStorage.setItem('maydiv_resume_auth_time', now);
+      } catch (e) {}
+      setMinutesRemaining(30);
+      fetchApplications();
+    } else {
+      setLoginError('Invalid credentials. Access is restricted to authorized MayDiv administrators.');
     }
   };
 
   const handleDelete = async (id, name) => {
-    if (!window.confirm(`Are you sure you want to delete application #${id} from ${name}?`)) {
+    if (!window.confirm(`Are you sure you want to permanently delete application #${id} (${name})?`)) {
       return;
     }
 
@@ -141,14 +188,13 @@ export default function ResumesDashboard() {
     return (
       <div style={{
         minHeight: '100vh',
-        background: '#090a0f',
+        background: '#07090e',
         color: '#fff',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: "'Segoe UI', Roboto, sans-serif"
+        justifyContent: 'center'
       }}>
-        <div style={{ textAlign: 'center', color: '#8892b0' }}>Loading Resume Portal...</div>
+        <div style={{ color: '#94a3b8', fontSize: '0.95rem' }}>Loading MayDiv Portal...</div>
       </div>
     );
   }
@@ -156,51 +202,58 @@ export default function ResumesDashboard() {
   // --- LOGIN SCREEN ---
   if (!isAuthenticated) {
     return (
-      <div style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0b0c10 0%, #1f2833 50%, #0b0c10 100%)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '1.5rem',
-        fontFamily: "'Segoe UI', Roboto, sans-serif",
-        color: '#fff'
-      }}>
-        <div style={{
-          width: '100%',
-          maxWidth: '420px',
-          background: 'rgba(20, 24, 33, 0.85)',
-          backdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '16px',
-          padding: '2.5rem 2rem',
-          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6)'
-        }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <Image src="/logo.png" alt="MayDiv Logo" width={160} height={52} quality={100} unoptimized />
-            <h2 style={{
-              fontSize: '1.5rem',
-              fontWeight: '700',
-              marginTop: '1.2rem',
-              marginBottom: '0.4rem',
-              background: 'linear-gradient(90deg, #FF3BFF, #ECBFBF, #5C24FF)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>
-              Resume Portal
-            </h2>
-            <p style={{ color: '#8892b0', fontSize: '0.85rem' }}>Login to view candidate applications & resumes</p>
+      <div className="resume-login-wrapper">
+        <div className="resume-login-card">
+          <div className="resume-login-logo">
+            <Link href="/">
+              <Image 
+                src="/logo.png" 
+                alt="MayDiv Logo" 
+                width={170} 
+                height={48} 
+                priority 
+                unoptimized 
+                style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
+              />
+            </Link>
           </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <span className="resume-login-badge">
+              <FaShieldAlt style={{ marginRight: '4px' }} /> Protected Portal
+            </span>
+            <h1 className="resume-login-title">Admin Sign In</h1>
+            <p className="resume-login-subtitle">
+              Enter your administrator credentials to access career applications & resumes.
+            </p>
+          </div>
+
+          {sessionNotice && (
+            <div style={{
+              background: 'rgba(234, 179, 8, 0.15)',
+              border: '1px solid rgba(234, 179, 8, 0.4)',
+              color: '#facc15',
+              padding: '0.75rem 1rem',
+              borderRadius: '12px',
+              fontSize: '0.85rem',
+              marginBottom: '1.2rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}>
+              <FaClock /> {sessionNotice}
+            </div>
+          )}
 
           {loginError && (
             <div style={{
-              background: 'rgba(255, 71, 87, 0.15)',
-              border: '1px solid #ff4757',
-              color: '#ff4757',
+              background: 'rgba(244, 63, 94, 0.15)',
+              border: '1px solid rgba(244, 63, 94, 0.4)',
+              color: '#fb7185',
               padding: '0.75rem 1rem',
-              borderRadius: '8px',
+              borderRadius: '12px',
               fontSize: '0.85rem',
-              marginBottom: '1.5rem',
+              marginBottom: '1.2rem',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem'
@@ -209,176 +262,98 @@ export default function ResumesDashboard() {
             </div>
           )}
 
-          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-            <div>
-              <label style={{ display: 'block', fontSize: '0.85rem', color: '#ccd6f6', marginBottom: '0.4rem' }}>
-                Username / Email
-              </label>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: '8px',
-                padding: '0.7rem 1rem',
-                gap: '0.8rem'
-              }}>
-                <FaUser style={{ color: '#FF3BFF' }} />
+          <form onSubmit={handleLogin}>
+            <div className="resume-input-group">
+              <label className="resume-input-label">Username / Email</label>
+              <div className="resume-input-box">
+                <FaUser style={{ color: '#FF3BFF', fontSize: '0.9rem' }} />
                 <input
                   type="text"
                   placeholder="admin or admin@maydiv.com"
                   value={usernameInput}
                   onChange={(e) => setUsernameInput(e.target.value)}
                   required
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    color: '#fff',
-                    outline: 'none',
-                    width: '100%',
-                    fontSize: '0.95rem'
-                  }}
+                  autoFocus
                 />
               </div>
             </div>
 
-            <div>
-              <label style={{ display: 'block', fontSize: '0.85rem', color: '#ccd6f6', marginBottom: '0.4rem' }}>
-                Password
-              </label>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: '8px',
-                padding: '0.7rem 1rem',
-                gap: '0.8rem'
-              }}>
-                <FaLock style={{ color: '#FF3BFF' }} />
+            <div className="resume-input-group">
+              <label className="resume-input-label">Password</label>
+              <div className="resume-input-box">
+                <FaLock style={{ color: '#FF3BFF', fontSize: '0.9rem' }} />
                 <input
                   type="password"
                   placeholder="••••••••••••"
                   value={passwordInput}
                   onChange={(e) => setPasswordInput(e.target.value)}
                   required
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    color: '#fff',
-                    outline: 'none',
-                    width: '100%',
-                    fontSize: '0.95rem'
-                  }}
                 />
               </div>
             </div>
 
-            <button
-              type="submit"
-              style={{
-                marginTop: '0.5rem',
-                background: 'linear-gradient(90deg, #FF3BFF, #5C24FF)',
-                border: 'none',
-                color: '#fff',
-                padding: '0.85rem',
-                borderRadius: '8px',
-                fontWeight: '600',
-                fontSize: '1rem',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 4px 15px rgba(255, 59, 255, 0.3)'
-              }}
-            >
-              Sign In
+            <button type="submit" className="resume-btn-submit">
+              Sign In to Dashboard
             </button>
           </form>
 
           <div style={{
-            marginTop: '1.5rem',
+            marginTop: '2rem',
             textAlign: 'center',
-            fontSize: '0.8rem',
-            color: '#64748b'
+            fontSize: '0.78rem',
+            color: '#475569',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.4rem'
           }}>
-            MayDiv Digital Agency • Secure Portal
+            <FaLock style={{ fontSize: '0.7rem' }} /> 256-bit Encrypted Session • 30m Auto-Logout
           </div>
         </div>
       </div>
     );
   }
 
+  // Count files uploaded
+  const filesCount = applications.filter(a => a.resume_file && a.resume_file !== 'No file uploaded').length;
+
   // --- DASHBOARD VIEW ---
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#090a0f',
-      color: '#fff',
-      fontFamily: "'Segoe UI', Roboto, sans-serif",
-      paddingBottom: '3rem'
-    }}>
+    <div style={{ minHeight: '100vh', background: '#07090e', color: '#fff', paddingBottom: '4rem' }}>
       {/* Top Navbar */}
-      <header style={{
-        background: 'rgba(15, 18, 25, 0.95)',
-        backdropFilter: 'blur(10px)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-        padding: '1rem 2rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        position: 'sticky',
-        top: 0,
-        zIndex: 100
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+      <header className="resume-dash-header">
+        <div className="resume-header-logo-group">
           <Link href="/">
-            <Image src="/logo.png" alt="MayDiv Logo" width={140} height={45} quality={100} unoptimized />
+            <Image 
+              src="/logo.png" 
+              alt="MayDiv Logo" 
+              width={160} 
+              height={45} 
+              priority 
+              unoptimized 
+              style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+            />
           </Link>
-          <span style={{
-            background: 'linear-gradient(90deg, #FF3BFF, #5C24FF)',
-            padding: '0.2rem 0.6rem',
-            borderRadius: '12px',
-            fontSize: '0.75rem',
-            fontWeight: '600'
-          }}>
-            ADMIN PORTAL
-          </span>
+          <div className="resume-timer-badge" title="Auto logout in 30 minutes for security">
+            <FaClock /> Session: {minutesRemaining}m left
+          </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
           <button
             onClick={fetchApplications}
             disabled={loading}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              background: 'rgba(255, 255, 255, 0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
-              color: '#ccd6f6',
-              padding: '0.5rem 1rem',
-              borderRadius: '8px',
-              fontSize: '0.85rem',
-              cursor: 'pointer'
-            }}
+            className="btn-header-refresh"
+            title="Reload live database"
           >
-            <FaSync />
-            Refresh
+            <FaSync style={{ animation: loading ? 'spin 1s linear infinite' : 'none' }} />
+            {loading ? 'Refreshing...' : 'Refresh'}
           </button>
 
           <button
-            onClick={handleLogout}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              background: 'rgba(255, 71, 87, 0.15)',
-              border: '1px solid #ff4757',
-              color: '#ff4757',
-              padding: '0.5rem 1rem',
-              borderRadius: '8px',
-              fontSize: '0.85rem',
-              cursor: 'pointer'
-            }}
+            onClick={() => handleLogout()}
+            className="btn-header-logout"
+            title="End admin session"
           >
             <FaSignOutAlt /> Logout
           </button>
@@ -386,85 +361,94 @@ export default function ResumesDashboard() {
       </header>
 
       {/* Main Container */}
-      <main style={{ maxWidth: '1280px', margin: '2rem auto', padding: '0 1.5rem' }}>
-        {/* Title & Stats */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-end',
-          flexWrap: 'wrap',
-          gap: '1.5rem',
-          marginBottom: '2rem'
-        }}>
-          <div>
-            <h1 style={{
-              fontSize: '2rem',
-              fontWeight: '700',
-              margin: 0,
-              background: 'linear-gradient(90deg, #fff, #a5b4fc)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>
-              Career Applications & Resumes
-            </h1>
-            <p style={{ color: '#8892b0', margin: '0.4rem 0 0 0', fontSize: '0.95rem' }}>
-              Manage all incoming applicant submissions and download resumes.
-            </p>
-          </div>
-
-          {/* Quick Stats Badges */}
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <div style={{
-              background: 'rgba(255, 255, 255, 0.04)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              borderRadius: '12px',
-              padding: '0.8rem 1.4rem',
-              textAlign: 'center'
-            }}>
-              <div style={{ fontSize: '1.6rem', fontWeight: '800', color: '#FF3BFF' }}>
-                {applications.length}
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#8892b0', textTransform: 'uppercase' }}>
-                Total Applicants
-              </div>
-            </div>
-          </div>
+      <main style={{ maxWidth: '1360px', margin: '2.5rem auto 0 auto', padding: '0 2rem' }}>
+        {/* Title Header */}
+        <div style={{ marginBottom: '2rem' }}>
+          <h1 style={{
+            fontSize: '2.2rem',
+            fontWeight: '800',
+            letterSpacing: '-0.5px',
+            margin: '0 0 0.5rem 0',
+            background: 'linear-gradient(135deg, #ffffff 40%, #c4b5fd 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
+            Candidate Applications & Resumes
+          </h1>
+          <p style={{ color: '#94a3b8', margin: 0, fontSize: '0.98rem' }}>
+            Live applicant database connected to Hostinger MySQL. View cover messages and download attached CVs.
+          </p>
         </div>
 
         {/* Action Status Notification */}
         {actionMessage.text && (
           <div style={{
-            background: actionMessage.type === 'success' ? 'rgba(46, 213, 115, 0.15)' : 'rgba(255, 71, 87, 0.15)',
-            border: actionMessage.type === 'success' ? '1px solid #2ed573' : '1px solid #ff4757',
-            color: actionMessage.type === 'success' ? '#2ed573' : '#ff4757',
-            padding: '0.8rem 1.2rem',
-            borderRadius: '8px',
+            background: actionMessage.type === 'success' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(244, 63, 94, 0.15)',
+            border: actionMessage.type === 'success' ? '1px solid #10b981' : '1px solid #f43f5e',
+            color: actionMessage.type === 'success' ? '#34d399' : '#fb7185',
+            padding: '0.9rem 1.4rem',
+            borderRadius: '14px',
             marginBottom: '1.5rem',
             display: 'flex',
             alignItems: 'center',
             gap: '0.6rem',
-            fontSize: '0.9rem'
+            fontSize: '0.92rem'
           }}>
             {actionMessage.type === 'success' ? <FaCheckCircle /> : <FaExclamationTriangle />}
             {actionMessage.text}
           </div>
         )}
 
-        {/* Search Bar */}
+        {/* Stats Grid */}
+        <div className="resume-stats-grid">
+          <div className="resume-stat-card">
+            <div>
+              <div className="resume-stat-number">{applications.length}</div>
+              <div className="resume-stat-label">Total Applications</div>
+            </div>
+            <div className="resume-stat-icon-wrapper">
+              <FaUsers />
+            </div>
+          </div>
+
+          <div className="resume-stat-card">
+            <div>
+              <div className="resume-stat-number">{filesCount}</div>
+              <div className="resume-stat-label">Resumes Attached</div>
+            </div>
+            <div className="resume-stat-icon-wrapper" style={{ background: 'rgba(56, 189, 248, 0.1)', color: '#38bdf8' }}>
+              <FaFilePdf />
+            </div>
+          </div>
+
+          <div className="resume-stat-card">
+            <div>
+              <div className="resume-stat-number">{filteredApplications.length}</div>
+              <div className="resume-stat-label">Filtered Results</div>
+            </div>
+            <div className="resume-stat-icon-wrapper" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
+              <FaFileAlt />
+            </div>
+          </div>
+        </div>
+
+        {/* Live Search Bar */}
         <div style={{
-          background: 'rgba(255, 255, 255, 0.03)',
+          background: 'rgba(18, 22, 34, 0.75)',
+          backdropFilter: 'blur(16px)',
           border: '1px solid rgba(255, 255, 255, 0.08)',
-          borderRadius: '12px',
-          padding: '0.8rem 1.2rem',
+          borderRadius: '16px',
+          padding: '0.9rem 1.4rem',
           display: 'flex',
           alignItems: 'center',
-          gap: '0.8rem',
-          marginBottom: '1.5rem'
+          gap: '1rem',
+          marginBottom: '1.8rem',
+          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.4)'
         }}>
-          <FaSearch style={{ color: '#8892b0' }} />
+          <FaSearch style={{ color: '#94a3b8', fontSize: '1rem' }} />
           <input
             type="text"
-            placeholder="Search by candidate name, email, message, or file name..."
+            placeholder="Search applicants by name, email, note, or resume filename..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
@@ -473,18 +457,21 @@ export default function ResumesDashboard() {
               color: '#fff',
               outline: 'none',
               width: '100%',
-              fontSize: '0.95rem'
+              fontSize: '0.95rem',
+              fontFamily: 'inherit'
             }}
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
               style={{
-                background: 'transparent',
+                background: 'rgba(255, 255, 255, 0.08)',
                 border: 'none',
-                color: '#8892b0',
+                color: '#cbd5e1',
+                padding: '0.3rem 0.7rem',
+                borderRadius: '6px',
                 cursor: 'pointer',
-                fontSize: '0.85rem'
+                fontSize: '0.8rem'
               }}
             >
               Clear
@@ -493,94 +480,55 @@ export default function ResumesDashboard() {
         </div>
 
         {/* Applications Data Table */}
-        <div style={{
-          background: 'rgba(15, 18, 25, 0.8)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          borderRadius: '14px',
-          overflow: 'hidden',
-          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)'
-        }}>
+        <div className="resume-table-card">
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
+            <table className="resume-table">
               <thead>
-                <tr style={{
-                  background: 'rgba(255, 255, 255, 0.03)',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-                  color: '#8892b0',
-                  fontSize: '0.8rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.5px'
-                }}>
-                  <th style={{ padding: '1rem 1.2rem', width: '60px' }}>ID</th>
-                  <th style={{ padding: '1rem 1.2rem' }}>Candidate</th>
-                  <th style={{ padding: '1rem 1.2rem' }}>Message / Note</th>
-                  <th style={{ padding: '1rem 1.2rem' }}>Applied At</th>
-                  <th style={{ padding: '1rem 1.2rem' }}>Resume File</th>
-                  <th style={{ padding: '1rem 1.2rem', textAlign: 'right' }}>Actions</th>
+                <tr>
+                  <th style={{ width: '65px' }}>ID</th>
+                  <th>Candidate Details</th>
+                  <th>Message / Cover Note</th>
+                  <th>Applied At</th>
+                  <th>Attached Resume</th>
+                  <th style={{ textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan="6" style={{ padding: '3rem', textAlign: 'center', color: '#8892b0' }}>
-                      <div style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>⏳</div>
-                      <div>Loading applications from database...</div>
+                    <td colSpan="6" style={{ padding: '4rem', textAlign: 'center', color: '#94a3b8' }}>
+                      <div style={{ fontSize: '1.5rem', marginBottom: '0.8rem' }}>⏳</div>
+                      <div style={{ fontWeight: '600' }}>Fetching records from Hostinger database...</div>
                     </td>
                   </tr>
                 ) : filteredApplications.length === 0 ? (
                   <tr>
-                    <td colSpan="6" style={{ padding: '3rem', textAlign: 'center', color: '#8892b0' }}>
-                      {searchQuery ? 'No applicants match your search query.' : 'No applications received yet.'}
+                    <td colSpan="6" style={{ padding: '4rem', textAlign: 'center', color: '#94a3b8' }}>
+                      {searchQuery ? 'No applicants match your search query.' : 'No applications found in the database.'}
                     </td>
                   </tr>
                 ) : (
                   filteredApplications.map((app) => {
                     const isDeleting = deleteLoadingId === app.id;
+                    const hasResume = app.resume_file && app.resume_file !== 'No file uploaded';
 
                     return (
-                      <tr 
-                        key={app.id} 
-                        style={{ 
-                          borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-                          transition: 'background 0.2s ease',
-                          opacity: isDeleting ? 0.5 : 1
-                        }}
-                      >
-                        <td style={{ padding: '1.2rem', color: '#a5b4fc', fontWeight: '700' }}>
-                          #{app.id}
+                      <tr key={app.id} style={{ opacity: isDeleting ? 0.4 : 1 }}>
+                        <td>
+                          <span className="resume-id-badge">#{app.id}</span>
                         </td>
-                        <td style={{ padding: '1.2rem' }}>
-                          <div style={{ fontWeight: '600', color: '#fff', fontSize: '0.95rem' }}>
-                            {app.name}
-                          </div>
-                          <a 
-                            href={`mailto:${app.email}`} 
-                            style={{ 
-                              color: '#8892b0', 
-                              fontSize: '0.82rem', 
-                              display: 'inline-flex', 
-                              alignItems: 'center', 
-                              gap: '0.3rem',
-                              marginTop: '0.2rem',
-                              textDecoration: 'none'
-                            }}
-                          >
-                            <FaEnvelope style={{ color: '#FF3BFF', fontSize: '0.75rem' }} /> {app.email}
+                        <td>
+                          <div className="resume-candidate-name">{app.name}</div>
+                          <a href={`mailto:${app.email}`} className="resume-candidate-email">
+                            <FaEnvelope style={{ fontSize: '0.75rem' }} /> {app.email}
                           </a>
                         </td>
-                        <td style={{ padding: '1.2rem', maxWidth: '300px' }}>
-                          <div style={{ 
-                            color: '#cbd5e1', 
-                            fontSize: '0.88rem',
-                            whiteSpace: 'pre-wrap',
-                            lineHeight: '1.4',
-                            maxHeight: '80px',
-                            overflowY: 'auto'
-                          }}>
+                        <td style={{ maxWidth: '340px' }}>
+                          <div className="resume-message-bubble">
                             {app.message || '—'}
                           </div>
                         </td>
-                        <td style={{ padding: '1.2rem', color: '#8892b0', fontSize: '0.82rem', whiteSpace: 'nowrap' }}>
+                        <td style={{ color: '#94a3b8', fontSize: '0.84rem', whiteSpace: 'nowrap' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                             <FaClock style={{ color: '#64748b' }} />
                             {app.applied_at ? new Date(app.applied_at).toLocaleString('en-IN', {
@@ -589,13 +537,13 @@ export default function ResumesDashboard() {
                             }) : '—'}
                           </div>
                         </td>
-                        <td style={{ padding: '1.2rem' }}>
-                          {app.resume_file && app.resume_file !== 'No file uploaded' ? (
+                        <td>
+                          {hasResume ? (
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#38bdf8' }}>
-                              <FaFilePdf style={{ color: '#f43f5e', fontSize: '1.1rem' }} />
+                              <FaFilePdf style={{ color: '#f43f5e', fontSize: '1.2rem', flexShrink: 0 }} />
                               <span style={{ 
                                 fontSize: '0.82rem', 
-                                maxWidth: '180px', 
+                                maxWidth: '170px', 
                                 overflow: 'hidden', 
                                 textOverflow: 'ellipsis', 
                                 whiteSpace: 'nowrap' 
@@ -604,31 +552,18 @@ export default function ResumesDashboard() {
                               </span>
                             </div>
                           ) : (
-                            <span style={{ color: '#64748b', fontSize: '0.82rem' }}>No file</span>
+                            <span style={{ color: '#475569', fontSize: '0.82rem' }}>No file</span>
                           )}
                         </td>
-                        <td style={{ padding: '1.2rem', textAlign: 'right' }}>
+                        <td style={{ textAlign: 'right' }}>
                           <div style={{ display: 'inline-flex', gap: '0.5rem', alignItems: 'center' }}>
-                            {app.resume_file && app.resume_file !== 'No file uploaded' ? (
+                            {hasResume && (
                               <>
                                 <a
                                   href={getViewUrl(app.id)}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  style={{
-                                    background: 'rgba(56, 189, 248, 0.15)',
-                                    color: '#38bdf8',
-                                    border: '1px solid rgba(56, 189, 248, 0.4)',
-                                    padding: '0.4rem 0.8rem',
-                                    borderRadius: '6px',
-                                    fontSize: '0.8rem',
-                                    fontWeight: '500',
-                                    textDecoration: 'none',
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    gap: '0.4rem',
-                                    cursor: 'pointer'
-                                  }}
+                                  className="btn-action-view"
                                   title="View Resume in New Tab"
                                 >
                                   <FaEye /> View
@@ -636,42 +571,19 @@ export default function ResumesDashboard() {
                                 <a
                                   href={getDownloadUrl(app.id)}
                                   download
-                                  style={{
-                                    background: 'rgba(46, 213, 115, 0.15)',
-                                    color: '#2ed573',
-                                    border: '1px solid rgba(46, 213, 115, 0.4)',
-                                    padding: '0.4rem 0.8rem',
-                                    borderRadius: '6px',
-                                    fontSize: '0.8rem',
-                                    fontWeight: '500',
-                                    textDecoration: 'none',
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    gap: '0.4rem',
-                                    cursor: 'pointer'
-                                  }}
-                                  title="Download Resume"
+                                  className="btn-action-download"
+                                  title="Download Resume File"
                                 >
                                   <FaDownload /> Download
                                 </a>
                               </>
-                            ) : null}
+                            )}
 
                             <button
                               onClick={() => handleDelete(app.id, app.name)}
                               disabled={isDeleting}
-                              style={{
-                                background: 'rgba(255, 71, 87, 0.1)',
-                                color: '#ff4757',
-                                border: '1px solid rgba(255, 71, 87, 0.3)',
-                                padding: '0.4rem 0.6rem',
-                                borderRadius: '6px',
-                                fontSize: '0.8rem',
-                                cursor: 'pointer',
-                                display: 'inline-flex',
-                                alignItems: 'center'
-                              }}
-                              title="Delete Application"
+                              className="btn-action-delete"
+                              title="Delete this candidate application"
                             >
                               <FaTrash />
                             </button>
